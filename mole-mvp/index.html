@@ -29,17 +29,27 @@ button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}butto
 /* v1.1: the mathematical diagram must remain visible while selecting an answer */
 .choices{position:relative;left:auto;right:auto;bottom:auto;margin:0;border-left:0;border-right:0;border-top:3px solid #d8b46d;border-bottom:3px solid #d8b46d;box-shadow:none;z-index:2}
 @media(max-width:800px){
- .diagram-panel{position:sticky;top:0;z-index:30;box-shadow:0 4px 18px #07101cbb}
+ .diagram-panel{position:sticky;top:0;z-index:30;box-shadow:0 4px 18px #07101cbb;width:100%}
  .diagram-panel .section-heading{padding:4px 10px}
  .diagram-panel .diagram{padding:3px 8px}
  .diagram-panel .diagram svg{max-height:112px}
  .diagram-panel .diagram small{margin-top:0;font-size:10px}
+ .diagram-panel .mission{padding:5px 10px}
+ .diagram-panel .mission .name,.diagram-panel .mission p{display:none}
+ .diagram-panel .mission h3{font-size:13px;margin:0}
  .mine{height:clamp(310px,44svh,450px)}
  .choices{padding:10px 9px}
  .choices .option{min-height:48px;font-size:13px}
  .wrap{padding-top:6px}
 }
 @media(max-width:370px){.mine{height:340px}.diagram-panel .diagram svg{max-height:98px}}
+@media(max-width:800px) and (max-height:620px){
+ .diagram-panel .diagram svg{max-height:82px}
+ .diagram-panel .diagram small{display:none}
+ .diagram-panel .mission{padding:3px 9px}
+ .choices .option{min-height:41px;padding:6px 7px}
+ .choices h3{font-size:12px}
+}
 </style>
 </head><body>
 <div class="wrap">
@@ -138,13 +148,22 @@ function drawMole(t){let sx=mole.x,sy=mole.y-cameraY,hop=(mode==='travel'||mode=
  }}
 function draw(time){ctx.clearRect(0,0,LW,LH);background();scenery();tunnel();mineDecoration(time);drawMole(time); // vignette frame elements
  rect(0,0,5,LH,'#1d232c');rect(LW-5,0,5,LH,'#1d232c');}
-function moveCamera(){let desired=Math.max(0,Math.min(MAXDEPTH-LH,mole.y-(mode==='fork'?108:260)));cameraY+=(desired-cameraY)*.1;if(Math.abs(desired-cameraY)<.2)cameraY=desired}
+function moveCamera(){
+ let offset=mode==='fork'?215:260;
+ if(mode==='fork'&&window.innerWidth<=800){
+  const mr=$('mine').getBoundingClientRect(),dr=document.querySelector('.diagram-panel').getBoundingClientRect();
+  const top=Math.max(mr.top,dr.bottom),bottom=Math.min(mr.bottom,window.innerHeight);
+  if(bottom>top+25)offset=(top+(bottom-top)*.48-mr.top)*LW/Math.max(mr.width,1);
+ }
+ let desired=Math.max(0,Math.min(MAXDEPTH-LH,mole.y-offset));
+ cameraY+=(desired-cameraY)*.1;if(Math.abs(desired-cameraY)<.2)cameraY=desired
+}
 function toast(s,dur=2100){toastText=s;toastUntil=performance.now()+dur;$('toast').textContent=s;$('toast').classList.remove('hidden')}
 function updateHud(){const n=Math.min(round+1,3);$('counter').textContent=`${n} / 3`;$('tasklabel').textContent=`問題 ${n} / 3`;$('progressbar').style.width=`${completion.length/3*100}%`;$('depthflag').textContent=`DEPTH ${Math.max(0,Math.floor((mole.y-150)/5))} m`;let digging=mode==='dig';$('dig').disabled=!digging;$('instruction').innerHTML=digging?'土の中を<strong>指で下になぞって</strong>掘ろう。<br>「掘る」ボタンでも進めます。':mode==='fork'?'看板の番号に対応する<strong>合同条件</strong>をタップ！':mode==='won'?'<strong>3つの合同条件</strong>を発見した！':'モグラが新しい道を掘っています…';}
 function sound(freq=400,type='square',dur=.08){if(!audioEnabled)return;try{audioContext=audioContext||new (window.AudioContext||window.webkitAudioContext)();if(audioContext.state==='suspended')audioContext.resume();let osc=audioContext.createOscillator(),gain=audioContext.createGain();osc.type=type;osc.frequency.setValueAtTime(freq,audioContext.currentTime);gain.gain.setValueAtTime(.035,audioContext.currentTime);gain.gain.exponentialRampToValueAtTime(.0001,audioContext.currentTime+dur);osc.connect(gain);gain.connect(audioContext.destination);osc.start();osc.stop(audioContext.currentTime+dur)}catch(e){}}
 function spawn(){for(let i=0;i<12;i++)particles.push({x:mole.x+(hash(i,Math.floor(mole.y),5)-.5)*55,y:mole.y+hash(i,Math.floor(mole.y),6)*21-13,vx:(hash(i,42)-.5)*1.6,vy:-hash(i,20)*2-1,s:2+Math.round(hash(i,5)*3),ttl:25,color:['#d7aa73','#83634b','#c59c67','#9d8064'][i%4]})}
 function digBy(n){if(mode!=='dig')return;let old=mole.y;mole.y=Math.min(forks[round]-12,mole.y+Math.max(0,n));descent+=mole.y-old;if(mole.y!==old){if(descent>17){descent=0;spawn();sound(110,'triangle',.035)}updateHud();}if(mole.y>=forks[round]-12){mole.y=forks[round]-12;forkArrive()}}
-function forkArrive(){mode='fork';cameraY=Math.max(0,mole.y-108);toast('分かれ道を発見！ 正しい合同条件を選ぼう。',2900);$('choices').hidden=false;renderChoices();updateHud();sound(510,'sine',.13);requestAnimationFrame(()=>{$('choices').scrollIntoView({behavior:'smooth',block:'end'})})}
+function forkArrive(){mode='fork';cameraY=Math.max(0,mole.y-215);toast('分かれ道を発見！ 正しい合同条件を選ぼう。',2900);$('choices').hidden=false;renderChoices();updateHud();sound(510,'sine',.13);requestAnimationFrame(()=>{$('choices').scrollIntoView({behavior:'smooth',block:'end'})})}
 // Choices change order per round; all three genuine textbook condition statements.
 const optionOrders=[[0,1,2],[2,0,1],[1,2,0]];
 function renderChoices(){const area=$('options');area.replaceChildren();$('answerTip').textContent='';optionOrders[round].forEach((id,j)=>{let b=document.createElement('button');b.type='button';b.className='option';b.dataset.answer=String(id);const icon=document.createElement('span');icon.className='diamond';icon.textContent=['①','②','③'][j];let txt=document.createElement('span');txt.textContent=CONDITIONS[id];b.append(icon,txt);b.addEventListener('click',()=>choose(id,b));area.append(b)})}

@@ -10,8 +10,8 @@ button{font:inherit;cursor:pointer;touch-action:manipulation}button:focus-visibl
 .brand{display:flex;gap:7px;align-items:center;min-width:0}.brand-mark{width:31px;height:31px;display:grid;place-items:center;background:#654f32;border:2px solid #e0bb73;box-shadow:3px 3px 0 #080e16;font-size:16px}.brand-txt b{display:block;font-size:clamp(13px,3.7vw,18px);line-height:1.22;white-space:nowrap}.brand-txt small{display:block;line-height:1.1;font:bold 9px monospace;letter-spacing:.1em;color:#b7d6d3}
 .tiny{font-weight:800;color:#e9dfcd;background:#263c4c;border:1px solid #89a5a7;padding:6px 9px;font-size:11px;white-space:nowrap}
 .diagram{flex:0 0 auto;min-height:0;display:grid;grid-template-columns:1fr;gap:0;background:#efe5cb;border:3px solid #ac8855;box-shadow:inset 0 0 0 2px #fff1cf;color:#263443}
-.diagram-top{display:flex;align-items:center;justify-content:space-between;padding:3px 8px 0;gap:6px}.diagram-top strong{font-size:11px;letter-spacing:.02em}.diagram-top span{font-size:10px;color:#5d5e5b;font-weight:700;text-align:right}
-.figure{height:clamp(90px,14dvh,138px);width:100%;display:block;padding:0 4px;overflow:visible}.diagram-note{padding:0 8px 4px;text-align:center;font-weight:800;font-size:11px;color:#464d54}
+.diagram-top{display:flex;align-items:center;justify-content:space-between;padding:3px 8px 0;gap:6px}.diagram-top strong{font-size:11px;letter-spacing:.02em}.diagram-top span{font-size:10px;color:#5d5e5b;font-weight:700;text-align:right;min-width:0;overflow-wrap:anywhere}
+.figure{height:clamp(116px,17dvh,155px);width:100%;display:block;padding:0 4px;overflow:visible}.diagram-note{padding:0 8px 4px;text-align:center;font-weight:800;font-size:11px;color:#464d54}
 .diagram .hilite{animation:hilite .7s ease-in-out infinite alternate}@keyframes hilite{to{filter:drop-shadow(0 0 4px #fcb43d)}}
 .status{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:8px;flex:0 0 46px;min-height:46px;padding:6px 9px;background:#21344b;border:2px solid #587786;box-shadow:2px 2px #080e16}
 .task-num{font:900 10px/1.4 monospace;color:#f4d99c;white-space:nowrap}.task-num span{display:block;color:#aec8cd;font-size:9px}
@@ -41,14 +41,14 @@ button{font:inherit;cursor:pointer;touch-action:manipulation}button:focus-visibl
 .review-mode .primary{flex:0 0 auto;padding:9px}
 
 @keyframes shake{0%,100%{transform:none}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}@keyframes pulse{50%{opacity:.5}}
-@media(min-width:700px){.app{padding:8px 14px;gap:8px}.top{height:40px;flex-basis:40px}.figure{height:135px}.mine{min-height:165px}.quiz{padding:10px 12px;gap:8px}.answer{min-height:40px}.footer{flex-basis:30px}}
-@media(max-height:740px){.app{gap:4px;padding:3px 5px 4px}.top{height:29px;flex-basis:29px}.diagram{border-width:2px}.figure{height:clamp(68px,12dvh,92px)}.diagram-note{padding-bottom:2px;font-size:9px}.status{flex-basis:39px;min-height:39px;padding:4px 6px}.quiz{gap:4px;padding:5px 6px}.question h2{font-size:12px}.answer{min-height:31px;padding:4px 6px;font-size:11px}.answer b{width:20px;height:20px;flex-basis:20px}.hint{padding:4px 6px}.footer{flex-basis:24px}.mine{min-height:75px}.brand-mark{width:25px;height:25px;font-size:13px}.top .brand-txt small{display:none}}
-@media(max-height:590px){.diagram-top{padding-top:1px}.figure{height:65px}.diagram-note{font-size:9px}.top{height:25px;flex-basis:25px}.status{flex-basis:34px;min-height:34px}.quiz{gap:3px}.answer{min-height:28px;padding:3px 5px}.mine{min-height:50px}.footer small{display:none}}
+@media(min-width:700px){.app{padding:8px 14px;gap:8px}.top{height:40px;flex-basis:40px}.figure{height:150px}.mine{min-height:165px}.quiz{padding:10px 12px;gap:8px}.answer{min-height:40px}.footer{flex-basis:30px}}
+@media(max-height:740px){.app{gap:4px;padding:3px 5px 4px}.top{height:29px;flex-basis:29px}.diagram{border-width:2px}.figure{height:clamp(96px,15dvh,117px)}.diagram-note{padding-bottom:2px;font-size:9px}.status{flex-basis:39px;min-height:39px;padding:4px 6px}.quiz{gap:4px;padding:5px 6px}.question h2{font-size:12px}.answer{min-height:31px;padding:4px 6px;font-size:11px}.answer b{width:20px;height:20px;flex-basis:20px}.hint{padding:4px 6px}.footer{flex-basis:24px}.mine{min-height:75px}.brand-mark{width:25px;height:25px;font-size:13px}.top .brand-txt small{display:none}}
+@media(max-height:590px){.diagram-top{padding-top:1px}.figure{height:84px}.diagram-note{font-size:9px}.top{height:25px;flex-basis:25px}.status{flex-basis:34px;min-height:34px}.quiz{gap:3px}.answer{min-height:28px;padding:3px 5px}.mine{min-height:50px}.footer small{display:none}}
 @media(prefers-reduced-motion:reduce){.timer.warning,.answer.wrong{animation:none}}
 </style></head><body>
 <div class="app" id="app">
 <header class="top"><div class="brand"><div class="brand-mark">⛏</div><div class="brand-txt"><b>モグラの証明ダッシュ 2</b><small>16-BIT PROOF RUSH</small></div></div><button id="pauseBtn" class="tiny" type="button" disabled>Ⅱ 一時停止</button></header>
-<section class="diagram" aria-label="証明に使う図形"><div class="diagram-top"><strong>📜 図形の条件</strong><span id="given">問題を選んでスタート</span></div><svg id="figure" class="figure" viewBox="0 0 360 192" role="img" aria-label="問題の図形"></svg><div class="diagram-note" id="goal">正しい証明の道を掘り進もう！</div></section>
+<section class="diagram" aria-label="証明に使う図形"><div class="diagram-top"><strong>📜 図形の条件</strong><span id="given">問題を選んでスタート</span></div><svg id="figure" class="figure" viewBox="0 0 360 145" role="img" aria-label="問題の図形"></svg><div class="diagram-note" id="goal">正しい証明の道を掘り進もう！</div></section>
 <div class="status" aria-label="制限時間と残りライフ"><div class="task-num" id="taskNum">Q 1/3<span id="hearts">♥♥♥</span></div><div><div class="progress-text"><span id="gateCount">GATE 1 / 8</span><span id="statusTag">到達まで</span></div><div id="bar" class="timebar"><i id="barFill"></i></div></div><strong id="timer" class="timer">12.0</strong></div>
 <section class="mine" id="mine" aria-label="自動下降するモグラのドット絵"><canvas id="world" width="288" height="236"></canvas><div class="mine-top"><span class="depth" id="depth">深さ 0 m</span><span class="speech" id="message">スタートすると自動で進むよ！</span></div><div class="mine-bottom"><div class="lane-guide"><span>①</span><span>②</span><span>③</span></div></div><div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="ゲームメニュー"><div class="modal" id="modalContent"><div class="big">⛏️ 🐾 💎</div><h2>証明の道を掘り進め！</h2><p>モグラは自動で下降！<br>関門に着く前に正しい言葉・式・記号を選ぼう。<br>3問連続で証明を完成させよう。</p><div class="modes" id="modes"><button class="mode" data-mode="study" type="button">じっくり<small>20〜30秒</small></button><button class="mode active" data-mode="normal" type="button">ふつう<small>12〜22秒</small></button><button class="mode" data-mode="challenge" type="button">チャレンジ<small>7〜14秒</small></button></div><button class="primary" id="startBtn" type="button">▶ 冒険スタート！</button><span style="font-size:10px;color:#aecaee">三角形の合同条件は教科書表記。「根拠」は自由な順番で集めるよ。</span></div></div></section>
 <section class="quiz" aria-label="証明のパーツ選択"><div class="question"><h2 id="question">まずはゲームをスタートしよう！</h2><small id="stepType">証明の道</small></div><div class="answers" id="answers"><button class="answer" disabled><b>①</b><span>スタートすると選択肢が現れます。</span></button></div><div class="minirow"><span class="feedback" id="feedback" role="status">正しい道を選んで、モグラを助けよう。</span><button class="hint" id="hintBtn" type="button" disabled>💡 ヒント ＋3秒</button></div><div class="hint-reveal" id="hintText" hidden></div></section>
@@ -60,7 +60,18 @@ const $=id=>document.getElementById(id),canvas=$('world'),ctx=canvas.getContext(
 const W=288,H=236,PATHX=[52,144,236];
 
 const CONDITIONS=['3組の辺がそれぞれ等しい。','2組の辺とその間の角がそれぞれ等しい。','1組の辺とその両端の角がそれぞれ等しい。'];
-const POINTS={kite:{A:[180,23],B:[70,162],C:[290,162],D:[180,110]},cross:{A:[88,26],B:[249,28],C:[272,162],D:[111,160],O:[180,94]},separate:{A:[84,23],B:[32,170],C:[153,159],D:[258,23],E:[206,170],F:[327,159]}};
+// All figures use a 360x145 coordinate space. Paired vertices are exact geometric correspondences.
+const POINTS={
+ kite:{A:[180,30],B:[77,119],C:[283,119],D:[180,82]},
+ cross:{A:[91,24],B:[269,24],C:[269,124],D:[91,124],O:[180,74]},
+ separate:{A:[86,30],B:[47,119],C:[154,119],D:[260,30],E:[221,119],F:[328,119]}
+};
+// Explicit label positions prevent letters from touching angle arcs or being clipped on iPhone.
+const VERTEX_LABELS={
+ kite:{A:[180,21],B:[63,134],C:[297,134],D:[180,109]},
+ cross:{A:[77,21],B:[283,21],C:[282,139],D:[77,139],O:[204,78]},
+ separate:{A:[86,21],B:[35,135],C:[166,135],D:[260,21],E:[209,135],F:[341,135]}
+};
 const TASKS=[
  {id:'kite-sss',title:'左右の角を証明',shape:'kite',kind:0,given:'AB＝AC、BD＝CD',goal:'∠BAD＝∠DAC を証明しよう',tri:'△ABDと△ACD',triWrong:['△ABCと△BDC','△ABDと△BCD'],fact:[{v:'AB＝AC',why:'仮定より',refs:['AB','AC']},{v:'BD＝CD',why:'仮定より',refs:['BD','CD']},{v:'AD＝AD',why:'共通な辺だから',refs:['AD']}],wrong:['AB＝BD','AC＝CD'],cong:'△ABD≡△ACD',congWrong:['△ABD≡△ADC','△ABD＝△ACD'],result:'∠BAD＝∠DAC',resultWrong:['∠BAD＝∠ADC','∠ABD＝∠DAC'],reason:'角',edgeGroups:[["AB","AC"],["BD","CD"]],angleGroups:[],shared:['AD'],resultRefs:['BAD','DAC']},
  {id:'kite-asa',title:'左右の辺を証明',shape:'kite',kind:2,given:'∠BAD＝∠DAC、∠BDA＝∠ADC',goal:'BD＝CD を証明しよう',tri:'△ABDと△ACD',triWrong:['△ABCと△BDC','△ABDと△BCD'],fact:[{v:'∠BAD＝∠DAC',why:'仮定より',refs:['BAD','DAC']},{v:'∠BDA＝∠ADC',why:'仮定より',refs:['BDA','ADC']},{v:'AD＝AD',why:'共通な辺だから',refs:['AD']}],wrong:['AB＝BD','∠BAD＝∠BDA'],cong:'△ABD≡△ACD',congWrong:['△ABD≡△ADC','△ABD＝△ACD'],result:'BD＝CD',resultWrong:['AB＝BD','AD＝CD'],reason:'辺',edgeGroups:[],angleGroups:[['BAD','DAC'],['BDA','ADC']],shared:['AD'],resultRefs:['BD','CD']},
@@ -88,17 +99,20 @@ function currentSpec(){let t=task(),k=stepKind();if(k==='tri')return {title:'対
  if(k==='reason'){let correct=`合同な図形の対応する${t.reason}はそれぞれ等しいので、`,other=t.reason==='辺'?'角':'辺';return{title:'合同から結論を導く理由は？',type:'合同の利用',choices:[correct,`合同な図形の対応する${other}はそれぞれ等しいので、`,'仮定より、'],correct:[correct],hint:'結論で示すのは「辺」の等しさ？「角」の等しさ？'};}
  return{title:'最後に証明する式は？',type:'結論',choices:[t.result,...t.resultWrong],correct:[t.result],hint:'問題文に書かれた最終目標を確認しよう。'};
 }
-function makeChoices(spec){let pool=spec.choices;if(stepKind()==='facts'){// maximum 4 options; always retain at least one valid candidate
- let good=pool.filter(x=>spec.correct.includes(x)),bad=pool.filter(x=>!spec.correct.includes(x));pool=[...shuffled(good).slice(0,3),...shuffled(bad).slice(0,Math.max(0,4-Math.min(3,good.length)))];}
- return shuffled(pool).slice(0,4)
+function makeChoices(spec){let pool=spec.choices;if(stepKind()==='facts'){
+ // One button per one of the three visible tunnel gates. Include a plausible distractor.
+ let good=pool.filter(x=>spec.correct.includes(x)),bad=pool.filter(x=>!spec.correct.includes(x));
+ const count=Math.min(2,good.length);pool=[...shuffled(good).slice(0,count),...shuffled(bad).slice(0,3-count)];
+ }
+ return shuffled(pool).slice(0,3)
 }
 function updateUI(){if(state.phase==='ready')return;let t=task();$('gateCount').textContent=`GATE ${state.idx+1} / ${state.totalSteps}`;$('taskNum').innerHTML=`Q ${state.taskIndex+1}/3<span id="hearts">${'♥'.repeat(state.lives)}${'♡'.repeat(3-state.lives)}</span>`;$('timer').textContent=state.remaining.toFixed(1);let warning=state.remaining<=3&&state.phase==='playing'&&!state.chosen;$('timer').classList.toggle('warning',warning);$('bar').classList.toggle('warning',warning);$('barFill').style.width=`${Math.max(0,Math.min(100,state.remaining/state.limit*100))}%`;$('statusTag').textContent=state.chosen?'突破！':state.phase==='collision'?'岩に衝突！':'到達まで';$('depth').textContent=`深さ ${Math.round((state.idx+state.p)*12+state.taskIndex*100)}m`;$('pauseBtn').disabled=state.phase!=='playing'&&state.phase!=='paused';$('pauseBtn').textContent=state.phase==='paused'?'▶ 再開':'Ⅱ 一時停止'}
 function setMessage(str){$('message').textContent=str}
 function markDiagram(){let t=task();$('given').textContent=t.given;$('goal').textContent=t.goal;drawFigure(state.highlight)}
 function start(){state={...state,phase:'playing',idx:0,lives:3,taskIndex:0,taskIds:pickTasks(),picked:[],notes:[],completed:[],wrong:0,hints:0,elapsed:0,attempts:0,highlight:[],highlightId:-1};$('overlay').hidden=true;$('notebookBtn').disabled=false;loadTask();sound(640,'square',.08)}
 function loadTask(){state.taskStarted=state.elapsed;state.taskWrong=state.wrong;state.taskHints=state.hints;state.idx=0;state.lives=3;state.picked=[];state.notes=[];state.highlight=[];state.highlightId=-1;markDiagram();setStep()}
-function setStep(){resetTimer();let spec=currentSpec();$('question').textContent=spec.title;$('stepType').textContent=spec.type;$('hintBtn').disabled=false;$('hintBtn').textContent='💡 ヒント ＋3秒';$('hintText').hidden=true;$('hintText').textContent='';$('feedback').textContent='岩に着く前に、正しい答えをタップ！';let root=$('answers');root.replaceChildren();choiceMap=makeChoices(spec);choiceMap.forEach((word,i)=>{let b=document.createElement('button');b.type='button';b.className='answer';b.dataset.idx=String(i);let n=document.createElement('b');n.textContent=['①','②','③','④'][i];let txt=document.createElement('span');txt.textContent=word;b.append(n,txt);b.addEventListener('click',()=>answer(i));root.appendChild(b)});setMessage('正しい道を選ぼう！');updateUI()}
-function answer(i){if(state.phase!=='playing'||state.chosen||!choiceMap[i])return;let spec=currentSpec(),v=choiceMap[i],buttons=[...document.querySelectorAll('#answers .answer')];state.attempts++;if(spec.correct.includes(v)){state.choice=i%3;state.chosen=true;state.correctFlash=1;buttons[i].classList.add('good');buttons.forEach(b=>b.disabled=true);$('hintBtn').disabled=true;$('feedback').textContent='正解！　道が開いた！';setMessage('正解！ 次の関門へ！');sound(650,'square',.09);let t=task();let f=t.fact.find(x=>x.v===v);state.pending={text:v,fact:f||null};}
+function setStep(){resetTimer();let spec=currentSpec();$('modeSummary').textContent=state.idx>0?'同じ色の頂点どうしが対応':'自動下降 × 証明3問 × 8関門';$('question').textContent=spec.title;$('stepType').textContent=spec.type;$('hintBtn').disabled=false;$('hintBtn').textContent='💡 ヒント ＋3秒';$('hintText').hidden=true;$('hintText').textContent='';$('feedback').textContent='岩に着く前に、正しい答えをタップ！';let root=$('answers');root.replaceChildren();choiceMap=makeChoices(spec);choiceMap.forEach((word,i)=>{let b=document.createElement('button');b.type='button';b.className='answer';b.dataset.idx=String(i);let n=document.createElement('b');n.textContent=['①','②','③','④'][i];let txt=document.createElement('span');txt.textContent=word;b.append(n,txt);b.addEventListener('click',()=>answer(i));root.appendChild(b)});setMessage('正しい道を選ぼう！');updateUI()}
+function answer(i){if(state.phase!=='playing'||state.chosen||!choiceMap[i])return;let spec=currentSpec(),v=choiceMap[i],buttons=[...document.querySelectorAll('#answers .answer')];state.attempts++;if(spec.correct.includes(v)){state.choice=i;state.chosen=true;state.correctFlash=1;buttons[i].classList.add('good');buttons.forEach(b=>b.disabled=true);$('hintBtn').disabled=true;$('feedback').textContent='正解！　道が開いた！';setMessage('正解！ 次の関門へ！');sound(650,'square',.09);let t=task();let f=t.fact.find(x=>x.v===v);state.pending={text:v,fact:f||null};}
  else{state.wrong++;state.hitFlash=1;state.remaining=Math.max(0,state.remaining-1.2);state.p=Math.max(0,1-state.remaining/state.limit);let b=buttons[i];b.classList.add('wrong');setTimeout(()=>b.classList.remove('wrong'),420);$('feedback').textContent='違う道！ 時間に注意して選び直そう。';setMessage('ゴツン！ もう一度！');sound(140,'sawtooth',.13);if(state.remaining<=0)collision();}updateUI()}
 function hint(){if(state.phase!=='playing'||state.chosen||state.hintUsed)return;state.hintUsed=true;state.hints++;state.remaining=Math.min(state.limit+3,state.remaining+3);state.p=Math.max(0,1-state.remaining/state.limit);$('hintText').textContent='💡 '+currentSpec().hint;$('hintText').hidden=false;$('hintBtn').disabled=true;$('hintBtn').textContent='💡 使用済み';$('feedback').textContent='＋3秒！ じっくり考えてみよう。';sound(480,'sine',.12);updateUI()}
 function addLine(text,refs=[]){state.notes.push({text,refs});state.highlight=refs;drawFigure(refs)}
@@ -125,21 +139,70 @@ function showOverlay(html,review=false){
 function showNotes(){let old=state.phase;if(old==='playing')state.phase='paused';showOverlay(`<div class="big">📓</div><h2>証明ノート</h2>${proofHtml()}<button class="primary" id="closeNote">▶ ${old==='playing'?'ゲームを再開':'閉じる'}</button>`,true);wireProof();$('closeNote').onclick=()=>{if(old==='playing'){resume()}else if(old==='gameover'){gameOver()}else if(old==='between'){finishTask(true);}else{$('overlay').hidden=true}};updateUI()}
 function togglePause(){if(state.phase==='playing'){state.phase='paused';showOverlay(`<div class="big">⏸</div><h2>一時停止</h2><p>タイマーを止めています。</p><button class="primary" id="resume">▶ 再開する</button><button class="secondary" id="restart">↺ 最初から</button>`);$('resume').onclick=resume;$('restart').onclick=start}else if(state.phase==='paused')resume();updateUI()}
 function resume(){state.phase='playing';$('overlay').hidden=true;last=performance.now();updateUI()}
-function drawFigure(highlight=[]){const t=task(),pts=POINTS[t.shape];let lines=t.shape==='kite'?[['A','B'],['B','D'],['D','A'],['A','C'],['C','D']]:t.shape==='cross'?[['A','O'],['O','B'],['B','A'],['C','O'],['O','D'],['D','C']]:[['A','B'],['B','C'],['C','A'],['D','E'],['E','F'],['F','D']];let s='';
- const segment=(a,b,col='#39576a',width=2.8)=>`<line x1="${pts[a][0]}" y1="${pts[a][1]}" x2="${pts[b][0]}" y2="${pts[b][1]}" stroke="${col}" stroke-width="${width}" stroke-linecap="round"/>`;
- if(t.shape==='kite'){s+=`<polygon points="${['A','B','D'].map(k=>pts[k].join(',')).join(' ')}" fill="#c4dee6" opacity=".65"/><polygon points="${['A','D','C'].map(k=>pts[k].join(',')).join(' ')}" fill="#c4dee6" opacity=".65"/>`}
- else if(t.shape==='cross'){s+=`<polygon points="${['A','O','B'].map(k=>pts[k].join(',')).join(' ')}" fill="#c4dee6" opacity=".7"/><polygon points="${['C','O','D'].map(k=>pts[k].join(',')).join(' ')}" fill="#c4dee6" opacity=".7"/>`}
- else{s+=`<polygon points="${['A','B','C'].map(k=>pts[k].join(',')).join(' ')}" fill="#c4dee6" opacity=".7"/><polygon points="${['D','E','F'].map(k=>pts[k].join(',')).join(' ')}" fill="#c4dee6" opacity=".7"/>`}
- for(let pair of lines)s+=segment(pair[0],pair[1]);for(let v of t.shared){s+=segment(v[0],v[1],'#2880a0',4)}
- function tick(seg,count){let p=pts[seg[0]],q=pts[seg[1]],dx=q[0]-p[0],dy=q[1]-p[1],L=Math.hypot(dx,dy),nx=-dy/L,ny=dx/L;let ret='';for(let j=0;j<count;j++){let f=(j-(count-1)/2)*7,x=(p[0]+q[0])/2+f*dx/L,y=(p[1]+q[1])/2+f*dy/L;ret+=`<path d="M ${x-6*nx} ${y-6*ny} L ${x+6*nx} ${y+6*ny}" stroke="#d47239" stroke-width="3" stroke-linecap="round"/>`}return ret}
- function arc(code,r=20){const a=pts[code[0]],b=pts[code[1]],c=pts[code[2]];let aa=Math.atan2(a[1]-b[1],a[0]-b[0]),bb=Math.atan2(c[1]-b[1],c[0]-b[0]);let d=(bb-aa+Math.PI*3)%(Math.PI*2)-Math.PI;let p=[];for(let i=0;i<=12;i++){let theta=aa+d*i/12;p.push((b[0]+r*Math.cos(theta)).toFixed(2)+','+(b[1]+r*Math.sin(theta)).toFixed(2))}return `<polyline points="${p.join(' ')}" fill="none" stroke="#8b54ad" stroke-width="3" stroke-linecap="round"/>`}
- t.edgeGroups.forEach((grp,i)=>grp.forEach(x=>s+=tick(x,i+1)));
- t.angleGroups.forEach((grp,i)=>grp.forEach(x=>{for(let j=0;j<i+1;j++)s+=arc(x,16+j*6)}));
- // highlight text, proof lines and selected reasons: widths sufficiently visible on mobile
- for(let ref of highlight){if(ref.length===2&&pts[ref[0]]&&pts[ref[1]])s+=segment(ref[0],ref[1],'#f2a128',6);else if(ref.length===3&&pts[ref[0]]&&pts[ref[1]]&&pts[ref[2]]){s+=arc(ref,29).replace('stroke="#8b54ad" stroke-width="3"','stroke="#f2a128" stroke-width="6"')}}
- for(let [name,p] of Object.entries(pts)){let dx=name==='B'||name==='D'&&t.shape==='cross'?-17:name==='C'||name==='F'?8: name==='O'?8: -6,dy=name==='A'||name==='D'&&t.shape==='separate'?-7:name==='O'?-6:17;if(name==='D'&&t.shape==='kite'){dx=9;dy=9}s+=`<text x="${p[0]+dx}" y="${p[1]+dy}" font-size="15" fill="#23374b" font-weight="800">${name}</text>`}
- $('figure').innerHTML=s;$('figure').setAttribute('aria-label','図形：'+t.given+'。証明すること：'+t.goal);
+function drawFigure(highlight=[]){
+ const t=task(),pts=POINTS[t.shape],labels=VERTEX_LABELS[t.shape];
+ const vertexGroups=trianglesFromPair(t.tri);
+ const showCorrespondence=state.idx>0 || state.notes.length>0 || state.phase==='between';
+ const palette=['#9c4c37','#147e73','#64569f'];
+ let vertexColors={};
+ if(showCorrespondence&&vertexGroups){
+  for(let i=0;i<3;i++){
+   vertexColors[vertexGroups[0][i]]=palette[i];
+   vertexColors[vertexGroups[1][i]]=palette[i];
+  }
+ }
+ const lines=t.shape==='kite'?[['A','B'],['B','D'],['D','A'],['A','C'],['C','D']]:t.shape==='cross'?[['A','O'],['O','B'],['B','A'],['C','O'],['O','D'],['D','C']]:[['A','B'],['B','C'],['C','A'],['D','E'],['E','F'],['F','D']];
+ const segment=(a,b,col='#36566b',width=3)=>`<line x1="${pts[a][0]}" y1="${pts[a][1]}" x2="${pts[b][0]}" y2="${pts[b][1]}" stroke="${col}" stroke-width="${width}" stroke-linecap="round"/>`;
+ const poly=(names,col)=>`<polygon points="${names.map(k=>pts[k].join(',')).join(' ')}" fill="${col}" fill-opacity=".68"/>`;
+ let svg='';
+ if(t.shape==='kite')svg+=poly(['A','B','D'],'#bbd9e4')+poly(['A','D','C'],'#c8e5e2');
+ else if(t.shape==='cross')svg+=poly(['A','O','B'],'#bbd9e4')+poly(['C','O','D'],'#c8e5e2');
+ else svg+=poly(['A','B','C'],'#bbd9e4')+poly(['D','E','F'],'#c8e5e2');
+ for(const pair of lines)svg+=segment(pair[0],pair[1]);
+ for(const pair of t.shared)svg+=segment(pair[0],pair[1],'#227b95',4);
+ // Matching side marks: one / two / three ticks denote each equal-side pair.
+ function tick(code,count){
+  const p=pts[code[0]],q=pts[code[1]];
+  const dx=q[0]-p[0],dy=q[1]-p[1],len=Math.hypot(dx,dy);
+  const tx=dx/len,ty=dy/len,nx=-ty,ny=tx;
+  let result='';
+  for(let i=0;i<count;i++){
+   const o=(i-(count-1)/2)*9;
+   const cx=(p[0]+q[0])/2+tx*o,cy=(p[1]+q[1])/2+ty*o;
+   const col=['#d06a30','#8753a2','#14847c'][count-1]||'#d06a30';
+   result+=`<line x1="${(cx-7*nx).toFixed(2)}" y1="${(cy-7*ny).toFixed(2)}" x2="${(cx+7*nx).toFixed(2)}" y2="${(cy+7*ny).toFixed(2)}" stroke="${col}" stroke-width="3.3" stroke-linecap="round"/>`;
+  }
+  return result;
+ }
+ // Draw the smaller interior angle, explicitly referenced as ∠XYZ (vertex Y).
+ function arc(code,r=16,color='#8753a2',width=2.8){
+  const a=pts[code[0]],b=pts[code[1]],c=pts[code[2]];
+  let aa=Math.atan2(a[1]-b[1],a[0]-b[0]),bb=Math.atan2(c[1]-b[1],c[0]-b[0]);
+  const difference=(bb-aa+Math.PI*3)%(Math.PI*2)-Math.PI;
+  const positions=[];
+  for(let i=0;i<=18;i++){
+   const theta=aa+difference*i/18;
+   positions.push(`${(b[0]+r*Math.cos(theta)).toFixed(2)},${(b[1]+r*Math.sin(theta)).toFixed(2)}`);
+  }
+  return `<polyline points="${positions.join(' ')}" fill="none" stroke="${color}" stroke-width="${width}" stroke-linecap="round"/>`;
+ }
+ t.edgeGroups.forEach((group,i)=>group.forEach(code=>svg+=tick(code,i+1)));
+ t.angleGroups.forEach((group,i)=>group.forEach(code=>{for(let count=0;count<=i;count++)svg+=arc(code,16+count*7);}));
+ // Highlight both sides/angles named in the tapped proof statement.
+ for(const code of highlight){
+  if(code.length===2 && pts[code[0]] && pts[code[1]])svg+=segment(code[0],code[1],'#e99c1b',6);
+  if(code.length===3 && pts[code[0]] && pts[code[1]] && pts[code[2]])svg+=arc(code,29,'#e99c1b',5);
+ }
+ for(const [name,xy] of Object.entries(pts)){
+  const lab=labels[name];
+  svg+=`<circle cx="${xy[0]}" cy="${xy[1]}" r="2.3" fill="#213d56"/>`;
+  svg+=`<text x="${lab[0]}" y="${lab[1]}" text-anchor="middle" font-size="16" font-weight="800" stroke="#f7f0db" stroke-width="4" paint-order="stroke" stroke-linejoin="round" fill="${vertexColors[name]||'#253a50'}">${name}</text>`;
+ }
+ $('figure').innerHTML=svg;
+ $('figure').setAttribute('aria-label',`図形：${t.given}。証明すること：${t.goal}。頂点は各三角形の対応順に記す。`);
 }
+// Parse vertex order from △ABCと△DEF; always use the same three correspondences.
+function trianglesFromPair(text){const m=text.match(/^△([A-Z]{3})と△([A-Z]{3})$/);return m?[m[1],m[2]]:null}
 function hash(x,y,z=0){let n=Math.imul(x+139,374761393)^Math.imul(y+z+17,668265263);n=Math.imul(n^(n>>>13),1274126177);return ((n^(n>>>16))>>>0)/4294967295}
 function pix(x,y,w,h,col){ctx.fillStyle=col;ctx.fillRect(Math.round(x),Math.round(y),Math.ceil(w),Math.ceil(h))}
 const palettes=[['#64452f','#745034','#826044','#523d32'],['#56413d','#60464b','#785253','#42393d'],['#3a465c','#4a526b','#586174','#323b50'],['#375565','#476576','#567486','#2c4959']];

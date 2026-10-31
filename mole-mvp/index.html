@@ -25,6 +25,21 @@ button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}butto
 @media(max-width:800px){.pill{display:none}.layout{display:flex;flex-direction:column}.play,.side{width:100%}.side{display:contents}.diagram-panel{order:-1}.play{order:0}.help-panel{order:1}.notebook-panel{order:2}.mine{height:clamp(395px,53svh,560px)}.game-head{padding:8px 11px}.diagram{padding:5px 10px}.diagram svg{max-height:145px}.section-heading{padding:6px 11px}.mission{padding:7px 11px}.mission h3{font-size:14px}.mission p{font-size:11px}.top{margin-bottom:8px}.crest{width:42px;height:42px}.wrap{padding:10px 10px 30px}.brand h1{font-size:19px}.choices{bottom:9px;left:8px;right:8px;padding:9px}.option{padding:8px;min-height:42px}.controls{padding:9px;gap:5px}.controls .instruction{font-size:11px}}
 @media(max-width:370px){.pill{display:none}.mine{height:440px}.brand h1{font-size:17px}.option{font-size:12px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+/* v1.1: the mathematical diagram must remain visible while selecting an answer */
+.choices{position:relative;left:auto;right:auto;bottom:auto;margin:0;border-left:0;border-right:0;border-top:3px solid #d8b46d;border-bottom:3px solid #d8b46d;box-shadow:none;z-index:2}
+@media(max-width:800px){
+ .diagram-panel{position:sticky;top:0;z-index:30;box-shadow:0 4px 18px #07101cbb}
+ .diagram-panel .section-heading{padding:4px 10px}
+ .diagram-panel .diagram{padding:3px 8px}
+ .diagram-panel .diagram svg{max-height:112px}
+ .diagram-panel .diagram small{margin-top:0;font-size:10px}
+ .mine{height:clamp(310px,44svh,450px)}
+ .choices{padding:10px 9px}
+ .choices .option{min-height:48px;font-size:13px}
+ .wrap{padding-top:6px}
+}
+@media(max-width:370px){.mine{height:340px}.diagram-panel .diagram svg{max-height:98px}}
 </style>
 </head><body>
 <div class="wrap">
@@ -34,9 +49,9 @@ button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}butto
   <div class="game-head"><div><span class="quest-label">CHAPTER 01 / 合同条件の洞窟</span><strong>正しい証明の道を掘り進め！</strong></div><span class="level" id="counter">1 / 3</span></div>
   <div class="progress"><div id="progressbar"></div></div>
   <div id="mine" class="mine"><canvas id="world" width="384" height="540" aria-label="モグラの地下探索フィールド。指で下になぞると掘り進みます"></canvas><div class="mine-overlay"><div class="depthflag" id="depthflag">DEPTH 0 m</div><div class="toast" id="toast" aria-live="polite">指で下になぞって、地面を掘ろう！</div></div>
-   <div id="choices" class="choices" hidden><h3>◆ どの合同条件の道へ進む？</h3><div class="options" id="options"></div><div class="answer-tip" id="answerTip" role="status"></div></div>
    <div id="win" class="win" hidden><span class="trophy" aria-hidden="true">💎</span><span class="eyebrow">QUEST COMPLETE</span><h2>証明の道、開通！</h2><p>3つの合同条件を見分けて、地下の宝物にたどり着いた！</p><button id="replayWin" class="btn">もう一度冒険する ↺</button></div>
   </div>
+  <div class="choices" id="choices" hidden><h3>◆ 図形を見ながら、正しい道を選ぼう！</h3><div class="options" id="options"></div><div class="answer-tip" id="answerTip" role="status"></div></div>
   <div class="controls"><div class="instruction" id="instruction">土の中を<strong>指で下になぞる</strong>とモグラが進む。<br>PCならマウスでドラッグ。</div><div class="tools"><button id="sound" class="sound" aria-label="音のオンオフ">♪ OFF</button><button id="dig" class="btn">⛏ 掘る ↓</button></div></div>
  </section>
  <aside class="side">
@@ -129,7 +144,7 @@ function updateHud(){const n=Math.min(round+1,3);$('counter').textContent=`${n} 
 function sound(freq=400,type='square',dur=.08){if(!audioEnabled)return;try{audioContext=audioContext||new (window.AudioContext||window.webkitAudioContext)();if(audioContext.state==='suspended')audioContext.resume();let osc=audioContext.createOscillator(),gain=audioContext.createGain();osc.type=type;osc.frequency.setValueAtTime(freq,audioContext.currentTime);gain.gain.setValueAtTime(.035,audioContext.currentTime);gain.gain.exponentialRampToValueAtTime(.0001,audioContext.currentTime+dur);osc.connect(gain);gain.connect(audioContext.destination);osc.start();osc.stop(audioContext.currentTime+dur)}catch(e){}}
 function spawn(){for(let i=0;i<12;i++)particles.push({x:mole.x+(hash(i,Math.floor(mole.y),5)-.5)*55,y:mole.y+hash(i,Math.floor(mole.y),6)*21-13,vx:(hash(i,42)-.5)*1.6,vy:-hash(i,20)*2-1,s:2+Math.round(hash(i,5)*3),ttl:25,color:['#d7aa73','#83634b','#c59c67','#9d8064'][i%4]})}
 function digBy(n){if(mode!=='dig')return;let old=mole.y;mole.y=Math.min(forks[round]-12,mole.y+Math.max(0,n));descent+=mole.y-old;if(mole.y!==old){if(descent>17){descent=0;spawn();sound(110,'triangle',.035)}updateHud();}if(mole.y>=forks[round]-12){mole.y=forks[round]-12;forkArrive()}}
-function forkArrive(){mode='fork';cameraY=Math.max(0,mole.y-108);toast('分かれ道を発見！ 正しい合同条件を選ぼう。',2900);$('choices').hidden=false;renderChoices();updateHud();sound(510,'sine',.13)}
+function forkArrive(){mode='fork';cameraY=Math.max(0,mole.y-108);toast('分かれ道を発見！ 正しい合同条件を選ぼう。',2900);$('choices').hidden=false;renderChoices();updateHud();sound(510,'sine',.13);requestAnimationFrame(()=>{$('choices').scrollIntoView({behavior:'smooth',block:'end'})})}
 // Choices change order per round; all three genuine textbook condition statements.
 const optionOrders=[[0,1,2],[2,0,1],[1,2,0]];
 function renderChoices(){const area=$('options');area.replaceChildren();$('answerTip').textContent='';optionOrders[round].forEach((id,j)=>{let b=document.createElement('button');b.type='button';b.className='option';b.dataset.answer=String(id);const icon=document.createElement('span');icon.className='diamond';icon.textContent=['①','②','③'][j];let txt=document.createElement('span');txt.textContent=CONDITIONS[id];b.append(icon,txt);b.addEventListener('click',()=>choose(id,b));area.append(b)})}

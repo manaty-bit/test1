@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>モグラの証明大冒険｜16bit MVP</title>
+<style>
+:root{--night:#101c30;--navy:#192940;--gold:#f7d47a;--cream:#fff7e5;--muted:#b6c4d6;--edge:#3e5874;--mint:#7de7c0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#0f1929;color:var(--cream);font-family:system-ui,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;background-image:radial-gradient(circle at 5% 5%,#28405b 0,transparent 350px),radial-gradient(circle at 90% 60%,#26354f 0,transparent 420px)}
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible{outline:3px solid #fff4b1;outline-offset:3px}
+.wrap{max-width:1120px;margin:auto;padding:15px 14px 40px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.brand{display:flex;align-items:center;gap:12px}.crest{width:48px;height:48px;display:grid;place-items:center;background:#3f705c;border:3px solid #d4bd77;box-shadow:inset 0 0 0 3px #203f39,4px 4px 0 #070d17;font-size:25px;line-height:1}
+.brand small,.eyebrow{display:block;color:var(--gold);letter-spacing:.18em;font:700 10px/1.7 ui-monospace,monospace}.brand h1{margin:0;font-size:clamp(19px,3vw,25px);letter-spacing:.035em;text-shadow:2px 2px #080f18}.pill{border:1px solid #806e51;background:#253348;color:var(--gold);font:700 11px monospace;padding:9px 11px;white-space:nowrap}
+.layout{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(310px,.85fr);gap:16px;align-items:start}
+.paper{border:3px solid #536c83;background:#15283e;box-shadow:0 0 0 3px #0b1320,5px 6px 0 #080f19;position:relative}.paper:before{content:"";position:absolute;inset:5px;border:1px solid #2d465c;pointer-events:none}
+.game-head{padding:11px 13px 10px;display:flex;justify-content:space-between;gap:8px;align-items:center;background:#1c3148;border-bottom:3px solid #3d5c69}.quest-label{color:var(--gold);font:700 11px ui-monospace,monospace;letter-spacing:.08em}.game-head strong{display:block;font-size:14px}.level{font:700 12px monospace;color:var(--mint);white-space:nowrap}.progress{height:7px;background:#0b1728;box-shadow:inset 0 0 0 1px #2b4154}.progress>div{width:0%;height:100%;background:repeating-linear-gradient(90deg,#f7d47a 0 9px,#e2a651 9px 11px);transition:width .5s}
+.mine{height:clamp(420px,60vh,650px);position:relative;overflow:hidden;background:#59412e;isolation:isolate;cursor:ns-resize;touch-action:none}.mine canvas{width:100%;height:100%;display:block;image-rendering:pixelated;image-rendering:crisp-edges;touch-action:none}
+.mine-overlay{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:11px}.depthflag{align-self:flex-start;background:#102438d9;border:2px solid #6f8a93;padding:5px 10px;font:700 11px ui-monospace,monospace;color:#e3ebf4;box-shadow:3px 3px 0 #07142388}.toast{max-width:98%;align-self:center;background:#152d39eb;border:2px solid #bb9858;padding:8px 12px;color:#ffebbb;text-align:center;font-size:12px;font-weight:700;box-shadow:3px 4px 0 #101621aa;min-height:37px}.toast.hidden{opacity:0}
+.choices{pointer-events:auto;position:absolute;left:12px;right:12px;bottom:14px;background:#101f31f5;border:3px solid #d8b46d;padding:10px;box-shadow:0 0 0 3px #21384b,5px 6px 0 #0b121a;animation:pop .16s steps(3)}.choices[hidden]{display:none!important}.choices h3{margin:0 0 7px;color:#ffdf98;font-size:14px;text-shadow:1px 2px #091625}.options{display:grid;gap:7px}.option{position:relative;display:flex;align-items:center;gap:9px;width:100%;border:2px solid #6a8290;border-bottom-color:#34485b;background:#203b4d;color:#fff7e6;text-align:left;padding:9px 11px;font-weight:750;font-size:clamp(12px,2.8vw,14px);line-height:1.35;min-height:45px;box-shadow:inset 2px 2px #38576b,2px 3px #090e18}.option:hover{background:#2e5265}.option:active{transform:translateY(2px)}.option .diamond{flex:none;color:#d8bf7b;font:900 14px monospace}.option.error{border-color:#e48b81;background:#653838}.option:disabled{opacity:.8;cursor:default}.answer-tip{font-size:12px;min-height:17px;color:#ffceb1;margin-top:7px}
+.win{position:absolute;z-index:4;inset:22px 14px;pointer-events:auto;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:12px;background:#122237ed;border:4px solid #f7d47a;box-shadow:inset 0 0 0 4px #36506b,0 0 0 5px #0a1728}.win[hidden]{display:none!important}.win .trophy{font-size:58px;filter:drop-shadow(4px 5px #090e17)}.win h2{font-size:27px;color:var(--gold);margin:0;text-shadow:3px 3px #0a121c}.win p{margin:0;line-height:1.7;font-size:14px;max-width:270px}
+.controls{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:12px;background:#172b40;border-top:3px solid #405d70}.controls .instruction{font-size:12px;color:#d2ddea;line-height:1.45;flex:1;min-width:150px}.controls strong{color:#ffdfa0}.btn{border:2px solid #f1c67b;background:#bf8140;color:#fff7e6;padding:10px 14px;box-shadow:inset 2px 2px #e9a75d,3px 3px #080e18;font-weight:800;min-height:43px}.btn:hover{background:#d99c55}.btn:active{transform:translate(2px,2px);box-shadow:1px 1px #080e18}.btn.secondary{background:#28495a;border-color:#678b94;box-shadow:inset 2px 2px #456a78,3px 3px #080e18}.btn:disabled{opacity:.45;cursor:default}.tools{display:flex;gap:8px;align-items:center}
+.side{display:grid;gap:15px}.section-heading{display:flex;justify-content:space-between;align-items:center;background:#20384f;border-bottom:2px solid #4b6a80;padding:9px 13px}.section-heading h2{font-size:14px;margin:0;color:var(--gold)}.section-heading span{color:#cad5dc;font-size:11px}.diagram{padding:12px;background:#f2ead5;color:#233347;position:relative}.diagram svg{width:100%;height:auto;display:block;max-height:190px}.diagram small{display:block;margin-top:4px;color:#455b63;font-size:11px;text-align:center;line-height:1.5}
+.mission{padding:13px 15px;border-bottom:1px solid #3f5770}.mission .name{color:#eed498;font-size:12px;font-weight:800;margin-bottom:5px}.mission h3{font-size:16px;margin:0 0 5px}.mission p{font-size:12px;color:#bfccdb;margin:0}.hintbox{padding:11px 13px 14px}.hinttext{font-size:13px;line-height:1.7;margin:0 0 12px;color:#d4dfe8;min-height:46px}.hinttext strong{color:var(--gold)}
+.notepad{padding:13px 15px 15px}.notepad .logitem{padding:8px 10px;margin-top:8px;border-left:3px solid #81cfad;background:#1d3944;font-size:13px;line-height:1.6}.notepad .empty{margin:7px 0 2px;color:#90a5b3;font-size:12px}.reset{background:none;border:1px solid #657484;color:#c0cbda;font-size:11px;padding:5px 7px}.foot{color:#95a8be;font-size:11px;line-height:1.6;margin-top:14px;padding:0 3px;text-align:center}.sound{background:none;border:1px solid #667988;padding:7px 9px;color:#e4e6de;font-size:12px}
+@keyframes pop{from{transform:translateY(9px);opacity:.4}to{transform:none;opacity:1}}.mine.shake{animation:shake .2s steps(4)}@keyframes shake{0%,100%{transform:none}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@media(max-width:800px){.pill{display:none}.layout{display:flex;flex-direction:column}.play,.side{width:100%}.side{display:contents}.diagram-panel{order:-1}.play{order:0}.help-panel{order:1}.notebook-panel{order:2}.mine{height:clamp(395px,53svh,560px)}.game-head{padding:8px 11px}.diagram{padding:5px 10px}.diagram svg{max-height:145px}.section-heading{padding:6px 11px}.mission{padding:7px 11px}.mission h3{font-size:14px}.mission p{font-size:11px}.top{margin-bottom:8px}.crest{width:42px;height:42px}.wrap{padding:10px 10px 30px}.brand h1{font-size:19px}.choices{bottom:9px;left:8px;right:8px;padding:9px}.option{padding:8px;min-height:42px}.controls{padding:9px;gap:5px}.controls .instruction{font-size:11px}}
+@media(max-width:370px){.pill{display:none}.mine{height:440px}.brand h1{font-size:17px}.option{font-size:12px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+/* v1.1: the mathematical diagram must remain visible while selecting an answer */
+.choices{position:relative;left:auto;right:auto;bottom:auto;margin:0;border-left:0;border-right:0;border-top:3px solid #d8b46d;border-bottom:3px solid #d8b46d;box-shadow:none;z-index:2}
+@media(max-width:800px){
+ .diagram-panel{position:sticky;top:0;z-index:30;box-shadow:0 4px 18px #07101cbb;width:100%}
+ .diagram-panel .section-heading{padding:4px 10px}
+ .diagram-panel .diagram{padding:3px 8px}
+ .diagram-panel .diagram svg{max-height:112px}
+ .diagram-panel .diagram small{margin-top:0;font-size:10px}
+ .diagram-panel .mission{padding:5px 10px}
+ .diagram-panel .mission .name,.diagram-panel .mission p{display:none}
+ .diagram-panel .mission h3{font-size:13px;margin:0}
+ .mine{height:clamp(310px,44svh,450px)}
+ .choices{padding:10px 9px}
+ .choices .option{min-height:48px;font-size:13px}
+ .wrap{padding-top:6px}
+}
+@media(max-width:370px){.mine{height:340px}.diagram-panel .diagram svg{max-height:98px}}
+@media(max-width:800px) and (max-height:620px){
+ .diagram-panel .diagram svg{max-height:82px}
+ .diagram-panel .diagram small{display:none}
+ .diagram-panel .mission{padding:3px 9px}
+ .choices .option{min-height:41px;padding:6px 7px}
+ .choices h3{font-size:12px}
+}
+
+/* Smooth UI: one continuous play surface; no page-scroll requirement on phones */
+.mine canvas{position:absolute;top:50%;left:0;transform:translateY(-50%);width:100%;height:auto;aspect-ratio:384 / 540}
+.top-right{display:flex;align-items:center;gap:10px}
+@media(min-width:801px){.side{position:sticky;top:12px}.play.is-fork .mine{height:clamp(220px,36vh,330px)}}
+.note-open{border:2px solid #6d9092;background:#244858;color:#fff0bf;padding:7px 11px;font-weight:800;font-size:12px;white-space:nowrap}
+.choice-head{display:flex;justify-content:space-between;align-items:center;gap:7px;margin-bottom:8px}
+.choice-head h3{margin:0;font-size:14px;color:#ffdf98}
+.hint-quick{border:1px solid #e6bd68;background:#564323;color:#fff3cc;font-size:11px;font-weight:800;padding:6px 7px;white-space:nowrap}
+.hint-inline{background:#354157;border-left:3px solid #f4d276;color:#fff3cc;font-size:12px;line-height:1.45;padding:6px 8px;margin-bottom:8px}
+.hint-inline[hidden],.note-sheet[hidden]{display:none!important}
+.note-sheet{position:fixed;inset:0;background:#071322e6;z-index:100;display:grid;place-items:center;padding:18px}
+.note-card{width:min(520px,100%);max-height:85vh;overflow:hidden;background:#152a3f;border:3px solid #ddc180;box-shadow:7px 7px 0 #070d15;display:flex;flex-direction:column}
+.note-bar{padding:12px 15px;display:flex;justify-content:space-between;align-items:center;background:#213b4b}
+.note-bar button{background:#415364;border:1px solid #9bb1b7;color:white;padding:7px 11px}
+.note-content{padding:15px;overflow-y:auto;font-size:14px;line-height:1.7}
+.note-content .logitem{padding:9px;margin-bottom:9px;background:#233d45;border-left:3px solid #9cdbab}
+.note-content .empty{color:#bfced8}
+@media(max-width:800px){
+ html,body{height:100%;overflow:hidden;overscroll-behavior:none}
+ .wrap{height:100vh;height:100dvh;min-height:0;display:flex;flex-direction:column;overflow:hidden;padding:5px 6px 5px}
+ .top{margin:0 0 5px;flex:0 0 27px;height:27px;gap:5px}
+ .brand{gap:5px}.brand small,.crest,.pill{display:none}.brand h1{font-size:15px;white-space:nowrap}
+ .note-open{font-size:11px;padding:3px 7px;border-width:1px}
+ .layout{display:flex;flex-direction:column;gap:5px;flex:1 1 auto;min-height:0;overflow:hidden}
+ .side{display:contents}
+ .diagram-panel{position:relative;top:auto;z-index:1;order:-1;width:100%;flex:0 0 auto;box-shadow:none;border-width:2px}
+ .diagram-panel .section-heading{padding:3px 8px;min-height:22px}
+ .diagram-panel .section-heading h2{font-size:12px}
+ .diagram-panel .section-heading span{font-size:10px}
+ .diagram-panel .diagram{padding:0 5px 2px}
+ .diagram-panel .diagram svg{width:100%;height:auto;max-height:min(15svh,108px);margin:auto}
+ .diagram-panel .diagram small,.diagram-panel .mission{display:none}
+ .play{order:0;flex:1 1 auto;min-height:0;width:100%;display:flex;flex-direction:column;overflow:hidden;border-width:2px;box-shadow:none}
+ .play .game-head{flex:0 0 auto;padding:4px 9px;min-height:34px;gap:7px}
+ .game-head .quest-label{font-size:9px}.game-head strong{font-size:12px}
+ .progress{flex:0 0 5px;height:5px}
+ .mine{flex:1 1 auto;min-height:108px;height:auto;max-height:none;cursor:ns-resize;overflow:hidden}
+ .mine canvas{position:absolute;top:50%;left:0;transform:translateY(-50%);width:100%;height:auto;aspect-ratio:384 / 540;image-rendering:pixelated}
+ .depthflag{font-size:9px;padding:2px 6px}.mine-overlay{padding:5px}
+ .toast{font-size:10px;min-height:0;padding:5px 8px;max-width:92%}
+ .choices{flex:0 0 auto;max-height:45dvh;overflow-y:auto;margin:0;padding:6px 7px;box-shadow:none;border-width:2px 0;border-left:0;border-right:0}
+ .choices .choice-head{margin:0 0 5px}.choice-head h3{font-size:12px}
+ .hint-quick{font-size:10px;padding:3px 5px}
+ .hint-inline{margin:0 0 5px;padding:4px 6px;font-size:11px}
+ .options{gap:4px}
+ .option{padding:6px 8px;min-height:39px;font-size:clamp(11px,3.45vw,13px);line-height:1.27;box-shadow:inset 2px 2px #38576b}
+ .option .diamond{font-size:13px}
+ .answer-tip{min-height:0;margin:4px 0 0;font-size:11px}
+ .answer-tip:empty{display:none}
+ .controls{flex:0 0 44px;min-height:44px;padding:5px 7px;border-top-width:2px}
+ .controls .instruction{display:block;font-size:10px;min-width:0;flex:1;line-height:1.25}
+ .controls .instruction br{display:none}
+ .controls .tools{flex:0 0 auto;gap:5px}
+ .controls .sound{padding:5px 6px;font-size:10px}
+ .controls .btn{font-size:12px;min-height:31px;padding:5px 9px;border-width:2px}
+ .help-panel,.notebook-panel,.foot{display:none}
+ .win{inset:5px;padding:9px;gap:5px}.win h2{font-size:20px}.win .trophy{font-size:31px}.win p{font-size:12px}
+ .play.is-fork .mine{flex:1 1 auto}
+}
+@media(max-width:800px) and (max-height:700px){
+ .diagram-panel .diagram svg{max-height:min(14svh,90px)}
+ .controls{flex-basis:39px;min-height:39px}
+ .controls .instruction{font-size:9px}
+ .choices .option{min-height:35px;padding:5px 7px}
+ .choices{padding:4px 7px}
+ .mine{min-height:93px}
+}
+@media(max-width:800px) and (max-height:560px){
+ .top{flex-basis:22px;height:22px}.brand h1{font-size:13px}
+ .diagram-panel .diagram svg{max-height:67px}
+ .game-head strong{display:none}.play .game-head{min-height:24px;padding:3px 6px}
+ .choices .option{min-height:33px;padding:4px 6px}
+ .mine{min-height:72px}
+ .controls{flex-basis:36px;min-height:36px}
+}
+</style>
+</head><body>
+<div class="wrap">
+<header class="top"><div class="brand"><div class="crest" aria-hidden="true">⛏️</div><div><small>PIXEL PROOF QUEST / 16-BIT MVP</small><h1>モグラの証明大冒険</h1></div></div><div class="top-right"><span class="pill">STAGE 01 ・ 体験版</span><button id="noteOpen" class="note-open" type="button">📓 発見 <span id="noteCount">0</span>/3</button></div></header>
+<main class="layout">
+ <section class="play paper" id="playRoot" aria-label="地下探索ゲーム">
+  <div class="game-head"><div><span class="quest-label">CHAPTER 01 / 合同条件の洞窟</span><strong>正しい証明の道を掘り進め！</strong></div><span class="level" id="counter">1 / 3</span></div>
+  <div class="progress"><div id="progressbar"></div></div>
+  <div id="mine" class="mine"><canvas id="world" width="384" height="540" aria-label="モグラの地下探索フィールド。指で下になぞると掘り進みます"></canvas><div class="mine-overlay"><div class="depthflag" id="depthflag">DEPTH 0 m</div><div class="toast" id="toast" aria-live="polite">指で下になぞって、地面を掘ろう！</div></div>
+   <div id="win" class="win" hidden><span class="trophy" aria-hidden="true">💎</span><span class="eyebrow">QUEST COMPLETE</span><h2>証明の道、開通！</h2><p>3つの合同条件を見分けて、地下の宝物にたどり着いた！</p><button id="replayWin" class="btn">もう一度冒険する ↺</button></div>
+  </div>
+  <div class="choices" id="choices" hidden><div class="choice-head"><h3>どの合同条件が使える？</h3><button id="hintQuick" class="hint-quick" type="button">💡 ヒント <span id="quickCount">0/3</span></button></div><div id="hintInline" class="hint-inline" role="status" hidden></div><div class="options" id="options"></div><div class="answer-tip" id="answerTip" role="status"></div></div>
+  <div class="controls"><div class="instruction" id="instruction">土の中を<strong>指で下になぞる</strong>とモグラが進む。<br>PCならマウスでドラッグ。</div><div class="tools"><button id="sound" class="sound" aria-label="音のオンオフ">♪ OFF</button><button id="dig" class="btn">⛏ 自動で掘る</button></div></div>
+ </section>
+ <aside class="side">
+  <section class="paper diagram-panel"><div class="section-heading"><h2>📜 今回の図形</h2><span id="tasklabel">問題 1</span></div><div class="diagram"><svg id="triangles" viewBox="0 0 390 160" role="img" aria-label="等しい辺と角に印を付けた2つの三角形"><polygon points="35,131 99,20 169,131" fill="#fdf9ec" stroke="#2c587b" stroke-width="2.5"/><polygon points="220,131 284,20 354,131" fill="#fdf9ec" stroke="#2c587b" stroke-width="2.5"/><g fill="#253d55" font-size="15" font-weight="bold"><text x="21" y="144">A</text><text x="93" y="14">B</text><text x="166" y="146">C</text><text x="205" y="144">D</text><text x="278" y="14">E</text><text x="352" y="146">F</text></g></svg><small>同じ印の辺・角はそれぞれ等しい。合同条件を考えよう。</small></div><div class="mission"><div class="name">MISSION</div><h3 id="missiontitle">印の付いた2つの三角形を見よう</h3><p id="missiontext">地下の分かれ道で、正しい合同条件を選ぼう。</p></div></section>
+  <section class="paper help-panel"><div class="section-heading"><h2>💡 モグラ博士のヒント</h2><span id="hintcount">0 / 3</span></div><div class="hintbox"><p class="hinttext" id="hinttext">困ったらヒントを見てみよう。<br>最初は図の印を数えてみよう！</p><button class="btn secondary" id="hint">ヒントをもらう ✦</button></div></section>
+  <section class="paper notebook-panel"><div class="section-heading"><h2>📓 発見ノート</h2><button class="reset" id="reset">最初から</button></div><div class="notepad" id="notepad"><p class="empty">正しい道を通ると、ここに発見が記録されます。</p></div></section>
+ </aside>
+</main><div id="noteSheet" class="note-sheet" hidden role="dialog" aria-modal="true" aria-label="発見ノート"><div class="note-card"><div class="note-bar"><strong>📓 発見ノート</strong><button id="noteClose" type="button" aria-label="ノートを閉じる">閉じる ✕</button></div><div id="noteMirror" class="note-content"></div></div></div><div class="foot">MVP：合同条件の識別・全3問／モグラ操作・分岐・ヒントを試すための体験版です。<br>地形・キャラクター・音はこのゲーム用のオリジナル。外部素材・通信不要。</div>
+</div>
+<script>
+(()=>{'use strict';
+const $=x=>document.getElementById(x),c=$('world'),ctx=c.getContext('2d',{alpha:false});ctx.imageSmoothingEnabled=false;
+const LW=384,LH=540,MAXDEPTH=1900, forks=[385,930,1475];
+const CONDITIONS=['3組の辺がそれぞれ等しい。','2組の辺とその間の角がそれぞれ等しい。','1組の辺とその両端の角がそれぞれ等しい。'];
+const tasks=[
+{answer:0,sides:[0,1,2],angles:[],hints:['等しい印が付いた「辺」は何組ある？','2つの三角形に、対応する3組の辺の印があるよ。','「3組の辺がそれぞれ等しい。」を選ぼう。'],detail:'対応する3組の辺に、それぞれ同じ印がある。'},
+{answer:1,sides:[0,1],angles:[1],hints:['印が付いた辺と角の位置関係に注目！','2組の辺と、その2辺にはさまれた角に印があるね。','「2組の辺とその間の角がそれぞれ等しい。」を選ぼう。'],detail:'対応する2組の辺と、その間の角にそれぞれ同じ印がある。'},
+{answer:2,sides:[0],angles:[0,1],hints:['印が付いた角は何組ある？','2組の角にはさまれている辺にも印があるね。','「1組の辺とその両端の角がそれぞれ等しい。」を選ぼう。'],detail:'対応する1組の辺と、その両端の角にそれぞれ同じ印がある。'}
+];
+const v0=[{x:35,y:131},{x:99,y:20},{x:169,y:131}],v1=[{x:220,y:131},{x:284,y:20},{x:354,y:131}], edges=[[0,1],[1,2],[2,0]];
+const ns='http://www.w3.org/2000/svg';function elem(tag,attrs,parent){let el=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v));parent.appendChild(el);return el}
+function tick(a,b,n,p){let mx=(a.x+b.x)/2,my=(a.y+b.y)/2,dx=b.x-a.x,dy=b.y-a.y,l=Math.hypot(dx,dy),px=-dy/l,py=dx/l;for(let j=0;j<n;j++){let off=(j-(n-1)/2)*7;elem('line',{x1:mx+dx/l*off-px*7,y1:my+dy/l*off-py*7,x2:mx+dx/l*off+px*7,y2:my+dy/l*off+py*7,stroke:'#d37435','stroke-width':2.6,'stroke-linecap':'round'},p)}}
+function arc(a,b,d,num,p){let a1=Math.atan2(b.y-a.y,b.x-a.x),a2=Math.atan2(d.y-a.y,d.x-a.x),diff=a2-a1;while(diff>Math.PI)diff-=Math.PI*2;while(diff< -Math.PI)diff+=Math.PI*2;for(let z=0;z<num;z++){let rad=18+z*5,s='';for(let i=0;i<=14;i++){let t=a1+diff*i/14,x=a.x+Math.cos(t)*rad,y=a.y+Math.sin(t)*rad;s+=(i?' L ':'M ')+x.toFixed(2)+' '+y.toFixed(2)}elem('path',{d:s,fill:'none',stroke:'#ba588b','stroke-width':2.5,'stroke-linecap':'round'},p)}}
+function diagram(){let svg=$('triangles');svg.replaceChildren();const t=tasks[round];[v0,v1].forEach((v,ix)=>{elem('polygon',{points:v.map(a=>`${a.x},${a.y}`).join(' '),fill:'#fffaf0',stroke:'#2b587b','stroke-width':2.5,'stroke-linejoin':'round'},svg);t.sides.forEach((e)=>tick(v[edges[e][0]],v[edges[e][1]],e+1,svg));t.angles.forEach((a)=>arc(v[a],v[(a+2)%3],v[(a+1)%3],a+1,svg));['ABC','DEF'][ix].split('').forEach((L,i)=>{let q=v[i],ox=[-15,-7,0][i],oy=[15,-7,16][i];if(i===2)ox=5;let el=elem('text',{x:q.x+ox,y:q.y+oy,fill:'#253d55','font-size':15,'font-weight':800},svg);el.textContent=L})});}
+let autoDig=false;let round=0,mode='dig',mole={x:192,y:162},cameraY=0,travel=null,toastUntil=0,toastText='',audioEnabled=false,audioContext=null,wrong=0,hintIndex=0,completion=[],lastFrame=0,particles=[],drag=false,dragY=0,dragX=0,descent=0;
+function hash(x,y,z=0){let n=(x*374761393+y*668265263+z*224682251)|0;n=Math.imul(n^(n>>>13),1274126177);return ((n^(n>>>16))>>>0)/4294967295}
+function rect(x,y,w,h,color){ctx.fillStyle=color;ctx.fillRect(Math.floor(x),Math.floor(y),Math.ceil(w),Math.ceil(h))}
+const soilSets=[['#67482e','#735137','#7b5637','#5c402c','#8a603d'],['#533d38','#644542','#6a4940','#49333a','#865449'],['#3c4254','#45475c','#52546b','#313849','#665875'],['#354455','#3a5160','#49596b','#27394d','#6b5d71']];
+function soil(y){let layer=y<480?0:y<950?1:y<1460?2:3;return soilSets[layer]}
+function background(){let top=Math.floor(cameraY/16)-1,bot=Math.ceil((cameraY+LH)/16)+1;rect(0,0,LW,LH,'#40392f');for(let ty=top;ty<=bot;ty++){let y=ty*16-cameraY;if(ty*16<116){let k=hash(1,ty);rect(0,y,LW,16,ty*16<65?'#7cc6d2':'#b5dec3');continue}let p=soil(ty*16);for(let tx=0;tx<Math.ceil(LW/16);tx++){let x=tx*16,r=hash(tx,ty);rect(x,y,16,16,p[Math.floor(r*4)]);rect(x,y,16,1,p[3]);if(hash(tx,ty,1)>.62)rect(x+3,y+5,7,2,p[4]);if(hash(tx,ty,2)>.74)rect(x+9,y+11,3,2,p[3]);if(hash(tx,ty,3)>.81)rect(x+2,y+12,3,2,'#ab8660');if(hash(tx,ty,4)>.92){rect(x+9,y+3,2,4,'#c2ac77');rect(x+11,y+5,2,2,'#ddba83')}}}}
+function scenery(){let y=116-cameraY;if(y>-70&&y<LH+60){rect(0,y-115,LW,102,'#9ad6ca');for(let i=0;i<14;i++){let x=i*31-10,h=10+hash(i,9)*24;rect(x,y-h-12,36,h,'#679d79');rect(x+8,y-h-20,22,9,'#86be8c')}rect(0,y-12,LW,12,'#3b6d4b');rect(0,y-9,LW,6,'#639252');rect(0,y-4,LW,5,'#95b95d');for(let i=0;i<53;i++){let x=i*8+hash(i,8)*4;rect(x,y-14-hash(i,3)*5,2,7,'#467646')}}
+ // earth embedded artefacts and mineral clusters at fixed coordinates
+ let coords=[[49,292],[330,340],[52,600],[305,720],[66,995],[336,1080],[48,1360],[322,1570],[56,1740]];
+ for(let i=0;i<coords.length;i++){let [x,wy]=coords[i],yy=wy-cameraY;if(yy< -50||yy>LH+50)continue;let rock=i%3===0; if(rock){rect(x-9,yy-5,24,16,'#a08b79');rect(x-9,yy-5,18,4,'#cbb5a1');rect(x+8,yy+7,7,4,'#73685e');rect(x-4,yy+2,3,2,'#e8dbc0')} else {rect(x,yy,11,22,'#2a6771');rect(x+2,yy-10,7,14,'#49b6b8');rect(x+5,yy-13,2,16,'#a6f3dc');rect(x+11,yy+8,8,10,'#2e929c');rect(x+14,yy+8,2,6,'#8df3e5')}}
+ // plant roots around first layer
+ for(let i=0;i<16;i++){let x=(i*53)%LW,wy=116+Math.floor(hash(i,11)*190),yy=wy-cameraY;if(yy>LH||yy<0)continue;rect(x,yy,2,25+Math.floor(hash(i,2)*17),'#604f32');rect(x-5,yy+10,7,2,'#604f32');rect(x+2,yy+19,8,2,'#987746')}
+}
+function tunnel(){let top=Math.max(118,Math.floor(cameraY)-8),last=Math.min(MAXDEPTH,Math.ceil(cameraY+LH)+8);const finalY=mode==='won'?1780:mole.y+20;
+ for(let wy=top;wy<last;wy+=8){if(wy>finalY)continue;let yy=wy-cameraY;let r=Math.floor(hash(7,Math.floor(wy/16))*9),w=35+r;
+ rect(192-w,yy,w*2,8,'#1a2530');rect(192-w,yy,5,8,'#34332d');rect(192+w-5,yy,5,8,'#4d4133');
+ if(wy%40===0){rect(192-w+7,yy+3,4,2,'#755e49');rect(192+w-13,yy+1,5,2,'#615a47')}
+ }
+ // fork chambers, opening at discovered depths; connected until current point
+ forks.forEach((fy,i)=>{if(fy>finalY+22)return;let sy=fy-cameraY;if(sy< -195||sy>LH+190)return;let active=i<=round;
+ rect(25,sy-15,334,111,'#1b2630');rect(25,sy-15,334,8,'#493e38');rect(25,sy+91,334,7,'#6c5840');
+ for(let j=0;j<3;j++){let x=82+j*110,yy=sy+23;rect(x-44,yy,88,63,'#293646');rect(x-36,yy+7,72,55,'#18222d');rect(x-43,yy,86,8,'#76604c');rect(x-39,yy+9,78,3,'#a28a67');rect(x-42,yy+79,84,7,'#7b6150');rect(x-16,yy+69,32,7,'#c9ad75'); // tunnel markers
+ rect(x-20,yy-29,40,27,'#65492f');rect(x-22,yy-28,44,5,'#a7804d');rect(x-22,yy-3,44,5,'#332b2a');ctx.font='bold 15px monospace';ctx.textAlign='center';ctx.fillStyle='#f8db95';ctx.fillText(String(j+1),x,yy-9);ctx.textAlign='start';
+ if((hash(i,j,8)>.35)) {rect(x-35,yy+17,5,9,'#67778a');rect(x-35,yy+19,2,3,'#a2b7bc')}}
+ // amber lamps
+ for(let side of [18,365]){rect(side-3,sy+18,7,17,'#977541');rect(side-5,sy+10,11,9,'#efb85a');rect(side-3,sy+9,7,6,'#fff1ac');rect(side-2,sy+15,4,4,'#f3d25e')}
+ if(active&&mode!=='dig')rect(155,sy-20,74,7,'#334a50');
+ });
+ // marks in tunnel
+ for(let wy=190;wy<last;wy+=90){let sy=wy-cameraY;if(sy<0||wy>finalY)continue;rect(170,sy,9,2,'#685645');rect(205,sy+13,7,2,'#5d5142')}
+}
+function drawGem(x,y){rect(x-13,y-2,26,16,'#358d9b');rect(x-8,y-13,16,11,'#a4efcb');rect(x-4,y-18,8,5,'#e7ffba');rect(x+3,y-9,8,16,'#6fe5dc');rect(x-4,y+14,8,9,'#2f658e');rect(x-2,y-12,3,17,'#f4ffd9')}
+function mineDecoration(time){for(let i=0;i<30;i++){let wx=(i*61+31)%LW,wy=160+i*52;let y=wy-cameraY;if(y<0||y>LH)continue;if(hash(i,7)>.59){let x=wx,tt=Math.sin(time/700+i)*2;rect(x,y+tt,2,2,'#e2c47d')} }
+ for(let p of particles){let yy=p.y-cameraY;if(yy> -10&&yy<LH+10)rect(p.x,yy,p.s,p.s,p.color)}
+ if(mode==='won'){let yy=1780-cameraY;if(yy>-70&&yy<LH+90){rect(99,yy-17,188,65,'#1c3135');rect(112,yy+25,160,18,'#a07042');rect(110,yy+17,164,9,'#e9b96b');rect(166,yy+6,54,27,'#6a452f');drawGem(192,yy-19)}}
+}
+// A dedicated 32x32 native pixel mole sprite rendered at integer zoom.
+const moleSprite=document.createElement('canvas');moleSprite.width=38;moleSprite.height=35;const mc=moleSprite.getContext('2d');mc.imageSmoothingEnabled=false;
+function px(x,y,w,h,color){mc.fillStyle=color;mc.fillRect(x,y,w,h)}
+function generateMole(){mc.clearRect(0,0,38,35);
+ // tail, dark outline, paws
+ px(2,20,9,6,'#2f2630');px(0,21,5,3,'#a86c69');px(7,20,23,13,'#302830');px(10,17,24,13,'#342a31');px(12,19,20,10,'#956848');px(16,22,17,7,'#b9855c');px(10,29,9,5,'#3b3134');px(12,30,7,3,'#dc9b76');px(25,29,10,5,'#3b3134');px(27,30,7,3,'#db9a74');
+ // backpack
+ px(7,11,11,13,'#2a303a');px(8,12,8,10,'#476a70');px(10,14,5,7,'#78a09a');px(9,12,3,4,'#a2c6b0');
+ // ears, head, muzzle
+ px(18,3,12,10,'#2d2830');px(19,4,10,8,'#ac7756');px(19,5,7,6,'#dda47c');px(23,7,4,4,'#f4be9c');
+ px(13,10,24,20,'#2d2730');px(15,8,22,21,'#9f6a4e');px(16,11,18,17,'#b8845f');px(23,19,13,8,'#dca789');px(26,20,11,6,'#f3d0ac');
+ // nose, eyes
+ px(33,21,5,5,'#302d33');px(34,22,3,2,'#da9b95');px(26,14,5,6,'#26272c');px(27,15,2,3,'#faf9e1');px(28,15,1,1,'#fff');px(30,27,5,2,'#774f48');
+ // miner cap
+ px(12,7,22,5,'#252b32');px(15,3,19,8,'#2b5064');px(16,4,17,5,'#558b92');px(17,3,14,2,'#a6c7b0');px(28,6,8,5,'#2b2f38');px(30,7,6,4,'#f7dd8d');px(31,7,4,2,'#fffae0');px(13,11,24,3,'#30343a');
+ // diggers claws
+ px(24,26,9,7,'#513f41');px(27,27,8,5,'#e5a67e');px(33,28,5,3,'#f3d4ad');px(29,31,3,3,'#ffe2bd');
+ }generateMole();
+function drawMole(t){let sx=mole.x,sy=mole.y-cameraY,hop=(mode==='travel'||mode==='dig')?Math.round(Math.sin(t/110)*2):0;
+ // light under feet
+ if(sy>-50&&sy<LH+50){rect(sx-26,sy+24,54,5,'#172029');ctx.drawImage(moleSprite,Math.round(sx-38),Math.round(sy-40+hop),76,70);
+ // lantern glow glints (pixel rings)
+ rect(sx+27,sy-23+hop,7,3,'#ffdd8b');rect(sx+34,sy-21+hop,4,2,'#fff1bf');
+ }}
+function draw(time){ctx.clearRect(0,0,LW,LH);background();scenery();tunnel();mineDecoration(time);drawMole(time); // vignette frame elements
+ rect(0,0,5,LH,'#1d232c');rect(LW-5,0,5,LH,'#1d232c');}
+function moveCamera(){
+ // Pixel-art canvas keeps its native aspect ratio and is clipped by the mine viewport.
+ // With the canvas vertically centered, camera positions the mole above the doors.
+ let offset=mode==='fork'?238:265;
+ let desired=Math.max(0,Math.min(MAXDEPTH-LH,mole.y-offset));
+ cameraY+=(desired-cameraY)*.16;if(Math.abs(desired-cameraY)<.2)cameraY=desired;
+}
+function toast(s,dur=2100){toastText=s;toastUntil=performance.now()+dur;$('toast').textContent=s;$('toast').classList.remove('hidden')}
+function updateHud(){
+ const n=Math.min(round+1,3);
+ $('counter').textContent=`${n} / 3`;
+ $('tasklabel').textContent=`問題 ${n} / 3`;
+ $('progressbar').style.width=`${completion.length/3*100}%`;
+ $('noteCount').textContent=completion.length;
+ $('depthflag').textContent=`DEPTH ${Math.max(0,Math.floor((mole.y-150)/5))} m`;
+ $('dig').disabled=mode!=='dig'||autoDig;
+ $('dig').textContent=autoDig?'⛏ 掘削中…':'⛏ 自動で掘る';
+ $('instruction').innerHTML=mode==='dig'?'指で<strong>下になぞって掘る</strong>か、ボタンで自動で進もう。':mode==='fork'?'図形を見ながら、<strong>道を選ぼう！</strong>':mode==='won'?'<strong>3つの合同条件</strong>を発見した！':'モグラが次の道へ移動中…';
+}
+function sound(freq=400,type='square',dur=.08){if(!audioEnabled)return;try{audioContext=audioContext||new (window.AudioContext||window.webkitAudioContext)();if(audioContext.state==='suspended')audioContext.resume();let osc=audioContext.createOscillator(),gain=audioContext.createGain();osc.type=type;osc.frequency.setValueAtTime(freq,audioContext.currentTime);gain.gain.setValueAtTime(.035,audioContext.currentTime);gain.gain.exponentialRampToValueAtTime(.0001,audioContext.currentTime+dur);osc.connect(gain);gain.connect(audioContext.destination);osc.start();osc.stop(audioContext.currentTime+dur)}catch(e){}}
+function spawn(){for(let i=0;i<12;i++)particles.push({x:mole.x+(hash(i,Math.floor(mole.y),5)-.5)*55,y:mole.y+hash(i,Math.floor(mole.y),6)*21-13,vx:(hash(i,42)-.5)*1.6,vy:-hash(i,20)*2-1,s:2+Math.round(hash(i,5)*3),ttl:25,color:['#d7aa73','#83634b','#c59c67','#9d8064'][i%4]})}
+function digBy(n){if(mode!=='dig')return;let old=mole.y;mole.y=Math.min(forks[round]-12,mole.y+Math.max(0,n));descent+=mole.y-old;if(mole.y!==old){if(descent>17){descent=0;spawn();sound(110,'triangle',.035)}updateHud();}if(mole.y>=forks[round]-12){mole.y=forks[round]-12;forkArrive()}}
+function forkArrive(){autoDig=false;mode='fork';$('playRoot').classList.add('is-fork');cameraY=Math.max(0,mole.y-238);toast('分かれ道！　正しい合同条件を選ぼう。',2000);$('choices').hidden=false;renderChoices();$('hintInline').hidden=true;$('quickCount').textContent=`${hintIndex}/3`;updateHud();sound(510,'sine',.13)}
+// Choices change order per round; all three genuine textbook condition statements.
+const optionOrders=[[0,1,2],[2,0,1],[1,2,0]];
+function renderChoices(){const area=$('options');area.replaceChildren();$('answerTip').textContent='';optionOrders[round].forEach((id,j)=>{let b=document.createElement('button');b.type='button';b.className='option';b.dataset.answer=String(id);const icon=document.createElement('span');icon.className='diamond';icon.textContent=['①','②','③'][j];let txt=document.createElement('span');txt.textContent=CONDITIONS[id];b.append(icon,txt);b.addEventListener('click',()=>choose(id,b));area.append(b)})}
+function choose(choice,b){if(mode!=='fork')return;const task=tasks[round];if(choice!==task.answer){wrong++;b.classList.add('error');$('answerTip').textContent='その道は行き止まり！ 図の印を確認しよう。';$('mine').classList.remove('shake');void $('mine').offsetWidth;$('mine').classList.add('shake');toast('ちがう道みたい。もう一度選んでみよう！');sound(130,'sawtooth',.15);setTimeout(()=>b.classList.remove('error'),430);return}
+completion.push({text:CONDITIONS[choice],detail:task.detail});writeNotebook();$('choices').hidden=true;$('playRoot').classList.remove('is-fork');mode='travel';travel={start:performance.now(),fromX:mole.x,fromY:mole.y,at:round};toast('正解！ 正しい道が開いた！',2200);updateHud();sound(600,'square',.08);setTimeout(()=>sound(780,'square',.13),100);}
+function writeNotebook(){let root=$('notepad');root.replaceChildren();completion.forEach((it,i)=>{let el=document.createElement('div');el.className='logitem';el.innerHTML=`<b>発見 ${i+1}</b>　${it.text}<br><span style="color:#b5dbca;font-size:11px">${it.detail}</span>`;root.append(el)})}
+function setTask(){diagram();hintIndex=0;$('hintQuick').disabled=false;$('hintInline').hidden=true;$('quickCount').textContent='0/3';$('hintcount').textContent='0 / 3';$('hinttext').textContent='困ったらヒントを見てみよう。まずは図の印を数えよう！';$('missiontitle').textContent=['辺の印を数えてみよう','「その間の角」を探そう','「その両端の角」を探そう'][round];$('missiontext').textContent='地下の分かれ道で、正しい合同条件を選ぼう。';$('hint').disabled=false;updateHud()}
+function hint(){if(mode==='won')return;if(hintIndex>=3)return;let t=tasks[round];const msg=t.hints[hintIndex];$('hinttext').textContent=msg;$('hintInline').textContent='💡 '+msg;$('hintInline').hidden=false;hintIndex++;$('hintcount').textContent=`${hintIndex} / 3`;$('quickCount').textContent=`${hintIndex}/3`;if(hintIndex===3){$('hint').disabled=true;$('hintQuick').disabled=true}sound(500,'sine',.09)}
+function newGame(){autoDig=false;round=0;mode='dig';$('playRoot').classList.remove('is-fork');mole={x:192,y:162};cameraY=0;travel=null;wrong=0;hintIndex=0;completion=[];particles=[];descent=0;drag=false;$('win').hidden=true;$('choices').hidden=true;$('notepad').innerHTML='<p class="empty">正しい道を通ると、ここに発見が記録されます。</p>';setTask();toast('スワイプで掘ろう！ ボタンでも進めるよ。',2100)}
+function loop(t){let dt=Math.min(48,t-(lastFrame||t));lastFrame=t;if(mode==='dig'&&autoDig)digBy(dt*1.2);if(mode==='travel'&&travel){let p=Math.min(1,(t-travel.start)/920),e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;let lane=[81,192,302][round]; // at 0..0.4: to lane, 0.4..0.7: down, 0.7..1: return center
+ if(e<.36){mole.x=192+(lane-192)*(e/.36);mole.y=travel.fromY+e/.36*45}else if(e<.68){mole.x=lane;mole.y=travel.fromY+45+(e-.36)/.32*95}else{mole.x=lane+(192-lane)*(e-.68)/.32;mole.y=travel.fromY+140+(e-.68)/.32*30}
+ if(Math.floor(t/130)%3===0&&hash(Math.floor(t/130),round)>.6)spawn();if(p>=1){mole.x=192;mole.y=travel.fromY+170;travel=null;round++;if(round>=3){mode='won';mole.y=1780;$('win').hidden=false;toast('全3問クリア！ 地底の宝物を発見！',5000);sound(920,'square',.18)}else{mode='dig';setTask();toast('次の洞窟へ！ 指でさらに掘り進もう。',2500)}}updateHud()}
+ moveCamera();particles=particles.filter(p=>--p.ttl>0);for(let p of particles){p.x+=p.vx;p.y+=p.vy;p.vy+=.13}draw(t);$('depthflag').textContent=`DEPTH ${Math.max(0,Math.floor((mole.y-150)/5))} m`;
+ if(toastUntil&&t>toastUntil){$('toast').classList.add('hidden');toastUntil=0}requestAnimationFrame(loop)}
+ c.addEventListener('pointerdown',e=>{if(mode!=='dig')return;drag=true;dragY=e.clientY;dragX=e.clientX;c.setPointerCapture(e.pointerId)});
+ c.addEventListener('pointermove',e=>{if(!drag||mode!=='dig')return;let dy=e.clientY-dragY;dragY=e.clientY;dragX=e.clientX;if(dy>0){let scale=LW/Math.max(300,c.getBoundingClientRect().width);digBy(dy*scale*3.25)}e.preventDefault()});
+ ['pointerup','pointercancel','lostpointercapture'].forEach(ev=>c.addEventListener(ev,()=>{drag=false}));
+ c.addEventListener('wheel',e=>{if(mode!=='dig')return;e.preventDefault();if(e.deltaY>0)digBy(Math.min(60,e.deltaY*.42))},{passive:false});
+ document.addEventListener('keydown',e=>{if(e.key==='ArrowDown'||e.key===' '){if(e.target.tagName==='BUTTON')return;if(mode==='dig'){e.preventDefault();digBy(35)}}});
+ $('dig').addEventListener('click',()=>{if(mode==='dig'){autoDig=true;updateHud()}});$('hint').addEventListener('click',hint);$('hintQuick').addEventListener('click',hint);$('reset').addEventListener('click',newGame);$('replayWin').addEventListener('click',newGame);
+ $('noteOpen').addEventListener('click',()=>{const note=$('noteMirror');note.innerHTML=$('notepad').innerHTML;$('noteSheet').hidden=false});
+ $('noteClose').addEventListener('click',()=>{$('noteSheet').hidden=true});
+ $('noteSheet').addEventListener('click',e=>{if(e.target===$('noteSheet'))$('noteSheet').hidden=true});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')$('noteSheet').hidden=true});
+ $('sound').addEventListener('click',()=>{audioEnabled=!audioEnabled;$('sound').textContent=audioEnabled?'♫ ON':'♪ OFF';if(audioEnabled)sound(540,'sine',.13)});
+ window.__moleMVP={get state(){return {round,mode,y:mole.y,completion:completion.length,wrong,hints:hintIndex}},dig:digBy,choose:(i)=>choose(i,{classList:{add(){},remove(){}}}),reset:newGame};
+ newGame();requestAnimationFrame(loop);
+})();
+</script></body></html>

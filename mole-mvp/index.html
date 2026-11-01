@@ -1,7 +1,10 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#101b2b"><title>モグラの証明ダッシュ 4｜5つのステージ</title>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#101b2b"><title>モグラの証明ダッシュ 5｜学びやすさ改善版</title>
 <style>
 :root{--bg:#101b2b;--panel:#20334a;--border:#667f8a;--gold:#f5d484;--ink:#fff6de;--pale:#efe8d2;--green:#a1efd1;--red:#ffaaa2}
+
+#given{display:none}.diagram-top{justify-content:flex-start}.diagram-note{font-weight:800}
+.math{font-variant-numeric:tabular-nums;letter-spacing:.01em}.math .tri,.math .ang{display:inline-block;font-weight:900;color:#6d4527;margin-right:1px;text-shadow:0 1px 0 #fff4d5}.math .name{font-weight:900;letter-spacing:.02em}.math .eq{font-weight:900;padding:0 .08em}.math .cong{font-weight:900;padding:0 .08em;color:#194d71}.math .tri-group,.math .ang-group{white-space:nowrap}.answer span.math{font-size:1.05em}.proofrow .math{line-height:1.5}.diagram-note .math{font-size:1.02em}
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg)}
 body{font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif;color:var(--ink);background:radial-gradient(circle at 50% -10%,#2f5062,transparent 65%),#101b2b;-webkit-tap-highlight-color:transparent}
 button{font:inherit;cursor:pointer;touch-action:manipulation}button:focus-visible{outline:3px solid #fffbc9;outline-offset:1px}[hidden]{display:none!important}
@@ -72,10 +75,37 @@ button{font:inherit;cursor:pointer;touch-action:manipulation}button:focus-visibl
 .review-mode .modal.stage-modal h2{font-size:17px}
 .stage-menu .stage-picker::-webkit-scrollbar{width:5px}.stage-menu .stage-picker::-webkit-scrollbar-thumb{background:#6b8992}
 @media(max-height:610px){.stage-card{min-height:55px;padding:7px 9px}.stage-icon{width:31px;height:31px;flex-basis:31px;font-size:17px}.stage-info strong{font-size:12px}.stage-info small{font-size:10px}}
+
+/* v5: student-first, high-contrast mathematical notation */
+.diagram-top{justify-content:space-between;align-items:center;min-height:27px}
+.diagram-top .zoom-btn{background:#fff9e8;border:1px solid #9a835e;color:#263b4d;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:900;line-height:1.4}
+.diagram-top .zoom-btn:active{background:#e5d5b5}
+#figure{cursor:zoom-in;touch-action:manipulation}
+.answer .math .tri,.answer .math .ang,.question .math .tri,.question .math .ang{color:#ffdd92;text-shadow:0 1px #132634}
+.answer .math .cong,.question .math .cong{color:#aef2e0}
+.answer .math .eq,.question .math .eq{color:#fff5e1}
+.answer .math .tri-group,.answer .math .ang-group{white-space:nowrap}
+.answer .math .tri,.answer .math .ang{font-size:1.21em;line-height:1;vertical-align:-.03em}
+.diagram-note .math .tri,.diagram-note .math .ang{color:#704e28}
+.proofrow .math .tri,.proofrow .math .ang{color:#6d4527}
+.proofrow .math .cong{color:#194d71}
+.answer:disabled.wrong{opacity:.76;text-decoration:line-through;text-decoration-thickness:1px}
+.zoom-mode{top:0!important;inset:0!important;z-index:350!important;padding:10px!important}
+.zoom-mode .modal{width:min(720px,100%);max-height:100%;height:auto;overflow:auto;gap:12px;padding:13px}
+.zoom-mode .zoom-panel{background:#f6efd9;color:#263b4d;border:2px solid #bb995e;padding:9px;border-radius:6px;display:flex;align-items:center;justify-content:center}
+.zoom-mode .zoom-panel svg{width:100%;height:auto;min-height:130px;max-height: min(45dvh,330px);display:block;overflow:visible}
+.zoom-mode .zoom-goal{font-size:clamp(13px,3.6vw,17px);font-weight:800;color:#fff2cf;line-height:1.5}
+.zoom-mode .mark-legend{background:#273f4d;border:1px solid #7793a1;text-align:left;padding:9px;font-size:12px;line-height:1.65;color:#e8f1df}
+.zoom-mode .mark-legend .legend-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.zoom-mode .mark-legend .legend-row span{white-space:nowrap}
+.zoom-mode .primary{width:100%}
+.minirow .feedback{flex:1 1 auto;min-width:0}
+.app{padding-bottom:max(7px,env(safe-area-inset-bottom,0px))}
+@media(max-height:610px){.diagram-top{min-height:20px}.diagram-top .zoom-btn{font-size:10px;padding:1px 6px}.zoom-mode .zoom-panel svg{max-height:31dvh}}
 </style></head><body>
 <div class="app" id="app">
-<header class="top"><div class="brand"><div class="brand-mark">⛏</div><div class="brand-txt"><b>モグラの証明ダッシュ 4</b><small>16-BIT SNAKE ESCAPE</small></div></div><button id="pauseBtn" class="tiny" type="button" disabled>Ⅱ 一時停止</button></header>
-<section class="diagram" aria-label="証明に使う図形"><div class="diagram-top"><strong>📜 図形の条件</strong><span id="given">問題を選んでスタート</span></div><svg id="figure" class="figure" viewBox="0 0 360 145" role="img" aria-label="問題の図形"></svg><div class="diagram-note" id="goal">正しい証明の道を掘り進もう！</div></section>
+<header class="top"><div class="brand"><div class="brand-mark">⛏</div><div class="brand-txt"><b>モグラの証明ダッシュ 5</b><small>16-BIT SNAKE ESCAPE</small></div></div><button id="pauseBtn" class="tiny" type="button" disabled>Ⅱ 一時停止</button></header>
+<section class="diagram" aria-label="証明に使う図形"><div class="diagram-top"><strong>📜 図を見て考えよう</strong><button type="button" id="zoomBtn" class="zoom-btn" aria-label="図を拡大して見る（制限時間は停止）">🔍 図を拡大</button><span id="given" aria-hidden="true"></span></div><svg id="figure" class="figure" viewBox="0 0 360 145" role="img" aria-label="問題の図形"></svg><div class="diagram-note" id="goal">正しい証明の道を掘り進もう！</div></section>
 <div class="status" aria-label="ヘビに追いつかれるまでの残り時間とライフ"><div class="task-num" id="taskNum">Q 1/3<span id="hearts">♥♥♥</span></div><div><div class="progress-text"><span id="gateCount">GATE 1 / 8</span><span id="statusTag">ヘビ接近中</span></div><div id="bar" class="timebar"><i id="barFill"></i></div></div><strong id="timer" class="timer">12.0</strong></div>
 <section class="mine" id="mine" aria-label="土を掘りながら自動で下へ逃げるモグラと追いかけるヘビのドット絵"><canvas id="world" width="288" height="236"></canvas><div class="mine-top"><span class="depth" id="depth">深さ 0 m</span><span class="speech" id="message">土を掘ってヘビから逃げよう！</span></div><div class="mine-bottom"><div class="lane-guide"><span>①</span><span>②</span><span>③</span></div></div><div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="ゲームメニュー"><div class="modal" id="modalContent"><div class="big">⛏️ 🐾 💎</div><h2>ヘビから逃げて証明完成！</h2><p>モグラは自動で土を掘って進む！<br><strong>上から追ってくるヘビにつかまる前に</strong>、正しい言葉・式・記号を選ぼう。<br>正解すると一気に掘り進んで逃げられるよ！</p><div class="modes" id="modes"><button class="mode" data-mode="study" type="button">じっくり<small>20〜30秒</small></button><button class="mode active" data-mode="normal" type="button">ふつう<small>12〜22秒</small></button><button class="mode" data-mode="challenge" type="button">チャレンジ<small>7〜14秒</small></button></div><button class="primary" id="startBtn" type="button">▶ 冒険スタート！</button><span style="font-size:10px;color:#aecaee">三角形の合同条件は教科書表記。等しい式を選んだら、その理由も選ぼう。順番は自由！</span></div></div></section>
 <section class="quiz" aria-label="証明のパーツ選択"><div class="question"><h2 id="question">まずはゲームをスタートしよう！</h2><small id="stepType">証明の道</small></div><div class="answers" id="answers"><button class="answer" disabled><b>①</b><span>スタートすると選択肢が現れます。</span></button></div><div class="minirow"><span class="feedback" id="feedback" role="status">正しい道を選んで、モグラを助けよう。</span><button class="hint" id="hintBtn" type="button" disabled>💡 ヒント ＋3秒</button></div><div class="hint-reveal" id="hintText" hidden></div></section>
@@ -144,10 +174,18 @@ let stageClears=readCompleted();
 function saveClear(id){if(!stageClears.includes(id))stageClears.push(id);try{localStorage.setItem(SAVE_KEY,JSON.stringify(stageClears))}catch(_){}}
 
 const MODES={study:[20,25,30],normal:[12,17,22],challenge:[7,10,14]};
-let state={phase:'ready',idx:0,lives:3,remaining:12,limit:12,p:0,chosen:false,choice:1,wrong:0,hints:0,elapsed:0,taskStarted:0,taskWrong:0,taskHints:0,attempts:0,hintUsed:false,notes:[],picked:[],taskIndex:0,taskIds:[],frame:0,hitFlash:0,correctFlash:0,collisionClock:0,penaltyFlash:0,mode:'normal',overlays:[],highlight:[],highlightId:-1,completed:[],selectedFact:null,totalSteps:1,stageIndex:0,steps:['condition'],stageId:'first'};
+let state={phase:'ready',idx:0,lives:3,remaining:12,limit:12,p:0,chosen:false,choice:1,wrong:0,hints:0,elapsed:0,taskStarted:0,taskWrong:0,taskHints:0,attempts:0,correctAnswers:0,hintUsed:false,notes:[],picked:[],taskIndex:0,taskIds:[],frame:0,hitFlash:0,correctFlash:0,collisionClock:0,penaltyFlash:0,mode:'normal',overlays:[],highlight:[],highlightId:-1,completed:[],selectedFact:null,totalSteps:1,stageIndex:0,steps:['condition'],stageId:'first'};
 let last=0,lastHud=0,audio=false,audioCtx=null,choiceMap=[];
 function sound(f=390,t='square',len=.07,volume=.035){if(!audio)return;try{audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=t;o.frequency.setValueAtTime(f,audioCtx.currentTime);g.gain.setValueAtTime(volume,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+len);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+len)}catch(e){}}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function formatMath(s){
+ let str=esc(String(s));
+ str=str.replace(/△([A-Z]{3})/g,'<span class="tri-group"><span class="tri">△</span><span class="name">$1</span></span>');
+ str=str.replace(/∠([A-Z]{3})/g,'<span class="ang-group"><span class="ang">∠</span><span class="name">$1</span></span>');
+ str=str.replace(/≡/g,'<span class="cong">≡</span>');
+ str=str.replace(/＝/g,'<span class="eq">＝</span>');
+ return '<span class="math">'+str+'</span>';
+}
 function shuffled(a){let b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
 function pickTasks(){return [...STAGES[state.stageIndex].tasks]}
 function stage(){return STAGES[state.stageIndex]}
@@ -167,7 +205,7 @@ function currentSpec(){let t=task(),k=stepKind();if(k==='tri')return {title:'対
  if(k==='condition')return{title:'使える合同条件は？',type:'合同条件',choices:CONDITIONS,correct:[CONDITIONS[t.kind]],hint:'集めた等しさは「辺」が何組、「角」が何組かな？'};
  if(k==='cong')return{title:'合同を正しく表す式は？',type:'合同の式',choices:[t.cong,...t.congWrong],correct:[t.cong],hint:'頂点の対応順を守ろう。「≡」は合同を表す記号。'};
  if(k==='reason'){let correct=`合同な図形の対応する${t.reason}はそれぞれ等しいので、`,other=t.reason==='辺'?'角':'辺';return{title:'合同から結論を導く理由は？',type:'合同の利用',choices:[correct,`合同な図形の対応する${other}はそれぞれ等しいので、`,'仮定より、'],correct:[correct],hint:'結論で示すのは「辺」の等しさ？「角」の等しさ？'};}
- return{title:'最後に証明する式は？',type:'結論',choices:[t.result,...t.resultWrong],correct:[t.result],hint:'問題文に書かれた最終目標を確認しよう。'};
+ return{title:'最後に証明する式は？',type:'結論',choices:[t.result,...t.resultWrong],correct:[t.result],hint:'図の下にある目標を確認しよう。'};
 }
 function makeChoices(spec){let pool=spec.choices;if(stepKind()==='facts'){
  // One button per one of the three visible tunnel gates. Include a plausible distractor.
@@ -182,14 +220,22 @@ function makeChoices(spec){let pool=spec.choices;if(stepKind()==='facts'){
 }
 function updateUI(){if(state.phase==='ready')return;let t=task();$('gateCount').textContent=`GATE ${state.idx+1} / ${state.totalSteps}`;$('taskNum').innerHTML=`ST${state.stageIndex+1} ${state.taskIndex+1}/3<span id="hearts">${'♥'.repeat(state.lives)}${'♡'.repeat(3-state.lives)}</span>`;$('timer').textContent=state.remaining.toFixed(1);let warning=state.remaining<=3&&state.phase==='playing'&&!state.chosen;$('timer').classList.toggle('warning',warning);$('mine').classList.toggle('chase-warning',warning);$('bar').classList.toggle('warning',warning);$('barFill').style.width=`${Math.max(0,Math.min(100,state.remaining/state.limit*100))}%`;$('statusTag').textContent=state.chosen?'逃走成功！':state.phase==='collision'?'つかまった！':'🐍 追跡中';$('depth').textContent=`深さ ${Math.round((state.idx+state.p)*12+state.taskIndex*100+state.stageIndex*300)}m`;$('pauseBtn').disabled=state.phase!=='playing'&&state.phase!=='paused';$('pauseBtn').textContent=state.phase==='paused'?'▶ 再開':'Ⅱ 一時停止'}
 function setMessage(str){$('message').textContent=str}
-function markDiagram(){let t=task();$('given').textContent=t.given;$('goal').textContent=t.goal;drawFigure(state.highlight)}
+function wrongFeedback(k){
+ if(k==='tri'||k==='cong')return '対応する頂点の順番と△・≡を確認しよう。';
+ if(k==='facts')return '同じ印の辺・角、共通な辺、平行線の印に注目。';
+ if(k==='factWhy')return '「仮定」「共通」「対頂角」「錯角」のどれからいえるか考えよう。';
+ if(k==='condition')return '辺と角の組数、角の位置を図で確認しよう。';
+ if(k==='reason')return '証明したい結論が辺なのか角なのかを確認。';
+ return '最初に示すべき結論と、対応する頂点の順を確認。';
+}
+function markDiagram(){let t=task();$('given').textContent='';$('goal').innerHTML=formatMath(t.goal);drawFigure(state.highlight)}
 function showStageMenu(){
  state.phase='ready';
  const rec=STAGES.findIndex(t=>!stageClears.includes(t.id));
  const previewIndex=rec<0?0:rec;state.stageIndex=previewIndex;state.stageId=STAGES[previewIndex].id;state.taskIds=[STAGES[previewIndex].tasks[0]];state.taskIndex=0;state.idx=0;state.steps=[...STAGES[previewIndex].steps];state.totalSteps=state.steps.length;state.notes=[];state.highlight=[];markDiagram();
  const cards=STAGES.map((st,i)=>`<button type="button" class="stage-card ${stageClears.includes(st.id)?'done':''} ${i===rec?'recommended':''}" data-stage="${i}">
  <span class="stage-icon">${st.icon}</span><span class="stage-info"><strong>STAGE ${i+1}　${st.name}</strong><small>${st.desc} ・ 3問</small></span><span class="stage-tag">${stageClears.includes(st.id)?'✓ クリア':i===rec?'おすすめ':'挑戦'}</span></button>`).join('');
- showOverlay(`<h2>🗺 5つの地下ステージ</h2><p class="stage-menu-help">やさしい問題から本格的な証明へ。クリアはこのブラウザに保存されます。</p><div class="stage-menu-top"><b>3問ずつ・全15問</b><span>${stageClears.length}/5 クリア・▼ スクロール</span></div><div class="stage-picker">${cards}</div><div class="stage-menu-top"><b>制限時間</b><span>ヘビに捕まる前に答えよう</span></div><div class="modes" id="modes"><button type="button" class="mode ${state.mode==='study'?'active':''}" data-mode="study">じっくり<small>ゆったり</small></button><button type="button" class="mode ${state.mode==='normal'?'active':''}" data-mode="normal">ふつう<small>おすすめ</small></button><button type="button" class="mode ${state.mode==='challenge'?'active':''}" data-mode="challenge">チャレンジ<small>速い</small></button></div><span class="stage-menu-help">全ステージ自由に選べます。時間切れでも何度でも再挑戦できます。</span>`,true);
+ showOverlay(`<h2>🗺 5つの地下ステージ</h2><p class="stage-menu-help">やさしい問題から本格的な証明へ。クリアはこのブラウザに保存されます。<br>図の印：同じ刻み＝等しい辺 ／ 同じ弧＝等しい角 ／ 同じ矢印＝平行</p><div class="stage-menu-top"><b>3問ずつ・全15問</b><span>${stageClears.length}/5 クリア・▼ スクロール</span></div><div class="stage-picker">${cards}</div><div class="stage-menu-top"><b>制限時間</b><span>ヘビに捕まる前に答えよう</span></div><div class="modes" id="modes"><button type="button" class="mode ${state.mode==='study'?'active':''}" data-mode="study">じっくり<small>ゆったり</small></button><button type="button" class="mode ${state.mode==='normal'?'active':''}" data-mode="normal">ふつう<small>おすすめ</small></button><button type="button" class="mode ${state.mode==='challenge'?'active':''}" data-mode="challenge">チャレンジ<small>速い</small></button></div><span class="stage-menu-help">全ステージ自由に選べます。時間切れでも何度でも再挑戦できます。</span>`,true);
  $('modalContent').classList.add('stage-modal');
  for(const button of document.querySelectorAll('.stage-card'))button.onclick=()=>startStage(Number(button.dataset.stage));
  for(const button of document.querySelectorAll('.mode'))button.onclick=()=>{state.mode=button.dataset.mode;for(const x of document.querySelectorAll('.mode'))x.classList.toggle('active',x===button)};
@@ -198,16 +244,29 @@ function showStageMenu(){
 function startStage(stageIndex){
  if(!STAGES[stageIndex])return;
  const st=STAGES[stageIndex],chosenMode=state.mode;
- state={...state,phase:'playing',mode:chosenMode,stageIndex,stageId:st.id,steps:[...st.steps],totalSteps:st.steps.length,idx:0,lives:3,taskIndex:0,taskIds:[...st.tasks],picked:[],selectedFact:null,notes:[],completed:[],wrong:0,hints:0,elapsed:0,attempts:0,highlight:[],highlightId:-1};
+ state={...state,phase:'playing',mode:chosenMode,stageIndex,stageId:st.id,steps:[...st.steps],totalSteps:st.steps.length,idx:0,lives:3,taskIndex:0,taskIds:[...st.tasks],picked:[],selectedFact:null,notes:[],completed:[],wrong:0,hints:0,elapsed:0,attempts:0,correctAnswers:0,highlight:[],highlightId:-1};
  $('overlay').hidden=true;$('overlay').classList.remove('review-mode');$('modalContent').classList.remove('stage-modal');
  $('notebookBtn').disabled=false;loadTask();sound(640,'square',.08)
 }
 function start(){startStage(state.stageIndex)}
 function loadTask(){state.taskStarted=state.elapsed;state.taskWrong=state.wrong;state.taskHints=state.hints;state.idx=0;state.lives=3;state.picked=[];state.selectedFact=null;state.notes=[];state.highlight=[];state.highlightId=-1;markDiagram();setStep()}
-function setStep(){resetTimer();let spec=currentSpec();$('modeSummary').textContent=state.idx>0?'同じ色の頂点どうしが対応':`STAGE ${state.stageIndex+1} ・ ${stage().name}`;$('question').textContent=spec.title;$('stepType').textContent=spec.type;$('hintBtn').disabled=false;$('hintBtn').textContent='💡 ヒント ＋3秒';$('hintText').hidden=true;$('hintText').textContent='';$('feedback').textContent='ヘビにつかまる前に、正しい答えをタップ！';let root=$('answers');root.replaceChildren();choiceMap=makeChoices(spec);choiceMap.forEach((word,i)=>{let b=document.createElement('button');b.type='button';b.className='answer';b.dataset.idx=String(i);let n=document.createElement('b');n.textContent=['①','②','③','④'][i];let txt=document.createElement('span');txt.textContent=word;b.append(n,txt);b.addEventListener('click',()=>answer(i));root.appendChild(b)});setMessage('🐍 ヘビが上から迫ってくる！');updateUI()}
-function answer(i){if(state.phase!=='playing'||state.chosen||!choiceMap[i])return;let spec=currentSpec(),v=choiceMap[i],buttons=[...document.querySelectorAll('#answers .answer')];state.attempts++;if(spec.correct.includes(v)){state.choice=i;state.chosen=true;state.correctFlash=1;buttons[i].classList.add('good');buttons.forEach(b=>b.disabled=true);$('hintBtn').disabled=true;$('feedback').textContent='正解！　一気に掘ってヘビから逃げよう！';setMessage('🐍 ヘビを引き離した！');sound(650,'square',.09);let t=task();let f=t.fact.find(x=>x.v===v);state.pending={text:v,fact:f||null};}
- else{state.wrong++;state.hitFlash=1;state.remaining=Math.max(0,state.remaining-1.2);state.p=Math.max(0,1-state.remaining/state.limit);let b=buttons[i];b.classList.add('wrong');setTimeout(()=>b.classList.remove('wrong'),420);$('feedback').textContent='違う道！ ヘビが近づいてきた！';setMessage('🐍 ヘビが近い！ 急いで！');sound(140,'sawtooth',.13);if(state.remaining<=0)collision();}updateUI()}
-function hint(){if(state.phase!=='playing'||state.chosen||state.hintUsed)return;state.hintUsed=true;state.hints++;state.remaining=Math.min(state.limit+3,state.remaining+3);state.p=Math.max(0,1-state.remaining/state.limit);$('hintText').textContent='💡 '+currentSpec().hint;$('hintText').hidden=false;$('hintBtn').disabled=true;$('hintBtn').textContent='💡 使用済み';$('feedback').textContent='＋3秒！ ヘビが少し遠ざかった！';sound(480,'sine',.12);updateUI()}
+function setStep(){resetTimer();let spec=currentSpec();$('modeSummary').textContent=state.idx>0?'同じ色の頂点どうしが対応':`STAGE ${state.stageIndex+1} ・ ${stage().name}`;$('question').textContent=spec.title;$('stepType').textContent=spec.type;$('hintBtn').disabled=false;$('hintBtn').textContent='💡 ヒント ＋3秒';$('hintText').hidden=true;$('hintText').textContent='';$('feedback').textContent='ヘビにつかまる前に、正しい答えをタップ！';let root=$('answers');root.replaceChildren();choiceMap=makeChoices(spec);choiceMap.forEach((word,i)=>{let b=document.createElement('button');b.type='button';b.className='answer';b.dataset.idx=String(i);let n=document.createElement('b');n.textContent=['①','②','③','④'][i];let txt=document.createElement('span');txt.innerHTML=formatMath(word);b.append(n,txt);b.addEventListener('click',()=>answer(i));root.appendChild(b)});setMessage('🐍 ヘビが上から迫ってくる！');updateUI()}
+function answer(i){if(state.phase!=='playing'||state.chosen||!choiceMap[i])return;let spec=currentSpec(),v=choiceMap[i],buttons=[...document.querySelectorAll('#answers .answer')];state.attempts++;if(spec.correct.includes(v)){state.correctAnswers++;state.choice=i;state.chosen=true;state.correctFlash=1;buttons[i].classList.add('good');buttons.forEach(b=>b.disabled=true);$('hintBtn').disabled=true;$('feedback').textContent='正解！　一気に掘ってヘビから逃げよう！';setMessage('🐍 ヘビを引き離した！');sound(650,'square',.09);let t=task();let f=t.fact.find(x=>x.v===v);state.pending={text:v,fact:f||null};}
+ else{state.wrong++;state.hitFlash=1;state.remaining=Math.max(0,state.remaining-1.2);state.p=Math.max(0,1-state.remaining/state.limit);const b=buttons[i];b.classList.add('wrong');b.disabled=true;$('feedback').textContent='違う道！ '+wrongFeedback(stepKind())+'（－1.2秒）';setMessage('🐍 ヘビが近い！ 急いで！');sound(140,'sawtooth',.13);if(state.remaining<=0)collision();}updateUI()}
+function hint(){
+ if(state.phase!=='playing'||state.chosen||state.hintUsed)return;
+ state.hintUsed=true;state.hints++;
+ state.remaining=Math.min(state.limit+3,state.remaining+3);
+ state.p=Math.max(0,1-state.remaining/state.limit);
+ const help=currentSpec().hint;
+ $('hintText').textContent='💡 '+help;$('hintText').hidden=false;
+ $('hintBtn').disabled=true;$('hintBtn').textContent='💡 使用済み';
+ $('feedback').textContent='ヒント使用・＋3秒（読む間はタイマー停止）';
+ state.phase='paused';
+ showOverlay(`<div class="big">💡</div><h2>ヒント</h2><p style="font-size:15px;line-height:1.7">${esc(help)}</p><p>読む間はヘビが止まっています。再開すると＋3秒です。</p><button class="primary" id="closeHint" type="button">▶ ゲームを再開</button>`,true);
+ $('closeHint').onclick=resume;
+ sound(480,'sine',.12);updateUI();
+}
 function addLine(text,refs=[]){state.notes.push({text,refs});state.highlight=refs;drawFigure(refs)}
 function advanceStep(){let t=task(),k=stepKind(),v=state.pending?.text||'';let f=state.pending?.fact;state.pending=null;sound(870,'square',.08);
  if(k==='tri'){addLine(t.tri+'において、');}
@@ -234,7 +293,7 @@ function advanceStep(){let t=task(),k=stepKind(),v=state.pending?.text||'';let f
 }
 function collision(){if(state.phase!=='playing')return;state.phase='collision';state.lives--;state.wrong++;state.collisionClock=900;state.hitFlash=1;setMessage('🐍 ヘビに追いつかれた！');$('feedback').textContent=state.lives?'つかまった！ 同じ関門から再挑戦':'ライフがなくなった！';sound(100,'sawtooth',.2);updateUI()}
 function gameOver(){state.phase='gameover';showOverlay(`<div class="big">🐍 💥</div><h2>ヘビにつかまった！</h2><p>${state.taskIndex+1}問目の関門で失敗。<br>正しい証明をもう一度つなげよう。</p><button class="primary" id="retry">↺ 最初から再挑戦</button><button class="secondary" id="notesBtn">📓 途中までの証明を見る</button><button class="secondary" id="toStages">🗺 ステージを選び直す</button>`);$('retry').onclick=()=>startStage(state.stageIndex);$('notesBtn').onclick=showNotes;$('toStages').onclick=showStageMenu;updateUI()}
-function proofHtml(){const rows=state.notes.map((line,i)=>`<button type="button" class="proofrow" data-line="${i}"><b>${String(i+1).padStart(2,'0')}.</b> ${esc(line.text)}</button>`).join('');return `<div class="proof"><h3>学習の記録（各行を押すと図で確認）</h3>${rows||'<p>まだ証明は始まっていません。</p>'}</div>`}
+function proofHtml(){const rows=state.notes.map((line,i)=>`<button type="button" class="proofrow" data-line="${i}"><b>${String(i+1).padStart(2,'0')}.</b> ${formatMath(line.text)}</button>`).join('');return `<div class="proof"><h3>学習の記録（各行を押すと図で確認）</h3>${rows||'<p>まだ証明は始まっていません。</p>'}</div>`}
 function wireProof(){for(let b of document.querySelectorAll('.proofrow')){b.onclick=()=>{let i=Number(b.dataset.line),line=state.notes[i];state.highlight=line.refs;state.highlightId=i;drawFigure(line.refs);for(let x of document.querySelectorAll('.proofrow'))x.classList.toggle('active',x===b);setMessage('図形で根拠を確認！')}}}
 function finishTask(repeat=false){
  state.phase='between';if(!repeat)state.completed.push(task().id);
@@ -242,22 +301,33 @@ function finishTask(repeat=false){
  const more=state.taskIndex<stage().tasks.length-1;
  const head=more?'証明の道、突破！':'ステージクリア！';
  if(!repeat&&!more)saveClear(stage().id);
- const accuracy=Math.round(state.completed.length*state.totalSteps/(state.completed.length*state.totalSteps+state.wrong)*100);
- showOverlay(`<div class="big">💎 🐾 💎</div><h2>${head}</h2><div class="result-stars">${'★'.repeat(stars)}${'☆'.repeat(3-stars)}</div><p>STAGE ${state.stageIndex+1} ・ ${state.taskIndex+1}/${stage().tasks.length} 問<br>この問題：${seconds}秒・ミス${misses}回・ヒント${used}回<br>ここまでの正解率：${accuracy}%（ミス・時間切れ込み）<br>各行をタップすると図で確かめられるよ。</p>${proofHtml()}<button class="primary" id="continue">${more?'▶ 次の問題へ':'🗺 ステージを選ぶ'}</button>${!more&&state.stageIndex<STAGES.length-1?'<button class="secondary" id="nextStage">⛏ 次のステージに挑戦</button>':''}`);
+ const accuracy=Math.round(state.correctAnswers/Math.max(1,state.correctAnswers+state.wrong)*100);
+ showOverlay(`<div class="big">💎 🐾 💎</div><h2>${head}</h2><div class="result-stars">${'★'.repeat(stars)}${'☆'.repeat(3-stars)}</div><p>STAGE ${state.stageIndex+1} ・ ${state.taskIndex+1}/${stage().tasks.length} 問<br>この問題：${seconds}秒・ミス${misses}回・ヒント${used}回<br>ここまでの解答成功率：${accuracy}%（時間切れも失敗として集計）<br>各行をタップすると図で確かめられるよ。</p>${proofHtml()}<button class="primary" id="continue">${more?'▶ 次の問題へ':'🗺 ステージを選ぶ'}</button>${!more&&state.stageIndex<STAGES.length-1?'<button class="secondary" id="nextStage">⛏ 次のステージに挑戦</button>':''}`);
  wireProof();
  $('continue').onclick=()=>{if(more){state.taskIndex++;state.phase='playing';$('overlay').hidden=true;loadTask()}else showStageMenu()};
  if($('nextStage'))$('nextStage').onclick=()=>startStage(state.stageIndex+1);
  setMessage('証明完成！');sound(980,'square',.19);updateUI()
 }
 function showOverlay(html,review=false){
- let el=$('overlay');let showReview=review||state.phase==='between';
+ let el=$('overlay');el.classList.remove('zoom-mode');let showReview=review||state.phase==='between';
  if(showReview){document.body.appendChild(el);el.classList.add('review-mode');el.style.top=Math.max(0,document.querySelector('.diagram').getBoundingClientRect().bottom+3)+'px';}
  else{$('mine').appendChild(el);el.classList.remove('review-mode');el.style.top='';}
  $('modalContent').innerHTML=html;el.hidden=false
 }
+function showDiagramZoom(){
+ const before=state.phase;
+ if(before!=='playing')return;
+ state.phase='paused';
+ showOverlay(`<h2>🔍 図形を拡大</h2><div class="zoom-panel" id="zoomPanel"></div><div class="zoom-goal">${formatMath(task().goal)}</div><div class="mark-legend"><div class="legend-row"><span>／　同じ刻み → 等しい辺</span><span>⌒　同じ弧 → 等しい角</span><span>➜　同じ矢印 → 平行</span></div><div style="margin-top:4px;text-align:center">同じ辺を共有する場合は、その辺にも注目しよう。</div></div><p>図を確認している間、タイマーは停止します。</p><button type="button" class="primary" id="closeZoom">▶ ゲームを再開</button>`,true);
+ const el=$('overlay');el.classList.add('zoom-mode');el.style.top='0px';
+ const clone=$('figure').cloneNode(true);clone.removeAttribute('id');clone.removeAttribute('class');clone.setAttribute('aria-label','拡大した問題の図');
+ $('zoomPanel').replaceChildren(clone);
+ $('closeZoom').onclick=()=>{el.classList.remove('zoom-mode');if(before==='playing')resume();else{$('overlay').hidden=true;updateUI()}};
+ updateUI();
+}
 function showNotes(){let old=state.phase;if(old==='playing')state.phase='paused';showOverlay(`<div class="big">📓</div><h2>証明ノート</h2>${proofHtml()}<button class="primary" id="closeNote">▶ ${old==='playing'?'ゲームを再開':'閉じる'}</button>`,true);wireProof();$('closeNote').onclick=()=>{if(old==='playing'){resume()}else if(old==='gameover'){gameOver()}else if(old==='between'){finishTask(true);}else{$('overlay').hidden=true}};updateUI()}
 function togglePause(){if(state.phase==='playing'){state.phase='paused';showOverlay(`<div class="big">⏸</div><h2>一時停止</h2><p>タイマーを止めています。</p><button class="primary" id="resume">▶ 再開する</button><button class="secondary" id="restart">↺ このステージをやり直す</button><button class="secondary" id="toStages">🗺 ステージ選択</button>`);$('resume').onclick=resume;$('restart').onclick=()=>startStage(state.stageIndex);$('toStages').onclick=showStageMenu}else if(state.phase==='paused')resume();updateUI()}
-function resume(){state.phase='playing';$('overlay').hidden=true;last=performance.now();updateUI()}
+function resume(){state.phase='playing';$('overlay').hidden=true;$('overlay').classList.remove('zoom-mode');last=performance.now();updateUI()}
 function drawFigure(highlight=[]){
  const t=task(),pts=POINTS[t.shape],labels=VERTEX_LABELS[t.shape];
  const vertexGroups=trianglesFromPair(t.tri);
@@ -480,6 +550,6 @@ function frame(t){let dt=Math.min(100,Math.max(0,t-(last||t)));last=t;if(state.p
  else{state.p=Math.min(1,state.p+dt/300);if(state.p>=1)advanceStep()}
 } else if(state.phase==='collision'){state.collisionClock-=dt;if(state.collisionClock<=0){if(state.lives===0)gameOver();else{state.phase='playing';setStep()}}}
 state.hitFlash=Math.max(0,state.hitFlash-dt/450);state.correctFlash=Math.max(0,state.correctFlash-dt/750);world(t);if(t-lastHud>80){lastHud=t;updateUI()}requestAnimationFrame(frame)}
-function setup(){for(const b of document.querySelectorAll('.mode'))b.onclick=()=>{state.mode=b.dataset.mode;for(const x of document.querySelectorAll('.mode'))x.classList.toggle('active',x===b)};$('startBtn').onclick=()=>startStage(0);$('pauseBtn').onclick=togglePause;$('hintBtn').onclick=hint;$('notebookBtn').onclick=showNotes;$('stageMenuBtn').onclick=()=>{if(state.phase==='playing'){state.phase='paused'}showStageMenu()};$('muteBtn').onclick=()=>{audio=!audio;$('muteBtn').textContent=audio?'♫ ON':'♪ OFF';sound(600,'sine',.1)};document.addEventListener('keydown',e=>{if(state.phase==='playing'&&['1','2','3','4'].includes(e.key))answer(Number(e.key)-1);if(e.key==='Escape'&&['playing','paused'].includes(state.phase))togglePause()});document.addEventListener('visibilitychange',()=>{if(document.hidden&&state.phase==='playing')togglePause()});$('figure').innerHTML='';const initial=TASKS[0];state.taskIds=[initial.id];markDiagram();showStageMenu();requestAnimationFrame(frame)}
+function setup(){for(const b of document.querySelectorAll('.mode'))b.onclick=()=>{state.mode=b.dataset.mode;for(const x of document.querySelectorAll('.mode'))x.classList.toggle('active',x===b)};$('startBtn').onclick=()=>startStage(0);$('pauseBtn').onclick=togglePause;$('hintBtn').onclick=hint;$('zoomBtn').onclick=showDiagramZoom;$('figure').addEventListener('click',showDiagramZoom);$('notebookBtn').onclick=showNotes;$('stageMenuBtn').onclick=()=>{if(state.phase==='playing'){state.phase='paused'}showStageMenu()};$('muteBtn').onclick=()=>{audio=!audio;$('muteBtn').textContent=audio?'♫ ON':'♪ OFF';sound(600,'sine',.1)};document.addEventListener('keydown',e=>{if(state.phase==='playing'&&['1','2','3','4'].includes(e.key))answer(Number(e.key)-1);if(e.key==='Escape'&&['playing','paused'].includes(state.phase))togglePause()});document.addEventListener('visibilitychange',()=>{if(document.hidden&&state.phase==='playing')togglePause()});$('figure').innerHTML='';const initial=TASKS[0];state.taskIds=[initial.id];markDiagram();showStageMenu();requestAnimationFrame(frame)}
 window.__moleRush2={get state(){return{...state,notes:[...state.notes],picked:[...state.picked]}},get task(){return task().id},get options(){return[...choiceMap]},get spec(){return currentSpec()},start,startStage,showStageMenu,get stages(){return STAGES},get stage(){return stage().id},get points(){return POINTS},answer,hint,forceTimeout:()=>{if(state.phase==='playing'){state.remaining=0;collision()}},showNotes,chooseTaskIds:ids=>{if(ids.every(id=>TASKS.some(t=>t.id===id))&&ids.length===3){state.taskIds=ids;state.taskIndex=0;state.phase='playing';$('overlay').hidden=true;loadTask()}},tasks:TASKS};setup();
 })();</script></body></html>

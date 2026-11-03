@@ -154,6 +154,15 @@ body.play-mode .footer{display:none}body.play-mode #app{min-height:0;flex:1;disp
 .proof-answer-scroll .options.choice-list .option{min-height:44px}
 @media(max-width:800px){.proof-answer-scroll .options.choice-list .option{font-size:12px;min-height:43px;line-height:1.4}}
 @media(max-height:710px) and (max-width:800px){.proof-answer-scroll .options.choice-list .option{min-height:37px;padding:4px 7px}}
+
+/* Proof notebook is a written proof: each equality and its reason share one line. */
+.proof-drawer-content .proof-line{padding:12px 14px;min-height:65px}
+.proof-drawer-content .proof-line .slotnumber{font-size:11px;letter-spacing:.015em;margin-bottom:4px}
+.proof-drawer-content .proof-line .slotcontent{font-size:clamp(14px,3.5vw,17px);font-weight:650;line-height:1.6;overflow-wrap:anywhere}
+.proof-drawer-content .proof-line.filled .slotcontent{color:var(--ink)}
+.proof-drawer-content .proof-line.partial{background:#faf7ec;border-color:#d6c6a5}
+.proof-empty-piece,.proof-pending{color:var(--muted);font-size:.9em;font-weight:500}
+@media(max-width:420px){.proof-drawer-content .proof-line{min-height:61px;padding:10px 12px}}
 </style></head><body><div class="shell"><header><div class="brand"><div class="logo" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M7 38L23 8L42 38Z M23 8L23 38" stroke="currentColor" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 38H42" stroke="currentColor" stroke-width="2.7"/></svg></div><div class="brand-label"><div class="brand-kicker">GEOMETRY / PROOF</div><h1><span>三角形の合同</span><strong>証明マスター</strong></h1></div></div><div class="topactions"><button id="homeBtn" class="tinybtn" type="button">ステージ選択</button><button id="resetBtn" class="tinybtn" type="button">記録をリセット</button></div></header><div id="bootAlert" style="background:#fff2d9;border:2px solid #e4af39;color:#604416;border-radius:13px;padding:16px;margin:10px 0;font-size:14px"><strong>この画面でゲームが動かない場合</strong><div>ChatGPTなどのファイルプレビューは、ゲームを動かすJavaScriptを停止することがあります。HTMLを保存してWebブラウザで開くか、GitHub PagesなどのHTTPSサイトに公開して利用してください。</div></div><main id="app"><div class="hero"><h2>合同条件から、証明が書ける力へ。</h2><p>4ステージ・全40問。正しい表現で、証明を1行ずつ完成させよう。</p></div><div class="stages"><button class="stage" onclick="startStage(1)"><span class="num">01</span><strong>合同条件を見抜け！</strong><small>図を見て3つの合同条件から選ぶ</small></button><button class="stage" onclick="startStage(2)"><span class="num">02</span><strong>対応する辺と角を探せ！</strong><small>合同条件と等しい3組を選ぶ</small></button><button class="stage" onclick="startStage(3)"><span class="num">03</span><strong>証明を組み立てろ！</strong><small>「〜において」から合同まで</small></button><button class="stage" onclick="startStage(4)"><span class="num">04</span><strong>合同を使って証明せよ！</strong><small>合同を使って辺・角の等しさを示す</small></button></div><div class="rules"><strong>正式な合同条件</strong><br>① 3組の辺がそれぞれ等しい。<br>② 2組の辺とその間の角がそれぞれ等しい。<br>③ 1組の辺とその両端の角がそれぞれ等しい。<br><br>ヒントは3段階。間違えても何度でも挑戦できます。</div></main><div class="footer">GEOMETRY NOTE /  図形の印と図形の性質から、根拠を考える。</div></div>
 <script>
 'use strict';
@@ -282,11 +291,47 @@ function chooseProof(value){const q=current(),keys=proofKeys(q),key=initialActiv
 function undoProof(){const keys=proofKeys(current()),filled=keys.filter(k=>state.slots[k]);if(!filled.length)return;let last=filled[filled.length-1];if(state.active&&state.slots[state.active])last=state.active;if(last.startsWith('eq')&&state.slots['why'+last.slice(2)])delete state.slots['why'+last.slice(2)];delete state.slots[last];state.active=last;state.answered=false;state.feedback={kind:'info',text:'直前の項目を戻しました。'};render()}
 function proofMath(s){return esc(s).replace(/([△∠])/g,'<span class="math-symbol">$1</span>').replace(/([≡＝])/g,'<span class="math-operator">$1</span>')}
 function proofFigureBox(q){const goal=state.stage===4?`<div class="proof-goal"><b>GOAL</b> ${proofMath(q.goalSelected[0])}</div>`:'<div class="proof-goal"><b>MISSION</b> 2つの三角形の合同を証明しよう</div>';return `<div class="question-head"><h2>STAGE ${state.stage}　${STAGE_NAMES[state.stage]}</h2><span class="pill">${state.index+1} / 10</span></div><div class="progress"><div style="width:${(state.index+1)*10}%"></div></div><div class="figure">${diagram(q)}</div>${goal}${q.key==='para'?'<div class="diagram-key">同じ矢印のついた辺は平行</div>':''}${(state.feedback?.kind==='error'||state.hint)?`<div class="proof-figure-notice" role="status"><span>${state.feedback?.kind==='error'?'⚠️ '+esc(state.feedback.text):'💡 '+esc(hintText(q)[state.hint-1]||'')}</span><button type="button" aria-label="メッセージを閉じる" onclick="this.closest('.proof-figure-notice').remove()">×</button></div>`:''}`}
+function proofNotebookGroups(q){
+ const groups=[{label:'考える三角形',keys:['intro'],type:'intro'}];
+ for(let i=0;i<3;i++)groups.push({label:`等しいこと ${i+1}組目`,keys:[`eq${i}`,`why${i}`],type:'fact'});
+ groups.push({label:'合同条件から合同を示す',keys:['condition','congruent'],type:'cong'});
+ if(q.stage===4)groups.push({label:'合同から結論を導く',keys:['link','goal'],type:'result'});
+ return groups;
+}
+function proofNotebookLine(group){
+ const [a,b]=group.keys,first=state.slots[a],second=b?state.slots[b]:null;
+ const placeholder=text=>`<span class="proof-empty-piece">${text}</span>`;
+ if(group.type==='intro')return first?proofMath(slotDisplay(a)):placeholder('三角形を選ぶ');
+ if(group.type==='fact'){
+  const eq=first?.text||'';
+  if(first&&second)return proofMath(second+'、'+eq);
+  if(first)return proofMath(eq)+` <span class="proof-pending">（理由を選ぼう）</span>`;
+  return second?proofMath(second+'、')+placeholder('等式を選ぶ'):placeholder('等式と理由を選ぶ');
+ }
+ if(group.type==='cong'){
+  if(first&&second)return proofMath(first+second);
+  if(first)return proofMath(first)+placeholder('△…≡△…');
+  return second?proofMath(second)+` <span class="proof-pending">（合同条件を選ぼう）</span>`:placeholder('合同条件と合同を選ぶ');
+ }
+ if(first&&second)return proofMath(first+'、'+second);
+ if(first)return proofMath(first+'、')+placeholder('結論を選ぶ');
+ return second?proofMath(second)+` <span class="proof-pending">（理由を選ぼう）</span>`:placeholder('理由と結論を選ぶ');
+}
 function openProofNotebook(){
- const q=current(),keys=proofKeys(q),active=state.answered==='complete'?null:initialActive(q),done=keys.filter(k=>state.slots[k]).length;
+ const q=current(),keys=proofKeys(q),groups=proofNotebookGroups(q),active=state.answered==='complete'?null:initialActive(q);
+ const completed=groups.filter(g=>g.keys.every(k=>Boolean(state.slots[k]))).length;
  document.getElementById('proofDrawer')?.remove();
  const wrap=document.createElement('div');wrap.id='proofDrawer';wrap.className='proof-drawer';wrap.setAttribute('role','dialog');wrap.setAttribute('aria-modal','true');wrap.setAttribute('aria-label','証明ノート');
- wrap.innerHTML=`<section class="proof-drawer-card"><div class="proof-drawer-top"><b>📘 証明ノート　${done}/${keys.length}項目</b><button type="button" onclick="closeProofNotebook()">閉じる ×</button></div><div class="proof-drawer-content">${keys.map((key,i)=>{const filled=Boolean(state.slots[key]),ready=canUseKey(key,keys);return `<button type="button" class="slot ${filled?'filled':''} ${active===key?'active':''} ${!ready&&!filled?'locked':''}" onclick="focusProofSlot('${key}')"><span class="slotnumber">${i+1}. ${slotLabel(key)}${filled?' ✓':''}</span><span class="slotcontent">${filled?proofMath(slotDisplay(key)):(active===key?'● 今考えているところ':'タップしてこの空欄を考える')}</span></button>`}).join('')}</div><div class="proof-drawer-desc">${state.index<3?'ガイドモード：上から順に完成させます。':'好きな未完成の空欄を選べます。'}　閉じると解答画面に戻ります。</div></section>`;
+ const rows=groups.map((group,i)=>{
+  const filled=group.keys.every(k=>Boolean(state.slots[k]));
+  const partial=group.keys.some(k=>Boolean(state.slots[k]))&&!filled;
+  const target=group.keys.find(k=>!state.slots[k]&&canUseKey(k,keys))||group.keys.find(k=>!state.slots[k])||group.keys[0];
+  const ready=canUseKey(target,keys);
+  const selected=active&&group.keys.includes(active);
+  const status=filled?' ✓':partial?' ・途中':'';
+  return `<button type="button" class="slot proof-line ${filled?'filled':''} ${partial?'partial':''} ${selected?'active':''} ${!ready&&!filled?'locked':''}" onclick="focusProofSlot('${target}')"><span class="slotnumber">${i+1}. ${group.label}${status}</span><span class="slotcontent">${proofNotebookLine(group)}</span></button>`;
+ }).join('');
+ wrap.innerHTML=`<section class="proof-drawer-card"><div class="proof-drawer-top"><b>📘 証明ノート　${completed}/${groups.length}行</b><button type="button" onclick="closeProofNotebook()">閉じる ×</button></div><div class="proof-drawer-content">${rows}</div><div class="proof-drawer-desc">${state.index<3?'ガイドモード：上から順に完成させます。':'好きな未完成の行を選べます。'}　選択した式と理由は、完成すると同じ行にまとまります。</div></section>`;
  wrap.addEventListener('click',e=>{if(e.target===wrap)closeProofNotebook()});document.body.appendChild(wrap);wrap.querySelector('.proof-drawer-top button').focus();
 }
 function closeProofNotebook(){document.getElementById('proofDrawer')?.remove()}

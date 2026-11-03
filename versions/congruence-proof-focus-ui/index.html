@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>三角形の合同｜証明マスター（新UI）</title>
+<style>
+:root{--ink:#1c3042;--muted:#687b8c;--blue:#236cb7;--sky:#e8f4ff;--cyan:#d9f6fa;--teal:#118c89;--bg:#f3f7fb;--line:#d5e1eb;--yes:#087b55;--no:#ad3e42;--gold:#d78e1e;--white:#fff}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,system-ui,sans-serif;line-height:1.6}button{font:inherit;cursor:pointer;touch-action:manipulation}button:focus-visible{outline:3px solid #ffa92c;outline-offset:3px}.shell{max-width:1130px;margin:0 auto;padding:18px 18px 55px}header{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:16px}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#1e68ad,#12a6a2);color:#fff;display:grid;place-items:center;font-size:25px}.brand h1{font-size:21px;margin:0;line-height:1.3;letter-spacing:.03em}.brand small{display:block;color:var(--muted);font-size:12px;font-weight:500;margin-top:2px}.pill{font-size:12px;background:#e7f0fb;color:#22629f;padding:5px 9px;border-radius:99px;font-weight:700}.topactions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.tinybtn{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;color:var(--ink);font-size:13px}.tinybtn:hover{background:var(--sky)}.hero{padding:22px 24px;background:linear-gradient(115deg,#2165ab,#109d9d);color:#fff;border-radius:19px;box-shadow:0 8px 24px #1a4e7822;margin-bottom:20px}.hero h2{margin:0;font-size:22px}.hero p{margin:5px 0 0;color:#e0f7ff;font-size:14px}.stages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.stage{border:2px solid transparent;background:#fff;padding:17px 15px;text-align:left;border-radius:16px;box-shadow:0 3px 16px #365b7910;min-height:155px}.stage:hover{border-color:#8cc8e2;transform:translateY(-1px)}.stage .num{display:inline-grid;place-items:center;width:34px;height:34px;background:#e7f1fe;color:var(--blue);font-weight:900;border-radius:11px;margin-bottom:10px}.stage strong{display:block;font-size:15px;margin-bottom:4px}.stage small{font-size:12px;color:var(--muted)}.stage .done{font-size:12px;color:var(--teal);font-weight:bold;margin-top:7px}.rules{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 20px;margin-top:16px;font-size:13px;color:var(--muted)}.rules strong{color:var(--ink)}.layout{display:grid;grid-template-columns:minmax(0,1.23fr) minmax(320px,.77fr);gap:16px;align-items:start}.panel{background:#fff;border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:0 2px 12px #3155780a}.diagram-panel{position:sticky;top:10px}.question-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:9px}.question-head h2{margin:0;font-size:18px}.progress{height:7px;background:#e7eff5;border-radius:8px;overflow:hidden;margin:10px 0 13px}.progress div{height:100%;background:linear-gradient(90deg,#24a4a5,#2778c3);border-radius:8px;transition:width .25s}.figure{background:#fbfdff;border:1px solid #dce9f4;border-radius:14px;padding:7px;min-height:180px;display:flex;align-items:center;justify-content:center}.figure svg{width:100%;height:auto;display:block;max-height:390px}.assumption{font-size:14px;margin-top:10px;padding:10px 12px;background:#eff7ff;border-left:3px solid #4b91d0;border-radius:7px;white-space:pre-line}.caption{font-size:12px;color:var(--muted);margin-top:8px}.instruction{font-weight:800;font-size:16px;margin:2px 0 12px}.options{display:grid;gap:8px}.option{border:1.5px solid #ccdbe8;background:#fff;border-radius:11px;padding:12px 13px;text-align:left;min-height:49px;line-height:1.5;transition:background .15s,border .15s;overflow-wrap:anywhere}.option:hover:not(:disabled){border-color:#61b2cc;background:#effafe}.option.selected{background:#e6f4ff;border-color:#207bbc;box-shadow:inset 0 0 0 1px #207bbc}.option.correct{border-color:#0e9779;background:#e8faf3}.option:disabled{opacity:.6;cursor:default}.option.compact{font-size:14px;padding:10px 12px}.option .hintchip{font-size:11px;color:#2275b3;background:#ebf4ff;border-radius:6px;padding:2px 5px;margin-right:7px}.options.two{grid-template-columns:repeat(2,minmax(0,1fr))}.actionrow{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.btn{border:0;background:#236cb7;color:#fff;border-radius:11px;padding:11px 18px;font-weight:700}.btn:hover:not(:disabled){background:#175a9b}.btn.subtle{background:#e8f2fd;color:#2469a5}.btn.subtle:hover:not(:disabled){background:#d2e7fb}.btn.teal{background:#128783}.btn:disabled{opacity:.45;cursor:default}.btn.full{width:100%}.btn.hint{background:#fff6e4;border:1px solid #f0d397;color:#93600d}.message{padding:11px 12px;border-radius:10px;font-size:13px;margin-top:12px;border:1px solid transparent}.message.success{background:#e7f8f0;border-color:#a0dfc5;color:#116e50}.message.error{background:#fff0f0;border-color:#f2c8c8;color:#a4393e}.message.info{background:#eff6ff;border-color:#c8dff7;color:#315f8f}.hintpanel{border:1px solid #efd99d;border-radius:12px;padding:12px;margin-top:12px;background:#fffbef;font-size:13px}.hintpanel strong{color:#935e08}.hintpanel p{margin:5px 0 0}.notebook{margin-top:15px;border:1px solid #c7dded;border-radius:13px;background:linear-gradient(#ffffff,#f9fcff);overflow:hidden}.notebook h3{margin:0;padding:10px 14px;background:#eaf4ff;border-bottom:1px solid #c7dded;font-size:14px}.notecontent{padding:14px;font-size:14px;line-height:1.95;min-height:72px}.notecontent .line{display:block;padding-left:8px;border-left:3px solid transparent}.notecontent .line.latest{background:#edf9f5;border-left-color:#33a98d}.notecontent .empty{color:#90a0ad}.proofslots{display:grid;gap:6px}.slot{border:1px solid #d2e0eb;border-radius:9px;background:#fff;padding:9px 11px;text-align:left;font-size:13px}.slot .slotnumber{font-size:11px;font-weight:700;color:#627c92;display:block}.slot .slotcontent{display:block;color:#8ba0b1;line-height:1.7}.slot.filled .slotcontent{color:#215478;font-weight:600}.slot.active{border:2px solid #168e9f;background:#eafcff;padding:8px 10px}.slot.locked{opacity:.75;cursor:not-allowed}.slot.filled{border-color:#b9ded4;background:#f6fcf9}.slot.missing{border-style:dashed}.sectionlabel{font-size:12px;font-weight:bold;color:var(--muted);margin:13px 0 6px}.smallnote{font-size:12px;color:var(--muted)}.congrats{text-align:center;padding:36px 15px}.congrats .cup{font-size:60px}.congrats h2{font-size:24px}.legend{display:flex;gap:15px;flex-wrap:wrap;color:#647e95;font-size:12px;margin-top:8px}.key{width:16px;height:3px;display:inline-block;background:#e29a22;vertical-align:middle;margin-right:5px}.key.angle{background:#945dc8}.footer{font-size:12px;color:#798a9a;text-align:center;margin-top:20px}.hide{display:none!important}@media(max-width:800px){.layout{grid-template-columns:1fr}.diagram-panel{position:static}.stages{grid-template-columns:repeat(2,minmax(0,1fr))}.shell{padding:12px 12px 40px}.panel{padding:13px}.figure svg{max-height:290px}.hero{padding:18px}}@media(max-width:420px){.brand h1{font-size:17px}.brand small{font-size:10px}.logo{width:40px;height:40px;font-size:21px}.topactions{gap:5px}.tinybtn{padding:5px 7px;font-size:11px}.stage{padding:12px;min-height:145px}.stage strong{font-size:13px}.option{font-size:13px}.options.two{grid-template-columns:1fr}}
+
+/* 進行操作が画面外に隠れないようにする */
+.nextbtn{min-height:58px;font-size:17px;box-shadow:0 3px 10px #087b5533}
+@media(max-width:800px){
+  .actionrow:has(.nextbtn){position:sticky;bottom:8px;z-index:10;background:#ffffffed;padding:7px;border:1px solid #aad4cb;border-radius:15px;box-shadow:0 8px 20px #19466327}
+  .nextbtn{min-height:60px}
+}
+
+/* PROOF FOCUS v4: a self-contained, one-screen proof editor */
+body.proof-mode {overflow:hidden}
+body.proof-mode .shell {max-width:1160px;height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden;padding:8px 10px}
+body.proof-mode header {flex:0 0 auto;margin-bottom:7px}
+body.proof-mode .footer {display:none}
+body.proof-mode #app {flex:1;min-height:0;display:flex;overflow:hidden}
+.proof-workspace{width:100%;height:100%;min-height:0;display:grid;grid-template-columns:minmax(0,1.07fr) minmax(0,.93fr);gap:12px}
+.proof-figure,.proof-control{min-width:0;min-height:0;overflow:hidden;display:flex;flex-direction:column}
+.proof-figure{padding:12px}
+.proof-figure .question-head{margin:0 0 5px}
+.proof-figure .question-head h2{font-size:clamp(13px,1.4vw,18px)}
+.proof-figure .progress{flex:0 0 5px;margin:2px 0 6px}
+.proof-figure .figure{min-height:0;flex:1;overflow:hidden;padding:3px;border-radius:10px}
+.proof-figure .figure svg{height:100%;width:100%;max-height:100%;object-fit:contain}
+.proof-figure .proof-givens{flex:0 0 auto;max-height:76px;overflow:auto;margin-top:6px;background:#f0f7ff;border-left:3px solid #5095c7;border-radius:5px;padding:5px 8px;font-size:12px;line-height:1.42;white-space:pre-line}
+.proof-control{padding:12px;gap:8px}
+.proof-summary{display:flex;align-items:center;justify-content:space-between;gap:9px;flex:0 0 auto}
+.proof-summary .smallnote{font-size:12px}
+.proof-notebook{border:1px solid #7abacc;background:#effaff;color:#17667a;border-radius:10px;padding:8px 10px;font-size:13px;font-weight:800;white-space:nowrap;flex:0 0 auto}
+.proof-now{background:#eef9ff;border:2px solid #278fc1;border-radius:13px;padding:11px;flex:0 0 auto}
+.proof-now .proof-step{color:#137a99;font-size:11px;font-weight:900;letter-spacing:.02em}
+.proof-now .proof-question{font-size:clamp(16px,1.7vw,20px);font-weight:850;line-height:1.45;margin-top:4px}
+.proof-now .proof-context{font-size:12px;color:#526d80;margin-top:4px}
+.proof-answer-header{font-size:12px;color:#697f90;font-weight:700;flex:0 0 auto}
+.proof-answer-scroll{min-height:0;flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding:2px 4px 5px 1px}
+.proof-answer-scroll .options{display:grid;grid-template-columns:1fr;gap:7px}
+.proof-answer-scroll .option{min-height:46px;padding:10px 12px;font-size:clamp(13px,1.5vw,16px);line-height:1.36;font-weight:650;overflow-wrap:normal;word-break:normal}
+.proof-answer-scroll .option:nth-child(odd){background:#f7fbff}
+.proof-answer-scroll .option:active{background:#d8f4ff}
+.proof-actions{flex:0 0 auto;border-top:1px solid #d9e6ef;padding-top:7px;display:flex;flex-direction:column;gap:6px}
+.proof-actions-row{display:flex;gap:7px;align-items:center;justify-content:space-between}
+.proof-actions-row .btn{min-height:39px;padding:7px 10px;font-size:13px}
+.proof-hint-message{font-size:12px;line-height:1.35;padding:8px;background:#fff5df;border-left:3px solid #e5af4e;border-radius:6px}
+.proof-actions .message{margin:0;padding:7px 9px;font-size:12px}
+.proof-complete{min-height:0;flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;text-align:center;color:#087b55}
+.proof-complete h3{margin:0;color:#126f76;font-size:22px}
+.proof-complete .btn{width:min(360px,100%)}
+.proof-drawer{position:fixed;inset:0;background:#0f2948ad;z-index:5000;display:flex;align-items:center;justify-content:center;padding:12px}
+.proof-drawer-card{width:min(620px,100%);max-height:min(750px,95dvh);min-height:0;display:flex;flex-direction:column;overflow:hidden;background:white;border-radius:18px;box-shadow:0 18px 55px #07233a75;border:1px solid #afd2e1}
+.proof-drawer-top{display:flex;justify-content:space-between;align-items:center;padding:13px 14px;border-bottom:1px solid #d7e8f1;gap:12px}
+.proof-drawer-top b{font-size:16px}
+.proof-drawer-top button{min-height:38px;border:1px solid #b7cdda;background:#eff5fa;border-radius:10px;padding:5px 13px;font-weight:800}
+.proof-drawer-content{overflow:auto;padding:11px;overscroll-behavior:contain;display:grid;gap:7px}
+.proof-drawer-content .slot{min-height:48px;padding:9px 12px}
+.proof-drawer-content .slot.active{padding:8px 11px}
+.proof-drawer-content .slot .slotnumber{font-size:12px}
+.proof-drawer-content .slot .slotcontent{font-size:14px;color:#36566f}
+.proof-drawer-content .slot.filled .slotcontent{color:#126747}
+.proof-drawer-content .slot.locked{opacity:.55}
+.proof-drawer-desc{font-size:12px;color:#6b8091;padding:0 14px 11px}
+.math-symbol{font-size:1.19em;font-weight:900;color:#175c9d;white-space:nowrap}
+@media(max-width:800px){
+ body.proof-mode .shell{padding:4px 6px 6px}
+ body.proof-mode header{height:39px;margin:0 0 5px;flex-shrink:0}
+ body.proof-mode .brand{gap:6px}
+ body.proof-mode .brand .logo{width:31px;height:31px;font-size:18px;border-radius:9px}
+ body.proof-mode .brand h1{font-size:13px;white-space:nowrap}
+ body.proof-mode .brand small{display:none}
+ body.proof-mode #resetBtn{display:none}
+ body.proof-mode #homeBtn{font-size:11px;padding:6px}
+ .proof-workspace{grid-template-columns:1fr;grid-template-rows:clamp(180px,34%,250px) minmax(0,1fr);gap:5px}
+ .proof-figure{padding:6px 8px}
+ .proof-figure .question-head{margin:0 0 3px}
+ .proof-figure .question-head h2{font-size:12px}
+ .proof-figure .question-head .pill{font-size:11px}
+ .proof-figure .progress{flex-basis:4px;margin:2px 0 4px}
+ .proof-figure .proof-givens{max-height:38px;padding:3px 6px;margin-top:4px;font-size:10px;line-height:1.3}
+ .proof-figure .figure{min-height:0;padding:1px}
+ .proof-control{padding:8px;gap:6px}
+ .proof-summary .smallnote{font-size:11px;line-height:1.1}
+ .proof-notebook{padding:7px 9px;font-size:12px}
+ .proof-now{padding:7px 9px}
+ .proof-now .proof-step{font-size:10px}
+ .proof-now .proof-question{font-size:15px;margin-top:2px}
+ .proof-now .proof-context{margin-top:2px;font-size:11px}
+ .proof-answer-header{font-size:11px;line-height:1.2}
+ .proof-answer-scroll .options{gap:5px}
+ .proof-answer-scroll .option{font-size:13px;min-height:42px;padding:7px 9px}
+ .proof-actions{padding-top:5px;gap:4px}
+ .proof-actions-row .btn{padding:6px 9px;min-height:36px;font-size:12px}
+}
+@media(max-width:360px){
+ .proof-workspace{grid-template-rows:minmax(175px,32%) minmax(0,1fr)}
+ .proof-answer-scroll .option{font-size:12px;min-height:39px}
+ .proof-now .proof-question{font-size:14px}
+ .proof-figure .proof-givens{max-height:31px}
+}
+@media(max-height:630px){
+ .proof-workspace{grid-template-rows:minmax(173px,33%) minmax(0,1fr)}
+ .proof-control{gap:4px;padding:6px}
+ .proof-now{padding:6px 8px}
+ .proof-answer-scroll .option{min-height:38px;padding:5px 8px}
+ .proof-actions .message{font-size:11px;padding:4px 7px}
+ .proof-actions-row .btn{min-height:32px;padding:4px 8px}
+ .proof-figure .proof-givens{max-height:28px;font-size:10px}
+}
+
+</style></head><body><div class="shell"><header><div class="brand"><div class="logo">△</div><div><h1>三角形の合同 証明マスター</h1><small>見抜く → 対応を探す → 証明する → 活用する</small></div></div><div class="topactions"><button id="homeBtn" class="tinybtn" type="button">⌂ ステージ選択</button><button id="resetBtn" class="tinybtn" type="button">↺ 記録をリセット</button></div></header><div id="bootAlert" style="background:#fff2d9;border:2px solid #e4af39;color:#604416;border-radius:13px;padding:16px;margin:10px 0;font-size:14px"><strong>この画面でゲームが動かない場合</strong><div>ChatGPTなどのファイルプレビューは、ゲームを動かすJavaScriptを停止することがあります。HTMLを保存してWebブラウザで開くか、GitHub PagesなどのHTTPSサイトに公開して利用してください。</div></div><main id="app"><div class="hero"><h2>合同条件から、証明が書ける力へ。</h2><p>4ステージ・全40問。正しい表現で、証明を1行ずつ完成させよう。</p></div><div class="stages"><button class="stage" onclick="startStage(1)"><span class="num">01</span><strong>合同条件を見抜け！</strong><small>図を見て3つの合同条件から選ぶ</small></button><button class="stage" onclick="startStage(2)"><span class="num">02</span><strong>対応する辺と角を探せ！</strong><small>合同条件と等しい3組を選ぶ</small></button><button class="stage" onclick="startStage(3)"><span class="num">03</span><strong>証明を組み立てろ！</strong><small>「〜において」から合同まで</small></button><button class="stage" onclick="startStage(4)"><span class="num">04</span><strong>合同を使って証明せよ！</strong><small>合同を使って辺・角の等しさを示す</small></button></div><div class="rules"><strong>正式な合同条件</strong><br>① 3組の辺がそれぞれ等しい。<br>② 2組の辺とその間の角がそれぞれ等しい。<br>③ 1組の辺とその両端の角がそれぞれ等しい。<br><br>ヒントは3段階。間違えても何度でも挑戦できます。</div></main><div class="footer">学習用・オフライン動作対応 ｜ 説明と図に与えられた条件から判断しましょう。</div></div>
+<script>
+'use strict';
+const TERMS={SSS:'3組の辺がそれぞれ等しい。',SAS:'2組の辺とその間の角がそれぞれ等しい。',ASA:'1組の辺とその両端の角がそれぞれ等しい。'};
+const TYPES=['SSS','SAS','ASA','SAS','ASA','SSS','ASA','SSS','SAS','ASA'];
+const STAGE_NAMES={1:'合同条件を見抜け！',2:'対応する辺と角を探せ！',3:'証明を組み立てろ！',4:'合同を使って証明せよ！'};
+const REASONS=['仮定より','共通な辺だから','対頂角は等しいから','平行線の錯角は等しいから','垂直な直線がつくる角はともに90°だから'];
+const BASES={
+ kite:{title:'共通な辺を見つけよう',p:{A:[355,25],B:[145,188],C:[565,188],D:[355,285]},tri:['ABD','ACD'],givens:'AB＝AC、BD＝CD',eq:[['AB＝AC','仮定より'],['BD＝CD','仮定より'],['AD＝AD','共通な辺だから']],type:'SSS',cong:'△ABD≡△ACD',goal:[['∠BAD＝∠CAD','合同な図形の対応する角はそれぞれ等しいから'],['∠ABD＝∠ACD','合同な図形の対応する角はそれぞれ等しいから']],mark:[['AB','AC'],['BD','CD']],segments:[]},
+ angle:{title:'共通な辺と、はさまれた角',p:{A:[355,30],B:[115,260],C:[595,260],D:[355,260]},tri:['BAD','CAD'],givens:'BA＝CA、∠BAD＝∠CAD',eq:[['BA＝CA','仮定より'],['∠BAD＝∠CAD','仮定より'],['AD＝AD','共通な辺だから']],type:'SAS',cong:'△BAD≡△CAD',goal:[['BD＝CD','合同な図形の対応する辺はそれぞれ等しいから'],['∠ABD＝∠ACD','合同な図形の対応する角はそれぞれ等しいから']],mark:[['BA','CA'],['∠BAD','∠CAD']],segments:[]},
+ right:{title:'直角と共通な辺を利用しよう',p:{A:[355,30],B:[115,260],C:[595,260],D:[355,260]},tri:['BAD','CAD'],givens:'∠BAD＝∠CAD、AD⊥BC（B、D、Cは一直線上）',eq:[['∠BAD＝∠CAD','仮定より'],['∠BDA＝∠CDA','垂直な直線がつくる角はともに90°だから'],['AD＝AD','共通な辺だから']],type:'ASA',cong:'△BAD≡△CAD',goal:[['BA＝CA','合同な図形の対応する辺はそれぞれ等しいから'],['BD＝CD','合同な図形の対応する辺はそれぞれ等しいから']],mark:[['∠BAD','∠CAD']],segments:[]},
+ cross:{title:'対頂角を利用しよう',p:{A:[135,50],B:[585,250],C:[575,50],D:[145,250],O:[360,150]},tri:['AOC','BOD'],givens:'AO＝BO、CO＝DO（ABとCDの交点をOとする）',eq:[['AO＝BO','仮定より'],['CO＝DO','仮定より'],['∠AOC＝∠BOD','対頂角は等しいから']],type:'SAS',cong:'△AOC≡△BOD',goal:[['AC＝BD','合同な図形の対応する辺はそれぞれ等しいから'],['∠OAC＝∠OBD','合同な図形の対応する角はそれぞれ等しいから']],mark:[['AO','BO'],['CO','DO']],segments:[]},
+ para:{title:'平行線の錯角を利用しよう',p:{A:[145,65],B:[495,65],C:[575,260],D:[225,260]},tri:['ABC','CDA'],givens:'AB∥CD、BC∥AD',eq:[['∠BAC＝∠DCA','平行線の錯角は等しいから'],['∠BCA＝∠DAC','平行線の錯角は等しいから'],['AC＝CA','共通な辺だから']],type:'ASA',cong:'△ABC≡△CDA',goal:[['AB＝CD','合同な図形の対応する辺はそれぞれ等しいから'],['∠ABC＝∠CDA','合同な図形の対応する角はそれぞれ等しいから']],mark:[],segments:[]}
+};
+const PLAN=['kite','angle','right','cross','para','cross','kite','para','right','angle'];
+function makeProof(stage,index){const key=PLAN[index];const b=BASES[key];const mirrored=index>=5;const p={};for(const k in b.p){const v=b.p[k];p[k]=[mirrored?720-v[0]:v[0],v[1]]}const target=b.goal[(index>=5?1:0)];return {...b,p,stage,index,kind:'proof',key,goalSelected:target,eq:b.eq.map((e,j)=>({id:j,text:e[0],why:e[1]})),intro:`△${b.tri[0]}と△${b.tri[1]}において、`,condition:TERMS[b.type].replace(/。$/,'ので、'), congruent:b.cong};}
+function rotate(p,angle){const a=angle*Math.PI/180;return [p[0]*Math.cos(a)-p[1]*Math.sin(a),p[0]*Math.sin(a)+p[1]*Math.cos(a)]}
+function makeBasic(stage,index){const type=TYPES[index],ang1=[0,-17,20,35,-28,16,0,-33,22,8][index],ang2=[0,33,-27,48,-39,25,-8,-32,15,45][index];const shape=[[0,-95],[-95,75],[110,80]];const p={};['A','B','C'].forEach((ch,i)=>{const q=rotate(shape[i],ang1);p[ch]=[164+q[0],155+q[1]]});['D','E','F'].forEach((ch,i)=>{let q=rotate(shape[i],ang2);if([1,4,7].includes(index))q=[-q[0],q[1]];p[ch]=[541+q[0],155+q[1]]});let mark;if(type==='SSS')mark=[['AB','DE'],['BC','EF'],['AC','DF']];if(type==='SAS')mark=[['AB','DE'],['BC','EF'],['∠ABC','∠DEF']];if(type==='ASA')mark=[['AB','DE'],['∠BAC','∠EDF'],['∠ABC','∠DEF']];const allGood={'AB＝DE':type==='SSS'||type==='SAS'||type==='ASA','BC＝EF':type==='SSS'||type==='SAS','AC＝DF':type==='SSS','∠ABC＝∠DEF':type==='SAS'||type==='ASA','∠BAC＝∠EDF':type==='ASA'};const eq=mark.map(g=>`${g[0]}＝${g[1]}`);let candidates=['AB＝DE','BC＝EF','AC＝DF','∠ABC＝∠DEF','∠BAC＝∠EDF','AB＝DF','BC＝DE','∠ACB＝∠EDF','∠BAC＝∠DEF'];return {kind:'basic',stage,index,type,p,tri:['ABC','DEF'],mark,eq,candidates:candidates.filter(v=>eq.includes(v)||!allGood[v]),givens:'対応する辺・角についた同じ印は、それぞれ等しいことを表します。'};}
+let state={stage:0,index:0,hint:0,feedback:null,answered:false,selection:null,picks:[],slots:{},active:null,tries:0,hintsUsed:0};
+let records={};try{records=JSON.parse(localStorage.getItem('congruence-v3')||'{}')||{}}catch(e){records={}};
+function save(){try{localStorage.setItem('congruence-v3',JSON.stringify(records))}catch(e){}}
+const app=document.getElementById('app');
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function safeScrollTop(){try{window.scrollTo(0,0)}catch(e){}}
+function startStage(n){state={stage:n,index:0,hint:0,feedback:null,answered:false,selection:null,picks:[],slots:{},active:null,tries:0,hintsUsed:0};render();safeScrollTop()}
+function home(){state.stage=0;render();safeScrollTop()}
+function current(){return state.stage<=2?makeBasic(state.stage,state.index):makeProof(state.stage,state.index)}
+function dist(a,b){return Math.hypot(a[0]-b[0],a[1]-b[1])}
+function anglePoint(p,center,r){const v=[p[0]-center[0],p[1]-center[1]];const l=Math.hypot(...v);return [center[0]+v[0]/l*r,center[1]+v[1]/l*r]}
+function fmt(n){return Number(n.toFixed(2))}
+function glyph(lab,p){return p[lab]}
+function lineMark(a,b,num,color='#cf8b24'){let out='';const dx=b[0]-a[0],dy=b[1]-a[1],len=Math.hypot(dx,dy),nx=-dy/len,ny=dx/len,cx=(a[0]+b[0])/2,cy=(a[1]+b[1])/2,tx=dx/len,ty=dy/len;for(let i=0;i<num;i++){const offset=(i-(num-1)/2)*9;const x=cx+tx*offset,y=cy+ty*offset;out+=`<line x1="${fmt(x-nx*7)}" y1="${fmt(y-ny*7)}" x2="${fmt(x+nx*7)}" y2="${fmt(y+ny*7)}" stroke="${color}" stroke-width="3.5" stroke-linecap="round"/>`}return out}
+function angleMark(a,b,c,num,color='#9855c4'){const cx=b[0],cy=b[1],av=Math.atan2(a[1]-cy,a[0]-cx),cv=Math.atan2(c[1]-cy,c[0]-cx);let dif=((cv-av+3*Math.PI)%(2*Math.PI))-Math.PI;let svg='';for(let j=0;j<num;j++){const rad=23+j*7,pts=[];for(let i=0;i<=18;i++){const t=av+dif*i/18;pts.push(`${fmt(cx+rad*Math.cos(t))},${fmt(cy+rad*Math.sin(t))}`)}svg+=`<polyline points="${pts.join(' ')}" fill="none" stroke="${color}" stroke-width="3" stroke-linecap="round"/>`}return svg}
+function drawMark(label,p,num){if(label.startsWith('∠')){const a=label.slice(1).split('');return angleMark(p[a[0]],p[a[1]],p[a[2]],num)}else{return lineMark(p[label[0]],p[label[1]],num)}}
+function diagram(q){const p=q.p,edgeSet=new Set();for(const t of q.tri){for(let k=0;k<3;k++)edgeSet.add([t[k],t[(k+1)%3]].sort().join(''))}const colors=['#e6f3ff','#e5fbf7'];let result=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="${esc(q.tri.join('と'))}の図。下にある条件と図の印を確認してください。">`;
+ q.tri.forEach((t,i)=>{result+=`<polygon points="${[...t].map(c=>p[c].map(fmt).join(',')).join(' ')}" fill="${colors[i]}" fill-opacity="0.75" stroke="none"/>`});
+ for(const e of edgeSet){let a=p[e[0]],b=p[e[1]];result+=`<line x1="${fmt(a[0])}" y1="${fmt(a[1])}" x2="${fmt(b[0])}" y2="${fmt(b[1])}" stroke="#255f9c" stroke-width="3.4" stroke-linecap="round"/>`}
+ q.mark.forEach((group,i)=>{group.forEach(m=>{result+=drawMark(m,p,i+1)})});
+ if(q.kind==='proof'&&q.key==='right'){const d=p.D,a=p.A,b=p.B,c=p.C;let up= a[1]<d[1]?-1:1;result+=`<path d="M${d[0]-13},${d[1]} v${up*13} h13 M${d[0]+13},${d[1]} v${up*13} h-13" fill="none" stroke="#8261ab" stroke-width="2.2"/>`}
+ const special=q.key==='cross';const custom=special?{A:[-14,-10],B:[12,18],C:[12,-10],D:[-15,18],O:[0,-12]}:{};
+ for(const v in p){let pos=p[v],x,y;if(custom[v]){let flip=q.index>=5?-1:1;x=pos[0]+custom[v][0]*flip;y=pos[1]+custom[v][1]}else{let cx=q.kind==='basic'?(v<'D'?164:541):355;const delta=pos[0]-cx;x=pos[0]+(Math.abs(delta)<20?0:(delta<0?-15:15));y=pos[1]+(pos[1]<125?-13:20);if(v==='D'&&q.kind==='proof'&&pos[1]>200){x=pos[0]+15;y=pos[1]+20}if(v==='O'){x=pos[0]+12;y=pos[1]-12}}
+ result+=`<text x="${fmt(x)}" y="${fmt(y)}" font-size="20" font-weight="700" font-family="Arial,sans-serif" fill="#183f65" text-anchor="middle" stroke="#fff" stroke-width="4" paint-order="stroke">${v}</text>`}
+ result+='</svg>';return result}
+function stageBox(q){let levels=state.stage<=2?'合同条件を読み取る':state.index<3?'ガイド':state.index<6?'セミガイド':'フリー';return `<div class="question-head"><h2>STAGE ${state.stage}　${STAGE_NAMES[state.stage]}</h2><span class="pill">${state.index+1} / 10</span></div><div class="progress"><div style="width:${(state.index+1)*10}%"></div></div><div class="figure" id="svgBox">${diagram(q)}</div><div class="caption">${state.stage<=2?'同じ印がついた辺・角が等しいことを表します。':'与えられた条件と、図形の性質から考えましょう。'}</div><div class="assumption">${esc(q.kind==='basic'?q.givens:`条件：${q.givens}${state.stage===4?`\n証明すること：${q.goalSelected[0]}`:''}`)}</div><div class="legend"><span><i class="key"></i>等しい辺</span><span><i class="key angle"></i>等しい角</span></div><div class="caption">操作モード：${levels}　｜　問題 ${state.index+1} / 10</div>`}
+function feedback(){if(!state.feedback)return '';return `<div class="message ${state.feedback.kind}" role="status">${esc(state.feedback.text)}</div>`}
+function hintText(q){if(q.kind==='basic'){let a=q.type;if(state.stage===2&&state.answered)return ['印が付いた辺・角を、対応する相手と1組ずつ結びましょう。','等しい印があるのは「'+q.eq.slice(0,2).join('」「')+'」などです。','図で直接与えられた3組：'+q.eq.join('、')+'。'];if(a==='SSS')return ['等しい印が付いた「辺」の組数を数えよう。','3種類の線の印が、2つの三角形にそれぞれあるよ。','3組の辺がそれぞれ等しい、に注目しよう。'];if(a==='SAS')return ['辺と角の印がそれぞれ何組あるかを見よう。','等しい角は、印の付いた2辺の「間」にあるかな？','2組の辺とその間の角がそれぞれ等しい、に注目しよう。'];return ['等しい角の印に注目しよう。','等しい辺の「両端」にある2つの角に印があるよ。','1組の辺とその両端の角がそれぞれ等しい、に注目しよう。']}
+ let cur=state.active;if(!cur){return ['どの2つの三角形を比べるかを確かめよう。','条件から直接わかること、図形の性質からわかることを整理しよう。',`今回の合同条件は「${TERMS[q.type]}」です。`]};if(cur.startsWith('eq'))return ['条件として与えられた長さ・角と、共通な辺・対頂角を探そう。','合同条件を成立させるには、どの3組が必要かな？',`必要な3組は ${q.eq.map(x=>x.text).join('、')} です。`];if(cur.startsWith('why'))return ['直前に選んだ等式が、なぜ成り立つのか考えよう。','問題文の条件？ 共通な辺？ それとも図形の性質？',`ここで選んだ等式の理由は「${state.slots['eq'+cur.slice(3)]?.why||'仮定・共通・図形の性質'}」です。`];if(cur==='intro')return ['証明する2つの三角形を探そう。','図の三角形の名前を、頂点の順序を守って読もう。',q.intro];if(cur==='condition')return ['等しい3組の条件に注目しよう。','辺と角の組み合わせは何？',q.condition];if(cur==='congruent')return ['対応する頂点を正しい順番で書こう。','左の三角形の頂点と右の頂点を対応させよう。',q.congruent];if(cur==='link')return ['合同から、何がいえるだろう？','証明したいものは辺と角のどちら？',q.goalSelected[1]];if(cur==='goal')return ['最初の問題文で証明したい結論を確認しよう。','合同であることから、対応する部分が等しいといえるよ。',q.goalSelected[0]];return []}
+function hintBox(q){let texts=hintText(q);return `<div class="actionrow"><button type="button" class="btn hint" onclick="showHint()">💡 ヒント ${state.hint}/3 ${state.hint<3?'（次を見る）':'（すべて表示）'}</button></div>${state.hint?`<div class="hintpanel"><strong>ヒント ${state.hint}</strong><p>${esc(texts[state.hint-1])}</p></div>`:''}`}
+function showHint(){if(state.hint<3){state.hint++;state.hintsUsed++;state.feedback=null;render()}}
+function markRecord(){let key=`${state.stage}-${state.index}`;let prev=records[key];let rank=state.tries===0&&state.hintsUsed===0?3:state.hintsUsed===0?2:1;records[key]=Math.max(prev||0,rank);save()}
+function nextQuestion(){if(state.index===9){renderFinished();return}state.index++;state.hint=0;state.feedback=null;state.answered=false;state.selection=null;state.picks=[];state.slots={};state.active=null;state.tries=0;state.hintsUsed=0;render();safeScrollTop()}
+function choiceHTML(value,label,selected,cls=''){return `<button type="button" class="option ${cls} ${selected?'selected':''}" data-value="${esc(value)}" onclick="selectOption(this)">${esc(label)}</button>`}
+function selectOption(btn){if(state.answered)return;const v=btn.dataset.value;state.selection=v;state.feedback=null;checkCondition()}
+function checkCondition(){let q=current();if(state.selection===q.type){state.answered=true;state.feedback={kind:'success',text:`正解！ ${TERMS[q.type]} ${state.stage===2?'続いて、図に印が付いた3組の辺・角を選ぼう。':''}`};if(state.stage===1)markRecord();else state.hint=0}else{state.tries++;state.feedback={kind:'error',text:'もう一度考えてみよう。図の印の「数」と「位置」を確認しよう。'}}render()}
+function togglePair(encoded){let item=decodeURIComponent(encoded);const index=state.picks.indexOf(item);if(index<0)state.picks.push(item);else state.picks.splice(index,1);state.feedback=null;render()}
+function checkPairs(){const q=current(),good=state.picks.length===3&&q.eq.every(x=>state.picks.includes(x));if(good){markRecord();state.answered='complete';state.feedback={kind:'success',text:'正解！ 図で直接与えられた3組と、合同条件が一致しました。'}}else{state.tries++;state.feedback={kind:'error',text:'3組を確認しよう。選ぶのは、図に同じ印で直接示された対応する辺・角です。'}}render()}
+function basicControls(q){let html='<div class="instruction">'+(state.stage===1?'合同条件を1つタップしよう。':state.answered?'STEP 2/2：図に示された等しい3組を選ぼう。':'STEP 1/2：合同条件を1つタップしよう。')+'</div>';
+ if(!state.answered){html+=`<div class="options">${Object.keys(TERMS).map(k=>choiceHTML(k,TERMS[k],state.selection===k)).join('')}</div><p class="smallnote">選択すると、その場で正誤を判定します。</p>`}
+ if(state.stage===2&&state.answered!== 'complete'&&state.answered===true){const vals=q.candidates.slice();const spin=state.index%vals.length;const shuffled=vals.slice(spin).concat(vals.slice(0,spin));html+=`<div class="options two">${shuffled.map(e=>`<button type="button" class="option compact ${state.picks.includes(e)?'selected':''}" onclick="togglePair('${encodeURIComponent(e)}')">${state.picks.includes(e)?'✓　':'○　'}${esc(e)}</button>`).join('')}</div><p class="smallnote">選択中：${state.picks.length}/3組　（選んだボタンは再タップで解除）</p><div class="actionrow"><button type="button" class="btn teal" onclick="checkPairs()" ${state.picks.length!==3?'disabled':''}>3組を確認する</button><button type="button" class="btn subtle" onclick="state.picks=[];render()">選び直す</button></div>`}
+ if(state.stage===2&&state.answered==='complete')html+=`<div class="notebook"><h3>できあがった条件</h3><div class="notecontent">${q.eq.map(e=>`<span class="line">${esc(e)}</span>`).join('')}<span class="line">${esc(TERMS[q.type])}</span></div></div>`;
+ html+=feedback();if(state.answered==='complete'||(state.stage===1&&state.answered)){html+=`<div class="actionrow"><button type="button" class="btn teal full nextbtn" onclick="nextQuestion()">${state.index===9?'ステージ結果を見る':'次の問題へ →'}</button></div>`}else html+=hintBox(q);
+ return html}
+function proofKeys(q){let keys=['intro'];for(let i=0;i<3;i++){keys.push('eq'+i,'why'+i)}keys.push('condition','congruent');if(q.stage===4)keys.push('link','goal');return keys}
+function slotLabel(key){if(key==='intro')return 'どの三角形について考える？';if(key.startsWith('eq'))return `等しいこと ${Number(key.slice(2))+1}組目`;if(key.startsWith('why'))return `その理由 ${Number(key.slice(3))+1}組目`;if(key==='condition')return 'どの合同条件が使える？';if(key==='congruent')return '合同の結論';if(key==='link')return '合同からわかることの理由';return '最後に示したい結論'}
+function proofOptions(q,key){if(key==='intro')return [q.intro,`△${q.tri[0]}と△${[...q.tri[1]].reverse().join('')}において、`,`△${[...q.tri[0]].reverse().join('')}と△${q.tri[1]}において、`];if(key.startsWith('eq')){const rest=q.eq.filter(e=>!Object.keys(state.slots).filter(s=>s.startsWith('eq')).some(s=>state.slots[s]?.id===e.id));const wrong=wrongEquations(q);return [...rest.map(e=>({v:String(e.id),label:e.text})),...wrong.map((e,i)=>({v:'w'+i,label:e}))].sort((a,b)=>a.label.localeCompare(b.label,'ja'))}if(key.startsWith('why'))return REASONS.map(s=>({v:s,label:s}));if(key==='condition')return Object.values(TERMS).map(s=>({v:s.replace(/。$/,'ので、'),label:s.replace(/。$/,'ので、')}));if(key==='congruent'){const t=q.tri;return [q.congruent,`△${t[0]}≡△${[...t[1]].reverse().join('')}`,`△${t[0]}≡△${[...t[1]].slice(1).concat(t[1][0]).join('')}`]};if(key==='link')return ['合同な図形の対応する辺はそれぞれ等しいから','合同な図形の対応する角はそれぞれ等しいから','対頂角は等しいから','仮定より'];if(key==='goal'){let wrong=q.goal.filter(g=>g[0]!==q.goalSelected[0]).map(g=>g[0]);const t=q.tri;return [q.goalSelected[0],...wrong,`${t[0][0]}${t[0][1]}＝${t[1][1]}${t[1][2]}`]};return []}
+function wrongEquations(q){if(q.key==='kite')return ['AB＝CD','BD＝AC','∠ABD＝∠CAD'];if(q.key==='angle')return ['AB＝CD','AD＝BC','∠ABD＝∠ADC'];if(q.key==='right')return ['AB＝CD','∠BAD＝∠BDA','BC＝AD'];if(q.key==='cross')return ['AO＝DO','CO＝BO','∠AOC＝∠AOD'];return ['∠BAC＝∠DAC','AB＝BC','∠ABC＝∠BCA']}
+function slotDisplay(key){let s=state.slots[key];if(!s)return '';if(key.startsWith('eq'))return s.text;if(key.startsWith('why'))return s;if(typeof s==='string')return s;return String(s)}
+function isReady(key){if(key.startsWith('why')){let k='eq'+key.slice(3);return Boolean(state.slots[k])}return true}
+function canUseKey(key,keys){const filled=keys.filter(k=>Boolean(state.slots[k])).length;if(state.index<3){let first=keys.find(k=>!state.slots[k]);return key===first&&isReady(key)}return isReady(key)}
+function initialActive(q){const keys=proofKeys(q);let a=state.active;if(a&&!state.slots[a]&&canUseKey(a,keys))return a;return keys.find(k=>!state.slots[k]&&canUseKey(k,keys))||null}
+function activate(key){const keys=proofKeys(current());if(state.slots[key]){state.feedback={kind:'info',text:'完成済みの部分です。変更する場合は「1つ戻す」を使ってください。'};render();return}if(!canUseKey(key,keys)){state.feedback={kind:'info',text:state.index<3?'序盤は上から順番に完成させよう。':'理由を選ぶ前に、対応する等式を選ぼう。'};render();return}state.active=key;state.hint=0;state.feedback=null;render()}
+function chooseProof(value){const q=current(),keys=proofKeys(q),key=initialActive(q);if(!key)return;let correct=false,stored=value;
+ if(key.startsWith('eq')){const found=q.eq.find(e=>String(e.id)===value);if(found&&!keys.some(k=>k.startsWith('eq')&&state.slots[k]?.id===found.id)){correct=true;stored=found}}
+ else if(key.startsWith('why')){let eq=state.slots['eq'+key.slice(3)];correct=value===eq?.why}
+ else if(key==='intro')correct=value===q.intro;
+ else if(key==='condition')correct=value===q.condition;
+ else if(key==='congruent')correct=value===q.congruent;
+ else if(key==='link')correct=value===q.goalSelected[1];
+ else if(key==='goal')correct=value===q.goalSelected[0];
+ if(correct){state.slots[key]=stored;state.feedback={kind:'success',text:'正解！ 証明ノートに追加しました。'};state.hint=0;state.active=null;const next=initialActive(q);state.active=next;if(keys.every(k=>state.slots[k])){state.answered='complete';markRecord();state.feedback={kind:'success',text:'証明完成！ 等式・根拠・合同条件・対応順がそろいました。'}}}
+ else {state.tries++;state.feedback={kind:'error',text:'この箇所に入れると、根拠や対応関係が合いません。図や条件をもう一度確認しよう。'}}render()}
+function undoProof(){const keys=proofKeys(current()),filled=keys.filter(k=>state.slots[k]);if(!filled.length)return;let last=filled[filled.length-1];if(state.active&&state.slots[state.active])last=state.active;if(last.startsWith('eq')&&state.slots['why'+last.slice(2)])delete state.slots['why'+last.slice(2)];delete state.slots[last];state.active=last;state.answered=false;state.feedback={kind:'info',text:'直前の項目を戻しました。'};render()}
+function proofMath(s){return esc(s).replace(/([△∠])/g,'<span class="math-symbol">$1</span>')}
+function proofFigureBox(q){return `<div class="question-head"><h2>STAGE ${state.stage}　${STAGE_NAMES[state.stage]}</h2><span class="pill">${state.index+1} / 10</span></div><div class="progress"><div style="width:${(state.index+1)*10}%"></div></div><div class="figure">${diagram(q)}</div><div class="proof-givens">${esc(q.givens)}${state.stage===4?`\n【証明すること】${esc(q.goalSelected[0])}`:''}</div>`}
+function openProofNotebook(){
+ const q=current(),keys=proofKeys(q),active=state.answered==='complete'?null:initialActive(q),done=keys.filter(k=>state.slots[k]).length;
+ document.getElementById('proofDrawer')?.remove();
+ const wrap=document.createElement('div');wrap.id='proofDrawer';wrap.className='proof-drawer';wrap.setAttribute('role','dialog');wrap.setAttribute('aria-modal','true');wrap.setAttribute('aria-label','証明ノート');
+ wrap.innerHTML=`<section class="proof-drawer-card"><div class="proof-drawer-top"><b>📘 証明ノート　${done}/${keys.length}項目</b><button type="button" onclick="closeProofNotebook()">閉じる ×</button></div><div class="proof-drawer-content">${keys.map((key,i)=>{const filled=Boolean(state.slots[key]),ready=canUseKey(key,keys);return `<button type="button" class="slot ${filled?'filled':''} ${active===key?'active':''} ${!ready&&!filled?'locked':''}" onclick="focusProofSlot('${key}')"><span class="slotnumber">${i+1}. ${slotLabel(key)}${filled?' ✓':''}</span><span class="slotcontent">${filled?proofMath(slotDisplay(key)):(active===key?'● 今考えているところ':'タップしてこの空欄を考える')}</span></button>`}).join('')}</div><div class="proof-drawer-desc">${state.index<3?'ガイドモード：上から順に完成させます。':'好きな未完成の空欄を選べます。'}　閉じると解答画面に戻ります。</div></section>`;
+ wrap.addEventListener('click',e=>{if(e.target===wrap)closeProofNotebook()});document.body.appendChild(wrap);wrap.querySelector('.proof-drawer-top button').focus();
+}
+function closeProofNotebook(){document.getElementById('proofDrawer')?.remove()}
+function focusProofSlot(key){closeProofNotebook();activate(key)}
+function proofControls(q){
+ const keys=proofKeys(q),done=keys.filter(k=>state.slots[k]).length,completed=state.answered==='complete';
+ const mode=state.index<3?'ガイド':state.index<6?'セミガイド':'フリー';
+ const active=completed?null:initialActive(q);if(active)state.active=active;
+ let html=`<div class="proof-summary"><span class="smallnote"><b>${mode}モード</b> ・ ${done}/${keys.length} 完成</span><button class="proof-notebook" type="button" onclick="openProofNotebook()">📘 証明全文を見る</button></div>`;
+ if(completed){
+  html+=`<div class="proof-complete"><div style="font-size:35px">✅</div><h3>証明完成！</h3><p>完成した証明を確認してから次へ進もう。</p><button type="button" class="btn subtle" onclick="openProofNotebook()">📘 完成した証明を読む</button><button type="button" class="btn teal nextbtn" onclick="nextQuestion()">${state.index===9?'ステージ結果を見る':'次の問題へ →'}</button></div>`;
+  return html;
+ }
+ if(!active)return html+feedback();
+ const raw=proofOptions(q,active),opts=raw.map(x=>typeof x==='string'?{v:x,label:x}:{v:x.v,label:x.label});
+ const activeIndex=keys.indexOf(active)+1;
+ const context=active.startsWith('why')?`選んだ等式：${state.slots['eq'+active.slice(3)]?.text||''}`:active==='condition'?'等しい3組を確認して、合同条件を選ぼう。':active==='goal'?'何を証明するか、もう一度確認しよう。':'';
+ html+=`<div class="proof-now"><div class="proof-step">STEP ${activeIndex} / ${keys.length}　今考えるところ</div><div class="proof-question">${esc(slotLabel(active))}</div>${context?`<div class="proof-context">${proofMath(context)}</div>`:''}</div>`;
+ html+=`<div class="proof-answer-header">正しい選択肢をタップ　${opts.length>4?'（ここだけ上下にスクロールできます）':''}</div>`;
+ html+=`<div class="proof-answer-scroll" id="proofAnswers"><div class="options">${opts.map((o,i)=>`<button type="button" class="option" onclick="chooseProof(decodeURIComponent('${encodeURIComponent(o.v)}'))"><b style="display:inline-block;min-width:1.7em;color:#2675b6">${['A','B','C','D','E','F','G','H','I'][i]||''}</b> ${proofMath(o.label)}</button>`).join('')}</div></div>`;
+ const texts=hintText(q);
+ html+=`<div class="proof-actions">${feedback()}${state.hint?`<div class="proof-hint-message">💡 ${esc(texts[state.hint-1])}</div>`:''}<div class="proof-actions-row"><button type="button" class="btn subtle" onclick="undoProof()" ${done?'':'disabled'}>↶ 1つ戻す</button><button type="button" class="btn hint" onclick="showHint()">💡 ヒント ${state.hint}/3</button></div></div>`;
+ return html;
+}
+
+function render(){closeProofNotebook();document.body.classList.toggle('proof-mode',state.stage>=3);if(!state.stage){renderHome();return}const q=current();if(state.stage>=3){app.innerHTML=`<div class="proof-workspace"><section class="panel proof-figure">${proofFigureBox(q)}</section><section class="panel proof-control" id="controlPane">${proofControls(q)}</section></div>`;return}app.innerHTML=`<div class="layout"><section class="panel diagram-panel">${stageBox(q)}</section><section class="panel" id="controlPane">${basicControls(q)}</section></div>`}
+function renderHome(){const done=n=>Array.from({length:10},(_,i)=>records[`${n}-${i}`]?1:0).reduce((a,b)=>a+b,0);app.innerHTML=`<div class="hero"><h2>合同条件から、証明が書ける力へ。</h2><p>全40問。図を読み、根拠を選び、証明を完成させよう。</p></div><div class="stages">${[1,2,3,4].map(n=>`<button type="button" class="stage" onclick="startStage(${n})"><span class="num">0${n}</span><strong>${STAGE_NAMES[n]}</strong><small>${['','図を見て合同条件を選ぶ','合同条件と等しい3組を選ぶ','「〜において」から合同まで','合同を使って結論を導く'][n]}</small><div class="done">達成：${done(n)} / 10問</div></button>`).join('')}</div><div class="rules"><strong>正式な合同条件</strong><br>① ${TERMS.SSS}<br>② ${TERMS.SAS}<br>③ ${TERMS.ASA}<br><br>各ステージ10問。ステージ3・4は、序盤がガイド、中盤がセミガイド、後半がフリーです。<br>ヒントはいつでも使えます。間違えても失敗にはならず、再挑戦できます。<br><strong>記録</strong>：クリア状況は、この端末のブラウザ内に保存されます。</div>`}
+function renderFinished(){document.body.classList.remove('proof-mode');closeProofNotebook();let stage=state.stage,count=Array.from({length:10},(_,i)=>records[`${stage}-${i}`]||0),perfect=count.filter(v=>v===3).length;app.innerHTML=`<section class="panel congrats"><div class="cup">🏆</div><h2>STAGE ${stage} クリア！</h2><p>${STAGE_NAMES[stage]}　10問終了</p><p>ノーヒント・初回正解：<strong>${perfect} / 10問</strong></p><p class="smallnote">ヒントを使って解けた問題も、学習の成果です。</p><div class="actionrow" style="justify-content:center"><button type="button" class="btn teal" onclick="${stage<4?`startStage(${stage+1})`:'home()'}">${stage<4?'次のステージへ →':'ステージ選択へ'}</button><button type="button" class="btn subtle" onclick="startStage(${stage})">このステージを復習</button></div></section>`;safeScrollTop()}
+document.getElementById('homeBtn').addEventListener('click',home);document.getElementById('resetBtn').addEventListener('click',()=>{if(confirm('クリア記録をすべて消しますか？')){records={};save();home()}});
+renderHome();
+document.getElementById('bootAlert')?.remove();
+</script></body></html>

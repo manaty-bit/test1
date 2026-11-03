@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>三角形の合同｜証明マスター</title>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>三角形の合同｜証明マスター（新UI）</title>
 <style>
 :root{--ink:#1c3042;--muted:#687b8c;--blue:#236cb7;--sky:#e8f4ff;--cyan:#d9f6fa;--teal:#118c89;--bg:#f3f7fb;--line:#d5e1eb;--yes:#087b55;--no:#ad3e42;--gold:#d78e1e;--white:#fff}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,system-ui,sans-serif;line-height:1.6}button{font:inherit;cursor:pointer;touch-action:manipulation}button:focus-visible{outline:3px solid #ffa92c;outline-offset:3px}.shell{max-width:1130px;margin:0 auto;padding:18px 18px 55px}header{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:16px}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#1e68ad,#12a6a2);color:#fff;display:grid;place-items:center;font-size:25px}.brand h1{font-size:21px;margin:0;line-height:1.3;letter-spacing:.03em}.brand small{display:block;color:var(--muted);font-size:12px;font-weight:500;margin-top:2px}.pill{font-size:12px;background:#e7f0fb;color:#22629f;padding:5px 9px;border-radius:99px;font-weight:700}.topactions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.tinybtn{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;color:var(--ink);font-size:13px}.tinybtn:hover{background:var(--sky)}.hero{padding:22px 24px;background:linear-gradient(115deg,#2165ab,#109d9d);color:#fff;border-radius:19px;box-shadow:0 8px 24px #1a4e7822;margin-bottom:20px}.hero h2{margin:0;font-size:22px}.hero p{margin:5px 0 0;color:#e0f7ff;font-size:14px}.stages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.stage{border:2px solid transparent;background:#fff;padding:17px 15px;text-align:left;border-radius:16px;box-shadow:0 3px 16px #365b7910;min-height:155px}.stage:hover{border-color:#8cc8e2;transform:translateY(-1px)}.stage .num{display:inline-grid;place-items:center;width:34px;height:34px;background:#e7f1fe;color:var(--blue);font-weight:900;border-radius:11px;margin-bottom:10px}.stage strong{display:block;font-size:15px;margin-bottom:4px}.stage small{font-size:12px;color:var(--muted)}.stage .done{font-size:12px;color:var(--teal);font-weight:bold;margin-top:7px}.rules{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 20px;margin-top:16px;font-size:13px;color:var(--muted)}.rules strong{color:var(--ink)}.layout{display:grid;grid-template-columns:minmax(0,1.23fr) minmax(320px,.77fr);gap:16px;align-items:start}.panel{background:#fff;border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:0 2px 12px #3155780a}.diagram-panel{position:sticky;top:10px}.question-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:9px}.question-head h2{margin:0;font-size:18px}.progress{height:7px;background:#e7eff5;border-radius:8px;overflow:hidden;margin:10px 0 13px}.progress div{height:100%;background:linear-gradient(90deg,#24a4a5,#2778c3);border-radius:8px;transition:width .25s}.figure{background:#fbfdff;border:1px solid #dce9f4;border-radius:14px;padding:7px;min-height:180px;display:flex;align-items:center;justify-content:center}.figure svg{width:100%;height:auto;display:block;max-height:390px}.assumption{font-size:14px;margin-top:10px;padding:10px 12px;background:#eff7ff;border-left:3px solid #4b91d0;border-radius:7px;white-space:pre-line}.caption{font-size:12px;color:var(--muted);margin-top:8px}.instruction{font-weight:800;font-size:16px;margin:2px 0 12px}.options{display:grid;gap:8px}.option{border:1.5px solid #ccdbe8;background:#fff;border-radius:11px;padding:12px 13px;text-align:left;min-height:49px;line-height:1.5;transition:background .15s,border .15s;overflow-wrap:anywhere}.option:hover:not(:disabled){border-color:#61b2cc;background:#effafe}.option.selected{background:#e6f4ff;border-color:#207bbc;box-shadow:inset 0 0 0 1px #207bbc}.option.correct{border-color:#0e9779;background:#e8faf3}.option:disabled{opacity:.6;cursor:default}.option.compact{font-size:14px;padding:10px 12px}.option .hintchip{font-size:11px;color:#2275b3;background:#ebf4ff;border-radius:6px;padding:2px 5px;margin-right:7px}.options.two{grid-template-columns:repeat(2,minmax(0,1fr))}.actionrow{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.btn{border:0;background:#236cb7;color:#fff;border-radius:11px;padding:11px 18px;font-weight:700}.btn:hover:not(:disabled){background:#175a9b}.btn.subtle{background:#e8f2fd;color:#2469a5}.btn.subtle:hover:not(:disabled){background:#d2e7fb}.btn.teal{background:#128783}.btn:disabled{opacity:.45;cursor:default}.btn.full{width:100%}.btn.hint{background:#fff6e4;border:1px solid #f0d397;color:#93600d}.message{padding:11px 12px;border-radius:10px;font-size:13px;margin-top:12px;border:1px solid transparent}.message.success{background:#e7f8f0;border-color:#a0dfc5;color:#116e50}.message.error{background:#fff0f0;border-color:#f2c8c8;color:#a4393e}.message.info{background:#eff6ff;border-color:#c8dff7;color:#315f8f}.hintpanel{border:1px solid #efd99d;border-radius:12px;padding:12px;margin-top:12px;background:#fffbef;font-size:13px}.hintpanel strong{color:#935e08}.hintpanel p{margin:5px 0 0}.notebook{margin-top:15px;border:1px solid #c7dded;border-radius:13px;background:linear-gradient(#ffffff,#f9fcff);overflow:hidden}.notebook h3{margin:0;padding:10px 14px;background:#eaf4ff;border-bottom:1px solid #c7dded;font-size:14px}.notecontent{padding:14px;font-size:14px;line-height:1.95;min-height:72px}.notecontent .line{display:block;padding-left:8px;border-left:3px solid transparent}.notecontent .line.latest{background:#edf9f5;border-left-color:#33a98d}.notecontent .empty{color:#90a0ad}.proofslots{display:grid;gap:6px}.slot{border:1px solid #d2e0eb;border-radius:9px;background:#fff;padding:9px 11px;text-align:left;font-size:13px}.slot .slotnumber{font-size:11px;font-weight:700;color:#627c92;display:block}.slot .slotcontent{display:block;color:#8ba0b1;line-height:1.7}.slot.filled .slotcontent{color:#215478;font-weight:600}.slot.active{border:2px solid #168e9f;background:#eafcff;padding:8px 10px}.slot.locked{opacity:.75;cursor:not-allowed}.slot.filled{border-color:#b9ded4;background:#f6fcf9}.slot.missing{border-style:dashed}.sectionlabel{font-size:12px;font-weight:bold;color:var(--muted);margin:13px 0 6px}.smallnote{font-size:12px;color:var(--muted)}.congrats{text-align:center;padding:36px 15px}.congrats .cup{font-size:60px}.congrats h2{font-size:24px}.legend{display:flex;gap:15px;flex-wrap:wrap;color:#647e95;font-size:12px;margin-top:8px}.key{width:16px;height:3px;display:inline-block;background:#e29a22;vertical-align:middle;margin-right:5px}.key.angle{background:#945dc8}.footer{font-size:12px;color:#798a9a;text-align:center;margin-top:20px}.hide{display:none!important}@media(max-width:800px){.layout{grid-template-columns:1fr}.diagram-panel{position:static}.stages{grid-template-columns:repeat(2,minmax(0,1fr))}.shell{padding:12px 12px 40px}.panel{padding:13px}.figure svg{max-height:290px}.hero{padding:18px}}@media(max-width:420px){.brand h1{font-size:17px}.brand small{font-size:10px}.logo{width:40px;height:40px;font-size:21px}.topactions{gap:5px}.tinybtn{padding:5px 7px;font-size:11px}.stage{padding:12px;min-height:145px}.stage strong{font-size:13px}.option{font-size:13px}.options.two{grid-template-columns:1fr}}
 
@@ -9,6 +9,104 @@
   .actionrow:has(.nextbtn){position:sticky;bottom:8px;z-index:10;background:#ffffffed;padding:7px;border:1px solid #aad4cb;border-radius:15px;box-shadow:0 8px 20px #19466327}
   .nextbtn{min-height:60px}
 }
+
+/* PROOF FOCUS v4: a self-contained, one-screen proof editor */
+body.proof-mode {overflow:hidden}
+body.proof-mode .shell {max-width:1160px;height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden;padding:8px 10px}
+body.proof-mode header {flex:0 0 auto;margin-bottom:7px}
+body.proof-mode .footer {display:none}
+body.proof-mode #app {flex:1;min-height:0;display:flex;overflow:hidden}
+.proof-workspace{width:100%;height:100%;min-height:0;display:grid;grid-template-columns:minmax(0,1.07fr) minmax(0,.93fr);gap:12px}
+.proof-figure,.proof-control{min-width:0;min-height:0;overflow:hidden;display:flex;flex-direction:column}
+.proof-figure{padding:12px}
+.proof-figure .question-head{margin:0 0 5px}
+.proof-figure .question-head h2{font-size:clamp(13px,1.4vw,18px)}
+.proof-figure .progress{flex:0 0 5px;margin:2px 0 6px}
+.proof-figure .figure{min-height:0;flex:1;overflow:hidden;padding:3px;border-radius:10px}
+.proof-figure .figure svg{height:100%;width:100%;max-height:100%;object-fit:contain}
+.proof-figure .proof-givens{flex:0 0 auto;max-height:76px;overflow:auto;margin-top:6px;background:#f0f7ff;border-left:3px solid #5095c7;border-radius:5px;padding:5px 8px;font-size:12px;line-height:1.42;white-space:pre-line}
+.proof-control{padding:12px;gap:8px}
+.proof-summary{display:flex;align-items:center;justify-content:space-between;gap:9px;flex:0 0 auto}
+.proof-summary .smallnote{font-size:12px}
+.proof-notebook{border:1px solid #7abacc;background:#effaff;color:#17667a;border-radius:10px;padding:8px 10px;font-size:13px;font-weight:800;white-space:nowrap;flex:0 0 auto}
+.proof-now{background:#eef9ff;border:2px solid #278fc1;border-radius:13px;padding:11px;flex:0 0 auto}
+.proof-now .proof-step{color:#137a99;font-size:11px;font-weight:900;letter-spacing:.02em}
+.proof-now .proof-question{font-size:clamp(16px,1.7vw,20px);font-weight:850;line-height:1.45;margin-top:4px}
+.proof-now .proof-context{font-size:12px;color:#526d80;margin-top:4px}
+.proof-answer-header{font-size:12px;color:#697f90;font-weight:700;flex:0 0 auto}
+.proof-answer-scroll{min-height:0;flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding:2px 4px 5px 1px}
+.proof-answer-scroll .options{display:grid;grid-template-columns:1fr;gap:7px}
+.proof-answer-scroll .option{min-height:46px;padding:10px 12px;font-size:clamp(13px,1.5vw,16px);line-height:1.36;font-weight:650;overflow-wrap:normal;word-break:normal}
+.proof-answer-scroll .option:nth-child(odd){background:#f7fbff}
+.proof-answer-scroll .option:active{background:#d8f4ff}
+.proof-actions{flex:0 0 auto;border-top:1px solid #d9e6ef;padding-top:7px;display:flex;flex-direction:column;gap:6px}
+.proof-actions-row{display:flex;gap:7px;align-items:center;justify-content:space-between}
+.proof-actions-row .btn{min-height:39px;padding:7px 10px;font-size:13px}
+.proof-hint-message{font-size:12px;line-height:1.35;padding:8px;background:#fff5df;border-left:3px solid #e5af4e;border-radius:6px}
+.proof-actions .message{margin:0;padding:7px 9px;font-size:12px}
+.proof-complete{min-height:0;flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;text-align:center;color:#087b55}
+.proof-complete h3{margin:0;color:#126f76;font-size:22px}
+.proof-complete .btn{width:min(360px,100%)}
+.proof-drawer{position:fixed;inset:0;background:#0f2948ad;z-index:5000;display:flex;align-items:center;justify-content:center;padding:12px}
+.proof-drawer-card{width:min(620px,100%);max-height:min(750px,95dvh);min-height:0;display:flex;flex-direction:column;overflow:hidden;background:white;border-radius:18px;box-shadow:0 18px 55px #07233a75;border:1px solid #afd2e1}
+.proof-drawer-top{display:flex;justify-content:space-between;align-items:center;padding:13px 14px;border-bottom:1px solid #d7e8f1;gap:12px}
+.proof-drawer-top b{font-size:16px}
+.proof-drawer-top button{min-height:38px;border:1px solid #b7cdda;background:#eff5fa;border-radius:10px;padding:5px 13px;font-weight:800}
+.proof-drawer-content{overflow:auto;padding:11px;overscroll-behavior:contain;display:grid;gap:7px}
+.proof-drawer-content .slot{min-height:48px;padding:9px 12px}
+.proof-drawer-content .slot.active{padding:8px 11px}
+.proof-drawer-content .slot .slotnumber{font-size:12px}
+.proof-drawer-content .slot .slotcontent{font-size:14px;color:#36566f}
+.proof-drawer-content .slot.filled .slotcontent{color:#126747}
+.proof-drawer-content .slot.locked{opacity:.55}
+.proof-drawer-desc{font-size:12px;color:#6b8091;padding:0 14px 11px}
+.math-symbol{font-size:1.19em;font-weight:900;color:#175c9d;white-space:nowrap}
+@media(max-width:800px){
+ body.proof-mode .shell{padding:4px 6px 6px}
+ body.proof-mode header{height:39px;margin:0 0 5px;flex-shrink:0}
+ body.proof-mode .brand{gap:6px}
+ body.proof-mode .brand .logo{width:31px;height:31px;font-size:18px;border-radius:9px}
+ body.proof-mode .brand h1{font-size:13px;white-space:nowrap}
+ body.proof-mode .brand small{display:none}
+ body.proof-mode #resetBtn{display:none}
+ body.proof-mode #homeBtn{font-size:11px;padding:6px}
+ .proof-workspace{grid-template-columns:1fr;grid-template-rows:clamp(180px,34%,250px) minmax(0,1fr);gap:5px}
+ .proof-figure{padding:6px 8px}
+ .proof-figure .question-head{margin:0 0 3px}
+ .proof-figure .question-head h2{font-size:12px}
+ .proof-figure .question-head .pill{font-size:11px}
+ .proof-figure .progress{flex-basis:4px;margin:2px 0 4px}
+ .proof-figure .proof-givens{max-height:38px;padding:3px 6px;margin-top:4px;font-size:10px;line-height:1.3}
+ .proof-figure .figure{min-height:0;padding:1px}
+ .proof-control{padding:8px;gap:6px}
+ .proof-summary .smallnote{font-size:11px;line-height:1.1}
+ .proof-notebook{padding:7px 9px;font-size:12px}
+ .proof-now{padding:7px 9px}
+ .proof-now .proof-step{font-size:10px}
+ .proof-now .proof-question{font-size:15px;margin-top:2px}
+ .proof-now .proof-context{margin-top:2px;font-size:11px}
+ .proof-answer-header{font-size:11px;line-height:1.2}
+ .proof-answer-scroll .options{gap:5px}
+ .proof-answer-scroll .option{font-size:13px;min-height:42px;padding:7px 9px}
+ .proof-actions{padding-top:5px;gap:4px}
+ .proof-actions-row .btn{padding:6px 9px;min-height:36px;font-size:12px}
+}
+@media(max-width:360px){
+ .proof-workspace{grid-template-rows:minmax(175px,32%) minmax(0,1fr)}
+ .proof-answer-scroll .option{font-size:12px;min-height:39px}
+ .proof-now .proof-question{font-size:14px}
+ .proof-figure .proof-givens{max-height:31px}
+}
+@media(max-height:630px){
+ .proof-workspace{grid-template-rows:minmax(173px,33%) minmax(0,1fr)}
+ .proof-control{gap:4px;padding:6px}
+ .proof-now{padding:6px 8px}
+ .proof-answer-scroll .option{min-height:38px;padding:5px 8px}
+ .proof-actions .message{font-size:11px;padding:4px 7px}
+ .proof-actions-row .btn{min-height:32px;padding:4px 8px}
+ .proof-figure .proof-givens{max-height:28px;font-size:10px}
+}
+
 </style></head><body><div class="shell"><header><div class="brand"><div class="logo">△</div><div><h1>三角形の合同 証明マスター</h1><small>見抜く → 対応を探す → 証明する → 活用する</small></div></div><div class="topactions"><button id="homeBtn" class="tinybtn" type="button">⌂ ステージ選択</button><button id="resetBtn" class="tinybtn" type="button">↺ 記録をリセット</button></div></header><div id="bootAlert" style="background:#fff2d9;border:2px solid #e4af39;color:#604416;border-radius:13px;padding:16px;margin:10px 0;font-size:14px"><strong>この画面でゲームが動かない場合</strong><div>ChatGPTなどのファイルプレビューは、ゲームを動かすJavaScriptを停止することがあります。HTMLを保存してWebブラウザで開くか、GitHub PagesなどのHTTPSサイトに公開して利用してください。</div></div><main id="app"><div class="hero"><h2>合同条件から、証明が書ける力へ。</h2><p>4ステージ・全40問。正しい表現で、証明を1行ずつ完成させよう。</p></div><div class="stages"><button class="stage" onclick="startStage(1)"><span class="num">01</span><strong>合同条件を見抜け！</strong><small>図を見て3つの合同条件から選ぶ</small></button><button class="stage" onclick="startStage(2)"><span class="num">02</span><strong>対応する辺と角を探せ！</strong><small>合同条件と等しい3組を選ぶ</small></button><button class="stage" onclick="startStage(3)"><span class="num">03</span><strong>証明を組み立てろ！</strong><small>「〜において」から合同まで</small></button><button class="stage" onclick="startStage(4)"><span class="num">04</span><strong>合同を使って証明せよ！</strong><small>合同を使って辺・角の等しさを示す</small></button></div><div class="rules"><strong>正式な合同条件</strong><br>① 3組の辺がそれぞれ等しい。<br>② 2組の辺とその間の角がそれぞれ等しい。<br>③ 1組の辺とその両端の角がそれぞれ等しい。<br><br>ヒントは3段階。間違えても何度でも挑戦できます。</div></main><div class="footer">学習用・オフライン動作対応 ｜ 説明と図に与えられた条件から判断しましょう。</div></div>
 <script>
 'use strict';
@@ -91,14 +189,41 @@ function chooseProof(value){const q=current(),keys=proofKeys(q),key=initialActiv
  if(correct){state.slots[key]=stored;state.feedback={kind:'success',text:'正解！ 証明ノートに追加しました。'};state.hint=0;state.active=null;const next=initialActive(q);state.active=next;if(keys.every(k=>state.slots[k])){state.answered='complete';markRecord();state.feedback={kind:'success',text:'証明完成！ 等式・根拠・合同条件・対応順がそろいました。'}}}
  else {state.tries++;state.feedback={kind:'error',text:'この箇所に入れると、根拠や対応関係が合いません。図や条件をもう一度確認しよう。'}}render()}
 function undoProof(){const keys=proofKeys(current()),filled=keys.filter(k=>state.slots[k]);if(!filled.length)return;let last=filled[filled.length-1];if(state.active&&state.slots[state.active])last=state.active;if(last.startsWith('eq')&&state.slots['why'+last.slice(2)])delete state.slots['why'+last.slice(2)];delete state.slots[last];state.active=last;state.answered=false;state.feedback={kind:'info',text:'直前の項目を戻しました。'};render()}
-function proofControls(q){const keys=proofKeys(q),mode=state.index<3?'ガイドモード':state.index<6?'セミガイドモード':'フリーモード';const done=keys.filter(k=>state.slots[k]).length;let html=`<div class="instruction">証明をタップして完成させよう。</div><div class="smallnote">${mode} ｜ ${done}/${keys.length}項目 完成。${state.index<3?'上から順番に進めます。':'好きな箇所から考えてOKです。'}</div><div class="sectionlabel">証明ノート（空欄を選択）</div><div class="proofslots">`;
- const active=state.answered==='complete'?null:initialActive(q);
- keys.forEach((key,i)=>{const filled=Boolean(state.slots[key]);const isActive=active===key;const ready=canUseKey(key,keys);html+=`<button type="button" class="slot ${filled?'filled':''} ${isActive?'active':''} ${!ready&&!filled?'locked':''} ${!filled?'missing':''}" onclick="activate('${key}')"><span class="slotnumber">${i+1}. ${slotLabel(key)}${filled?'　✓':''}</span><span class="slotcontent">${filled?esc(slotDisplay(key)):(isActive?'ここを選択中':'タップして選ぶ')}</span></button>`});html+='</div>';
- if(state.answered!=='complete'&&active){const raw=proofOptions(q,active),opts=raw.map((x,i)=>typeof x==='string'?{v:x,label:x}:{v:x.v,label:x.label});html+=`<div class="sectionlabel">「${slotLabel(active)}」を選んでください</div><div class="options ${opts.length>4?'two':''}">${opts.map(o=>`<button type="button" class="option compact" onclick="chooseProof(decodeURIComponent('${encodeURIComponent(o.v)}'))">${esc(o.label)}</button>`).join('')}</div>`}
- html+=feedback();if(state.answered==='complete'){html+=`<div class="actionrow"><button type="button" class="btn teal full nextbtn" onclick="nextQuestion()">${state.index===9?'ステージ結果を見る':'次の問題へ →'}</button></div>`}else{html+=`<div class="actionrow"><button type="button" class="btn subtle" onclick="undoProof()" ${!done?'disabled':''}>↶ 1つ戻す</button></div>`+hintBox(q)}return html}
-function render(){if(!state.stage){renderHome();return}const q=current();app.innerHTML=`<div class="layout"><section class="panel diagram-panel">${stageBox(q)}</section><section class="panel" id="controlPane">${state.stage<=2?basicControls(q):proofControls(q)}</section></div>`}
+function proofMath(s){return esc(s).replace(/([△∠])/g,'<span class="math-symbol">$1</span>')}
+function proofFigureBox(q){return `<div class="question-head"><h2>STAGE ${state.stage}　${STAGE_NAMES[state.stage]}</h2><span class="pill">${state.index+1} / 10</span></div><div class="progress"><div style="width:${(state.index+1)*10}%"></div></div><div class="figure">${diagram(q)}</div><div class="proof-givens">${esc(q.givens)}${state.stage===4?`\n【証明すること】${esc(q.goalSelected[0])}`:''}</div>`}
+function openProofNotebook(){
+ const q=current(),keys=proofKeys(q),active=state.answered==='complete'?null:initialActive(q),done=keys.filter(k=>state.slots[k]).length;
+ document.getElementById('proofDrawer')?.remove();
+ const wrap=document.createElement('div');wrap.id='proofDrawer';wrap.className='proof-drawer';wrap.setAttribute('role','dialog');wrap.setAttribute('aria-modal','true');wrap.setAttribute('aria-label','証明ノート');
+ wrap.innerHTML=`<section class="proof-drawer-card"><div class="proof-drawer-top"><b>📘 証明ノート　${done}/${keys.length}項目</b><button type="button" onclick="closeProofNotebook()">閉じる ×</button></div><div class="proof-drawer-content">${keys.map((key,i)=>{const filled=Boolean(state.slots[key]),ready=canUseKey(key,keys);return `<button type="button" class="slot ${filled?'filled':''} ${active===key?'active':''} ${!ready&&!filled?'locked':''}" onclick="focusProofSlot('${key}')"><span class="slotnumber">${i+1}. ${slotLabel(key)}${filled?' ✓':''}</span><span class="slotcontent">${filled?proofMath(slotDisplay(key)):(active===key?'● 今考えているところ':'タップしてこの空欄を考える')}</span></button>`}).join('')}</div><div class="proof-drawer-desc">${state.index<3?'ガイドモード：上から順に完成させます。':'好きな未完成の空欄を選べます。'}　閉じると解答画面に戻ります。</div></section>`;
+ wrap.addEventListener('click',e=>{if(e.target===wrap)closeProofNotebook()});document.body.appendChild(wrap);wrap.querySelector('.proof-drawer-top button').focus();
+}
+function closeProofNotebook(){document.getElementById('proofDrawer')?.remove()}
+function focusProofSlot(key){closeProofNotebook();activate(key)}
+function proofControls(q){
+ const keys=proofKeys(q),done=keys.filter(k=>state.slots[k]).length,completed=state.answered==='complete';
+ const mode=state.index<3?'ガイド':state.index<6?'セミガイド':'フリー';
+ const active=completed?null:initialActive(q);if(active)state.active=active;
+ let html=`<div class="proof-summary"><span class="smallnote"><b>${mode}モード</b> ・ ${done}/${keys.length} 完成</span><button class="proof-notebook" type="button" onclick="openProofNotebook()">📘 証明全文を見る</button></div>`;
+ if(completed){
+  html+=`<div class="proof-complete"><div style="font-size:35px">✅</div><h3>証明完成！</h3><p>完成した証明を確認してから次へ進もう。</p><button type="button" class="btn subtle" onclick="openProofNotebook()">📘 完成した証明を読む</button><button type="button" class="btn teal nextbtn" onclick="nextQuestion()">${state.index===9?'ステージ結果を見る':'次の問題へ →'}</button></div>`;
+  return html;
+ }
+ if(!active)return html+feedback();
+ const raw=proofOptions(q,active),opts=raw.map(x=>typeof x==='string'?{v:x,label:x}:{v:x.v,label:x.label});
+ const activeIndex=keys.indexOf(active)+1;
+ const context=active.startsWith('why')?`選んだ等式：${state.slots['eq'+active.slice(3)]?.text||''}`:active==='condition'?'等しい3組を確認して、合同条件を選ぼう。':active==='goal'?'何を証明するか、もう一度確認しよう。':'';
+ html+=`<div class="proof-now"><div class="proof-step">STEP ${activeIndex} / ${keys.length}　今考えるところ</div><div class="proof-question">${esc(slotLabel(active))}</div>${context?`<div class="proof-context">${proofMath(context)}</div>`:''}</div>`;
+ html+=`<div class="proof-answer-header">正しい選択肢をタップ　${opts.length>4?'（ここだけ上下にスクロールできます）':''}</div>`;
+ html+=`<div class="proof-answer-scroll" id="proofAnswers"><div class="options">${opts.map((o,i)=>`<button type="button" class="option" onclick="chooseProof(decodeURIComponent('${encodeURIComponent(o.v)}'))"><b style="display:inline-block;min-width:1.7em;color:#2675b6">${['A','B','C','D','E','F','G','H','I'][i]||''}</b> ${proofMath(o.label)}</button>`).join('')}</div></div>`;
+ const texts=hintText(q);
+ html+=`<div class="proof-actions">${feedback()}${state.hint?`<div class="proof-hint-message">💡 ${esc(texts[state.hint-1])}</div>`:''}<div class="proof-actions-row"><button type="button" class="btn subtle" onclick="undoProof()" ${done?'':'disabled'}>↶ 1つ戻す</button><button type="button" class="btn hint" onclick="showHint()">💡 ヒント ${state.hint}/3</button></div></div>`;
+ return html;
+}
+
+function render(){closeProofNotebook();document.body.classList.toggle('proof-mode',state.stage>=3);if(!state.stage){renderHome();return}const q=current();if(state.stage>=3){app.innerHTML=`<div class="proof-workspace"><section class="panel proof-figure">${proofFigureBox(q)}</section><section class="panel proof-control" id="controlPane">${proofControls(q)}</section></div>`;return}app.innerHTML=`<div class="layout"><section class="panel diagram-panel">${stageBox(q)}</section><section class="panel" id="controlPane">${basicControls(q)}</section></div>`}
 function renderHome(){const done=n=>Array.from({length:10},(_,i)=>records[`${n}-${i}`]?1:0).reduce((a,b)=>a+b,0);app.innerHTML=`<div class="hero"><h2>合同条件から、証明が書ける力へ。</h2><p>全40問。図を読み、根拠を選び、証明を完成させよう。</p></div><div class="stages">${[1,2,3,4].map(n=>`<button type="button" class="stage" onclick="startStage(${n})"><span class="num">0${n}</span><strong>${STAGE_NAMES[n]}</strong><small>${['','図を見て合同条件を選ぶ','合同条件と等しい3組を選ぶ','「〜において」から合同まで','合同を使って結論を導く'][n]}</small><div class="done">達成：${done(n)} / 10問</div></button>`).join('')}</div><div class="rules"><strong>正式な合同条件</strong><br>① ${TERMS.SSS}<br>② ${TERMS.SAS}<br>③ ${TERMS.ASA}<br><br>各ステージ10問。ステージ3・4は、序盤がガイド、中盤がセミガイド、後半がフリーです。<br>ヒントはいつでも使えます。間違えても失敗にはならず、再挑戦できます。<br><strong>記録</strong>：クリア状況は、この端末のブラウザ内に保存されます。</div>`}
-function renderFinished(){let stage=state.stage,count=Array.from({length:10},(_,i)=>records[`${stage}-${i}`]||0),perfect=count.filter(v=>v===3).length;app.innerHTML=`<section class="panel congrats"><div class="cup">🏆</div><h2>STAGE ${stage} クリア！</h2><p>${STAGE_NAMES[stage]}　10問終了</p><p>ノーヒント・初回正解：<strong>${perfect} / 10問</strong></p><p class="smallnote">ヒントを使って解けた問題も、学習の成果です。</p><div class="actionrow" style="justify-content:center"><button type="button" class="btn teal" onclick="${stage<4?`startStage(${stage+1})`:'home()'}">${stage<4?'次のステージへ →':'ステージ選択へ'}</button><button type="button" class="btn subtle" onclick="startStage(${stage})">このステージを復習</button></div></section>`;safeScrollTop()}
+function renderFinished(){document.body.classList.remove('proof-mode');closeProofNotebook();let stage=state.stage,count=Array.from({length:10},(_,i)=>records[`${stage}-${i}`]||0),perfect=count.filter(v=>v===3).length;app.innerHTML=`<section class="panel congrats"><div class="cup">🏆</div><h2>STAGE ${stage} クリア！</h2><p>${STAGE_NAMES[stage]}　10問終了</p><p>ノーヒント・初回正解：<strong>${perfect} / 10問</strong></p><p class="smallnote">ヒントを使って解けた問題も、学習の成果です。</p><div class="actionrow" style="justify-content:center"><button type="button" class="btn teal" onclick="${stage<4?`startStage(${stage+1})`:'home()'}">${stage<4?'次のステージへ →':'ステージ選択へ'}</button><button type="button" class="btn subtle" onclick="startStage(${stage})">このステージを復習</button></div></section>`;safeScrollTop()}
 document.getElementById('homeBtn').addEventListener('click',home);document.getElementById('resetBtn').addEventListener('click',()=>{if(confirm('クリア記録をすべて消しますか？')){records={};save();home()}});
 renderHome();
 document.getElementById('bootAlert')?.remove();

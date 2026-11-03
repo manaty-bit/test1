@@ -289,6 +289,26 @@ header{background:var(--board);color:var(--chalk);border:1px solid #34594b;borde
  .proof-figure .proof-goal{margin-top:3px;padding:3px 6px}
  .proof-control .proof-answer-scroll .option{min-height:35px;padding:4px 6px}
 }
+
+/* Geometry presentation audit: stop stretching a small drawing across the full desktop height. */
+@media(min-width:801px){
+ body.play-mode:not(.proof-mode) #app{overflow-y:auto;align-items:flex-start}
+ body.play-mode:not(.proof-mode) .layout{height:auto;max-height:none;align-items:stretch;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr)}
+ body.play-mode:not(.proof-mode) .diagram-panel{height:auto;overflow:visible}
+ body.play-mode:not(.proof-mode) .diagram-panel .figure{flex:none;height:clamp(260px,32vw,375px);align-items:flex-start;justify-content:center}
+ body.play-mode:not(.proof-mode) .diagram-panel .figure svg{height:100%;width:100%;max-height:100%;object-fit:contain}
+ body.play-mode:not(.proof-mode) .basic-control{height:auto;min-height:477px;overflow:visible;padding-top:17px;padding-bottom:17px;justify-content:center}
+ body.play-mode:not(.proof-mode) .basic-control .basic-actions{position:static}
+ body.play-mode:not(.proof-mode) .basic-control:not(:has(.pick-summary)) .basic-head{margin-top:60px}
+}
+/* Keep the proof editor compact as well; spare vertical space should not stretch the diagram. */
+@media(min-width:801px){
+ body.play-mode.proof-mode #app{overflow-y:auto;align-items:flex-start;display:block}
+ body.play-mode.proof-mode .proof-workspace{height:clamp(460px,65vh,570px);min-height:0}
+ body.play-mode.proof-mode .proof-figure .figure{min-height:0;max-height:none}
+}
+/* On phones, preserve the deliberately short figure area for fully visible 6-9 choices. */
+@media(max-width:800px){.diagram-panel .figure svg,.proof-figure .figure svg{object-position:center center}}
 </style></head><body><div class="shell"><header><div class="brand"><div class="logo" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M7 38L23 8L42 38Z M23 8L23 38" stroke="currentColor" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 38H42" stroke="currentColor" stroke-width="2.7"/></svg></div><div class="brand-label"><div class="brand-kicker">GEOMETRY LAB · PROOF NOTE</div><h1><span>三角形の合同</span><strong>証明マスター</strong></h1></div></div><div class="topactions"><button id="homeBtn" class="tinybtn" type="button">ステージ選択</button><button id="resetBtn" class="tinybtn" type="button">記録をリセット</button></div></header><div id="bootAlert" style="background:#fff2d9;border:2px solid #e4af39;color:#604416;border-radius:13px;padding:16px;margin:10px 0;font-size:14px"><strong>この画面でゲームが動かない場合</strong><div>ChatGPTなどのファイルプレビューは、ゲームを動かすJavaScriptを停止することがあります。HTMLを保存してWebブラウザで開くか、GitHub PagesなどのHTTPSサイトに公開して利用してください。</div></div><main id="app"><div class="hero"><h2>合同条件から、証明が書ける力へ。</h2><p>4ステージ・全40問。正しい表現で、証明を1行ずつ完成させよう。</p></div><div class="stages"><button class="stage" onclick="startStage(1)"><span class="num">01</span><strong>合同条件を見抜け！</strong><small>図を見て3つの合同条件から選ぶ</small></button><button class="stage" onclick="startStage(2)"><span class="num">02</span><strong>対応する辺と角を探せ！</strong><small>合同条件と等しい3組を選ぶ</small></button><button class="stage" onclick="startStage(3)"><span class="num">03</span><strong>証明を組み立てろ！</strong><small>「〜において」から合同まで</small></button><button class="stage" onclick="startStage(4)"><span class="num">04</span><strong>合同を使って証明せよ！</strong><small>合同を使って辺・角の等しさを示す</small></button></div><div class="rules"><strong>正式な合同条件</strong><br>① 3組の辺がそれぞれ等しい。<br>② 2組の辺とその間の角がそれぞれ等しい。<br>③ 1組の辺とその両端の角がそれぞれ等しい。<br><br>ヒントは3段階。間違えても何度でも挑戦できます。</div></main><div class="footer">GEOMETRY NOTE /  図形の印と図形の性質から、根拠を考える。</div></div>
 <script>
 'use strict';
@@ -340,43 +360,92 @@ function parallelMark(a,b,count){
  }
  return out;
 }
-function labelPosition(v,p,q,custom){
- const pos=p[v];
- if(custom[v]){const flip=q.index>=5?-1:1;return {x:pos[0]+custom[v][0]*flip,y:pos[1]+custom[v][1],anchor:'middle'}}
- const xs=Object.values(p).map(a=>a[0]),ys=Object.values(p).map(a=>a[1]);
- const minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys);
- const rangeX=Math.max(1,maxX-minX),rangeY=Math.max(1,maxY-minY);
- const near=(a,b,t=8)=>Math.abs(a-b)<=t;
- const onBottom=near(pos[1],maxY,Math.max(6,rangeY*0.02));
- const onTop=near(pos[1],minY,Math.max(6,rangeY*0.02));
- const centered=Math.abs(pos[0]-(minX+maxX)/2)<=Math.max(10,rangeX*0.06);
- const interiorBottom=onBottom&&pos[0]>minX+rangeX*0.18&&pos[0]<maxX-rangeX*0.18;
- if(v==='O')return {x:pos[0]+12,y:pos[1]-12,anchor:'middle'};
- if(onTop)return {x:pos[0],y:pos[1]-16,anchor:'middle'};
- if(interiorBottom)return {x:pos[0]+(centered?18:0),y:pos[1]+35,anchor:'middle'};
- if(onBottom){
-  if(pos[0]<=minX+rangeX*0.25)return {x:pos[0]-18,y:pos[1]+22,anchor:'middle'};
-  if(pos[0]>=maxX-rangeX*0.25)return {x:pos[0]+18,y:pos[1]+22,anchor:'middle'};
-  return {x:pos[0],y:pos[1]+26,anchor:'middle'};
- }
- const centerX=(minX+maxX)/2;
- const dx=pos[0]<centerX?-16:16;
- return {x:pos[0]+dx,y:pos[1]+22,anchor:'middle'};
+// Geometry-aware positioning: place vertex labels OUTSIDE each triangle,
+// score alternatives against all geometric segments and other labels.
+function labelDistanceToSegment(p,a,b){
+ const dx=b[0]-a[0],dy=b[1]-a[1],den=dx*dx+dy*dy;
+ const t=den?Math.max(0,Math.min(1,((p[0]-a[0])*dx+(p[1]-a[1])*dy)/den)):0;
+ return Math.hypot(p[0]-(a[0]+t*dx),p[1]-(a[1]+t*dy));
 }
-function diagram(q){const p=q.p,edgeSet=new Set();for(const t of q.tri){for(let k=0;k<3;k++)edgeSet.add([t[k],t[(k+1)%3]].sort().join(''))}const colors=['#eff5f1','#f7f3ea'];const xs=Object.values(p).map(x=>x[0]),ys=Object.values(p).map(x=>x[1]);
- const vb=q.kind==='proof'?`${fmt(Math.min(...xs)-40)} ${fmt(Math.min(...ys)-37)} ${fmt(Math.max(...xs)-Math.min(...xs)+80)} ${fmt(Math.max(...ys)-Math.min(...ys)+74)}`:'0 0 720 320';
- let result=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb}" role="img" aria-label="${esc(q.tri.join('と'))}の図。同じ印は等しい辺・角、同じ矢印は平行な直線、四角の印は直角を表します。">`;
+function pointRectDistance(p,r){const x=Math.max(r.x1,Math.min(p[0],r.x2)),y=Math.max(r.y1,Math.min(p[1],r.y2));return Math.hypot(p[0]-x,p[1]-y)}
+function segmentRectDistance(a,b,r){
+ // Exact line/rect intersection using Liang-Barsky, then endpoint/corner gaps.
+ let t0=0,t1=1,dx=b[0]-a[0],dy=b[1]-a[1];
+ const tests=[[-dx,a[0]-r.x1],[dx,r.x2-a[0]],[-dy,a[1]-r.y1],[dy,r.y2-a[1]]];
+ let hit=true;
+ for(const [p,q] of tests){if(Math.abs(p)<1e-9){if(q<0){hit=false;break}}else{const t=q/p;if(p<0)t0=Math.max(t0,t);else t1=Math.min(t1,t)}}
+ if(hit&&t0<=t1)return 0;
+ let d=Math.min(pointRectDistance(a,r),pointRectDistance(b,r));
+ for(const x of [r.x1,r.x2])for(const y of [r.y1,r.y2])d=Math.min(d,labelDistanceToSegment([x,y],a,b));
+ return d;
+}
+function vertexLabelLayout(q,edges){
+ const p=q.p,used=[],positions={};
+ const dirs=[0,-Math.PI/8,Math.PI/8,-Math.PI/4,Math.PI/4,-Math.PI*3/8,Math.PI*3/8,-Math.PI/2,Math.PI/2,-Math.PI*5/8,Math.PI*5/8,Math.PI];
+ for(const v of Object.keys(p)){
+  const pos=p[v],tri=q.tri.filter(t=>t.includes(v));
+  const neighbors=[...new Set(tri.join('').split(''))].map(k=>p[k]).filter(Boolean);
+  const cx=neighbors.reduce((a,x)=>a+x[0],0)/neighbors.length;
+  const cy=neighbors.reduce((a,x)=>a+x[1],0)/neighbors.length;
+  let vx=pos[0]-cx,vy=pos[1]-cy;
+  if(Math.hypot(vx,vy)<10){vx=(v==='O'?0:1);vy=-1}
+  const base=Math.atan2(vy,vx),rads=[36,42,48,56];
+  let best=null;
+  for(const rad of rads)for(const delta of dirs){
+   const a=base+delta,ux=Math.cos(a),uy=Math.sin(a);
+   const x=pos[0]+ux*rad,y=pos[1]+uy*rad+11;
+   const box={x1:x-13,x2:x+13,y1:y-25,y2:y+5};
+   let clearance=Infinity;
+   for(const e of edges){clearance=Math.min(clearance,segmentRectDistance(e[0],e[1],box))}
+   let score=rad*.15+Math.abs(delta)*15;
+   if(clearance<5)score+=1200+(5-clearance)*40;
+   else if(clearance<12)score+=(12-clearance)*10;
+   // Avoid neighboring vertex labels and other vertex points.
+   for(const other of used){
+    const ox=Math.max(0,Math.max(other.x1-box.x2,box.x1-other.x2));
+    const oy=Math.max(0,Math.max(other.y1-box.y2,box.y1-other.y2));
+    if(ox<18&&oy<18)score+=2000;
+   }
+   for(const [other,otherPos] of Object.entries(p)){
+    if(other===v)continue;
+    if(pointRectDistance(otherPos,box)<8)score+=500;
+   }
+   if(!best||score<best.score)best={x,y,box,score};
+  }
+  positions[v]={x:best.x,y:best.y,anchor:'middle'};
+  used.push(best.box);
+ }
+ return positions;
+}
+function diagram(q){
+ const p=q.p,edgeSet=new Set();
+ for(const t of q.tri){for(let k=0;k<3;k++)edgeSet.add([t[k],t[(k+1)%3]].sort().join(''))}
+ const colors=['#eff5f1','#f7f3ea'];
+ const edges=[...edgeSet].map(e=>[p[e[0]],p[e[1]]]);
+ const labels=vertexLabelLayout(q,edges);
+ // Fit the actual drawing AND its labels. No hard-coded 720x320 viewBox.
+ const xs=Object.values(p).map(x=>x[0]),ys=Object.values(p).map(x=>x[1]);
+ for(const lb of Object.values(labels)){xs.push(lb.x-16,lb.x+16);ys.push(lb.y-28,lb.y+8)}
+ const minX=Math.min(...xs)-13,maxX=Math.max(...xs)+13;
+ const minY=Math.min(...ys)-12,maxY=Math.max(...ys)+14;
+ const vb=`${fmt(minX)} ${fmt(minY)} ${fmt(maxX-minX)} ${fmt(maxY-minY)}`;
+ let result=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb}" preserveAspectRatio="xMidYMin meet" role="img" aria-label="${esc(q.tri.join('と'))}の図。同じ印は等しい辺・角、同じ矢印は平行な直線、四角の印は直角を表します。">`;
  q.tri.forEach((t,i)=>{result+=`<polygon points="${[...t].map(c=>p[c].map(fmt).join(',')).join(' ')}" fill="${colors[i]}" fill-opacity="0.75" stroke="none"/>`});
- for(const e of edgeSet){let a=p[e[0]],b=p[e[1]];result+=`<line x1="${fmt(a[0])}" y1="${fmt(a[1])}" x2="${fmt(b[0])}" y2="${fmt(b[1])}" stroke="#304d50" stroke-width="3.4" stroke-linecap="round"/>`}
+ for(const e of edges){const [a,b]=e;result+=`<line x1="${fmt(a[0])}" y1="${fmt(a[1])}" x2="${fmt(b[0])}" y2="${fmt(b[1])}" stroke="#304d50" stroke-width="3.4" stroke-linecap="round"/>`}
  q.mark.forEach((group,i)=>{group.forEach(m=>{result+=drawMark(m,p,i+1)})});
  if(q.kind==='proof'&&q.key==='para'){
   result+=parallelMark(p.A,p.B,1)+parallelMark(p.C,p.D,1);
   result+=parallelMark(p.B,p.C,2)+parallelMark(p.D,p.A,2);
  }
- if(q.kind==='proof'&&q.key==='right'){const d=p.D,a=p.A;let up= a[1]<d[1]?-1:1;result+=`<path d="M${d[0]-13},${d[1]} v${up*13} h13 M${d[0]+13},${d[1]} v${up*13} h-13" fill="none" stroke="#8065a0" stroke-width="3.8"/>`}
- const special=q.key==='cross';const custom=special?{A:[-14,-10],B:[12,18],C:[12,-10],D:[-15,18],O:[0,-12]}:{};
- for(const v in p){const lp=labelPosition(v,p,q,custom);result+=`<text x="${fmt(lp.x)}" y="${fmt(lp.y)}" font-size="30" font-weight="800" font-family="Arial,sans-serif" fill="#253e41" text-anchor="${lp.anchor}" stroke="#fff" stroke-width="4" paint-order="stroke">${v}</text>`}
- result+='</svg>';return result}
+ if(q.kind==='proof'&&q.key==='right'){
+  const d=p.D,a=p.A;const up=a[1]<d[1]?-1:1;
+  result+=`<path d="M${d[0]-13},${d[1]} v${up*13} h13 M${d[0]+13},${d[1]} v${up*13} h-13" fill="none" stroke="#8065a0" stroke-width="3.8"/>`;
+ }
+ for(const v in p){const lb=labels[v];
+  result+=`<text x="${fmt(lb.x)}" y="${fmt(lb.y)}" font-size="30" font-weight="800" font-family="Arial,sans-serif" fill="#253e41" text-anchor="middle" stroke="#faf8f1" stroke-width="4" paint-order="stroke">${v}</text>`;
+ }
+ result+='</svg>';return result;
+}
 function stageBox(q){return `<div class="question-head"><h2>STAGE ${state.stage}　${STAGE_NAMES[state.stage]}</h2><span class="pill">${state.index+1} / 10</span></div><div class="progress"><div style="width:${(state.index+1)*10}%"></div></div><div class="figure" id="svgBox">${diagram(q)}</div><div class="legend"><span><i class="key"></i>等しい辺</span><span><i class="key angle"></i>等しい角</span></div>`}
 function feedback(){if(!state.feedback)return '';return `<div class="message ${state.feedback.kind}" role="status">${esc(state.feedback.text)}</div>`}
 function hintText(q){if(q.kind==='basic'){let a=q.type;if(state.stage===2&&state.answered)return ['印が付いた辺・角を、対応する相手と1組ずつ結びましょう。','等しい印があるのは「'+q.eq.slice(0,2).join('」「')+'」などです。','図で直接与えられた3組：'+q.eq.join('、')+'。'];if(a==='SSS')return ['等しい印が付いた「辺」の組数を数えよう。','3種類の線の印が、2つの三角形にそれぞれあるよ。','3組の辺がそれぞれ等しい、に注目しよう。'];if(a==='SAS')return ['辺と角の印がそれぞれ何組あるかを見よう。','等しい角は、印の付いた2辺の「間」にあるかな？','2組の辺とその間の角がそれぞれ等しい、に注目しよう。'];return ['等しい角の印に注目しよう。','等しい辺の「両端」にある2つの角に印があるよ。','1組の辺とその両端の角がそれぞれ等しい、に注目しよう。']}

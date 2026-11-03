@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>証明マスター｜三角形の合同・ノートと黒板</title>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>証明マスター｜そのためには？ ゴールから考える証明</title>
 <style>
 :root{
  --paper:#f6f5f1;--surface:#fff;--ink:#233338;--ink2:#52636a;--quiet:#7c8b8f;
@@ -309,6 +309,68 @@ header{background:var(--board);color:var(--chalk);border:1px solid #34594b;borde
 }
 /* On phones, preserve the deliberately short figure area for fully visible 6-9 choices. */
 @media(max-width:800px){.diagram-panel .figure svg,.proof-figure .figure svg{object-position:center center}}
+
+/* THINK BACKWARD / PROVE FORWARD — one screen, consistent note + blackboard language */
+.strategy-top{display:flex;justify-content:space-between;align-items:center;gap:6px;flex:0 0 auto;border-bottom:1px solid var(--line);padding-bottom:7px}
+.strategy-phase{display:inline-flex;align-items:center;font-size:12px;font-weight:850;color:var(--board,#173a33);letter-spacing:.01em}
+.strategy-count{font:800 11px/1.3 ui-monospace,monospace;color:var(--accent);background:var(--wash);border-radius:4px;padding:4px 7px;white-space:nowrap}
+.strategy-question{background:var(--wash);border-left:3px solid var(--accent);border-radius:3px;padding:11px 12px;flex:0 0 auto}
+.strategy-question-kicker{font-size:11px;font-weight:900;color:var(--accent);letter-spacing:.03em}
+.strategy-question h3{font-size:clamp(15px,1.85vw,20px);line-height:1.4;font-weight:850;margin:4px 0}
+.strategy-question p{font-size:12px;color:var(--ink2);margin:2px 0 0;line-height:1.4}
+.strategy-answers .options{align-content:start}
+.strategy-answers .option{min-height:50px;white-space:normal;overflow-wrap:anywhere;word-break:normal}
+.strategy-answers .options.choice-list .option{font-size:13px;min-height:47px}
+.strategy-answers .option.strategy-selected{border-color:var(--accent);background:var(--wash);box-shadow:inset 3px 0 0 var(--accent)}
+.strategy-chosen{flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:7px;border:1px solid var(--line);border-radius:5px;min-height:44px}
+.strategy-chosen>span{font-size:10px;line-height:1.2;font-weight:800;color:var(--ink2);max-width:40px}
+.strategy-chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));flex:1;min-width:0;gap:4px}
+.strategy-chips>span{display:grid;place-items:center;min-width:0;min-height:32px;border:1px dashed #9db4a9;border-radius:4px;background:#f8faf7;padding:3px;font-size:clamp(10px,1.25vw,12px);text-align:center;overflow-wrap:anywhere;font-weight:750;color:var(--ink)}
+.strategy-action{display:flex;flex-direction:column;gap:7px;flex:0 0 auto}
+.strategy-action p{font-size:13px;line-height:1.52;margin:0;padding:10px 12px;background:#fffdf5;border-left:3px solid #bb9860}
+.strategy-go{width:100%;min-height:47px;font-size:16px}
+.strategy-back-link{border:0;background:none;color:var(--ink2);font-size:11px;min-height:27px;align-self:center;text-decoration:underline;text-underline-offset:3px}
+.strategy-quiet{color:var(--quiet);font-size:11px;font-weight:700}
+.strategy-ready-scroll{min-height:0;flex:1 1 auto;overflow:auto;padding:2px 3px 6px}
+.strategy-trail{display:flex;flex-direction:column;gap:1px;align-items:stretch}
+.strategy-trail-item{border:1px solid var(--line);border-radius:5px;background:var(--surface);text-align:center;padding:9px 8px;font-size:clamp(13px,1.5vw,16px);font-weight:820;line-height:1.4}
+.strategy-trail-item:first-child{border-color:var(--accent);background:var(--wash)}
+.strategy-trail-item small{display:block;font-size:10px;font-weight:900;color:var(--accent);margin-bottom:2px}
+.strategy-trail-arrow{text-align:center;font-size:10px;font-weight:900;color:var(--accent);padding:2px 0}
+.strategy-map h3{font-size:14px;margin:5px 0 7px;color:var(--accent)}
+.strategy-forward-list{display:grid;gap:6px}.strategy-forward-list>div{background:#fff;border:1px solid var(--line);border-radius:4px;padding:10px;line-height:1.5;font-size:13px;font-weight:700}
+.strategy-map>p{font-size:12px;color:var(--ink2);line-height:1.7}
+@media(max-width:800px){
+ .strategy-top{padding-bottom:4px}.strategy-phase{font-size:11px}
+ .strategy-question{padding:7px 9px}.strategy-question h3{font-size:15px;margin:2px 0}.strategy-question p{font-size:11px}
+ .strategy-question-kicker{font-size:10px}
+ .strategy-answers .option{min-height:43px;padding:7px 8px;font-size:12px}
+ .strategy-answers .options.choice-list .option{font-size:12px;min-height:42px}
+ .strategy-chosen{min-height:39px;padding:5px 6px}.strategy-chips>span{min-height:28px;font-size:10px}
+ .strategy-trail-item{padding:6px 8px;font-size:13px}.strategy-trail-arrow{padding:1px 0}
+ .strategy-action p{font-size:11px;padding:6px 9px}.strategy-go{min-height:40px;font-size:14px}
+}
+@media(max-height:630px){.strategy-question p{display:none}.strategy-question{padding:6px 8px}.strategy-trail-item{padding:5px 6px}.strategy-chosen{min-height:35px}}
+
+/* The reasoning map is the focal point once the plan is ready on a phone. */
+@media(max-width:800px){
+ body.strategy-ready .proof-workspace{grid-template-rows:76px minmax(0,1fr)}
+ body.strategy-ready .proof-figure .figure,
+ body.strategy-ready .proof-figure .progress,
+ body.strategy-ready .proof-figure .diagram-key{display:none}
+ body.strategy-ready .proof-figure{padding:6px 8px}
+ body.strategy-ready .proof-figure .question-head{margin:0 0 3px}
+ body.strategy-ready .proof-figure .proof-goal{margin-top:2px;padding:4px 7px}
+ body.strategy-ready .proof-control{gap:5px}
+}
+@media(max-width:360px){
+ .strategy-question{padding:6px 8px}
+ .strategy-question p{display:none}
+ .strategy-question h3{font-size:14px;margin:2px 0}
+ .strategy-chosen{min-height:35px;padding:4px 6px}
+ .strategy-chips>span{min-height:26px}
+ .proof-control .strategy-answers .option{min-height:40px;padding:5px 6px}
+}
 </style></head><body><div class="shell"><header><div class="brand"><div class="logo" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M7 38L23 8L42 38Z M23 8L23 38" stroke="currentColor" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 38H42" stroke="currentColor" stroke-width="2.7"/></svg></div><div class="brand-label"><div class="brand-kicker">GEOMETRY LAB · PROOF NOTE</div><h1><span>三角形の合同</span><strong>証明マスター</strong></h1></div></div><div class="topactions"><button id="homeBtn" class="tinybtn" type="button">ステージ選択</button><button id="resetBtn" class="tinybtn" type="button">記録をリセット</button></div></header><div id="bootAlert" style="background:#fff2d9;border:2px solid #e4af39;color:#604416;border-radius:13px;padding:16px;margin:10px 0;font-size:14px"><strong>この画面でゲームが動かない場合</strong><div>ChatGPTなどのファイルプレビューは、ゲームを動かすJavaScriptを停止することがあります。HTMLを保存してWebブラウザで開くか、GitHub PagesなどのHTTPSサイトに公開して利用してください。</div></div><main id="app"><div class="hero"><h2>合同条件から、証明が書ける力へ。</h2><p>4ステージ・全40問。正しい表現で、証明を1行ずつ完成させよう。</p></div><div class="stages"><button class="stage" onclick="startStage(1)"><span class="num">01</span><strong>合同条件を見抜け！</strong><small>図を見て3つの合同条件から選ぶ</small></button><button class="stage" onclick="startStage(2)"><span class="num">02</span><strong>対応する辺と角を探せ！</strong><small>合同条件と等しい3組を選ぶ</small></button><button class="stage" onclick="startStage(3)"><span class="num">03</span><strong>証明を組み立てろ！</strong><small>「〜において」から合同まで</small></button><button class="stage" onclick="startStage(4)"><span class="num">04</span><strong>合同を使って証明せよ！</strong><small>合同を使って辺・角の等しさを示す</small></button></div><div class="rules"><strong>正式な合同条件</strong><br>① 3組の辺がそれぞれ等しい。<br>② 2組の辺とその間の角がそれぞれ等しい。<br>③ 1組の辺とその両端の角がそれぞれ等しい。<br><br>ヒントは3段階。間違えても何度でも挑戦できます。</div></main><div class="footer">GEOMETRY NOTE /  図形の印と図形の性質から、根拠を考える。</div></div>
 <script>
 'use strict';
@@ -327,13 +389,13 @@ const PLAN=['kite','angle','right','cross','para','cross','kite','para','right',
 function makeProof(stage,index){const key=PLAN[index];const b=BASES[key];const mirrored=index>=5;const p={};for(const k in b.p){const v=b.p[k];p[k]=[mirrored?720-v[0]:v[0],v[1]]}const target=b.goal[(index>=5?1:0)];return {...b,p,stage,index,kind:'proof',key,goalSelected:target,eq:b.eq.map((e,j)=>({id:j,text:e[0],why:e[1]})),intro:`△${b.tri[0]}と△${b.tri[1]}において、`,condition:TERMS[b.type].replace(/。$/,'ので、'), congruent:b.cong};}
 function rotate(p,angle){const a=angle*Math.PI/180;return [p[0]*Math.cos(a)-p[1]*Math.sin(a),p[0]*Math.sin(a)+p[1]*Math.cos(a)]}
 function makeBasic(stage,index){const type=TYPES[index],ang1=[0,-17,20,35,-28,16,0,-33,22,8][index],ang2=[0,33,-27,48,-39,25,-8,-32,15,45][index];const shape=[[0,-95],[-95,75],[110,80]];const p={};['A','B','C'].forEach((ch,i)=>{const q=rotate(shape[i],ang1);p[ch]=[164+q[0],155+q[1]]});['D','E','F'].forEach((ch,i)=>{let q=rotate(shape[i],ang2);if([1,4,7].includes(index))q=[-q[0],q[1]];p[ch]=[541+q[0],155+q[1]]});let mark;if(type==='SSS')mark=[['AB','DE'],['BC','EF'],['AC','DF']];if(type==='SAS')mark=[['AB','DE'],['BC','EF'],['∠ABC','∠DEF']];if(type==='ASA')mark=[['AB','DE'],['∠BAC','∠EDF'],['∠ABC','∠DEF']];const allGood={'AB＝DE':type==='SSS'||type==='SAS'||type==='ASA','BC＝EF':type==='SSS'||type==='SAS','AC＝DF':type==='SSS','∠ABC＝∠DEF':type==='SAS'||type==='ASA','∠BAC＝∠EDF':type==='ASA'};const eq=mark.map(g=>`${g[0]}＝${g[1]}`);let candidates=['AB＝DE','BC＝EF','AC＝DF','∠ABC＝∠DEF','∠BAC＝∠EDF','AB＝DF','BC＝DE','∠ACB＝∠EDF','∠BAC＝∠DEF'];return {kind:'basic',stage,index,type,p,tri:['ABC','DEF'],mark,eq,candidates:candidates.filter(v=>eq.includes(v)||!allGood[v]),givens:'対応する辺・角についた同じ印は、それぞれ等しいことを表します。'};}
-let state={stage:0,index:0,hint:0,feedback:null,answered:false,selection:null,picks:[],slots:{},active:null,tries:0,hintsUsed:0};
+let state={stage:0,index:0,hint:0,feedback:null,answered:false,selection:null,picks:[],slots:{},active:null,tries:0,hintsUsed:0,planPhase:null,planStep:0,planPairs:[]};
 let records={};try{records=JSON.parse(localStorage.getItem('congruence-v3')||'{}')||{}}catch(e){records={}};
 function save(){try{localStorage.setItem('congruence-v3',JSON.stringify(records))}catch(e){}}
 const app=document.getElementById('app');
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function safeScrollTop(){try{window.scrollTo(0,0)}catch(e){}}
-function startStage(n){state={stage:n,index:0,hint:0,feedback:null,answered:false,selection:null,picks:[],slots:{},active:null,tries:0,hintsUsed:0};render();safeScrollTop()}
+function startStage(n){state={stage:n,index:0,hint:0,feedback:null,answered:false,selection:null,picks:[],slots:{},active:null,tries:0,hintsUsed:0,planPhase:n>=3?'reverse':null,planStep:0,planPairs:[]};render();safeScrollTop()}
 function home(){state.stage=0;render();safeScrollTop()}
 function current(){return state.stage<=2?makeBasic(state.stage,state.index):makeProof(state.stage,state.index)}
 function dist(a,b){return Math.hypot(a[0]-b[0],a[1]-b[1])}
@@ -452,8 +514,10 @@ function hintText(q){if(q.kind==='basic'){let a=q.type;if(state.stage===2&&state
  let cur=state.active;if(!cur){return ['どの2つの三角形を比べるかを確かめよう。','条件から直接わかること、図形の性質からわかることを整理しよう。',`今回の合同条件は「${TERMS[q.type]}」です。`]};if(cur.startsWith('eq'))return ['条件として与えられた長さ・角と、共通な辺・対頂角を探そう。','合同条件を成立させるには、どの3組が必要かな？',`必要な3組は ${q.eq.map(x=>x.text).join('、')} です。`];if(cur.startsWith('why'))return ['直前に選んだ等式が、なぜ成り立つのか考えよう。','図の仮定を示す印？ 共通な辺？ それとも図形の性質？',`ここで選んだ等式の理由は「${state.slots['eq'+cur.slice(3)]?.why||'仮定・共通・図形の性質'}」です。`];if(cur==='intro')return ['証明する2つの三角形を探そう。','図の三角形の名前を、頂点の順序を守って読もう。',q.intro];if(cur==='condition')return ['等しい3組の条件に注目しよう。','辺と角の組み合わせは何？',q.condition];if(cur==='congruent')return ['対応する頂点を正しい順番で書こう。','左の三角形の頂点と右の頂点を対応させよう。',q.congruent];if(cur==='link')return ['合同から、何がいえるだろう？','証明したいものは辺と角のどちら？',q.goalSelected[1]];if(cur==='goal')return ['図の下にあるGOALを確認しよう。','合同であることから、対応する部分が等しいといえるよ。',q.goalSelected[0]];return []}
 function hintBox(q){let texts=hintText(q);return `<div class="actionrow"><button type="button" class="btn hint" onclick="showHint()">💡 ヒント ${state.hint}/3 ${state.hint<3?'（次を見る）':'（すべて表示）'}</button></div>${state.hint?`<div class="hintpanel"><strong>ヒント ${state.hint}</strong><p>${esc(texts[state.hint-1])}</p></div>`:''}`}
 function showHint(){if(state.hint<3){state.hint++;state.hintsUsed++;state.feedback=null;render()}}
+function strategyHintText(q){const k=strategyStepKind(q);if(k==='target')return ['証明したい辺・角は、合同な図形の対応する部分かな？','対応する部分が等しいといいたいとき、まず何が示せればよいかな？','2つの三角形が合同だと示す作戦を考えよう。'];if(k==='condition')return ['辺と角の印を数えてみよう。','等しい3組の「辺と角の組み合わせ」に注目しよう。',`今回は「${TERMS[q.type]}」を使う作戦だよ。`];return ['合同条件を満たす3組を探そう。','図の印のほか、共通な辺・対頂角・錯角も使えないかな？','必要な3組は、図に示された情報と図形の性質から確認できるよ。'];}
+
 function markRecord(){let key=`${state.stage}-${state.index}`;let prev=records[key];let rank=state.tries===0&&state.hintsUsed===0?3:state.hintsUsed===0?2:1;records[key]=Math.max(prev||0,rank);save()}
-function nextQuestion(){if(state.index===9){renderFinished();return}state.index++;state.hint=0;state.feedback=null;state.answered=false;state.selection=null;state.picks=[];state.slots={};state.active=null;state.tries=0;state.hintsUsed=0;render();safeScrollTop()}
+function nextQuestion(){if(state.index===9){renderFinished();return}state.index++;state.hint=0;state.feedback=null;state.answered=false;state.selection=null;state.picks=[];state.slots={};state.active=null;state.tries=0;state.hintsUsed=0;state.planPhase=state.stage>=3?'reverse':null;state.planStep=0;state.planPairs=[];render();safeScrollTop()}
 function choiceHTML(value,label,selected,cls=''){return `<button type="button" class="option ${cls} ${selected?'selected':''}" data-value="${esc(value)}" onclick="selectOption(this)">${esc(label)}</button>`}
 function selectOption(btn){if(state.answered)return;const v=btn.dataset.value;state.selection=v;state.feedback=null;checkCondition()}
 function checkCondition(){let q=current();if(state.selection===q.type){state.answered=true;state.feedback={kind:'success',text:`正解！ ${TERMS[q.type]} ${state.stage===2?'続いて、図に印が付いた3組の辺・角を選ぼう。':''}`};if(state.stage===1)markRecord();else {state.hint=0;state.feedback=null}}else{state.tries++;state.feedback={kind:'error',text:'もう一度考えてみよう。図の印の「数」と「位置」を確認しよう。'}}render()}
@@ -505,7 +569,7 @@ function chooseProof(value){const q=current(),keys=proofKeys(q),key=initialActiv
  else {state.tries++;let message='この箇所に入れると、根拠や対応関係が合いません。図の印をもう一度確認しよう。';if(key==='congruent')message=value.includes('＝')?'三角形が合同であることは「≡」で表します。「＝」は辺の長さや角の大きさの等しさに使います。':'三角形の対応する頂点の順序を、図で確かめよう。';state.feedback={kind:'error',text:message}}render()}
 function undoProof(){const keys=proofKeys(current()),filled=keys.filter(k=>state.slots[k]);if(!filled.length)return;let last=filled[filled.length-1];if(state.active&&state.slots[state.active])last=state.active;if(last.startsWith('eq')&&state.slots['why'+last.slice(2)])delete state.slots['why'+last.slice(2)];delete state.slots[last];state.active=last;state.answered=false;state.feedback={kind:'info',text:'直前の項目を戻しました。'};render()}
 function proofMath(s){return esc(s).replace(/([△∠])/g,'<span class="math-symbol">$1</span>').replace(/([≡＝])/g,'<span class="math-operator">$1</span>')}
-function proofFigureBox(q){const goal=state.stage===4?`<div class="proof-goal"><b>GOAL</b> ${proofMath(q.goalSelected[0])}</div>`:'<div class="proof-goal"><b>MISSION</b> 2つの三角形の合同を証明しよう</div>';return `<div class="question-head"><h2>STAGE ${state.stage}　${STAGE_NAMES[state.stage]}</h2><span class="pill">${state.index+1} / 10</span></div><div class="progress"><div style="width:${(state.index+1)*10}%"></div></div><div class="figure">${diagram(q)}</div>${goal}${q.key==='para'?'<div class="diagram-key">同じ矢印のついた辺は平行</div>':''}${(state.feedback?.kind==='error'||state.hint)?`<div class="proof-figure-notice" role="status"><span>${state.feedback?.kind==='error'?'⚠️ '+esc(state.feedback.text):'💡 '+esc(hintText(q)[state.hint-1]||'')}</span><button type="button" aria-label="メッセージを閉じる" onclick="this.closest('.proof-figure-notice').remove()">×</button></div>`:''}`}
+function proofFigureBox(q){const goal=state.stage===4?`<div class="proof-goal"><b>GOAL</b> ${proofMath(q.goalSelected[0])}</div>`:`<div class="proof-goal"><b>GOAL</b> ${proofMath(q.congruent)}</div>`;return `<div class="question-head"><h2>STAGE ${state.stage}　${STAGE_NAMES[state.stage]}</h2><span class="pill">${state.index+1} / 10</span></div><div class="progress"><div style="width:${(state.index+1)*10}%"></div></div><div class="figure">${diagram(q)}</div>${goal}${q.key==='para'?'<div class="diagram-key">同じ矢印のついた辺は平行</div>':''}${(state.feedback?.kind==='error'||state.hint)?`<div class="proof-figure-notice" role="status"><span>${state.feedback?.kind==='error'?'⚠️ '+esc(state.feedback.text):'💡 '+esc((state.planPhase==='reverse'?strategyHintText(q):hintText(q))[state.hint-1]||'')}</span><button type="button" aria-label="メッセージを閉じる" onclick="this.closest('.proof-figure-notice').remove()">×</button></div>`:''}`}
 // Learning interactions have 9/11 slots, but the finished proof has 5/6 written lines.
 // Pair each statement with its reason instead of showing them as separate proof lines.
 function proofNotebookGroups(q){
@@ -553,13 +617,82 @@ function openProofNotebook(){
 }
 function closeProofNotebook(){document.getElementById('proofDrawer')?.remove()}
 function focusProofSlot(key){closeProofNotebook();activate(key)}
+// Backward reasoning: GOAL → triangle congruence → congruence criterion → three facts.
+// The reasoning phase does not pre-fill the proof. Students reconstruct it forwards afterwards.
+function strategyStepKind(q){if(q.stage===4&&state.planStep===0)return 'target';if(state.planStep===(q.stage===4?1:0))return 'condition';return 'facts'}
+function strategyProgress(q){return `${state.planStep+1} / ${q.stage===4?3:2}`}
+function strategyOptions(q,kind){
+ if(kind==='target')return proofOptions(q,'congruent').map(v=>({value:v,label:v}));
+ if(kind==='condition')return ['SSS','SAS','ASA'].map(v=>({value:v,label:TERMS[v]}));
+ const all=[...q.eq.map(e=>e.text),...wrongEquations(q)].filter((v,i,a)=>a.indexOf(v)===i);
+ return all.map(v=>({value:v,label:v}));
+}
+function strategyAdvance(){state.feedback=null;state.hint=0;state.planStep++;if(state.planStep>=(state.stage===4?3:2))state.planPhase='ready';render()}
+function strategyChoose(value){
+ if(state.planPhase!=='reverse')return;
+ const q=current(),kind=strategyStepKind(q);
+ if(kind==='facts')return strategyToggleFact(value);
+ const good=kind==='target'?value===q.congruent:value===q.type;
+ if(good){strategyAdvance();return}
+ state.tries++;
+ state.feedback={kind:'error',text:kind==='target'?'ゴールの辺・角が「対応する部分」になる三角形の順序を確認しよう。三角形の合同は ≡ を使います。':'辺と角の印の数・位置を図で見直そう。'};
+ render();
+}
+function strategyToggleFact(v){
+ if(state.planPhase!=='reverse'||strategyStepKind(current())!=='facts')return;
+ const ix=state.planPairs.indexOf(v);
+ if(ix>=0)state.planPairs.splice(ix,1);
+ else if(state.planPairs.length<3)state.planPairs.push(v);
+ else {state.feedback={kind:'info',text:'3組まで選べます。変更するときは選択済みの式をもう一度押してね。'};render();return}
+ state.feedback=null;render();
+}
+function strategyConfirmFacts(){
+ if(state.planPhase!=='reverse'||strategyStepKind(current())!=='facts'||state.planPairs.length!==3)return;
+ const q=current();
+ if(q.eq.every(e=>state.planPairs.includes(e.text))){strategyAdvance();return}
+ state.tries++;state.feedback={kind:'error',text:'その3組で合同条件がそろうかな？ 図の印と、共通な辺・対頂角・錯角をもう一度確かめよう。'};render();
+}
+function strategyBack(){
+ if(state.planPhase==='ready'){state.planPhase='reverse';state.planStep=state.stage===4?2:1;state.feedback=null;render();return}
+ if(state.planPhase!=='reverse'||state.planStep<=0)return;
+ state.planStep--;state.hint=0;state.feedback=null;render();
+}
+function strategyStartProof(){if(state.planPhase!=='ready')return;state.planPhase='forward';state.hint=0;state.feedback=null;state.active=null;render()}
+function strategyTrail(q){
+ const goal=q.stage===4?q.goalSelected[0]:q.congruent;
+ const items=[goal];if(q.stage===4)items.push(q.congruent);
+ items.push(TERMS[q.type].replace(/。$/,''));items.push(q.eq.map(e=>e.text).join(' ／ '));
+ return `<div class="strategy-trail">${items.map((label,i)=>`<div class="strategy-trail-item">${i===0?'<small>GOAL</small>':''}${proofMath(label)}</div>${i<items.length-1?'<div class="strategy-trail-arrow">そのためには？　↓</div>':''}`).join('')}</div>`;
+}
+function strategyControls(q){
+ const phase=state.planPhase;
+ if(phase==='ready')return `<div class="strategy-top"><span class="strategy-phase">思考 ｜ ゴールから逆算</span><span class="strategy-count">作戦完成</span></div><div class="strategy-question"><div class="strategy-question-kicker">THINK BACKWARD</div><h3>逆算の作戦ができた！</h3><p>何を示せばゴールに届くか、道筋が見えました。</p></div><div class="strategy-ready-scroll">${strategyTrail(q)}</div><div class="strategy-action"><p><b>思考はゴールから。</b>でも、<b>証明を書くのはスタートから。</b><br>作戦を閉じて、自分の力で書いてみよう。</p><button type="button" class="btn teal strategy-go" onclick="strategyStartProof()">証明を前から書く →</button><button type="button" class="strategy-back-link" onclick="strategyBack()">作戦を見直す</button></div>`;
+ const kind=strategyStepKind(q),facts=kind==='facts';
+ const opts=strategyOptions(q,kind);
+ const question=kind==='target'?'この辺・角の等しさを示すには？':kind==='condition'?'2つの三角形の合同を示すには？':'その合同条件を使うには、どの3組が必要？';
+ const description=kind==='target'?'対応する部分が等しいといえる、三角形の合同を選ぼう。':kind==='condition'?'図をよく見て、使えそうな合同条件を選ぼう。':'図の印と図形の性質から、必要な3組を選ぼう。';
+ let html=`<div class="strategy-top"><span class="strategy-phase">PHASE 1　思考 ｜ 逆算する</span><span class="strategy-count">${strategyProgress(q)}</span></div><div class="strategy-question"><div class="strategy-question-kicker">合言葉：そのためには？</div><h3>${question}</h3><p>${description}</p></div>`;
+ if(facts){html+=`<div class="strategy-chosen"><span>選んだ3組</span><div class="strategy-chips">${[0,1,2].map((i)=>`<span>${state.planPairs[i]?proofMath(state.planPairs[i]):'—'}</span>`).join('')}</div></div>`}
+ html+=`<div class="proof-answer-scroll strategy-answers" id="strategyAnswers"><div class="options ${kind==='condition'?'choice-list':'choice-grid'}">${opts.map((o,i)=>`<button type="button" class="option ${facts&&state.planPairs.includes(o.value)?'strategy-selected':''}" onclick="strategyChoose(decodeURIComponent('${encodeURIComponent(o.value)}'))" aria-pressed="${facts&&state.planPairs.includes(o.value)?'true':'false'}"><span class="choice-letter">${facts&&state.planPairs.includes(o.value)?'✓':['A','B','C','D','E','F','G','H','I'][i]}</span><span class="choice-math">${proofMath(o.label)}</span></button>`).join('')}</div></div>`;
+ html+=`<div class="proof-actions strategy-actions">${feedback()}<div class="proof-actions-row">${facts?`<button type="button" class="btn teal" onclick="strategyConfirmFacts()" ${state.planPairs.length!==3?'disabled':''}>3組を確認する (${state.planPairs.length}/3)</button>`:state.planStep>0?'<button type="button" class="btn subtle" onclick="strategyBack()">← 1つ戻る</button>':'<span class="strategy-quiet">ゴールから考えよう</span>'}<button type="button" class="btn hint" onclick="showHint()">ヒント ${state.hint}/3</button></div>${facts&&state.planStep>0?'<button type="button" class="strategy-back-link" onclick="strategyBack()">← 合同条件を考え直す</button>':''}</div>`;
+ return html;
+}
+function openStrategyMap(){
+ if(state.planPhase!=='forward'||state.answered!=='complete')return;
+ const q=current();document.getElementById('proofDrawer')?.remove();
+ const wrap=document.createElement('div');wrap.id='proofDrawer';wrap.className='proof-drawer';wrap.setAttribute('role','dialog');wrap.setAttribute('aria-modal','true');wrap.setAttribute('aria-label','逆算と証明の作戦マップ');
+ wrap.innerHTML=`<section class="proof-drawer-card"><div class="proof-drawer-top"><b>逆算と証明の2つの順番</b><button type="button" onclick="closeProofNotebook()">閉じる ×</button></div><div class="proof-drawer-content strategy-map"><h3>① 思考：ゴールから「そのためには？」</h3>${strategyTrail(q)}<h3>② 実行：根拠からゴールへ</h3><div class="strategy-forward-list">${q.eq.map(e=>`<div>${proofMath(e.why+'、'+e.text)}</div>`).join('')}<div>${proofMath(q.condition+q.congruent)}</div>${q.stage===4?`<div>${proofMath(q.goalSelected[1]+'、'+q.goalSelected[0])}</div>`:''}</div><p>考える向きと、証明を書く向きは逆。だからゴールを意識すると、必要な根拠が見えてくる。</p></div></section>`;
+ wrap.addEventListener('click',e=>{if(e.target===wrap)closeProofNotebook()});document.body.appendChild(wrap);wrap.querySelector('.proof-drawer-top button').focus();
+}
+
 function proofControls(q){
+ if(state.planPhase==='reverse'||state.planPhase==='ready')return strategyControls(q);
  const keys=proofKeys(q),done=keys.filter(k=>state.slots[k]).length,completed=state.answered==='complete';
  const mode=state.index<3?'ガイド':state.index<6?'セミガイド':'フリー';
  const active=completed?null:initialActive(q);if(active)state.active=active;
- let html=`<div class="proof-summary"><span class="smallnote"><b>${mode}モード</b> ・ ${done}/${keys.length} 完成</span><button class="proof-notebook" type="button" onclick="openProofNotebook()">📘 証明全文を見る</button></div>`;
+ let html=`<div class="proof-summary"><span class="smallnote"><b>PHASE 2｜証明を書く</b>　${mode} ・ ${done}/${keys.length}</span><button class="proof-notebook" type="button" onclick="openProofNotebook()">証明ノート</button></div>`;
  if(completed){
-  html+=`<div class="proof-complete"><div style="font-size:35px">✅</div><h3>証明完成！</h3><p>完成した証明を確認してから次へ進もう。</p><button type="button" class="btn subtle" onclick="openProofNotebook()">📘 完成した証明を読む</button><button type="button" class="btn teal nextbtn" onclick="nextQuestion()">${state.index===9?'ステージ結果を見る':'次の問題へ →'}</button></div>`;
+  html+=`<div class="proof-complete"><div style="font-size:35px">✅</div><h3>証明完成！</h3><p>完成した証明を確認してから次へ進もう。</p><button type="button" class="btn subtle" onclick="openProofNotebook()">完成した証明を読む</button><button type="button" class="btn subtle" onclick="openStrategyMap()">逆算と証明を比べる</button><button type="button" class="btn teal nextbtn" onclick="nextQuestion()">${state.index===9?'ステージ結果を見る':'次の問題へ →'}</button></div>`;
   return html;
  }
  if(!active)return html+feedback();
@@ -575,11 +708,11 @@ function proofControls(q){
  return html;
 }
 
-function render(){closeProofNotebook();const playing=Boolean(state.stage);document.body.classList.toggle('play-mode',playing);document.body.classList.toggle('proof-mode',state.stage>=3);document.body.classList.toggle('home-mode',!playing);if(!playing){renderHome();return}const q=current();if(state.stage>=3){app.innerHTML=`<div class="proof-workspace"><section class="panel proof-figure">${proofFigureBox(q)}</section><section class="panel proof-control" id="controlPane">${proofControls(q)}</section></div>`;return}app.innerHTML=`<div class="layout"><section class="panel diagram-panel">${stageBox(q)}</section><section class="panel basic-control" id="controlPane">${basicControls(q)}</section></div>`}
+function render(){closeProofNotebook();const playing=Boolean(state.stage);document.body.classList.toggle('play-mode',playing);document.body.classList.toggle('proof-mode',state.stage>=3);document.body.classList.toggle('home-mode',!playing);document.body.classList.toggle('strategy-ready',state.planPhase==='ready'&&state.stage>=3);if(!playing){renderHome();return}const q=current();if(state.stage>=3){app.innerHTML=`<div class="proof-workspace"><section class="panel proof-figure">${proofFigureBox(q)}</section><section class="panel proof-control" id="controlPane">${proofControls(q)}</section></div>`;return}app.innerHTML=`<div class="layout"><section class="panel diagram-panel">${stageBox(q)}</section><section class="panel basic-control" id="controlPane">${basicControls(q)}</section></div>`}
 function renderHome(){
  document.body.classList.remove('play-mode','proof-mode');document.body.classList.add('home-mode');
  const done=n=>Array.from({length:10},(_,i)=>records[`${n}-${i}`]?1:0).reduce((a,b)=>a+b,0);
- const subs=['','図から合同条件を選ぶ','辺と角の対応を確かめる','根拠を順につなげる','合同を使って導く'];
+ const subs=['','図から合同条件を選ぶ','辺と角の対応を確かめる','逆算してから、前から書く','ゴールから逆算し、合同で導く'];
  const total=[1,2,3,4].reduce((sum,n)=>sum+done(n),0);
  app.innerHTML=`<section class="home-intro"><div class="home-intro-copy"><span class="eyebrow">4 CHAPTERS · 40 QUESTIONS</span><h2>図から考える。<br>筋道をつくる。</h2><p>図形の発見から、根拠のある証明まで。</p></div><div class="home-total">学習の記録<strong>${total}<small> / 40</small></strong>問 クリア</div></section>
  <div class="path-heading"><h3>学習の4章</h3><span>好きなステージから始められます</span></div>

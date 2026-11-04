@@ -449,6 +449,37 @@ header{background:var(--board);color:var(--chalk);border:1px solid #34594b;borde
 .proof-answer-scroll .equation-groups .options.choice-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:800px){.equation-groups{gap:6px}.equation-group{gap:3px}.equation-group-title{font-size:10px;line-height:1.25}.equation-group .options.pair-grid{gap:5px}}
 @media(max-height:710px) and (max-width:800px){.equation-groups{gap:4px}.equation-group-title{font-size:9px}.equation-group{gap:2px}}
+
+/* GOAL is the task, not an incidental caption: show it BEFORE the figure. */
+body.play-mode .proof-figure .proof-goal{
+ display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;
+ gap:12px;padding:12px 15px;margin:2px 0 9px;
+ min-width:0;background:#f4f1df;border:1px solid #d7ddca;border-left:5px solid #205d4c;
+ border-radius:5px;flex:0 0 auto;line-height:1.3;
+}
+body.play-mode .proof-figure .proof-goal-label{
+ font:900 12px/1.15 ui-monospace,Menlo,Consolas,monospace;color:#245b47;
+ letter-spacing:.075em;white-space:nowrap;
+}
+body.play-mode .proof-figure .proof-goal-main{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;min-width:0}
+body.play-mode .proof-figure .proof-goal-equation{
+ font-size:clamp(21px,2.2vw,29px);font-weight:900;color:#183b30;
+ line-height:1.32;letter-spacing:.01em;overflow-wrap:anywhere;
+}
+body.play-mode .proof-figure .proof-goal-equation .math-symbol,
+body.play-mode .proof-figure .proof-goal-equation .math-operator{color:inherit}
+body.play-mode .proof-figure .proof-goal-caption{font-size:12px;font-weight:750;color:#4d6053;white-space:nowrap}
+@media(max-width:800px){
+ body.play-mode .proof-figure .proof-goal{gap:8px;padding:7px 9px;margin:3px 0 5px;border-left-width:4px}
+ body.play-mode .proof-figure .proof-goal-label{font-size:10px}
+ body.play-mode .proof-figure .proof-goal-main{gap:3px 6px}
+ body.play-mode .proof-figure .proof-goal-equation{font-size:clamp(17px,4.75vw,22px)}
+ body.play-mode .proof-figure .proof-goal-caption{font-size:10px}
+}
+@media(max-width:800px) and (max-height:670px){
+ body.play-mode .proof-figure .proof-goal{padding:5px 8px;margin:2px 0 3px}
+ body.play-mode .proof-figure .proof-goal-equation{font-size:clamp(16px,4.6vw,20px)}
+}
 </style></head><body><div class="shell"><header><div class="brand"><div class="logo" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M7 38L23 8L42 38Z M23 8L23 38" stroke="currentColor" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 38H42" stroke="currentColor" stroke-width="2.7"/></svg></div><div class="brand-label"><div class="brand-kicker">GEOMETRY LAB · PROOF NOTE</div><h1><span>三角形の合同</span><strong>証明マスター</strong></h1></div></div><div class="topactions"><button id="homeBtn" class="tinybtn" type="button">ステージ選択</button><button id="resetBtn" class="tinybtn" type="button">記録をリセット</button></div></header><div id="bootAlert" style="background:#fff2d9;border:2px solid #e4af39;color:#604416;border-radius:13px;padding:16px;margin:10px 0;font-size:14px"><strong>この画面でゲームが動かない場合</strong><div>ChatGPTなどのファイルプレビューは、ゲームを動かすJavaScriptを停止することがあります。HTMLを保存してWebブラウザで開くか、GitHub PagesなどのHTTPSサイトに公開して利用してください。</div></div><main id="app"><div class="hero"><h2>合同条件から、証明が書ける力へ。</h2><p>4ステージ・全40問。正しい表現で、証明を1行ずつ完成させよう。</p></div><div class="stages"><button class="stage" onclick="startStage(1)"><span class="num">01</span><strong>合同条件を見抜け！</strong><small>図を見て3つの合同条件から選ぶ</small></button><button class="stage" onclick="startStage(2)"><span class="num">02</span><strong>対応する辺と角を探せ！</strong><small>合同条件と等しい3組を選ぶ</small></button><button class="stage" onclick="startStage(3)"><span class="num">03</span><strong>証明を組み立てろ！</strong><small>「〜において」から合同まで</small></button><button class="stage" onclick="startStage(4)"><span class="num">04</span><strong>合同を使って証明せよ！</strong><small>合同を使って辺・角の等しさを示す</small></button></div><div class="rules"><strong>正式な合同条件</strong><br>① 3組の辺がそれぞれ等しい。<br>② 2組の辺とその間の角がそれぞれ等しい。<br>③ 1組の辺とその両端の角がそれぞれ等しい。<br><br>ヒントは3段階。間違えても何度でも挑戦できます。</div></main><div class="footer">GEOMETRY NOTE /  図形の印と図形の性質から、根拠を考える。</div></div>
 <script>
 'use strict';
@@ -519,16 +550,11 @@ function finalBank(q){
   let wrong=e.why==='仮定より'?'共通な辺だから':'仮定より';
   return [`${wrong}、${e.text}`];
  });
- const swapEq=q.eq.map(e=>{
-  const t=e.text;
-  if(t.includes('∠'))return '仮定より、'+t.replace('＝','≡');
-  return '仮定より、'+t.replace('＝','≡');
- });
  const tri=q.tri;
  const falseCong=[q.congruent.replace('≡','＝'),`△${tri[0]}≡△${[...tri[1]].reverse().join('')}`,
   `△${tri[0]}＝△${tri[1]}`];
  const options=[...actual,
-  ...wrongFacts,...swapEq,
+  ...wrongFacts,
   ...Object.values(TERMS).map(t=>t.replace(/。$/,'ので、')),
   ...falseCong,
   q.goalSelected[1].includes('辺')?'合同な図形の対応する角はそれぞれ等しいから、':'合同な図形の対応する辺はそれぞれ等しいから、',
@@ -797,7 +823,7 @@ function chooseProof(value){const q=current(),keys=proofKeys(q),key=initialActiv
  else {state.tries++;let message='この箇所に入れると、根拠や対応関係が合いません。図の印をもう一度確認しよう。';if(key==='congruent')message=value.includes('＝')?'三角形が合同であることは「≡」で表します。「＝」は辺の長さや角の大きさの等しさに使います。':'三角形の対応する頂点の順序を、図で確かめよう。';state.feedback={kind:'error',text:message}}render()}
 function undoProof(){const keys=proofKeys(current()),filled=keys.filter(k=>state.slots[k]);if(!filled.length)return;let last=filled[filled.length-1];if(state.active&&state.slots[state.active])last=state.active;if(last.startsWith('eq')&&state.slots['why'+last.slice(2)])delete state.slots['why'+last.slice(2)];delete state.slots[last];state.active=last;state.answered=false;state.feedback={kind:'info',text:'直前の項目を戻しました。'};render()}
 function proofMath(s){return esc(s).replace(/([△∠])/g,'<span class="math-symbol">$1</span>').replace(/([≡＝])/g,'<span class="math-operator">$1</span>')}
-function proofFigureBox(q){const goal=state.stage>=4?`<div class="proof-goal"><b>GOAL</b> ${proofMath(q.goalSelected[0])}</div>`:`<div class="proof-goal"><b>GOAL</b> ${proofMath(q.congruent)}</div>`;return `<div class="question-head"><h2>STAGE ${state.stage}　${STAGE_NAMES[state.stage]}</h2><span class="pill">${state.index+1} / 10</span></div><div class="progress"><div style="width:${(state.index+1)*10}%"></div></div><div class="figure">${diagram(q)}</div>${goal}${q.key==='para'?'<div class="diagram-key">同じ矢印のついた辺は平行</div>':''}${state.stage!==5&&(state.feedback?.kind==='error'||state.hint)?`<div class="proof-figure-notice" role="status"><span>${state.feedback?.kind==='error'?'⚠️ '+esc(state.feedback.text):'💡 '+esc((state.planPhase==='reverse'?strategyHintText(q):hintText(q))[state.hint-1]||'')}</span><button type="button" aria-label="メッセージを閉じる" onclick="this.closest('.proof-figure-notice').remove()">×</button></div>`:''}`}
+function proofFigureBox(q){const target=state.stage>=4?q.goalSelected[0]:q.congruent;const goal=`<div class="proof-goal" role="note" aria-label="証明すること"><span class="proof-goal-label">GOAL</span><div class="proof-goal-main"><strong class="proof-goal-equation">${proofMath(target)}</strong><span class="proof-goal-caption">を証明しよう</span></div></div>`;return `<div class="question-head"><h2>STAGE ${state.stage}　${STAGE_NAMES[state.stage]}</h2><span class="pill">${state.index+1} / 10</span></div><div class="progress"><div style="width:${(state.index+1)*10}%"></div></div>${goal}<div class="figure">${diagram(q)}</div>${q.key==='para'?'<div class="diagram-key">同じ矢印のついた辺は平行</div>':''}${state.stage!==5&&(state.feedback?.kind==='error'||state.hint)?`<div class="proof-figure-notice" role="status"><span>${state.feedback?.kind==='error'?'⚠️ '+esc(state.feedback.text):'💡 '+esc((state.planPhase==='reverse'?strategyHintText(q):hintText(q))[state.hint-1]||'')}</span><button type="button" aria-label="メッセージを閉じる" onclick="this.closest('.proof-figure-notice').remove()">×</button></div>`:''}`}
 // Learning interactions have 9/11 slots, but the finished proof has 5/6 written lines.
 // Pair each statement with its reason instead of showing them as separate proof lines.
 function proofNotebookGroups(q){

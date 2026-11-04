@@ -348,7 +348,7 @@ function currentSpec(){let t=task(),k=stepKind();if(k==='plan')return{title:'GOA
    hint:'仮定・共通な辺・対頂角・平行線の性質から、使える理由を探そう。'};
  }
  if(k==='condition')return{title:'使える合同条件は？',type:'合同条件',choices:CONDITIONS,correct:[CONDITIONS[t.kind]],hint:'集めた等しさは「辺」が何組、「角」が何組かな？'};
- if(k==='cong')return{title:'合同を正しく表す式は？',type:'合同の式',choices:[t.cong,...t.congWrong],correct:[t.cong],hint:'頂点の対応順を守ろう。「≡」は合同を表す記号。'};
+ if(k==='cong')return{title:'合同を正しく表す式は？',type:'合同の式',choices:[t.cong,...t.congWrong],correct:[t.cong],hint:'合同な三角形どうしは「≡」で表す。辺・角の等しさと区別し、頂点の対応順を確かめよう。'};
  if(k==='reason'){let correct=`合同な図形の対応する${t.reason}はそれぞれ等しいので、`,other=t.reason==='辺'?'角':'辺';return{title:'合同から結論を導く理由は？',type:'合同の利用',choices:[correct,`合同な図形の対応する${other}はそれぞれ等しいので、`,'仮定より、'],correct:[correct],hint:'結論で示すのは「辺」の等しさ？「角」の等しさ？'};}
  return{title:'最後に証明する式は？',type:'結論',choices:[t.result,...t.resultWrong],correct:[t.result],hint:'図の下にある目標を確認しよう。'};
 }
@@ -378,6 +378,8 @@ function orderGameChoices(pool,k){
  return pool;
 }
 function makeChoices(spec){let pool=spec.choices,k=stepKind();
+ // 辺・角の等しさでは「≡」をひっかけにしない。≡の判別は三角形の合同の関門だけ。
+ if(k==='facts'||k==='result')pool=pool.filter(v=>v.includes('△')||!v.includes('≡'));
  if(k==='facts'){
   let good=pool.filter(x=>spec.correct.includes(x)),bad=pool.filter(x=>!spec.correct.includes(x));
   const count=Math.min(2,good.length);
@@ -396,12 +398,13 @@ function updateUI(){if(state.phase==='ready')return;refreshActs();let t=task();$
 function setMessage(str){$('message').textContent=str}
 function wrongFeedback(k){
  if(k==='plan')return '結論で示したい辺や角を含む2つの三角形を探そう。';
- if(k==='tri'||k==='cong')return '対応する頂点の順番と△・≡を確認しよう。';
- if(k==='facts')return '同じ印の辺・角、共通な辺、平行線の印に注目。';
+ if(k==='tri')return '2つの三角形の頂点の対応順を、図で確認しよう。';
+ if(k==='cong')return '三角形どうしの合同は「≡」。頂点の順番も確かめよう。';
+ if(k==='facts')return '同じ印の辺・角と対応関係に注目。記号の違いではなく根拠を考えよう。';
  if(k==='factWhy')return '「仮定」「共通」「対頂角」「錯角」のどれからいえるか考えよう。';
  if(k==='condition')return '辺と角の組数、角の位置を図で確認しよう。';
  if(k==='reason')return '証明したい結論が辺なのか角なのかを確認。';
- return '最初に示すべき結論と、対応する頂点の順を確認。';
+ return 'GOALで示したい辺の長さ・角の大きさと対応関係を確認しよう。';
 }
 function markDiagram(){let t=task();$('given').textContent='';$('goal').innerHTML=`<span class="goal-kicker">GOAL</span><strong class="goal-content">${formatMath(t.goal)}</strong>`;drawFigure(state.highlight)}
 function showStageMenu(){

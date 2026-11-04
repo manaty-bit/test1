@@ -225,20 +225,134 @@ button{font:inherit;cursor:pointer;touch-action:manipulation}button:focus-visibl
  .race-row .mine{height:100%}
 }
 
+
+/* ===========================================================
+   PORTRAIT CHASE — gameplay is the second full-height panel.
+   Figure / GOAL / choices are one connected column on the left.
+   The canvas has a matching pixel resolution and is never squashed.
+   =========================================================== */
+.chase-indicator{background:#152d35e8;color:#dcf7ce;border:1px solid #79a28b;
+ padding:4px 7px;font:800 10px/1.2 ui-monospace,monospace;white-space:nowrap;letter-spacing:.005em}
+.chase-indicator.danger{color:#ffd0bd;border-color:#e8a08a;background:#542b2ce8}
+.mine-top{align-items:center;justify-content:space-between;z-index:2;gap:5px;flex-wrap:wrap}
+.mine-top .speech{display:none}
+.race-row{isolation:isolate}
+.race-row .mine canvas{display:block;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges}
+.race-row .mine-bottom{z-index:1;bottom:6px}
+.race-row .lane-guide{max-width:unset}
+.race-row .lane-guide span{font-size:clamp(12px,1.25vw,17px)}
+@media(min-width:760px){
+ html,body{overflow:hidden}
+ .app{display:grid;width:100%;max-width:1600px;height:100dvh;overflow:hidden;
+   padding:clamp(8px,1.1vw,15px) clamp(10px,1.55vw,23px);
+   gap:clamp(6px,.82vw,12px);
+   grid-template-columns:minmax(0,1.1fr) minmax(290px,.9fr);
+   grid-template-rows:clamp(34px,4.5dvh,46px) clamp(43px,5.9dvh,56px)
+       clamp(23px,3dvh,30px) minmax(0,.98fr) minmax(0,1.02fr) 30px;
+   align-items:stretch}
+ .top{order:unset;grid-column:1/-1;grid-row:1;height:auto;min-height:0;padding:0 4px}
+ .status{order:unset;grid-column:1/-1;grid-row:2;min-height:0;height:100%;padding:5px 12px}
+ .act-track{order:unset;grid-column:1/-1;grid-row:3;height:100%;min-height:0;gap:7px}
+ .diagram{order:unset;grid-column:1;grid-row:4;min-height:0;display:grid;grid-template-rows:32px minmax(0,1fr) auto;align-self:stretch;padding:2px}
+ .diagram-top{min-height:0;padding:4px 9px 0}
+ .diagram-top strong{font-size:clamp(12px,1.2vw,15px)}
+ .diagram .figure{height:100%;min-height:0;max-height:none;width:100%;padding:3px 6px 0;align-self:stretch}
+ .diagram-note{min-height:64px;padding:9px 10px;gap:8px;align-items:center}
+ .goal-kicker{font-size:12px;padding:7px 9px}
+ .goal-content{font-size:clamp(21px,2.03vw,29px);font-weight:900;line-height:1.3}
+ .quiz{order:unset;grid-column:1;grid-row:5;min-height:0;align-self:stretch;display:flex;flex-direction:column;gap:clamp(5px,.85dvh,10px);
+  padding:clamp(9px,1.12vw,15px);overflow:hidden}
+ .question{align-items:baseline;gap:10px;flex:0 0 auto}
+ .question h2{font-size:clamp(15px,1.55vw,22px);line-height:1.4}
+ .question small{font-size:11px}
+ .answers{display:grid;flex:1 1 auto;min-height:0;align-content:center;gap:clamp(5px,.85dvh,10px)}
+ .answer{min-height:clamp(42px,6dvh,62px);padding:7px 12px;font-size:clamp(14px,1.3vw,18px);line-height:1.4;gap:10px}
+ .answer b{width:26px;height:26px;flex-basis:26px;font-size:13px}
+ .minirow{gap:8px;flex:0 0 auto}
+ .feedback{font-size:clamp(10px,1vw,13px)}
+ .hint{font-size:11px;padding:7px 10px}
+ .race-row{order:unset;grid-column:2;grid-row:4/6;display:flex;flex-direction:column;position:relative;
+  height:100%;max-height:none;min-height:0;gap:6px}
+ .race-row .mine{flex:1 1 auto;position:relative;width:100%;min-width:0;height:100%;max-height:none;min-height:0;
+  border:3px solid #947351;box-shadow:inset 0 0 0 2px #2c2320,2px 2px 0 #080c13}
+ .race-row .mine-top .speech{display:none}
+ .mole-guide{display:flex;flex-direction:row;align-items:center;gap:10px;flex:0 0 auto;min-height:38px;
+  justify-content:space-between;padding:7px 12px;border:1px solid #74928b;background:#1c3442;min-width:0}
+ .mole-guide .mole-guide-heading{font-size:11px;white-space:nowrap;color:#edcf8f}
+ .mole-guide strong{flex:1;min-width:0;text-align:right;line-height:1.3;font-size:clamp(11px,1vw,14px)}
+ .mole-guide small{display:none}
+ .footer{order:unset;grid-column:1/-1;grid-row:6;align-self:center;min-height:0;flex:none}
+ .footer small{font-size:11px}.footer button{padding:5px 11px;font-size:11px}
+ .overlay.review-mode{top:0!important;bottom:0;align-items:center;justify-content:center;background:#101b29eF;padding:12px;overflow:auto}
+ .review-mode .modal{height:min(89dvh,790px);max-height:92dvh;min-height:0;overflow:auto;width:min(850px,100%);padding:15px 20px}
+ .review-mode .modal.stage-modal{height:auto;max-height:92dvh}
+}
+@media(min-width:760px) and (max-width:1000px){
+ .app{grid-template-columns:minmax(0,1.12fr) minmax(260px,.88fr);grid-template-rows:34px 45px 23px minmax(0,.94fr) minmax(0,1.06fr) 27px}
+ .goal-content{font-size:clamp(19px,2.35vw,24px)}
+ .diagram-note{min-height:57px;padding:6px 8px}
+ .quiz{padding:8px 10px}.question h2{font-size:clamp(14px,1.75vw,17px)}
+ .answers{gap:5px}.answer{font-size:clamp(12px,1.6vw,15px);padding:5px 8px;min-height:38px}
+ .mole-guide{min-height:32px;padding:5px 8px}
+}
+@media(min-width:760px) and (max-height:690px){
+ .app{gap:5px;padding-top:6px;padding-bottom:6px;grid-template-rows:32px 43px 22px minmax(0,.92fr) minmax(0,1.08fr) 25px}
+ .diagram{grid-template-rows:25px minmax(0,1fr) auto}
+ .diagram-note{min-height:46px;padding:4px 8px}
+ .goal-content{font-size:clamp(18px,1.75vw,24px)}
+ .quiz{gap:4px;padding:6px 9px}.answers{gap:4px}.answer{min-height:32px;padding:4px 7px;font-size:13px}
+ .mole-guide{min-height:28px;padding:3px 8px}
+}
+@media(max-width:759px){
+ /* Keep all key mathematical controls visible on a phone; the tunnel receives
+    the remaining vertical space rather than pushing choices offscreen. */
+ .app{display:flex;max-width:760px;gap:4px;padding:4px 6px max(5px,env(safe-area-inset-bottom))}
+ .top{order:0}.status{order:1}.act-track{order:2}.diagram{order:3}.quiz{order:4}.race-row{order:5}.footer{order:6}
+ .diagram{flex:0 0 auto}.figure{height:clamp(90px,14dvh,150px)}
+ .diagram-note{min-height:42px;padding:5px 7px}.goal-content{font-size:clamp(15px,4vw,19px)}
+ .quiz{flex:0 0 auto;padding:7px;gap:6px}.answers{gap:5px}
+ .answer{min-height:clamp(35px,5.3dvh,47px);padding:5px 7px;font-size:clamp(11px,3.3vw,14px)}
+ .race-row{flex:1 1 180px;max-height:none;min-height:115px;display:block;position:relative}
+ .race-row .mine{height:100%;max-height:none;min-height:0}
+ .race-row .mine canvas{object-fit:cover;object-position:center 60%}
+ .chase-indicator{font-size:9px;padding:3px 5px}
+ .mole-guide{display:none}
+ .footer{flex:0 0 27px}
+}
+@media(max-width:759px) and (max-height:700px){
+ .figure{height:clamp(77px,12dvh,94px)}.diagram-note{min-height:35px;padding:3px 5px}
+ .quiz{gap:3px;padding:4px 6px}.answer{min-height:33px;padding:3px 6px}
+ .race-row{min-height:83px}.footer{flex-basis:22px}.minirow{gap:3px}
+}
+
+@media(min-width:760px) and (max-width:1000px){
+ .quiz .answers{align-content:start;padding-top:clamp(8px,1.6dvh,18px)}
+ .quiz .answer{min-height:clamp(44px,6dvh,60px)}
+}
 </style></head><body>
 <div class="app" id="app">
 <header class="top"><div class="brand"><div class="brand-mark">⛏</div><div class="brand-txt"><b>PROOF RUSH</b><small>考える × 掘り進む · 16-BIT</small></div></div><button id="pauseBtn" class="tiny" type="button" disabled>Ⅱ 一時停止</button></header>
 <section class="diagram" aria-label="証明に使う図形"><div class="diagram-top"><strong>📜 図を見て考えよう</strong><button type="button" id="zoomBtn" class="zoom-btn" aria-label="図を拡大して見る（制限時間は停止）">🔍 図を拡大</button><span id="given" aria-hidden="true"></span></div><svg id="figure" class="figure" viewBox="0 0 360 145" role="img" aria-label="問題の図形"></svg><div class="diagram-note" id="goal">正しい証明の道を掘り進もう！</div></section>
 <div class="status" aria-label="ヘビに追いつかれるまでの残り時間とライフ"><div class="task-num" id="taskNum">Q 1/3<span id="hearts">♥♥♥</span></div><div><div class="progress-text"><span id="gateCount">GATE 1 / 8</span><span id="statusTag">ヘビ接近中</span></div><div id="bar" class="timebar"><i id="barFill"></i></div></div><strong id="timer" class="timer">12.0</strong></div>
 <div class="act-track" id="actTrack" aria-label="証明の進行"><span>1 三角形</span><span>2 根拠</span><span>3 証明</span></div>
-<div class="race-row"><section class="mine" id="mine" aria-label="土を掘りながら自動で下へ逃げるモグラと追いかけるヘビのドット絵"><canvas id="world" width="288" height="236"></canvas><div class="mine-top"><span class="depth" id="depth">深さ 0 m</span><span class="speech" id="message">土を掘ってヘビから逃げよう！</span></div><div class="mine-bottom"><div class="lane-guide"><span>①</span><span>②</span><span>③</span></div></div><div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="ゲームメニュー"><div class="modal" id="modalContent"><div class="big">⛏️ 🐾 💎</div><h2 class="rush-title">PROOF RUSH</h2><p class="rush-subtitle">ヘビから逃げて証明完成！</p><p>モグラは自動で土を掘って進む！<br><strong>上から追ってくるヘビにつかまる前に</strong>、正しい言葉・式・記号を選ぼう。<br>正解すれば掘り進む！ ヘビの追跡から逃げ切ろう！</p><div class="race-rule">🐍 RUSH専用：3回のライフで地下の証明を突破しよう</div><button class="primary" id="startBtn" type="button">▶ 冒険スタート！</button><span style="font-size:10px;color:#aecaee">三角形の合同条件は教科書表記。等しい式を選んだら、その理由も選ぼう。順番は自由！</span></div></div></section><aside class="mole-guide" aria-live="polite"><span class="mole-guide-heading">🐾 モグラの作戦</span><strong id="molePrompt">正しい答えで道を開こう</strong><small>選んだ根拠が、次の地下通路になる。</small></aside></div>
+<div class="race-row"><section class="mine" id="mine" aria-label="土を掘りながら自動で下へ逃げるモグラと追いかけるヘビのドット絵"><canvas id="world" width="288" height="400"></canvas><div class="mine-top"><span class="depth" id="depth">深さ 0 m</span><span class="chase-indicator" id="chaseIndicator" aria-label="ヘビの追跡状況">残り猶予 100%</span><span class="speech" id="message">土を掘ってヘビから逃げよう！</span></div><div class="mine-bottom"><div class="lane-guide"><span>①</span><span>②</span><span>③</span></div></div><div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="ゲームメニュー"><div class="modal" id="modalContent"><div class="big">⛏️ 🐾 💎</div><h2 class="rush-title">PROOF RUSH</h2><p class="rush-subtitle">ヘビから逃げて証明完成！</p><p>モグラは自動で土を掘って進む！<br><strong>上から追ってくるヘビにつかまる前に</strong>、正しい言葉・式・記号を選ぼう。<br>正解すれば掘り進む！ ヘビの追跡から逃げ切ろう！</p><div class="race-rule">🐍 RUSH専用：3回のライフで地下の証明を突破しよう</div><button class="primary" id="startBtn" type="button">▶ 冒険スタート！</button><span style="font-size:10px;color:#aecaee">三角形の合同条件は教科書表記。等しい式を選んだら、その理由も選ぼう。順番は自由！</span></div></div></section><aside class="mole-guide" aria-live="polite"><span class="mole-guide-heading">⛏️ NEXT DIG</span><strong id="molePrompt">正しい答えで道を開こう</strong><small>正解するとモグラが掘り進む</small></aside></div>
 <section class="quiz" aria-label="証明のパーツ選択"><div class="question"><h2 id="question">まずはゲームをスタートしよう！</h2><small id="stepType">証明の道</small></div><div class="answers" id="answers"><button class="answer" disabled><b>①</b><span>スタートすると選択肢が現れます。</span></button></div><div class="minirow"><span class="feedback" id="feedback" role="status">正しい道を選んで、モグラを助けよう。</span><button class="hint" id="hintBtn" type="button" disabled>💡 ヒント ＋3秒</button></div><div class="hint-reveal" id="hintText" hidden></div></section>
 <footer class="footer"><small id="modeSummary">図を読む → 根拠を探す → 証明する</small><div style="display:flex;gap:5px"><button id="muteBtn" type="button">♪ OFF</button><button id="stageMenuBtn" type="button">🗺 ステージ</button><button id="notebookBtn" type="button" disabled>📓 証明ノート</button></div></footer>
 </div>
 <script>
 (()=>{'use strict';
 const $=id=>document.getElementById(id),canvas=$('world'),ctx=canvas.getContext('2d',{alpha:false});ctx.imageSmoothingEnabled=false;
-const W=288,H=236,PATHX=[52,144,236];
+const W=288,PATHX=[52,144,236];
+let H=400;
+// Pixel canvas resolution tracks the visible tunnel aspect ratio.
+// This prevents the mole, snake, and soil pixels from being squashed on wide tablets.
+function resizeWorld(){
+ const mine=$('mine');if(!mine)return;
+ const rect=mine.getBoundingClientRect();if(rect.width<15||rect.height<15)return;
+ const next=Math.max(185,Math.min(850,Math.round(W*rect.height/rect.width)));
+ if(next===H&&canvas.width===W&&canvas.height===H)return;
+ H=next;canvas.width=W;canvas.height=H;ctx.imageSmoothingEnabled=false;
+}
 
 const CONDITIONS=['3組の辺がそれぞれ等しい。','2組の辺とその間の角がそれぞれ等しい。','1組の辺とその両端の角がそれぞれ等しい。'];
 // All figures use a 360x145 coordinate space. Paired vertices are exact geometric correspondences.
@@ -394,7 +508,8 @@ function makeChoices(spec){let pool=spec.choices,k=stepKind();
 }
 function currentAct(){const k=stepKind();if(k==='tri'||(stage().id==='first'&&k==='condition'))return 1;if(k==='facts'||k==='factWhy')return 2;return 3;}
 function refreshActs(){$('actTrack').hidden=stage().id==='first'&&!state.reviewMode;const act=currentAct();const actNames=['三角形','根拠','証明'];$('actTrack').innerHTML=actNames.map((name,i)=>`<span class="act-cell ${act===i+1?'active':act>i+1?'done':''}">${act>i+1?'✓':i+1} ${name}</span>`).join('');}
-function updateUI(){if(state.phase==='ready')return;refreshActs();let t=task();$('gateCount').textContent=`GATE ${state.idx+1} / ${state.totalSteps}`;$('taskNum').innerHTML=`${state.reviewMode?'REVIEW':`ST${state.stageIndex+1}`} ${state.taskIndex+1}/${state.taskIds.length}<span id="hearts">${'♥'.repeat(state.lives)+'♡'.repeat(3-state.lives)}</span>`;$('timer').textContent=state.remaining.toFixed(1);let warning=state.remaining<=3&&state.phase==='playing'&&!state.chosen;$('timer').classList.toggle('warning',warning);$('mine').classList.toggle('chase-warning',warning);$('bar').classList.toggle('warning',warning);$('barFill').style.width=`${Math.max(0,Math.min(100,state.remaining/state.limit*100))}%`;$('statusTag').textContent=state.chosen?'掘り進め！':state.phase==='collision'?'つかまった！':'🐍 追跡中';$('depth').textContent=`深さ ${Math.round((state.idx+state.p)*12+state.taskIndex*100+state.stageIndex*300)}m`;$('pauseBtn').disabled=state.phase!=='playing'&&state.phase!=='paused';$('pauseBtn').textContent=state.phase==='paused'?'▶ 再開':'Ⅱ 一時停止'}
+function updateUI(){if(state.phase==='ready')return;refreshActs();let t=task();$('gateCount').textContent=`GATE ${state.idx+1} / ${state.totalSteps}`;$('taskNum').innerHTML=`${state.reviewMode?'REVIEW':`ST${state.stageIndex+1}`} ${state.taskIndex+1}/${state.taskIds.length}<span id="hearts">${'♥'.repeat(state.lives)+'♡'.repeat(3-state.lives)}</span>`;$('timer').textContent=state.remaining.toFixed(1);let warning=state.remaining<=3&&state.phase==='playing'&&!state.chosen;$('timer').classList.toggle('warning',warning);$('mine').classList.toggle('chase-warning',warning);$('bar').classList.toggle('warning',warning);$('barFill').style.width=`${Math.max(0,Math.min(100,state.remaining/state.limit*100))}%`;$('statusTag').textContent=state.chosen?'掘り進め！':state.phase==='collision'?'つかまった！':'🐍 追跡中';$('depth').textContent=`深さ ${Math.round((state.idx+state.p)*12+state.taskIndex*100+state.stageIndex*300)}m`;
+ const ci=$('chaseIndicator');if(ci){const margin=Math.max(0,Math.min(100,Math.round((state.remaining/state.limit)*100)));ci.textContent=`🐍 残り猶予 ${margin}%`;ci.classList.toggle('danger',margin<=22)}$('pauseBtn').disabled=state.phase!=='playing'&&state.phase!=='paused';$('pauseBtn').textContent=state.phase==='paused'?'▶ 再開':'Ⅱ 一時停止'}
 function setMessage(str){$('message').textContent=str}
 function wrongFeedback(k){
  if(k==='tri')return '2つの三角形の頂点の対応順を、図で確認しよう。';
@@ -608,7 +723,7 @@ function drawSnake(time,headX,headY){
  pix(x-10,y+9,4,5,'#f6e4ba');pix(x+6,y+9,4,5,'#f6e4ba');
 }
 function world(time){
- const moleY=123;
+ const moleY=Math.round(H*.62);
  const phase=(state.idx+state.p)*235+state.taskIndex*178;
  const shade=palettes[Math.min(3,Math.floor(state.idx/2))];
  // IMPORTANT: soil is filled everywhere. There is NO pre-dug vertical shaft.
@@ -625,8 +740,8 @@ function world(time){
   }
  }
  // Rock and mineral patches remain embedded in solid earth outside the tunnel.
- for(let j=0;j<12;j++){
-  let y=(j*57-phase*.68) % 360;
+ for(let j=0;j<Math.ceil(H/34);j++){
+  let y=(j*57-phase*.68) % (H+140);
   if(y<-25||y>H+18)continue;
   let x=j%2===0?27:250;
   pix(x,y,13,16,j%4===0?'#5f8e8d':'#a08b74');
@@ -644,17 +759,18 @@ function world(time){
  ctx.lineCap='square';ctx.lineJoin='bevel';
  function carve(color,width){
   ctx.strokeStyle=color;ctx.lineWidth=width;ctx.beginPath();
-  ctx.moveTo(144,-35);ctx.lineTo(144,72);
-  ctx.lineTo(144+(moleX-144)*.23,91);
-  ctx.lineTo(moleX,moleY+12);ctx.stroke();
+  ctx.moveTo(144,-35);ctx.lineTo(144,moleY-60);
+  ctx.lineTo(144+(moleX-144)*.23,moleY-33);
+  ctx.lineTo(moleX,moleY+13);ctx.stroke();
  }
- carve('#8b6546',77);carve('#48372e',69);carve('#1b2b33',61);
+ const core=H>260?100:79;carve('#8b6546',core+20);carve('#48372e',core+10);carve('#1b2b33',core);
  // Loose soil clings to the freshly excavated walls.
- for(let j=0;j<13;j++){
-  let yy=((j*19+time*.017)%150)-10;
-  let laneX=144+(moleX-144)*Math.max(0,(yy-74)/58);
-  pix(laneX-39,yy,3+(j%3),4,'#ad8760');
-  pix(laneX+35,yy+5,3+(j%2),3,'#c19a6e');
+ for(let j=0;j<Math.ceil(moleY/11);j++){
+  let yy=((j*19+time*.017)%(moleY+32))-10;
+  let laneX=144+(moleX-144)*Math.max(0,Math.min(1,(yy-(moleY-60))/75));
+  const side=core/2+4;
+  pix(laneX-side,yy,3+(j%3),4,'#ad8760');
+  pix(laneX+side-3,yy+5,3+(j%2),3,'#c19a6e');
  }
  // Ahead of the mole, below the cutting claws, the soil is still solid.
  // Dirt breaks away into square pixel fragments as the mole advances.
@@ -674,7 +790,7 @@ function world(time){
   }
  }
  // Incoming stone gates are BELOW the mole and rise with the passage of time.
- const gateY=H+42-state.p*115;
+ const gateY=H+42-state.p*Math.min(170,H*.43);
  if(gateY>moleY+12 && gateY<H+52){
   pix(0,gateY,288,8,'#252b2b');pix(0,gateY+8,288,4,'#c79b60');
   pix(11,gateY-33,266,33,'#554b49');
@@ -692,10 +808,13 @@ function world(time){
  // Answering in time opens distance. Running out of time lets the snake catch up.
  const timeFrac=Math.max(0,Math.min(1,state.remaining/Math.max(1,state.limit)));
  const extraEscape=state.chosen?state.p*73:0;
- const chaseGap=13+timeFrac*99+extraEscape;
+ const chaseGap=14+timeFrac*Math.max(99,H*.43)+extraEscape;
  const snakeY=moleY-chaseGap;
  const snakeX=144+(moleX-144)*.19;
- if(state.phase!=='ready'&&state.phase!=='gameover'&&state.phase!=='between')drawSnake(time,snakeX,snakeY);
+ if(state.phase!=='ready'&&state.phase!=='gameover'&&state.phase!=='between'){
+  ctx.save();ctx.translate(snakeX,snakeY);ctx.scale(1.32,1.32);ctx.translate(-snakeX,-snakeY);
+  drawSnake(time,snakeX,snakeY);ctx.restore();
+ }
  if(state.chosen&&state.p>.38){
   // Collapsing dirt briefly slows the snake after the correct choice.
   const yy=moleY-51-state.p*30;
@@ -704,6 +823,7 @@ function world(time){
  }
  // Original pixel mole, now actively digging DOWN into solid earth.
  const x=moleX,y=moleY+moleBob;
+ ctx.save();ctx.translate(x,y);ctx.scale(H>260?1.58:1.25,H>260?1.58:1.25);ctx.translate(-x,-y);
  pix(x-23,y-28,46,42,'#26343c');pix(x-20,y-25,40,38,'#7d523d');
  pix(x-17,y-22,33,33,'#ab7450');pix(x-12,y-21,20,16,'#ca8f64');
  pix(x-9,y-20,7,10,'#e5b38a');pix(x+10,y-16,9,11,'#f0c3a1');
@@ -718,6 +838,7 @@ function world(time){
  pix(x-21,y-28,43,11,'#253742');pix(x-15,y-32,28,10,'#558b96');
  pix(x-12,y-32,25,3,'#9dd4cc');pix(x+12,y-27,15,11,'#29343c');
  pix(x+17,y-26,10,8,state.correctFlash>0?'#c8ffe1':'#f3d78e');pix(x+19,y-25,6,4,'#ffffdf');
+ ctx.restore();
  if(state.hitFlash>0){pix(0,0,W,5,'#eb7d70');pix(0,H-5,W,5,'#eb7d70')}
  if(state.correctFlash>0){pix(0,0,W,4,'#8bffd2')}
 }
@@ -728,6 +849,9 @@ function frame(t){let dt=Math.min(100,Math.max(0,t-(last||t)));last=t;if(state.p
  else{state.p=Math.min(1,state.p+dt/300);if(state.p>=1)advanceStep()}
 } else if(state.phase==='collision'){state.collisionClock-=dt;if(state.collisionClock<=0){if(state.lives===0)gameOver();else{state.phase='playing';setStep()}}}
 state.hitFlash=Math.max(0,state.hitFlash-dt/450);state.correctFlash=Math.max(0,state.correctFlash-dt/750);world(t);if(t-lastHud>80){lastHud=t;updateUI()}requestAnimationFrame(frame)}
-function setup(){$('startBtn').onclick=()=>startStage(0);$('pauseBtn').onclick=togglePause;$('hintBtn').onclick=hint;$('zoomBtn').onclick=showDiagramZoom;$('figure').addEventListener('click',showDiagramZoom);$('notebookBtn').onclick=showNotes;$('stageMenuBtn').onclick=()=>{if(state.phase==='playing'){state.phase='paused'}showStageMenu()};$('muteBtn').onclick=()=>{audio=!audio;$('muteBtn').textContent=audio?'♫ ON':'♪ OFF';sound(600,'sine',.1)};document.addEventListener('keydown',e=>{if(state.phase==='playing'&&['1','2','3','4'].includes(e.key))answer(Number(e.key)-1);if(e.key==='Escape'&&['playing','paused'].includes(state.phase))togglePause()});document.addEventListener('visibilitychange',()=>{if(document.hidden&&state.phase==='playing')togglePause()});$('figure').innerHTML='';const initial=TASKS[0];state.taskIds=[initial.id];markDiagram();showStageMenu();requestAnimationFrame(frame)}
+function setup(){$('startBtn').onclick=()=>startStage(0);$('pauseBtn').onclick=togglePause;$('hintBtn').onclick=hint;$('zoomBtn').onclick=showDiagramZoom;$('figure').addEventListener('click',showDiagramZoom);$('notebookBtn').onclick=showNotes;$('stageMenuBtn').onclick=()=>{if(state.phase==='playing'){state.phase='paused'}showStageMenu()};$('muteBtn').onclick=()=>{audio=!audio;$('muteBtn').textContent=audio?'♫ ON':'♪ OFF';sound(600,'sine',.1)};document.addEventListener('keydown',e=>{if(state.phase==='playing'&&['1','2','3','4'].includes(e.key))answer(Number(e.key)-1);if(e.key==='Escape'&&['playing','paused'].includes(state.phase))togglePause()});document.addEventListener('visibilitychange',()=>{if(document.hidden&&state.phase==='playing')togglePause()});$('figure').innerHTML='';const initial=TASKS[0];state.taskIds=[initial.id];markDiagram();showStageMenu();resizeWorld();
+ if(typeof ResizeObserver!=='undefined'){new ResizeObserver(()=>resizeWorld()).observe($('mine'))}
+ window.addEventListener('resize',resizeWorld);
+ requestAnimationFrame(frame)}
 window.__moleRush2={get state(){return{...state,notes:[...state.notes],picked:[...state.picked]}},get task(){return task().id},get options(){return[...choiceMap]},get spec(){return currentSpec()},start,startStage,showStageMenu,get stages(){return STAGES},get stage(){return stage().id},get points(){return POINTS},answer,hint,forceTimeout:()=>{if(state.phase==='playing'){state.remaining=0;collision()}},showNotes,chooseTaskIds:ids=>{if(ids.every(id=>TASKS.some(t=>t.id===id))&&ids.length===3){state.taskIds=ids;state.taskIndex=0;state.phase='playing';$('overlay').hidden=true;loadTask()}},tasks:TASKS};setup();
 })();</script></body></html>

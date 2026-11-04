@@ -439,6 +439,16 @@ header{background:var(--board);color:var(--chalk);border:1px solid #34594b;borde
  .final-bank-head span:last-child{display:none}
 }
 
+/* Predictable categories: presentation helps scanning but does not reveal correctness. */
+.equation-groups{display:grid;align-content:start;gap:9px;min-width:0}
+.equation-group{display:grid;gap:5px;min-width:0}
+.equation-group-title{display:flex;align-items:center;gap:8px;color:var(--ink2);font-size:11px;font-weight:800;letter-spacing:.025em;line-height:1.4}
+.equation-group-title:after{content:"";height:1px;background:var(--line);flex:1}
+.equation-group .options{min-width:0}
+.equation-group .option{margin:0}
+.proof-answer-scroll .equation-groups .options.choice-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:800px){.equation-groups{gap:6px}.equation-group{gap:3px}.equation-group-title{font-size:10px;line-height:1.25}.equation-group .options.pair-grid{gap:5px}}
+@media(max-height:710px) and (max-width:800px){.equation-groups{gap:4px}.equation-group-title{font-size:9px}.equation-group{gap:2px}}
 </style></head><body><div class="shell"><header><div class="brand"><div class="logo" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M7 38L23 8L42 38Z M23 8L23 38" stroke="currentColor" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 38H42" stroke="currentColor" stroke-width="2.7"/></svg></div><div class="brand-label"><div class="brand-kicker">GEOMETRY LAB · PROOF NOTE</div><h1><span>三角形の合同</span><strong>証明マスター</strong></h1></div></div><div class="topactions"><button id="homeBtn" class="tinybtn" type="button">ステージ選択</button><button id="resetBtn" class="tinybtn" type="button">記録をリセット</button></div></header><div id="bootAlert" style="background:#fff2d9;border:2px solid #e4af39;color:#604416;border-radius:13px;padding:16px;margin:10px 0;font-size:14px"><strong>この画面でゲームが動かない場合</strong><div>ChatGPTなどのファイルプレビューは、ゲームを動かすJavaScriptを停止することがあります。HTMLを保存してWebブラウザで開くか、GitHub PagesなどのHTTPSサイトに公開して利用してください。</div></div><main id="app"><div class="hero"><h2>合同条件から、証明が書ける力へ。</h2><p>4ステージ・全40問。正しい表現で、証明を1行ずつ完成させよう。</p></div><div class="stages"><button class="stage" onclick="startStage(1)"><span class="num">01</span><strong>合同条件を見抜け！</strong><small>図を見て3つの合同条件から選ぶ</small></button><button class="stage" onclick="startStage(2)"><span class="num">02</span><strong>対応する辺と角を探せ！</strong><small>合同条件と等しい3組を選ぶ</small></button><button class="stage" onclick="startStage(3)"><span class="num">03</span><strong>証明を組み立てろ！</strong><small>「〜において」から合同まで</small></button><button class="stage" onclick="startStage(4)"><span class="num">04</span><strong>合同を使って証明せよ！</strong><small>合同を使って辺・角の等しさを示す</small></button></div><div class="rules"><strong>正式な合同条件</strong><br>① 3組の辺がそれぞれ等しい。<br>② 2組の辺とその間の角がそれぞれ等しい。<br>③ 1組の辺とその両端の角がそれぞれ等しい。<br><br>ヒントは3段階。間違えても何度でも挑戦できます。</div></main><div class="footer">GEOMETRY NOTE /  図形の印と図形の性質から、根拠を考える。</div></div>
 <script>
 'use strict';
@@ -725,15 +735,31 @@ function selectOption(btn){if(state.answered)return;const v=btn.dataset.value;st
 function checkCondition(){let q=current();if(state.selection===q.type){state.answered=true;state.feedback={kind:'success',text:`正解！ ${TERMS[q.type]} ${state.stage===2?'続いて、図に印が付いた3組の辺・角を選ぼう。':''}`};if(state.stage===1)markRecord();else {state.hint=0;state.feedback=null}}else{state.tries++;state.feedback={kind:'error',text:'もう一度考えてみよう。図の印の「数」と「位置」を確認しよう。'}}render()}
 function togglePair(encoded){let item=decodeURIComponent(encoded);const index=state.picks.indexOf(item);if(index<0){if(state.picks.length>=3){state.feedback={kind:'info',text:'選べるのは3組までです。変更する場合は、選択済みの項目をもう一度タップしてください。'};render();return}state.picks.push(item)}else state.picks.splice(index,1);state.feedback=null;render()}
 function checkPairs(){const q=current(),good=state.picks.length===3&&q.eq.every(x=>state.picks.includes(x));if(good){markRecord();state.answered='complete';state.feedback={kind:'success',text:'正解！ 図で直接与えられた3組と、合同条件が一致しました。'}}else{state.tries++;state.feedback={kind:'error',text:'3組を確認しよう。選ぶのは、図に同じ印で直接示された対応する辺・角です。'}}render()}
+// The same ordering rule is used in every question, independent of the answer key.
+function sortedMathChoices(values){return [...values].sort((a,b)=>a.replace(/^∠/,'').localeCompare(b.replace(/^∠/,''),'ja'))}
+function isAngleChoice(value){return /^\s*∠/.test(value)}
+function stage2GroupedChoices(values){
+ const renderOption=e=>`<button type="button" class="option ${state.picks.includes(e)?'selected':''}" aria-pressed="${state.picks.includes(e)?'true':'false'}" onclick="togglePair('${encodeURIComponent(e)}')"><span class="pick-check" aria-hidden="true">${state.picks.includes(e)?'✓':''}</span><span class="eq-text">${proofMath(e)}</span></button>`;
+ const group=(title,items)=>items.length?`<section class="equation-group"><div class="equation-group-title">${title}</div><div class="options pair-grid">${sortedMathChoices(items).map(renderOption).join('')}</div></section>`:'';
+ return `<div class="equation-groups">${group('辺の等しさ',values.filter(v=>!isAngleChoice(v)))}${group('角の等しさ',values.filter(isAngleChoice))}</div>`;
+}
+function proofChoiceButton(o,i){return `<button type="button" class="option" onclick="chooseProof(decodeURIComponent('${encodeURIComponent(o.v)}'))"><span class="choice-letter">${['A','B','C','D','E','F','G','H','I'][i]||''}</span><span class="choice-math">${proofMath(o.label)}</span></button>`}
+function groupedProofChoices(opts){
+ const sorted=[...opts].sort((a,b)=>a.label.replace(/^∠/,'').localeCompare(b.label.replace(/^∠/,''),'ja'));
+ const rows=sorted.map((o,i)=>({...o,order:i}));
+ const section=(title,items)=>items.length?`<section class="equation-group"><div class="equation-group-title">${title}</div><div class="options choice-grid">${items.map(o=>proofChoiceButton(o,o.order)).join('')}</div></section>`:'';
+ return `<div class="equation-groups">${section('辺の等しさ',rows.filter(o=>!isAngleChoice(o.label)))}${section('角の等しさ',rows.filter(o=>isAngleChoice(o.label)))}</div>`;
+}
+
 function basicControls(q){
  const selectingPairs=state.stage===2&&state.answered===true;
  const finished=state.answered==='complete'||(state.stage===1&&state.answered===true);
  const line=selectingPairs?'等しい3組を選ぼう':'合同条件を選ぼう';
  let html=`<div class="basic-head"><div class="basic-heading">${line}</div>${!finished?`<button type="button" class="btn hint" onclick="showHint()">ヒント ${state.hint}/3</button>`:""}</div>`;
  if(selectingPairs){
-  const vals=q.candidates.slice(),spin=state.index%vals.length,ordered=vals.slice(spin).concat(vals.slice(0,spin));
+  const ordered=q.candidates.slice();
   html+=`<div class="pick-summary" aria-live="polite"><span>選んだ<br>3組</span><div class="pick-slots">${[0,1,2].map((i)=>`<span class="pick-slot ${state.picks[i]?'filled':''}">${state.picks[i]?proofMath(state.picks[i]):'—'}</span>`).join('')}</div></div>`;
-  html+=`<div class="basic-choice-zone"><div class="basic-option-scroll"><div class="options pair-grid">${ordered.map((e)=>`<button type="button" class="option ${state.picks.includes(e)?'selected':''}" aria-pressed="${state.picks.includes(e)?'true':'false'}" onclick="togglePair('${encodeURIComponent(e)}')"><span class="pick-check" aria-hidden="true">${state.picks.includes(e)?'✓':''}</span><span class="eq-text">${proofMath(e)}</span></button>`).join('')}</div></div></div>`;
+  html+=`<div class="basic-choice-zone"><div class="basic-option-scroll">${stage2GroupedChoices(ordered)}</div></div>`;
  } else if(!state.answered){
   html+=`<div class="basic-choice-zone"><div class="basic-option-scroll"><div class="options condition-list">${Object.keys(TERMS).map(k=>choiceHTML(k,TERMS[k],state.selection===k)).join('')}</div></div></div>`;
  } else if(state.answered==='complete'){
@@ -905,7 +931,7 @@ function proofControls(q){
  const context=active.startsWith('why')?`選んだ等式：${state.slots['eq'+active.slice(3)]?.text||''}`:active==='condition'?'等しい3組を確認して、合同条件を選ぼう。':active==='goal'?'何を証明するか、もう一度確認しよう。':'';
  html+=`<div class="proof-now"><div class="proof-step">STEP ${activeIndex} / ${keys.length}　今考えるところ</div><div class="proof-question">${esc(slotLabel(active))}</div>${context?`<div class="proof-context">${proofMath(context)}</div>`:''}</div>`;
  html+=`<div class="proof-answer-header">選択肢を見比べて、正しい答えをタップ（全${opts.length}個）</div>`;
- html+=`<div class="proof-answer-scroll" id="proofAnswers"><div class="options ${opts.length>=4&&!longWords?'choice-grid':'choice-list'} count-${opts.length}">${opts.map((o,i)=>`<button type="button" class="option" onclick="chooseProof(decodeURIComponent('${encodeURIComponent(o.v)}'))"><span class="choice-letter">${['A','B','C','D','E','F','G','H','I'][i]||''}</span><span class="choice-math">${proofMath(o.label)}</span></button>`).join('')}</div></div>`;
+ html+=`<div class="proof-answer-scroll" id="proofAnswers">${active.startsWith('eq')?groupedProofChoices(opts):`<div class="options ${opts.length>=4&&!longWords?'choice-grid':'choice-list'} count-${opts.length}">${opts.map(proofChoiceButton).join('')}</div>`}</div>`;
  const texts=hintText(q);
  html+=`<div class="proof-actions">${feedback()}${state.hint?`<div class="proof-hint-message">💡 ${esc(texts[state.hint-1])}</div>`:''}<div class="proof-actions-row"><button type="button" class="btn subtle" onclick="undoProof()" ${done?'':'disabled'}>↶ 1つ戻す</button><button type="button" class="btn hint" onclick="showHint()">💡 ヒント ${state.hint}/3</button></div></div>`;
  return html;

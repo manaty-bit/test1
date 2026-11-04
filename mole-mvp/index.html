@@ -109,6 +109,13 @@ button{font:inherit;cursor:pointer;touch-action:manipulation}button:focus-visibl
 .review-mode .modal.stage-modal h2.rush-title,.modal h2.rush-title{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:clamp(28px,7.5vw,38px);font-weight:1000;line-height:1.1;letter-spacing:.12em;color:#ffe2a0;text-shadow:3px 3px 0 #745035,0 0 13px #edb76355;margin:0}
 .modal .rush-subtitle{font-size:clamp(11px,2.8vw,14px);font-weight:800;color:#d5ede9;line-height:1.35;margin:0}
 @media(max-height:610px){.review-mode .modal.stage-modal h2.rush-title{font-size:27px}.modal .rush-subtitle{font-size:11px}}
+
+/* Evidence choices: use stable edge→angle order, compact labels only when mixed. */
+.answer-kind{flex:0 0 23px;width:23px;min-height:21px;display:grid;place-items:center;font-size:10px;line-height:1;font-style:normal;font-weight:900;border:1px solid #acc9c6;background:#153843;color:#cde8df;border-radius:3px}
+.answer:has(.answer-kind){gap:6px}
+.answer .answer-kind+span{min-width:0;line-height:1.28}
+.answer.good .answer-kind{background:#e2f2e0;color:#145640;border-color:#97c4a5}
+@media(max-height:740px){.answer-kind{flex-basis:20px;width:20px;min-height:18px;font-size:9px}.answer:has(.answer-kind){gap:4px}}
 </style></head><body>
 <div class="app" id="app">
 <header class="top"><div class="brand"><div class="brand-mark">⛏</div><div class="brand-txt"><b>PROOF RUSH</b><small>証明タイムアタック · 16-BIT</small></div></div><button id="pauseBtn" class="tiny" type="button" disabled>Ⅱ 一時停止</button></header>
@@ -214,16 +221,44 @@ function currentSpec(){let t=task(),k=stepKind();if(k==='tri')return {title:'対
  if(k==='reason'){let correct=`合同な図形の対応する${t.reason}はそれぞれ等しいので、`,other=t.reason==='辺'?'角':'辺';return{title:'合同から結論を導く理由は？',type:'合同の利用',choices:[correct,`合同な図形の対応する${other}はそれぞれ等しいので、`,'仮定より、'],correct:[correct],hint:'結論で示すのは「辺」の等しさ？「角」の等しさ？'};}
  return{title:'最後に証明する式は？',type:'結論',choices:[t.result,...t.resultWrong],correct:[t.result],hint:'図の下にある目標を確認しよう。'};
 }
-function makeChoices(spec){let pool=spec.choices;if(stepKind()==='facts'){
- // One button per one of the three visible tunnel gates. Include a plausible distractor.
- let good=pool.filter(x=>spec.correct.includes(x)),bad=pool.filter(x=>!spec.correct.includes(x));
- const count=Math.min(2,good.length);pool=[...shuffled(good).slice(0,count),...shuffled(bad).slice(0,3-count)];
- }
- if(stepKind()==='factWhy'){
+// Keep search positions predictable without revealing which option is correct.
+// For equations only: side equalities -> angle equalities, then alphabetical vertex order.
+// A compact edge/angle tag appears only if the three choices mix both kinds.
+function answerFormulaKind(v){
+ const text=String(v).trim();
+ if(text.startsWith('∠'))return '角';
+ if(/^[A-Z]{2}[＝=][A-Z]{2}$/.test(text))return '辺';
+ return '';
+}
+function compareFormulaChoices(a,b){
+ const kind=a=>answerFormulaKind(a)==='辺'?0:answerFormulaKind(a)==='角'?1:2;
+ return kind(a)-kind(b)||String(a).replace(/^∠/,'').localeCompare(String(b).replace(/^∠/,'ja'));
+}
+const REASON_CHOICE_ORDER=['仮定より','共通な辺だから','対頂角は等しいから','平行線の錯角は等しいから'];
+function orderGameChoices(pool,k){
+ if(k==='facts'||k==='result')return [...pool].sort(compareFormulaChoices);
+ if(k==='condition')return CONDITIONS.filter(x=>pool.includes(x));
+ if(k==='factWhy')return [...pool].sort((a,b)=>REASON_CHOICE_ORDER.indexOf(a)-REASON_CHOICE_ORDER.indexOf(b));
+ if(k==='reason')return [...pool].sort((a,b)=>{
+  const rank=v=>v.startsWith('仮定より')?0:v.includes('対応する辺')?1:v.includes('対応する角')?2:3;
+  return rank(a)-rank(b);
+ });
+ // Keep triangle/congruence choices shuffled: the correct vertex order
+ // and the ≡ symbol must not be given away by a special fixed position.
+ return pool;
+}
+function makeChoices(spec){let pool=spec.choices,k=stepKind();
+ if(k==='facts'){
+  let good=pool.filter(x=>spec.correct.includes(x)),bad=pool.filter(x=>!spec.correct.includes(x));
+  const count=Math.min(2,good.length);
+  pool=[...shuffled(good).slice(0,count),...shuffled(bad).slice(0,3-count)];
+ }else if(k==='factWhy'){
   const good=spec.correct[0],bad=shuffled(pool.filter(x=>x!==good));
-  return shuffled([good,...bad.slice(0,2)]);
+  pool=[good,...bad.slice(0,2)];
+ }else{
+  pool=shuffled(pool).slice(0,3);
  }
- return shuffled(pool).slice(0,3)
+ return orderGameChoices(pool,k);
 }
 function updateUI(){if(state.phase==='ready')return;let t=task();$('gateCount').textContent=`GATE ${state.idx+1} / ${state.totalSteps}`;$('taskNum').innerHTML=`ST${state.stageIndex+1} ${state.taskIndex+1}/3<span id="hearts">${'♥'.repeat(state.lives)}${'♡'.repeat(3-state.lives)}</span>`;$('timer').textContent=state.remaining.toFixed(1);let warning=state.remaining<=3&&state.phase==='playing'&&!state.chosen;$('timer').classList.toggle('warning',warning);$('mine').classList.toggle('chase-warning',warning);$('bar').classList.toggle('warning',warning);$('barFill').style.width=`${Math.max(0,Math.min(100,state.remaining/state.limit*100))}%`;$('statusTag').textContent=state.chosen?'逃走成功！':state.phase==='collision'?'つかまった！':'🐍 追跡中';$('depth').textContent=`深さ ${Math.round((state.idx+state.p)*12+state.taskIndex*100+state.stageIndex*300)}m`;$('pauseBtn').disabled=state.phase!=='playing'&&state.phase!=='paused';$('pauseBtn').textContent=state.phase==='paused'?'▶ 再開':'Ⅱ 一時停止'}
 function setMessage(str){$('message').textContent=str}
@@ -257,7 +292,7 @@ function startStage(stageIndex){
 }
 function start(){startStage(state.stageIndex)}
 function loadTask(){state.taskStarted=state.elapsed;state.taskWrong=state.wrong;state.taskHints=state.hints;state.idx=0;state.lives=3;state.picked=[];state.selectedFact=null;state.notes=[];state.highlight=[];state.highlightId=-1;markDiagram();setStep()}
-function setStep(){resetTimer();let spec=currentSpec();$('modeSummary').textContent=state.idx>0?'同じ色の頂点どうしが対応':`STAGE ${state.stageIndex+1} ・ ${stage().name}`;$('question').textContent=spec.title;$('stepType').textContent=spec.type;$('hintBtn').disabled=false;$('hintBtn').textContent='💡 ヒント ＋3秒';$('hintText').hidden=true;$('hintText').textContent='';$('feedback').textContent='ヘビにつかまる前に、正しい答えをタップ！';let root=$('answers');root.replaceChildren();choiceMap=makeChoices(spec);choiceMap.forEach((word,i)=>{let b=document.createElement('button');b.type='button';b.className='answer';b.dataset.idx=String(i);let n=document.createElement('b');n.textContent=['①','②','③','④'][i];let txt=document.createElement('span');txt.innerHTML=formatMath(word);b.append(n,txt);b.addEventListener('click',()=>answer(i));root.appendChild(b)});setMessage('🐍 ヘビが上から迫ってくる！');updateUI()}
+function setStep(){resetTimer();let spec=currentSpec();$('modeSummary').textContent=state.idx>0?'同じ色の頂点どうしが対応':`STAGE ${state.stageIndex+1} ・ ${stage().name}`;$('question').textContent=spec.title;$('stepType').textContent=spec.type;$('hintBtn').disabled=false;$('hintBtn').textContent='💡 ヒント ＋3秒';$('hintText').hidden=true;$('hintText').textContent='';$('feedback').textContent='ヘビにつかまる前に、正しい答えをタップ！';let root=$('answers');root.replaceChildren();choiceMap=makeChoices(spec);const kinds=choiceMap.map(answerFormulaKind);const mixedKinds=stepKind()==='facts'&&kinds.includes('辺')&&kinds.includes('角');choiceMap.forEach((word,i)=>{let b=document.createElement('button');b.type='button';b.className='answer';b.dataset.idx=String(i);let n=document.createElement('b');n.textContent=['①','②','③','④'][i];let txt=document.createElement('span');txt.innerHTML=formatMath(word);if(mixedKinds&&kinds[i]){let tag=document.createElement('span');tag.className='answer-kind';tag.textContent=kinds[i];b.append(n,tag,txt)}else{b.append(n,txt)}b.addEventListener('click',()=>answer(i));root.appendChild(b)});setMessage('🐍 ヘビが上から迫ってくる！');updateUI()}
 function answer(i){if(state.phase!=='playing'||state.chosen||!choiceMap[i])return;let spec=currentSpec(),v=choiceMap[i],buttons=[...document.querySelectorAll('#answers .answer')];state.attempts++;if(spec.correct.includes(v)){state.correctAnswers++;state.choice=i;state.chosen=true;state.correctFlash=1;buttons[i].classList.add('good');buttons.forEach(b=>b.disabled=true);$('hintBtn').disabled=true;$('feedback').textContent='正解！　一気に掘ってヘビから逃げよう！';setMessage('🐍 ヘビを引き離した！');sound(650,'square',.09);let t=task();let f=t.fact.find(x=>x.v===v);state.pending={text:v,fact:f||null};}
  else{state.wrong++;state.hitFlash=1;state.remaining=Math.max(0,state.remaining-1.2);state.p=Math.max(0,1-state.remaining/state.limit);const b=buttons[i];b.classList.add('wrong');b.disabled=true;$('feedback').textContent='違う道！ '+wrongFeedback(stepKind())+'（－1.2秒）';setMessage('🐍 ヘビが近い！ 急いで！');sound(140,'sawtooth',.13);if(state.remaining<=0)collision();}updateUI()}
 function hint(){

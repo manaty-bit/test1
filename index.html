@@ -480,6 +480,79 @@ body.play-mode .proof-figure .proof-goal-caption{font-size:12px;font-weight:750;
  body.play-mode .proof-figure .proof-goal{padding:5px 8px;margin:2px 0 3px}
  body.play-mode .proof-figure .proof-goal-equation{font-size:clamp(16px,4.6vw,20px)}
 }
+
+/* Language note: standalone reading resource beside chapter 05 */
+.stage.word-guide-entry{background:#eff6f2;border:1px solid #afc9bc;position:relative}
+.stage.word-guide-entry:hover{background:#e5f2ec;border-color:#4a9279}
+.stage.word-guide-entry .num{color:#528775;font-size:26px}
+.stage.word-guide-entry .word-guide-tag{grid-column:2/4;grid-row:3;display:flex;align-items:center;gap:7px;margin-top:9px;font:750 10px/1.4 ui-monospace,monospace;letter-spacing:.06em;color:#31715d}
+.stage.word-guide-entry .word-guide-tag:before{content:"";display:block;width:20px;height:1px;background:currentColor}
+body.word-guide-mode{overflow:auto}
+.word-page{max-width:1060px;margin:0 auto;padding:0 0 30px}
+.word-nav{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:3px 0 14px;color:var(--quiet);font-size:11px}
+.word-back{border:1px solid var(--line2);padding:9px 13px;border-radius:8px;background:#fff;color:var(--accent);font-weight:800}
+.word-back:hover{background:var(--wash)}
+.word-banner{background:#214c42;color:#f8f8ec;border:1px solid #437568;border-radius:12px;padding:26px 30px}
+.word-banner .eyebrow{color:#d6c18d;font-size:10px;font-weight:800;letter-spacing:.13em}
+.word-banner h2{font-size:clamp(23px,3.6vw,37px);line-height:1.26;letter-spacing:-.035em;margin:10px 0}
+.word-banner p{font-size:13px;color:#dcebe4;line-height:1.85;margin:0}
+.word-topics{display:flex;flex-wrap:wrap;gap:7px;margin:15px 0 25px}
+.word-topics a{display:inline-block;border:1px solid #c4d5cd;background:#fff;padding:7px 12px;border-radius:99px;text-decoration:none;font-size:11px;font-weight:800;color:#315e52}
+.word-topics a:hover{background:#ecf5f0}
+.word-section{margin:26px 0 0;scroll-margin-top:15px}
+.word-section-head{display:flex;align-items:baseline;gap:9px;border-bottom:1px solid #c9d6ce;padding-bottom:9px;margin:0 0 13px}
+.word-section-head span{font:800 11px ui-monospace,monospace;color:#6c977f}
+.word-section-head h3{font-size:clamp(17px,2.5vw,21px);color:#203d35;margin:0}
+.word-lead{margin:0 0 13px;font-size:13px;color:#52636a;line-height:1.8}
+.word-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.word-card{background:#fff;border:1px solid #d7ded7;border-radius:10px;padding:16px;min-width:0}
+.word-card .code{display:inline-block;background:#e7f1eb;color:#25634f;border-radius:4px;padding:3px 8px;font:800 11px ui-monospace,monospace}
+.word-card h4{font-size:15px;line-height:1.6;margin:10px 0 4px;color:#203e35}
+.word-card p{font-size:12px;line-height:1.75;color:#4c5e62;margin:7px 0 0}
+.word-card ruby{ruby-position:over;font-size:16px;font-weight:900}
+.word-card rt{font-size:9px;font-weight:600;letter-spacing:0}
+.word-example{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:12px 0}
+.word-pair{background:#eef4f0;border:1px solid #c5d6cb;border-radius:8px;padding:11px 13px;text-align:center}
+.word-pair b{display:block;font-size:18px;color:#1d4b3a}
+.word-pair small{font-size:11px;color:#587267}
+.word-tip{background:#eaf4ee;border-left:4px solid #4f9c74;padding:11px 14px;border-radius:0 7px 7px 0;color:#2c5242;line-height:1.75;font-size:12px;margin:13px 0}
+.word-cautions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.word-caution{background:#fff;border:1px solid #d6dfd9;border-radius:9px;overflow:hidden}
+.word-caution summary{cursor:pointer;padding:13px 15px;display:flex;gap:8px;align-items:flex-start;list-style:none;font-size:13px;line-height:1.6;font-weight:750;color:#1e4035}
+.word-caution summary::-webkit-details-marker{display:none}
+.word-caution summary:after{content:"＋";color:#598875;font-size:18px;margin-left:auto;flex:0 0 auto}
+.word-caution[open] summary:after{content:"−"}
+.word-caution[open] summary{background:#f3f8f4;border-bottom:1px solid #e0e8e2}
+.word-caution .word-explain{padding:13px 15px;color:#435b50;font-size:12px;line-height:1.8}
+.word-caution .word-explain p{margin:0 0 8px}
+.word-status{display:inline-block;border-radius:99px;padding:2px 8px;background:#e3ebf5;color:#405f85;font-weight:800;font-size:10px;white-space:nowrap}
+.word-status.wrong{background:#fce9e4;color:#994b35}
+.word-status.better{background:#f9efd9;color:#7b5b26}
+.word-status.ok{background:#e1f3e8;color:#246848}
+.word-rule{font-weight:800;color:#204d3e}
+.word-quiz-notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.word-quiz-notes .word-card{background:#fafcfb}
+.word-checklist{background:#fcfbf7;border:1px solid #d6d9c8;border-radius:10px;padding:18px}
+.word-checklist label{display:flex;align-items:flex-start;gap:11px;padding:11px 0;font-size:13px;line-height:1.65;border-bottom:1px solid #e4e7e0;cursor:pointer}
+.word-checklist label:last-of-type{border-bottom:none}
+.word-checklist input{accent-color:#256a55;width:18px;height:18px;flex:0 0 18px;margin:1px 0 0}
+.word-end{display:flex;justify-content:space-between;gap:12px;align-items:center;padding-top:18px}
+.word-end p{margin:0;color:#526b61;font-size:12px}
+@media(max-width:800px){
+ .word-banner{padding:20px 18px}
+ .word-grid{grid-template-columns:1fr}
+ .word-cautions,.word-quiz-notes{grid-template-columns:1fr}
+ .word-page{padding-bottom:40px}
+ .word-card{padding:15px}
+ .word-section{margin-top:23px}
+ .word-example{gap:5px}
+ .word-pair{padding:8px 5px}
+ .word-pair b{font-size:15px}
+ .word-pair small{font-size:9px}
+ .word-end{flex-direction:column;align-items:stretch}
+ .word-end .word-back{text-align:center}
+}
+
 </style></head><body><div class="shell"><header><div class="brand"><div class="logo" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M7 38L23 8L42 38Z M23 8L23 38" stroke="currentColor" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 38H42" stroke="currentColor" stroke-width="2.7"/></svg></div><div class="brand-label"><div class="brand-kicker">GEOMETRY LAB · PROOF NOTE</div><h1><span>三角形の合同</span><strong>証明マスター</strong></h1></div></div><div class="topactions"><button id="homeBtn" class="tinybtn" type="button">ステージ選択</button><button id="resetBtn" class="tinybtn" type="button">記録をリセット</button></div></header><div id="bootAlert" style="background:#fff2d9;border:2px solid #e4af39;color:#604416;border-radius:13px;padding:16px;margin:10px 0;font-size:14px"><strong>この画面でゲームが動かない場合</strong><div>ChatGPTなどのファイルプレビューは、ゲームを動かすJavaScriptを停止することがあります。HTMLを保存してWebブラウザで開くか、GitHub PagesなどのHTTPSサイトに公開して利用してください。</div></div><main id="app"><div class="hero"><h2>合同条件から、証明が書ける力へ。</h2><p>4ステージ・全40問。正しい表現で、証明を1行ずつ完成させよう。</p></div><div class="stages"><button class="stage" onclick="startStage(1)"><span class="num">01</span><strong>合同条件を見抜け！</strong><small>図を見て3つの合同条件から選ぶ</small></button><button class="stage" onclick="startStage(2)"><span class="num">02</span><strong>対応する辺と角を探せ！</strong><small>合同条件と等しい3組を選ぶ</small></button><button class="stage" onclick="startStage(3)"><span class="num">03</span><strong>証明を組み立てろ！</strong><small>「〜において」から合同まで</small></button><button class="stage" onclick="startStage(4)"><span class="num">04</span><strong>合同を使って証明せよ！</strong><small>合同を使って辺・角の等しさを示す</small></button></div><div class="rules"><strong>正式な合同条件</strong><br>① 3組の辺がそれぞれ等しい。<br>② 2組の辺とその間の角がそれぞれ等しい。<br>③ 1組の辺とその両端の角がそれぞれ等しい。<br><br>ヒントは3段階。間違えても何度でも挑戦できます。</div></main><div class="footer">GEOMETRY NOTE /  図形の印と図形の性質から、根拠を考える。</div></div>
 <script>
 'use strict';
@@ -964,14 +1037,22 @@ function proofControls(q){
 }
 
 function render(){closeProofNotebook();const playing=Boolean(state.stage);document.body.classList.toggle('play-mode',playing);document.body.classList.toggle('proof-mode',state.stage>=3);document.body.classList.toggle('home-mode',!playing);document.body.classList.toggle('strategy-ready',state.planPhase==='ready'&&state.stage>=3);document.body.classList.toggle('final-mode',state.stage===5);if(!playing){renderHome();return}const q=current();if(state.stage>=3){app.innerHTML=`<div class="proof-workspace ${state.stage===5?'final-workspace':''}"><section class="panel proof-figure">${proofFigureBox(q)}</section><section class="panel proof-control" id="controlPane">${proofControls(q)}</section></div>`;return}app.innerHTML=`<div class="layout"><section class="panel diagram-panel">${stageBox(q)}</section><section class="panel basic-control" id="controlPane">${basicControls(q)}</section></div>`}
+function openWordGuide(){
+ state.stage=0;
+ document.body.classList.remove('play-mode','proof-mode');
+ document.body.classList.add('home-mode','word-guide-mode');
+ app.innerHTML="\n<div class=\"word-page\" aria-label=\"合同条件 言葉チェック表\">\n  <nav class=\"word-nav\"><button type=\"button\" class=\"word-back\" onclick=\"home()\">← ステージ選択へ戻る</button><span>独立した読み物 ／ 全50問の進捗とは別</span></nav>\n  <div class=\"word-banner\"><span class=\"eyebrow\">GEOMETRY NOTE · WORD CHECK</span><h2>合同条件・言葉チェック表</h2><p>「3個」ではなく「3組」なのはなぜ？<br>1つの言葉の違いが、数学の意味をどう変えるのか。読んで、比べて、「なるほど！」を見つけよう。</p></div>\n  <nav class=\"word-topics\" aria-label=\"読み物の目次\"><a href=\"#word-conditions\">01 正しい3条件</a><a href=\"#word-expressions\">02 言葉の落とし穴</a><a href=\"#word-rephrase\">03 言い換え判定</a><a href=\"#word-kanji\">04 漢字の豆知識</a><a href=\"#word-selfcheck\">05 自分でチェック</a></nav>\n  <section class=\"word-section\" id=\"word-conditions\">\n    <div class=\"word-section-head\"><span>01</span><h3>まず、3つの合同条件を正確に</h3></div>\n    <p class=\"word-lead\">2つの三角形の「対応する部分」を比べていることがポイント。どれか1つが成り立てば、2つの三角形は合同です。</p>\n    <div class=\"word-grid\">\n      <article class=\"word-card\"><span class=\"code\">SSS ／ 三辺相等</span><h4>3組の辺が<br>それぞれ等しい。</h4><p>対応する辺を3組比べる。<br>辺は「長さ」を比べる。</p></article>\n      <article class=\"word-card\"><span class=\"code\">SAS ／ 二辺夾角相等</span><h4>2組の辺とその間の角が<br>それぞれ等しい。</h4><p>辺が2組、角が1組。<br>角は必ず「2辺の間」。</p></article>\n      <article class=\"word-card\"><span class=\"code\">ASA ／ 二角夾辺相等</span><h4>1組の辺とその両端の角が<br>それぞれ等しい。</h4><p>辺が1組、角が2組。<br>2つの角はその辺の「両端」。</p></article>\n    </div>\n    <div class=\"word-tip\"><b>なるほど！</b> 「組」は、2つの三角形で対応する部分を<strong>ペア</strong>にして比べているということ。6本の辺が全部同じ長さ、という意味ではありません。</div>\n    <div class=\"word-example\" aria-label=\"対応する辺の3組\">\n      <div class=\"word-pair\"><b>AB ↔ DE</b><small>1組目の辺</small></div>\n      <div class=\"word-pair\"><b>BC ↔ EF</b><small>2組目の辺</small></div>\n      <div class=\"word-pair\"><b>CA ↔ FD</b><small>3組目の辺</small></div>\n    </div>\n    <p class=\"word-lead\">△ABC と △DEF の場合、上の対応する辺がそれぞれ等しければ、3組の辺がそれぞれ等しいことになります。</p>\n  </section>\n\n  <section class=\"word-section\" id=\"word-expressions\">\n    <div class=\"word-section-head\"><span>02</span><h3>「その一言」に意味がある！</h3></div>\n    <p class=\"word-lead\">気になる言葉をタップしてみよう。間違いを直すだけでなく、<strong>どんな意味になってしまうのか</strong>まで考えてみよう。</p>\n    <div class=\"word-cautions\">\n      <details class=\"word-caution\" open><summary>① 「3個の辺が等しい」では？</summary><div class=\"word-explain\"><p><span class=\"word-status better\">意味が曖昧</span> 「個」や「本」では、1つの三角形の3本の辺の話にも読めます。</p><p><span class=\"word-rule\">3組の辺</span>なら、2つの三角形の対応する辺を3ペア比べると分かります。</p></div></details>\n      <details class=\"word-caution\"><summary>② 「それぞれ」が抜けたら？</summary><div class=\"word-explain\"><p><span class=\"word-status better\">省略表現</span> 「3組の辺が等しい」でも文脈があれば意味は通じます。これだけで数学的に誤りとは言えません。</p><p>でも<span class=\"word-rule\">それぞれ</span>があると「各組で1本ずつ対応して等しい」とはっきり伝わります。</p></div></details>\n      <details class=\"word-caution\"><summary>③ 「その間の角」が抜けたら？</summary><div class=\"word-explain\"><p><span class=\"word-status wrong\">合同を保証できない</span> 「2組の辺と1組の角」だけでは、角がどこにあるか分かりません。</p><p>たとえば AB・AC の2辺を選んだら、その間の角は <strong>∠BAC</strong>。∠ABC など間ではない角だと、合同にならない場合があります。</p></div></details>\n      <details class=\"word-caution\"><summary>④ 「両端の角」が抜けたら？</summary><div class=\"word-explain\"><p><span class=\"word-status wrong\">情報が足りない</span> 「1組の辺と1組の角」だけでは合同は決まりません。</p><p>たとえば辺 BC の両端の角は <strong>∠ABC と ∠BCA</strong>。2つの角を指定することが大切です。</p></div></details>\n      <details class=\"word-caution\"><summary>⑤ 「3組の角が等しい」では？</summary><div class=\"word-explain\"><p><span class=\"word-status wrong\">合同を保証できない</span> 3組の角がすべて等しくても、大きさが異なる三角形が作れます。</p><p>角だけなら形は決まっても大きさは決まらない。<strong>相似</strong>と<strong>合同</strong>は違うのです。</p></div></details>\n      <details class=\"word-caution\"><summary>⑥ 「辺」と「角」は何を比べる？</summary><div class=\"word-explain\"><p><span class=\"word-status better\">表現を正確に</span> 辺は長さ、角は角の大きさを比較します。</p><p>「角が同じ長さ」「辺が同じ角度」という書き方は、比較する量がずれています。</p></div></details>\n    </div>\n  </section>\n\n  <section class=\"word-section\" id=\"word-rephrase\">\n    <div class=\"word-section-head\"><span>03</span><h3>「教科書と違う」＝「間違い」ではない</h3></div>\n    <p class=\"word-lead\">意味は正しくても、教科書の言い方を少し省略している場合があります。<strong>数学的に不十分な条件</strong>と<strong>言い方の違い</strong>を区別しよう。</p>\n    <div class=\"word-quiz-notes\">\n      <article class=\"word-card\"><span class=\"word-status ok\">意味は正しい</span><h4>「3組の辺の長さがそれぞれ等しい」</h4><p>「辺が等しい」を「辺の長さが等しい」と言い換えています。意味は同じです。</p></article>\n      <article class=\"word-card\"><span class=\"word-status better\">省略表現</span><h4>「2組の辺とその間の角が等しい」</h4><p>対応する三角形の話だと分かれば意味は伝わります。「それぞれ」がある方が明確です。</p></article>\n      <article class=\"word-card\"><span class=\"word-status ok\">同じ条件</span><h4>「2組の角とその間の辺がそれぞれ等しい」</h4><p>「1組の辺とその両端の角」と同じことを、角を先にして表現しています。</p></article>\n      <article class=\"word-card\"><span class=\"word-status ok\">数学的には十分</span><h4>「1組の辺と2組の角がそれぞれ等しい」</h4><p>辺と角の対応が正しければ、この情報でも合同になります。ただし、中学校で覚える基本の表現は「その両端の角」です。</p></article>\n    </div>\n    <div class=\"word-tip\"><b>覚えておこう：</b> 丁寧に言うことは大切。でも、単に省略した言葉を何でも「合同にならない」と判定するのは正しくありません。</div>\n  </section>\n\n  <section class=\"word-section\" id=\"word-kanji\">\n    <div class=\"word-section-head\"><span>04</span><h3>漢字を分解すると、意味が見えてくる</h3></div>\n    <p class=\"word-lead\">合同条件には短い漢字の呼び方もあります。「夾（きょう）」は、<strong>はさむ</strong>という意味です。</p>\n    <div class=\"word-grid\">\n      <article class=\"word-card\"><span class=\"code\">SSS</span><h4><ruby>三辺相等<rt>さんぺんそうとう</rt></ruby></h4><p><strong>三辺</strong>＝3組の辺<br><strong>相等</strong>＝対応するものが等しい</p></article>\n      <article class=\"word-card\"><span class=\"code\">SAS</span><h4><ruby>二辺夾角相等<rt>にへんきょうかくそうとう</rt></ruby></h4><p><strong>二辺</strong>＝2組の辺<br><strong>夾角</strong>＝その2辺に<strong>はさまれた角</strong></p></article>\n      <article class=\"word-card\"><span class=\"code\">ASA</span><h4><ruby>二角夾辺相等<rt>にかくきょうへんそうとう</rt></ruby></h4><p><strong>二角</strong>＝2組の角<br><strong>夾辺</strong>＝その2角に<strong>はさまれた辺</strong></p></article>\n    </div>\n    <div class=\"word-tip\"><b>なるほど！</b> 「<strong>二辺夾角</strong>」は辺が角をはさむ。「<strong>二角夾辺</strong>」は角が辺をはさむ。<strong>辺と角の順番が逆</strong>になっているのです。</div>\n  </section>\n\n  <section class=\"word-section\" id=\"word-selfcheck\">\n    <div class=\"word-section-head\"><span>05</span><h3>自分で説明できたらチェック</h3></div>\n    <div class=\"word-checklist\">\n      <label><input type=\"checkbox\"><span>「3個」ではなく「3組」という理由を説明できる。</span></label>\n      <label><input type=\"checkbox\"><span>「それぞれ」が何を明確にするか説明できる。</span></label>\n      <label><input type=\"checkbox\"><span>「その間の角」と「両端の角」を図の中で指させる。</span></label>\n      <label><input type=\"checkbox\"><span>「二辺夾角」と「二角夾辺」の違いを説明できる。</span></label>\n    </div>\n    <div class=\"word-end\"><p>これが分かれば、合同条件は単なる暗記ではなく、意味のある言葉になる。</p><button type=\"button\" class=\"word-back\" onclick=\"home()\">← ステージ選択に戻る</button></div>\n  </section>\n</div>";
+ safeScrollTop();
+}
 function renderHome(){
+ document.body.classList.remove('word-guide-mode');
  document.body.classList.remove('play-mode','proof-mode');document.body.classList.add('home-mode');
  const done=n=>Array.from({length:10},(_,i)=>records[`${n}-${i}`]?1:0).reduce((a,b)=>a+b,0);
  const subs=['','図から合同条件を選ぶ','辺と角の対応を確かめる','逆算してから、前から書く','ゴールから逆算し、合同で導く','初見の図から8行の証明をタップで完成'];
  const total=[1,2,3,4,5].reduce((sum,n)=>sum+done(n),0);
  app.innerHTML=`<section class="home-intro"><div class="home-intro-copy"><span class="eyebrow">5 CHAPTERS · 50 QUESTIONS</span><h2>図から考える。<br>筋道をつくる。</h2><p>図形の発見から、根拠のある証明まで。</p></div><div class="home-total">学習の記録<strong>${total}<small> / 50</small></strong>問 クリア</div></section>
  <div class="path-heading"><h3>学習の5章</h3><span>好きなステージから始められます</span></div>
- <div class="stages">${[1,2,3,4,5].map(n=>`<button type="button" class="stage" onclick="startStage(${n})" aria-label="ステージ${n}、${STAGE_NAMES[n]}、${done(n)}問達成"><span class="num">0${n}</span><strong>${STAGE_NAMES[n]}</strong><small>${subs[n]}</small><span class="stage-arrow" aria-hidden="true">›</span><span class="stage-progress"><span class="progress-track"><i style="width:${done(n)*10}%"></i></span><b>${done(n)} / 10</b></span></button>`).join('')}</div>
+ <div class="stages">${[1,2,3,4,5].map(n=>`<button type="button" class="stage" onclick="startStage(${n})" aria-label="ステージ${n}、${STAGE_NAMES[n]}、${done(n)}問達成"><span class="num">0${n}</span><strong>${STAGE_NAMES[n]}</strong><small>${subs[n]}</small><span class="stage-arrow" aria-hidden="true">›</span><span class="stage-progress"><span class="progress-track"><i style="width:${done(n)*10}%"></i></span><b>${done(n)} / 10</b></span></button>`).join('')}<button type="button" class="stage word-guide-entry" onclick="openWordGuide()" aria-label="合同条件・言葉チェック表を読む"><span class="num" aria-hidden="true">✎</span><strong>合同条件・言葉チェック表</strong><small>「組」「それぞれ」「その間」の意味がわかる</small><span class="stage-arrow" aria-hidden="true">›</span><span class="word-guide-tag">READ &amp; DISCOVER　／　豆知識を読む</span></button></div>
  <details class="rules"><summary>学習のルールと合同条件 <span>＋</span></summary><div class="rules-inner"><p class="rules-lead">合同を示す3つの条件</p><p>01　${TERMS.SSS}<br>02　${TERMS.SAS}<br>03　${TERMS.ASA}</p><p>各ステージ10問。ステージ3・4は逆算してから証明を組み立てます。ステージ5はヒントなしの初見問題。候補から8行の証明を完成させ、最後にまとめて点検します。</p><p>クリア記録はこの端末のブラウザに保存されます。</p><button type="button" class="reset-inline" onclick="document.getElementById('resetBtn').click()">学習記録をリセット</button></div></details>`;
 }
 function renderFinished(){document.body.classList.remove('proof-mode','play-mode');closeProofNotebook();let stage=state.stage,count=Array.from({length:10},(_,i)=>records[`${stage}-${i}`]||0),perfect=count.filter(v=>v===3).length;app.innerHTML=`<section class="panel congrats"><div class="cup">🏆</div><h2>STAGE ${stage} クリア！</h2><p>${STAGE_NAMES[stage]}　10問終了</p><p>ノーヒント・初回正解：<strong>${perfect} / 10問</strong></p><p class="smallnote">${stage===5?'完成した証明は、図を読み取って選んだ8行の文章から成ります。':'ヒントを使って解けた問題も、学習の成果です。'}</p><div class="actionrow" style="justify-content:center"><button type="button" class="btn teal" onclick="${stage<5?`startStage(${stage+1})`:'home()'}">${stage<5?'次のステージへ →':'ステージ選択へ'}</button><button type="button" class="btn subtle" onclick="startStage(${stage})">このステージを復習</button></div></section>`;safeScrollTop()}

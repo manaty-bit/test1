@@ -329,7 +329,21 @@ button{font:inherit;cursor:pointer;touch-action:manipulation}button:focus-visibl
  .quiz .answers{align-content:start;padding-top:clamp(8px,1.6dvh,18px)}
  .quiz .answer{min-height:clamp(44px,6dvh,60px)}
 }
-</style></head><body>
+</style>
+<style>
+/* Perfect-clear certificate */
+.overlay.certificate-mode{position:fixed!important;inset:0!important;top:0!important;z-index:300;display:flex;align-items:center;justify-content:center;background:#10192cf5;padding:12px}
+.certificate-mode .modal{width:min(700px,100%);max-height:calc(100dvh - 24px);height:auto;overflow:auto;background:#15283b;border-color:#f3d28c;gap:10px;padding:18px}
+.certificate-mode .cert-eyebrow{color:#f8d68e;font-size:12px;font-weight:900;letter-spacing:.14em}
+.certificate-mode .cert-lead{color:#f7f1dc;font-size:13px}
+.certificate-mode .cert-name{display:block;width:100%;padding:12px;font-size:18px;border:2px solid #f0d18d;border-radius:9px;background:#fffdf3;color:#192a3b;text-align:center}
+.certificate-mode .cert-preview{display:block;width:100%;max-width:540px;margin:auto;border:2px solid #e9cc88;border-radius:5px;box-shadow:0 8px 24px #0006}
+.certificate-mode .cert-date{font-size:12px;color:#e6dcc1}
+.certificate-mode .cert-help{font-size:11px;color:#c9d7e7}
+.certificate-mode .cert-actions{display:flex;gap:8px;flex-wrap:wrap}
+.certificate-mode .cert-actions button{flex:1 1 180px}
+</style>
+</head><body>
 <div class="app" id="app">
 <header class="top"><div class="brand"><div class="brand-mark">⛏</div><div class="brand-txt"><b>PROOF RUSH</b><small>考える × 掘り進む · 16-BIT</small></div></div><button id="pauseBtn" class="tiny" type="button" disabled>Ⅱ 一時停止</button></header>
 <section class="diagram" aria-label="証明に使う図形"><div class="diagram-top"><strong>📜 図を見て考えよう</strong><button type="button" id="zoomBtn" class="zoom-btn" aria-label="図を拡大して見る（制限時間は停止）">🔍 図を拡大</button><span id="given" aria-hidden="true"></span></div><svg id="figure" class="figure" viewBox="0 0 360 145" role="img" aria-label="問題の図形"></svg><div class="diagram-note" id="goal">正しい証明の道を掘り進もう！</div></section>
@@ -522,6 +536,7 @@ function wrongFeedback(k){
 }
 function markDiagram(){let t=task();$('given').textContent='';$('goal').innerHTML=`<span class="goal-kicker">GOAL</span><strong class="goal-content">${formatMath(t.goal)}</strong>`;drawFigure(state.highlight)}
 function showStageMenu(){
+ $('overlay').classList.remove('certificate-mode');
  state.phase='ready';
  const rec=STAGES.findIndex(t=>!stageClears.includes(t.id));
  const previewIndex=rec<0?0:rec;state.stageIndex=previewIndex;state.stageId=STAGES[previewIndex].id;state.taskIds=[STAGES[previewIndex].tasks[0]];state.taskIndex=0;state.idx=0;state.steps=[...STAGES[previewIndex].steps];state.totalSteps=state.steps.length;state.notes=[];state.highlight=[];markDiagram();
@@ -588,12 +603,117 @@ function retryCurrentRun(){if(state.reviewMode){const ids=[...state.taskIds];sta
 function gameOver(){state.phase='gameover';showOverlay(`<div class="big">🐍 💥</div><h2>ヘビにつかまった！</h2><p>${state.taskIndex+1}問目の関門で失敗。<br>正しい証明をもう一度つなげよう。</p><button class="primary" id="retry">↺ 最初から再挑戦</button><button class="secondary" id="notesBtn">📓 途中までの証明を見る</button><button class="secondary" id="toStages">🗺 ステージを選び直す</button>`);$('retry').onclick=retryCurrentRun;$('notesBtn').onclick=showNotes;$('toStages').onclick=showStageMenu;updateUI()}
 function proofHtml(){const rows=state.notes.map((line,i)=>`<button type="button" class="proofrow" data-line="${i}"><b>${String(i+1).padStart(2,'0')}.</b> ${formatMath(line.text)}</button>`).join('');return `<div class="proof"><h3>学習の記録（各行を押すと図で確認）</h3>${rows||'<p>まだ証明は始まっていません。</p>'}</div>`}
 function wireProof(){for(let b of document.querySelectorAll('.proofrow')){b.onclick=()=>{let i=Number(b.dataset.line),line=state.notes[i];state.highlight=line.refs;state.highlightId=i;drawFigure(line.refs);for(let x of document.querySelectorAll('.proofrow'))x.classList.toggle('active',x===b);setMessage('図形で根拠を確認！')}}}
+
+function certificateDate(date){
+ return new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(date);
+}
+function certificateTheme(kind){
+ if(kind==='perfect') return {
+  filename:'パーフェクト認定証',
+  overlayTitle:'🏆 パーフェクトクリア！',
+  eyebrow:'💎 SPECIAL ACHIEVEMENT 💎',
+  lead:'ミス０回・♥３つを維持してステージを完走！<br>名前を入力して、認定証を画像で保存しよう。',
+  message:'🏆 パーフェクトクリア！ 認定証を保存しよう',
+  bg1:'#fffdf1',bg2:'#f5e8c6',
+  outer:'#183f5b',middle:'#c49b46',inner:'#d9bd7c',accent:'#c49b46',
+  title1:'★  PERFECT CLEAR  ★',title1Color:'#a87a28',
+  title2:'パーフェクトクリア認定証',title2Color:'#173b55',
+  hearts:'♥  ♥  ♥',heartsColor:'#d45362',
+  status:'ミス ０ 回　｜　ライフ ３ / ３',
+  line:'#c8ac71',
+  body:'あなたは一度も間違えず、すべての証明を完成させました。',
+  footer:'#846c40'
+ };
+ return {
+  filename:'クリア認定証',
+  overlayTitle:'🥈 ステージクリア！',
+  eyebrow:'✨ STAGE CLEAR ✨',
+  lead:'ステージを最後までクリア！<br>名前を入力して、シルバーの認定証を画像で保存しよう。',
+  message:'🥈 ステージクリア！ 認定証を保存しよう',
+  bg1:'#f9fbff',bg2:'#dde4ee',
+  outer:'#314255',middle:'#9aa6b5',inner:'#cdd4dc',accent:'#9aa6b5',
+  title1:'★  STAGE CLEAR  ★',title1Color:'#6c7788',
+  title2:'クリア認定証',title2Color:'#23384c',
+  hearts:'CLEAR',heartsColor:'#6d7888',
+  status:'最後までよくがんばりました',
+  line:'#a7b0bb',
+  body:'あなたは証明の道を最後まで進み、ステージを見事にクリアしました。',
+  footer:'#6f7783'
+ };
+}
+function drawCertificate(name,stamp,stageName,stageNumber,kind='perfect'){
+ const theme=certificateTheme(kind);
+ const c=document.createElement('canvas');c.width=1400;c.height=990;
+ const g=c.getContext('2d');const W=c.width,H=c.height;
+ const fill=(color,x,y,w,h)=>{g.fillStyle=color;g.fillRect(x,y,w,h)};
+ const center=(str,y,size,color,weight='bold')=>{
+   g.fillStyle=color;g.font=`${weight} ${size}px "Noto Sans JP","Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif`;
+   g.textAlign='center';g.textBaseline='middle';g.fillText(str,W/2,y,W-215);
+ };
+ const grad=g.createLinearGradient(0,0,W,H);grad.addColorStop(0,theme.bg1);grad.addColorStop(1,theme.bg2);fill(grad,0,0,W,H);
+ g.strokeStyle=theme.outer;g.lineWidth=18;g.strokeRect(35,35,W-70,H-70);
+ g.strokeStyle=theme.middle;g.lineWidth=6;g.strokeRect(55,55,W-110,H-110);
+ g.strokeStyle=theme.inner;g.lineWidth=2;g.strokeRect(70,70,W-140,H-140);
+ for(const [x,y] of [[95,95],[1305,95],[95,895],[1305,895]]){
+  g.beginPath();g.arc(x,y,14,0,Math.PI*2);g.fillStyle=theme.accent;g.fill();
+ }
+ center('PROOF RUSH',159,45,'#244961','900');
+ center(theme.title1,225,43,theme.title1Color,'900');
+ center(theme.title2,315,57,theme.title2Color,'900');
+ center(theme.hearts,408,70,theme.heartsColor);
+ center(theme.status,488,32,'#334d61');
+ center(name||'お名前を入力してください',600,70,'#1a354a','900');
+ fill(theme.line,W/2-390,654,780,3);
+ center(theme.body,713,30,'#355268');
+ center(`STAGE ${stageNumber}　${stageName}`,780,28,'#354e62');
+ center('達成日時（日本時間）  '+certificateDate(stamp),842,26,'#42586b');
+ center('PROOF RUSH  |  GEOMETRY / PROOF',908,22,theme.footer);
+ return c;
+}
+function showCertificate(kind='perfect'){
+ const achievedAt=new Date();const stageName=stage().name;const stageNumber=state.stageIndex+1;const theme=certificateTheme(kind);
+ state.phase='certificate';
+ showOverlay(`<div class="cert-eyebrow">${theme.eyebrow}</div>
+ <h2>${theme.overlayTitle}</h2>
+ <p class="cert-lead">${theme.lead}</p>
+ <label for="certificateName" style="color:#ffdf96;font-size:13px;font-weight:800">認定証に記載する名前</label>
+ <input class="cert-name" id="certificateName" maxlength="32" autocomplete="name" placeholder="例：山田 太郎" aria-label="認定証に記載する名前">
+ <div class="cert-date">達成日時：${certificateDate(achievedAt)}（日本時間）</div>
+ <img id="certificatePreview" class="cert-preview" alt="認定証のプレビュー">
+ <p class="cert-help">画像を保存して、先生の指定する方法で提出してください。名前を入力すると画像にも反映されます。</p>
+ <div class="cert-actions"><button class="primary" type="button" id="downloadCertificate">⬇ 認定証を画像保存（PNG）</button><button class="secondary" type="button" id="certificateStages">🗺 ステージを選ぶ</button></div>
+ <p id="certificateError" role="status"></p>`);
+ $('overlay').classList.remove('review-mode','zoom-mode');
+ $('overlay').classList.add('certificate-mode');$('overlay').style.top='0px';
+ let currentCanvas;
+ const update=()=>{currentCanvas=drawCertificate($('certificateName').value.trim(),achievedAt,stageName,stageNumber,kind);$('certificatePreview').src=currentCanvas.toDataURL('image/png')};
+ $('certificateName').addEventListener('input',update);update();
+ $('downloadCertificate').onclick=()=>{
+  const name=$('certificateName').value.trim();
+  if(!name){$('certificateError').textContent='名前を入力してから保存してください。';$('certificateName').focus();return}
+  $('certificateError').textContent='';
+  currentCanvas=drawCertificate(name,achievedAt,stageName,stageNumber,kind);
+  const link=document.createElement('a');link.href=currentCanvas.toDataURL('image/png');
+  link.download=`PROOF_RUSH_${theme.filename}_STAGE${stageNumber}_${achievedAt.getTime()}.png`;
+  document.body.appendChild(link);link.click();link.remove();
+ };
+ $('certificateStages').onclick=()=>{ $('overlay').classList.remove('certificate-mode');showStageMenu() };
+ setMessage(theme.message);
+ updateUI();
+}
+function showPerfectCertificate(){showCertificate('perfect')}
+function showClearCertificate(){showCertificate('clear')}
+
 function finishTask(repeat=false){
  state.phase='between';if(!repeat)state.completed.push(task().id);
  const misses=state.wrong-state.taskWrong,used=state.hints-state.taskHints,seconds=Math.round(state.elapsed-state.taskStarted),stars=misses===0&&used===0?3:misses<=2?2:1;
  const more=state.taskIndex<state.taskIds.length-1;
+ if(!repeat&&!more&&!state.reviewMode){
+  saveClear(stage().id);
+  if(state.wrong===0&&state.lives===3){showPerfectCertificate();return;}
+  showClearCertificate();return;
+ }
  const head=more?'証明の道、突破！':state.reviewMode?'復習チャレンジ完了！':'ステージクリア！';
- if(!repeat&&!more&&!state.reviewMode)saveClear(stage().id);
  if(!repeat&&state.reviewMode&&misses===0){const r=missBook[task().id];if(r){r.count=Math.max(0,r.count-1);saveMissBook();}}
  const accuracy=Math.round(state.correctAnswers/Math.max(1,state.correctAnswers+state.wrong)*100);
  showOverlay(`<div class="big">💎 🐾 💎</div><h2>${head}</h2><div class="result-stars">${'★'.repeat(stars)+'☆'.repeat(3-stars)}</div><p>STAGE ${state.stageIndex+1} ・ ${state.taskIndex+1}/${stage().tasks.length} 問<br>この問題：${seconds}秒・ミス${misses}回・ヒント${used}回<br>ここまでの解答成功率：${accuracy}%（時間切れも失敗として集計）<br>各行をタップすると図で確かめられるよ。</p>${proofHtml()}<button class="primary" id="continue">${more?'▶ 次の問題へ':'🗺 ステージを選ぶ'}</button>${!more&&!state.reviewMode&&state.stageIndex<STAGES.length-1?'<button class="secondary" id="nextStage">⛏ 次のステージに挑戦</button>':''}`);

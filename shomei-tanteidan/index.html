@@ -282,6 +282,92 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;ba
 @media(max-width:400px){.shell{padding:9px}.topbar{flex-wrap:wrap;min-height:57px;padding-bottom:8px}.brand{flex:1 0 auto}.top-actions{margin-left:auto;gap:4px}.brand-text{font-size:15px}.brand-small{font-size:8px;letter-spacing:.11em}.smallbtn{font-size:10px;padding:6px 7px}.member-chip{max-width:105px}.hero{padding:23px 16px}.hero h1{font-size:35px}.hero-seal{width:42px;height:42px}.hero-seal span{font-size:19px}.brief-left strong{font-size:11px}.brief-counter{font-size:10px}.paper-heading h2{font-size:22px}.case-paper:before{font-size:8px;padding:4px 7px;right:10px}.rank-item{min-height:34px;padding:3px}.rank-number{width:25px;height:25px;font-size:11px}.option .opttext{font-size:14px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
+/* V3 PC: mission, whole diagram and all four choices visible in one viewport.
+   On phones and smaller tablets, keep the comfortable vertical layout. */
+.work-grid,.case-column,.choice-column{min-width:0}
+@media(min-width:900px){
+ body:has(#game-screen:not(.hidden)){height:100dvh;min-height:0;overflow:hidden}
+ .shell:has(#game-screen:not(.hidden)){height:100dvh;max-width:1600px;padding:7px 13px 5px;display:flex;flex-direction:column;overflow:hidden}
+ .shell:has(#game-screen:not(.hidden))>.topbar{flex:0 0 45px;min-height:0;margin-bottom:5px;}
+ .shell:has(#game-screen:not(.hidden))>.footer{display:none}
+ #game-screen.game-layout{display:grid;grid-template-columns:165px minmax(0,1fr);gap:12px;flex:1 1 auto;min-height:0;align-items:stretch}
+ #game-screen .rail{position:static;min-height:0;max-height:100%;overflow:auto;padding:11px;border-radius:13px}
+ #game-screen .rail-heading{font-size:9px;margin:0 1px 9px}
+ #game-screen .rank-item{padding:7px 5px;min-height:49px;margin-bottom:4px;gap:6px}
+ #game-screen .rank-desc strong{font-size:11px}
+ #game-screen .rank-desc{font-size:10px}
+ #game-screen .rank-number{width:27px;height:27px;flex:0 0 27px}
+ #game-screen .rail-tip{display:none}
+ #game-screen .work{display:flex;flex-direction:column;min-height:0;min-width:0;overflow:hidden}
+ #game-screen .mission-top{flex:0 0 auto;margin:0 0 2px}
+ #game-screen .mission-label{font-size:13px}
+ #game-screen .mission-no{font-size:11px}
+ #game-screen .meter{flex:0 0 5px;height:5px;margin:0 0 5px}
+ #game-screen .brief-bar{flex:0 0 auto;margin:0 0 7px;padding:6px 10px;min-height:41px;gap:9px}
+ #game-screen .brief-symbol{width:30px;height:30px;font-size:17px}
+ #game-screen .brief-left strong{font-size:12px}
+ #game-screen .brief-left small{font-size:10px}
+ #game-screen .brief-counter{font-size:11px;padding:4px 9px}
+ #game-screen .work-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:12px;flex:1 1 auto;min-height:0;overflow:hidden}
+ #game-screen .case-column,#game-screen .choice-column{min-height:0;display:flex;flex-direction:column;gap:5px}
+ #game-screen .case-paper{min-height:0;flex:1 1 auto;overflow:hidden;display:flex;flex-direction:column;border-radius:15px}
+ #game-screen .paper-heading{flex:0 0 auto;padding:19px 15px 3px}
+ #game-screen .paper-heading h2{font-size:clamp(18px,1.6vw,23px);margin:3px 0 5px;line-height:1.3}
+ #game-screen .case-id{font-size:10px;line-height:1.1}
+ #game-screen .scenario{font-size:clamp(12px,.94vw,14px);line-height:1.5}
+ #game-screen .diagram-wrap{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;padding:4px 13px 3px}
+ #game-screen .diagram-frame{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;padding:5px;overflow:hidden}
+ #game-screen .diagram-frame svg{width:100%;height:100%;min-height:0;max-height:100%;object-fit:contain}
+ #game-screen .diagram-foot{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:8px}
+ #game-screen .diagram-caption{font-size:10px;line-height:1.35;margin:2px 0}
+ #game-screen .diagram-zoom{font-size:10px;padding:4px 8px;white-space:nowrap}
+ #game-screen .question-box{flex:0 0 auto;margin:5px 12px 11px;padding:7px 10px;font-size:clamp(12px,1.1vw,15px);line-height:1.38}
+ #game-screen .question-label{font-size:9px;line-height:1.2;margin-bottom:3px}
+ #game-screen .draft-panel{flex:0 0 auto;max-height:35%;overflow:auto;margin:0;padding:0 6px}
+ #game-screen .draft-panel summary{padding:5px;font-size:12px}
+ #game-screen .draft-panel textarea{max-height:90px}
+ #game-screen .choice-column{gap:6px;overflow:hidden}
+ #game-screen .answer-heading{margin:0;flex:0 0 auto;gap:7px}
+ #game-screen .answer-heading strong{font-size:clamp(13px,1.1vw,16px)}
+ #game-screen .answer-heading span{font-size:10px;flex:none}
+ #game-screen .options{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:repeat(4,minmax(0,1fr));gap:7px;flex:1 1 auto;min-height:0;align-content:stretch}
+ #game-screen .options.reading-mode{grid-template-columns:minmax(0,1fr)}
+ #game-screen .option{min-height:0;max-height:none;padding:7px 10px;align-items:center;gap:10px;border-radius:10px;overflow:auto;scrollbar-width:thin;box-shadow:none}
+ #game-screen .option .num{flex:0 0 27px;width:27px;height:27px}
+ #game-screen .option .opttext{font-size:clamp(12px,1.08vw,16px);line-height:1.36;overflow-wrap:anywhere}
+ #game-screen .actionline{flex:0 0 auto;margin:0;gap:4px}
+ #game-screen .hint-btn{padding:5px 9px;font-size:11px}
+ #game-screen .actionline>span{font-size:10px!important}
+ #game-screen .hint-note{flex:0 0 auto;max-height:58px;overflow:auto;padding:7px;font-size:11px;line-height:1.4}
+ #game-screen .feedback{flex:0 0 auto;max-height:min(31dvh,165px);overflow:auto;padding:8px 11px;margin:0}
+ #game-screen .feedback h3{font-size:14px;margin:0 0 3px}
+ #game-screen .feedback p{font-size:12px;line-height:1.4;margin:0 0 6px}
+ #game-screen .feedback .goldbtn{min-height:30px;padding:5px 12px;font-size:12px}
+ #game-screen .proof-panel{flex:0 0 auto;max-height:33%;overflow:auto;margin:0}
+ #game-screen .proof-panel summary{font-size:12px;padding:5px}
+ #game-screen .proof-panel pre{font-size:12px;max-height:120px}
+ #game-screen .progress-mini{flex:0 0 auto;margin:0;gap:9px;font-size:10px}
+}
+/* Compact desktop/windowed browsers: remove the left rail and preserve 2-column gameplay. */
+@media(min-width:900px) and (max-width:1199px){
+ #game-screen.game-layout{grid-template-columns:minmax(0,1fr)}
+ #game-screen .rail{display:none}
+ #game-screen .work-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+}
+@media(min-width:900px) and (max-height:700px){
+ .shell:has(#game-screen:not(.hidden))>.topbar{flex-basis:38px;margin-bottom:3px}
+ #game-screen .brief-bar{min-height:34px;padding:3px 8px;margin-bottom:4px}
+ #game-screen .brief-symbol{height:26px;width:26px}
+ #game-screen .paper-heading{padding:17px 12px 2px}
+ #game-screen .scenario{font-size:12px;line-height:1.38}
+ #game-screen .diagram-caption{display:none}
+ #game-screen .question-box{margin:3px 9px 7px;padding:5px 8px}
+ #game-screen .choice-column{gap:4px}
+ #game-screen .options{gap:5px}
+ #game-screen .option{padding:4px 8px}
+ #game-screen .option .opttext{line-height:1.26}
+}
+
 </style>
 </head>
 <body>
@@ -316,16 +402,16 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;ba
 <section id="game-screen" class="hidden game-layout">
   <aside class="rail" aria-label="捜査ランク"><div class="rail-heading">SECRET MISSION MAP</div><div id="rank-nav"></div><div class="rail-tip">団長のひとこと：図の見た目は証拠にならない。仮定・性質・対応順を一つずつ確認しよう。</div></aside>
   <div class="work"><div class="mission-top"><div class="mission-label" id="rank-label"></div><div class="mission-no" id="mission-no"></div></div><div class="meter" role="progressbar" aria-label="捜査進行度" aria-valuemin="0" aria-valuemax="54" aria-valuenow="0" id="progress-track"><div class="meter-fill" id="progress-fill"></div></div>
-    <article class="case-paper"><div class="paper-heading"><div class="case-id" id="case-id"></div><h2 id="case-title"></h2><div class="scenario" id="scenario"></div></div><div class="diagram-wrap"><div class="diagram-frame" id="diagram"></div><div class="diagram-foot"><div class="diagram-caption">図は模式図。印と問題文に書かれた条件だけを証拠にしよう。</div><button type="button" class="diagram-zoom" id="diagram-zoom">🔎 図を拡大</button></div></div><div class="question-box"><span class="question-label">MISSION NOTE · 団長からの極秘指令</span><span id="question"></span></div></article>
+    <div class="work-grid"><div class="case-column"><article class="case-paper"><div class="paper-heading"><div class="case-id" id="case-id"></div><h2 id="case-title"></h2><div class="scenario" id="scenario"></div></div><div class="diagram-wrap"><div class="diagram-frame" id="diagram"></div><div class="diagram-foot"><div class="diagram-caption">図は模式図。印と問題文に書かれた条件だけを証拠にしよう。</div><button type="button" class="diagram-zoom" id="diagram-zoom">🔎 図を拡大</button></div></div><div class="question-box"><span class="question-label">MISSION NOTE · 団長からの極秘指令</span><span id="question"></span></div></article>
     <details id="draft-panel" class="draft-panel hidden"><summary>✍️ 自分で推理調書を書いてみる（任意・自動保存）</summary><p>調書を自分で書いてから4択を選ぶと、より力がつく。正解後に模範証明と比べられるぞ。</p><textarea id="draft-text" rows="7" spellcheck="false" placeholder="【証明】
 △＿＿ と △＿＿ において
 仮定より……
-……だから……"></textarea><div class="draft-status">書いた内容は、この端末だけに保存される。</div></details>
-    <div class="answer-heading"><strong>🔍 4つの推理から、正しいものを1つ選ぼう</strong><span>正解は必ず1つ</span></div><div id="options" class="options"></div>
+……だから……"></textarea><div class="draft-status">書いた内容は、この端末だけに保存される。</div></details></div>
+    <div class="choice-column"><div class="answer-heading"><strong>🔍 4つの推理から、正しいものを1つ選ぼう</strong><span>正解は必ず1つ</span></div><div id="options" class="options"></div>
     <div class="actionline"><button class="hint-btn" id="hint-btn">💡 団長にヒントを聞く</button><span style="font-size:11px;color:#acbed2">正解するまで次の事件には進めない</span></div><div class="hint-note hidden" id="hint-note" aria-live="polite"></div>
     <div class="feedback hidden" id="feedback" role="status" aria-live="polite"><h3 id="feedback-title"></h3><p id="feedback-text"></p><div class="continue" id="feedback-actions"></div></div>
     <details id="proof-panel" class="proof-panel hidden"><summary>📜 団長の模範調書を見る（正解後に公開）</summary><pre id="proof-content"></pre></details>
-    <div class="progress-mini"><span id="mini-score"></span><span id="mini-miss"></span><span id="mini-hints"></span></div>
+    <div class="progress-mini"><span id="mini-score"></span><span id="mini-miss"></span><span id="mini-hints"></span></div></div></div>
   </div>
 </section>
 <section id="result-screen" class="result hidden"><div class="medal" id="result-medal">🏅</div><div class="eyebrow" style="margin-top:17px">THE FINAL MYSTERY — SOLVED</div><h1 id="result-title">全事件、解決。</h1><p id="result-lead"></p><div class="result-card"><h2 style="font-family:var(--serif);margin-top:0">📋 キミの最終捜査記録</h2><div class="result-grid"><div><strong id="end-score">0</strong><span>獲得ポイント</span></div><div><strong id="end-miss">0</strong><span>再捜査</span></div><div><strong id="end-hints">0</strong><span>ヒント</span></div></div><div class="result-congrats">🎖️ 各章の認定証は「証明書アルバム」でいつでも確認・画像保存できるぞ。</div><div class="result-actions"><button class="goldbtn" id="save-certificate">🏅 第6章の認定証を見る</button><button class="ghostbtn" style="color:#35465d" id="play-again">もう一度、最初から捜査する</button></div></div></section>
@@ -902,7 +988,7 @@ function answer(i){
   const p=document.createElement('span');p.className='retry-note';p.textContent='証拠をもう一度見直してみよう。';
   $('feedback-actions').appendChild(p);
  }
- updateStats();save();fb.scrollIntoView({behavior:'smooth',block:'nearest'});
+ updateStats();save();if(!window.matchMedia('(min-width:900px)').matches)fb.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 function finish(){
  if(!state.awards?.[5])ensureAward(5);
@@ -1029,7 +1115,7 @@ drawIntro();if(state.finished)finish();
   const node = document.createElement('section');
   node.className='brief-bar';node.setAttribute('aria-label','現在の捜査');
   node.innerHTML='<div class="brief-left"><span class="brief-symbol" aria-hidden="true">🧭</span><div><strong id="brief-title">現場捜査中</strong><small id="brief-subtitle">図を観察 → 証拠を照合 → 推理する</small></div></div><span class="brief-counter" id="brief-counter">捜査準備中</span>';
-  document.querySelector('.case-paper')?.before(node);
+  document.querySelector('.work-grid')?.before(node);
   const originalRender=render;
   render=function(...args){
     const result=originalRender.apply(this,args);

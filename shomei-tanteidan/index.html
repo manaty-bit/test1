@@ -196,6 +196,41 @@ button,input,textarea{max-width:100%}
 @media(max-width:600px){.intro{margin-top:8px}.hero{padding:24px 19px}.hero h1{font-size:clamp(33px,9vw,44px);padding-right:0;margin-top:15px}.hero .lead{font-size:19px}.hero-seal{top:16px;right:15px;width:47px;height:47px}.hero-seal span{font-size:19px}.hero-seal small{font-size:8px}.hero .storyline{font-size:14px}.letter-note p{font-size:13px}.join-row{display:grid;grid-template-columns:1fr}.join-input{width:100%;min-height:49px}.join-row .goldbtn{width:100%}.member-chip{max-width:120px;padding:4px 6px;font-size:10px}.brand-sub{display:none}.archive-grid{grid-template-columns:1fr}.archive-card{padding:10px;gap:8px}.archive-info strong{font-size:13px}.award-preview{padding:5px;max-height:47dvh}.award-dialog{padding:13px}.award-actions{gap:6px}.award-actions .goldbtn,.award-actions .ghostbtn{width:100%}}
 @media(max-width:390px){.brand-icon{width:28px;height:28px;font-size:17px}.brand-text{font-size:12px}.top-actions{gap:4px}.top-actions .smallbtn{font-size:10px;padding:6px}.member-chip{max-width:85px}.hero .eyebrow{font-size:9px;letter-spacing:.12em}.hero h1{font-size:32px}.modal-head h2{font-size:22px}}
 
+
+
+/* v4: diagram label clarity and robust desktop typography */
+#game-screen .diagram-frame svg text.lab,
+#zoom-scroll svg text.lab {paint-order:stroke fill;stroke:#fffefa;stroke-width:4.8px;stroke-linecap:round;stroke-linejoin:round}
+#game-screen .diagram-frame svg text.note,
+#zoom-scroll svg text.note {paint-order:stroke fill;stroke:#fffefa;stroke-width:3px;stroke-linejoin:round}
+#game-screen .diagram-frame svg,
+#zoom-scroll svg {overflow:visible;shape-rendering:geometricPrecision;text-rendering:geometricPrecision}
+#game-screen .case-paper:before{content:'EVIDENCE FILE';right:12px;font-size:8px;letter-spacing:.11em;padding:5px 9px;box-shadow:0 2px 7px #0001}
+#game-screen .case-id{padding-right:108px;line-height:1.35;overflow-wrap:normal}
+#game-screen .scenario{overflow-wrap:anywhere;word-break:normal}
+#game-screen .question-box{overflow-wrap:anywhere}
+#game-screen .option .opttext{min-width:0;line-break:strict;word-break:normal;overflow-wrap:anywhere}
+#game-screen .option{position:relative}
+@media(min-width:900px){
+ #game-screen .paper-heading h2{letter-spacing:-.018em;overflow-wrap:anywhere}
+ #game-screen .option .num{align-self:center}
+ #game-screen .diagram-frame{background-size:26px 26px}
+ #game-screen .diagram-frame svg{flex:1 1 auto}
+ #game-screen .question-label{letter-spacing:.04em}
+ #game-screen .paper-heading{padding-right:13px}
+}
+@media(min-width:900px) and (max-height:730px){
+ #game-screen .paper-heading h2{line-height:1.27}
+ #game-screen .question-box{line-height:1.33}
+}
+@media(max-width:700px){
+ #game-screen .case-paper:before{font-size:8px;right:10px;top:0}
+ #game-screen .case-id{padding-right:108px}
+ #game-screen .diagram-frame{min-height:168px}
+ #game-screen .diagram-frame svg{height:auto;max-height:260px}
+ #game-screen .option .opttext{line-height:1.52}
+}
+
 </style>
 <style>
 /* 証明探偵団 2.0 — visual & accessibility upgrade. Main question bank remains unchanged. */
@@ -1139,6 +1174,56 @@ drawIntro();if(state.finished)finish();
       const b=buttons[Number(e.key)-1];if(b&&!b.disabled){e.preventDefault();b.click();}
     }
   });
+})();
+
+</script>
+<script>
+
+/* v4: fixed geometry label positions. The diagram's mathematical data remain unchanged. */
+(() => {
+ 'use strict';
+ const labelFix={
+   'x': {O:[275,108]},
+   'shared': {A:[297,22],B:[74,151],D:[304,248]},
+   'kite': {A:[67,144],B:[315,21],D:[313,251]},
+   'crossparallel': {C:[139,251],O:[302,105]},
+   'parallelogram': {D:[162,250]},
+   'textbook:case56': {B:[465,47],C:[114,222],D:[453,220],O:[299,105],'ℓ':[535,30]},
+   'textbook:case57': {A:[115,22],D:[115,247],O:[316,105]},
+   'textbook:similar': {D:[427,26]},
+   'textbook:case54': {P:[299,25]},
+   'textbook:case55': {A:[318,25]},
+   'textbook:case58': {E:[318,90]},
+   'textbook:case59': {B:[335,35],P:[312,108],R:[211,66]},
+   'textbook:case60': {D:[315,26],E:[362,101],F:[590,236]}
+ };
+ function polishDiagram(diagram){
+   const root=document.querySelector('#diagram svg'); if(!root)return;
+   const labels=[...root.querySelectorAll('text.lab')];
+   if(diagram==='textbook:logic'){
+     for(const l of labels){l.setAttribute('text-anchor','middle');}
+   }
+   for(const l of labels){
+     const pos=labelFix[diagram]?.[l.textContent.trim()];
+     if(pos){l.setAttribute('x',pos[0]);l.setAttribute('y',pos[1]);}
+   }
+   if(diagram==='textbook:case59'){const note=[...root.querySelectorAll('text.note')].find(l=>l.textContent.trim()==='PR⊥OB');if(note){note.setAttribute('x','116');note.setAttribute('y','47');}}
+   root.querySelectorAll('text.lab').forEach(l=>{
+     l.setAttribute('aria-hidden','true');
+     l.setAttribute('paint-order','stroke');
+   });
+   root.setAttribute('focusable','false');
+ }
+ const oldRender=render;
+ render=function(...args){
+   const result=oldRender.apply(this,args);
+   if(!state.finished && state.index<cases.length)polishDiagram(cases[state.index].diagram);
+   return result;
+ };
+ // The first saved state may already be at a game page: do not reset progress.
+ if(document.querySelector('#game-screen:not(.hidden)') && state.index<cases.length){
+   polishDiagram(cases[state.index].diagram);
+ }
 })();
 
 </script>

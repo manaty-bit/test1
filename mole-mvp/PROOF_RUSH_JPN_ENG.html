@@ -1,0 +1,1299 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#101b2b"><title>PROOF RUSH｜三角形の合同・証明ゲーム</title><meta name="description" content="PROOF RUSH｜モグラがヘビから逃げる、三角形の合同と証明の16bitタイムアタックゲーム">
+<style>
+:root{--bg:#101b2b;--panel:#20334a;--border:#667f8a;--gold:#f5d484;--ink:#fff6de;--pale:#efe8d2;--green:#a1efd1;--red:#ffaaa2}
+
+#given{display:none}.diagram-top{justify-content:flex-start}.diagram-note{font-weight:800}
+.math{font-variant-numeric:tabular-nums;letter-spacing:.01em}.math .tri,.math .ang{display:inline-block;font-weight:900;color:#6d4527;margin-right:1px;text-shadow:0 1px 0 #fff4d5}.math .name{font-weight:900;letter-spacing:.02em}.math .eq{font-weight:900;padding:0 .08em}.math .cong{font-weight:900;padding:0 .08em;color:#194d71}.math .tri-group,.math .ang-group{white-space:nowrap}.answer span.math{font-size:1.05em}.proofrow .math{line-height:1.5}.diagram-note .math{font-size:1.02em}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg)}
+body{font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif;color:var(--ink);background:radial-gradient(circle at 50% -10%,#2f5062,transparent 65%),#101b2b;-webkit-tap-highlight-color:transparent}
+button{font:inherit;cursor:pointer;touch-action:manipulation}button:focus-visible{outline:3px solid #fffbc9;outline-offset:1px}[hidden]{display:none!important}
+.app{max-width:780px;margin:0 auto;width:100%;height:100dvh;min-height:0;display:flex;flex-direction:column;padding:6px 8px 7px;gap:6px;overflow:hidden}
+.top{height:35px;flex:0 0 35px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 5px}
+.brand{display:flex;gap:7px;align-items:center;min-width:0}.brand-mark{width:31px;height:31px;display:grid;place-items:center;background:#654f32;border:2px solid #e0bb73;box-shadow:3px 3px 0 #080e16;font-size:16px}.brand-txt b{display:block;font-size:clamp(13px,3.7vw,18px);line-height:1.22;white-space:nowrap}.brand-txt small{display:block;line-height:1.1;font:bold 9px monospace;letter-spacing:.1em;color:#b7d6d3}
+.tiny{font-weight:800;color:#e9dfcd;background:#263c4c;border:1px solid #89a5a7;padding:6px 9px;font-size:11px;white-space:nowrap}
+.diagram{flex:0 0 auto;min-height:0;display:grid;grid-template-columns:1fr;gap:0;background:#efe5cb;border:3px solid #ac8855;box-shadow:inset 0 0 0 2px #fff1cf;color:#263443}
+.diagram-top{display:flex;align-items:center;justify-content:space-between;padding:3px 8px 0;gap:6px}.diagram-top strong{font-size:11px;letter-spacing:.02em}.diagram-top span{font-size:10px;color:#5d5e5b;font-weight:700;text-align:right;min-width:0;overflow-wrap:anywhere}
+.figure{height:clamp(116px,17dvh,155px);width:100%;display:block;padding:0 4px;overflow:visible}.diagram-note{padding:0 8px 4px;text-align:center;font-weight:800;font-size:11px;color:#464d54}
+.diagram .hilite{animation:hilite .7s ease-in-out infinite alternate}@keyframes hilite{to{filter:drop-shadow(0 0 4px #fcb43d)}}
+.status{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:8px;flex:0 0 46px;min-height:46px;padding:6px 9px;background:#21344b;border:2px solid #587786;box-shadow:2px 2px #080e16}
+.task-num{font:900 10px/1.4 monospace;color:#f4d99c;white-space:nowrap}.task-num span{display:block;color:#aec8cd;font-size:9px}
+.progress-text{display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:800;color:#f3deaa;margin-bottom:3px}
+.timebar{height:9px;background:#0e2030;border:1px solid #698390}.timebar i{height:100%;width:100%;display:block;background:linear-gradient(90deg,#5bccb3,#b5f3bd)}.timebar.warning i{background:linear-gradient(90deg,#f16b59,#f5b85d)}
+.timer{min-width:65px;text-align:right;font:900 clamp(19px,5vw,27px)/1 ui-monospace,monospace;color:#ffdc87;font-variant-numeric:tabular-nums}.timer.warning{color:#ff8e7f;animation:pulse .4s steps(2) infinite}.hearts{font-size:13px;color:#ff978d;white-space:nowrap}
+.mine{flex:1 1 auto;min-height:95px;position:relative;overflow:hidden;border:3px solid #946e49;background:#523927;box-shadow:inset 0 0 0 2px #30241e,3px 3px #090e15;isolation:isolate}
+.mine canvas{width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges;display:block}
+.mine-top{position:absolute;top:5px;left:6px;right:6px;pointer-events:none;display:flex;align-items:flex-start;justify-content:space-between;gap:8px}.depth{font:bold 10px monospace;background:#172b36e6;color:#ffe5ac;border:1px solid #8d9e9c;padding:4px 6px}.speech{background:#16283be6;border:1px solid #a3b5aa;padding:3px 7px;color:#eaf4e6;font-size:10px;max-width:76%;text-align:right}
+.mine-bottom{position:absolute;bottom:4px;left:0;right:0;pointer-events:none}.lane-guide{display:grid;grid-template-columns:repeat(3,1fr);width:100%;max-width:380px;gap:4px;padding:0 6px;margin:auto}.lane-guide span{font:900 12px monospace;color:#f9dc8b;text-shadow:1px 2px #1d1b17;text-align:center}
+.quiz{flex:0 0 auto;min-height:0;background:#172a3e;border:2px solid #78909b;box-shadow:3px 3px 0 #0c121a;padding:8px 9px 9px;display:flex;flex-direction:column;gap:6px}
+.question{display:flex;align-items:flex-start;gap:6px;justify-content:space-between}.question h2{margin:0;font-size:clamp(13px,3.4vw,17px);line-height:1.35;color:#ffdf9f}.question small{font-size:10px;color:#c2d1d4;font-weight:700;white-space:nowrap}
+.answers{display:grid;gap:5px}.answer{min-height:36px;text-align:left;display:flex;gap:8px;align-items:center;width:100%;border:2px solid #668391;background:#2a4859;color:#fff6e0;padding:5px 9px;line-height:1.26;font-weight:750;font-size:clamp(11px,3vw,15px);box-shadow:inset 2px 2px #3c6170;transition:background .12s}
+.answer b{width:23px;height:23px;flex:0 0 23px;display:grid;place-items:center;background:#172a36;border:1px solid #f1ca79;color:#f2d78e;font:900 12px monospace}.answer:disabled{cursor:default}.answer.good{background:#14664c;border-color:#b6f4bb;color:#f1ffe8}.answer.wrong{background:#6c3d3d;border-color:#f4aaa1;color:#ffebdd;animation:shake .25s steps(4)}.answer:active:not(:disabled){transform:translateY(1px)}
+.minirow{display:flex;align-items:center;justify-content:space-between;gap:7px}.feedback{font-size:11px;min-height:15px;color:#f4ce9c;font-weight:700;line-height:1.3}.hint{padding:5px 9px;border:1px solid #e6c17c;background:#554729;color:#fff0c1;font-weight:800;font-size:11px;white-space:nowrap}.hint:disabled{opacity:.55}.hint-reveal{font-size:11px;background:#2f4245;border-left:3px solid #efd385;padding:5px 7px;line-height:1.35;color:#fff1ce}
+.footer{flex:0 0 27px;display:flex;gap:7px;align-items:center;justify-content:space-between}.footer small{color:#abc2c8;font-size:10px;line-height:1.2;white-space:nowrap}.footer button{border:1px solid #7c949f;color:#e7eee9;background:#254051;padding:4px 9px;font-size:11px;font-weight:800}
+.overlay{position:absolute;inset:0;z-index:10;background:#0c1828e8;display:grid;place-items:center;padding:10px;text-align:center;overflow:auto}.modal{width:min(420px,100%);max-height:100%;overflow:auto;background:#182d40;border:3px solid #e1bf7f;box-shadow:inset 0 0 0 3px #344e5f,6px 6px 0 #0b121c;padding:13px 12px;display:flex;flex-direction:column;align-items:stretch;gap:8px}.modal .big{font-size:26px;line-height:1}.modal h2{font-size:clamp(17px,4.8vw,24px);color:#ffdf96;margin:0}.modal p{margin:0;font-size:12px;line-height:1.5;color:#e2eadf}.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;width:100%}.mode{padding:7px 3px;color:#e6f0f3;background:#2b4759;border:2px solid #597888;font-size:12px;font-weight:800}.mode.active{background:#5b5132;border-color:#f7d587;color:#fff4d3}.mode small{display:block;font-size:9px;color:#d0d5d5;font-weight:600}
+.primary{width:100%;background:#c58145;border:2px solid #ffe09b;padding:10px;color:#fff7e2;font-weight:900;font-size:15px;box-shadow:inset 2px 2px #eaae65,3px 3px #080e15}.secondary{width:100%;background:#294c5c;border:1px solid #92b6b9;color:#e8f5ed;padding:8px;font-weight:800}
+.proof{max-height:min(55dvh,330px);overflow:auto;width:100%;text-align:left;background:#f6efd9;border:3px solid #bd9c64;color:#2d3c4b;padding:8px;font-size:12px;line-height:1.55}.proof button{display:block;text-align:left;width:100%;border:0;border-bottom:1px dashed #d2c6a5;background:none;padding:5px 2px;color:#2d3c4b;font-weight:600;cursor:pointer;line-height:1.5}.proof button.active{background:#fce2a1;outline:2px solid #e2a441}.proof button:focus-visible{outline:2px solid #845a21}.proof h3{margin:0 0 6px;font-size:14px;color:#533d29} .result-stars{font-size:22px;color:#f4d781;letter-spacing:4px}
+.overlay.review-mode{position:fixed;left:0;right:0;bottom:0;z-index:200;background:#101c2bf7;display:flex;align-items:stretch;justify-content:center;padding:5px}
+.review-mode .modal{width:min(700px,100%);height:100%;max-height:100%;overflow:hidden;gap:6px;padding:10px 12px;display:flex;flex-direction:column}
+.review-mode .modal .big{display:none}
+.review-mode .modal h2{font-size:19px}
+.review-mode .modal p{font-size:11px;line-height:1.4}
+.review-mode .proof{flex:1 1 auto;min-height:0;max-height:none;overflow:auto;font-size:13px}
+.review-mode .proof button{font-size:13px;line-height:1.4;padding:7px 4px}
+.review-mode .primary{flex:0 0 auto;padding:9px}
+
+@keyframes shake{0%,100%{transform:none}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}@keyframes pulse{50%{opacity:.5}}
+@media(min-width:700px){.app{padding:8px 14px;gap:8px}.top{height:40px;flex-basis:40px}.figure{height:150px}.mine{min-height:165px}.quiz{padding:10px 12px;gap:8px}.answer{min-height:40px}.footer{flex-basis:30px}}
+@media(max-height:740px){.app{gap:4px;padding:3px 5px 4px}.top{height:29px;flex-basis:29px}.diagram{border-width:2px}.figure{height:clamp(96px,15dvh,117px)}.diagram-note{padding-bottom:2px;font-size:9px}.status{flex-basis:39px;min-height:39px;padding:4px 6px}.quiz{gap:4px;padding:5px 6px}.question h2{font-size:12px}.answer{min-height:31px;padding:4px 6px;font-size:11px}.answer b{width:20px;height:20px;flex-basis:20px}.hint{padding:4px 6px}.footer{flex-basis:24px}.mine{min-height:75px}.brand-mark{width:25px;height:25px;font-size:13px}.top .brand-txt small{display:none}}
+@media(max-height:590px){.diagram-top{padding-top:1px}.figure{height:84px}.diagram-note{font-size:9px}.top{height:25px;flex-basis:25px}.status{flex-basis:34px;min-height:34px}.quiz{gap:3px}.answer{min-height:28px;padding:3px 5px}.mine{min-height:50px}.footer small{display:none}}
+@media(prefers-reduced-motion:reduce){.timer.warning,.answer.wrong{animation:none}}
+
+/* Digging and chase UI */
+.mine{background:#593d2b}
+.mine.chase-warning{border-color:#f29469;box-shadow:0 0 0 2px #8e4b38,0 0 18px #a54d3955}
+.status{position:relative}
+.status:after{content:"";position:absolute;bottom:0;left:0;width:100%;height:2px;background:#ca9860;opacity:.55;pointer-events:none}
+@media(max-width:650px){.mine-top .speech{display:none}}
+@media (prefers-reduced-motion:reduce){.mine.chase-warning{box-shadow:none}}
+
+/* STAGE SELECT: clean, fully scrollable, touch-friendly */
+.stage-picker{display:grid;grid-template-columns:1fr;gap:7px;width:100%;overflow:auto;max-height:min(43dvh,345px);padding:2px 3px 5px;scrollbar-gutter:stable}
+.stage-card{width:100%;border:2px solid #789ba1;background:#294356;color:#fff0d3;text-align:left;display:flex;align-items:center;gap:10px;padding:10px 11px;min-height:65px;box-shadow:inset 3px 3px #365a65}
+.stage-card:active{transform:translateY(1px)}.stage-card:focus-visible{outline:3px solid #ffdb82}
+.stage-icon{width:38px;height:38px;flex:0 0 38px;background:#5b4931;border:2px solid #d9ad68;display:grid;place-items:center;font-size:21px}
+.stage-info{min-width:0;flex:1;display:flex;flex-direction:column;gap:2px}.stage-info strong{font-size:14px;line-height:1.25;color:#fff5cb}.stage-info small{font-size:11px;color:#ccdbe2;line-height:1.3}
+.stage-tag{flex:0 0 auto;font-size:11px;font-weight:800;color:#f7d98e}.stage-card.done{border-color:#81dabb}.stage-card.recommended{border-color:#f7d587}
+.stage-menu-top{display:flex;align-items:center;justify-content:space-between;gap:6px;width:100%;font-size:12px;color:#f1dba9}
+.stage-menu-top b{font-size:13px}.stage-menu-help{font-size:11px;color:#c4d7d9;text-align:left;width:100%}
+.stage-stageTitle{font-size:11px;color:#fff3c5;font-weight:800;white-space:nowrap}
+.stage-stats{font-size:12px;color:#dcebdc}
+.stage-menu .modal{gap:8px}
+.review-mode .modal.stage-modal{gap:8px;min-height:0}
+.review-mode .modal.stage-modal .modes{flex:0 0 auto}
+.review-mode .modal.stage-modal .stage-picker{flex:1 1 auto;max-height:none;min-height:0}
+.review-mode .modal.stage-modal h2{font-size:17px}
+.stage-menu .stage-picker::-webkit-scrollbar{width:5px}.stage-menu .stage-picker::-webkit-scrollbar-thumb{background:#6b8992}
+@media(max-height:610px){.stage-card{min-height:55px;padding:7px 9px}.stage-icon{width:31px;height:31px;flex-basis:31px;font-size:17px}.stage-info strong{font-size:12px}.stage-info small{font-size:10px}}
+
+/* v5: student-first, high-contrast mathematical notation */
+.diagram-top{justify-content:space-between;align-items:center;min-height:27px}
+.diagram-top .zoom-btn{background:#fff9e8;border:1px solid #9a835e;color:#263b4d;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:900;line-height:1.4}
+.diagram-top .zoom-btn:active{background:#e5d5b5}
+#figure{cursor:zoom-in;touch-action:manipulation}
+.answer .math .tri,.answer .math .ang,.question .math .tri,.question .math .ang{color:#ffdd92;text-shadow:0 1px #132634}
+.answer .math .cong,.question .math .cong{color:#aef2e0}
+.answer .math .eq,.question .math .eq{color:#fff5e1}
+.answer .math .tri-group,.answer .math .ang-group{white-space:nowrap}
+.answer .math .tri,.answer .math .ang{font-size:1.21em;line-height:1;vertical-align:-.03em}
+.diagram-note .math .tri,.diagram-note .math .ang{color:#704e28}
+.proofrow .math .tri,.proofrow .math .ang{color:#6d4527}
+.proofrow .math .cong{color:#194d71}
+.answer:disabled.wrong{opacity:.76;text-decoration:line-through;text-decoration-thickness:1px}
+.zoom-mode{top:0!important;inset:0!important;z-index:350!important;padding:10px!important}
+.zoom-mode .modal{width:min(720px,100%);max-height:100%;height:auto;overflow:auto;gap:12px;padding:13px}
+.zoom-mode .zoom-panel{background:#f6efd9;color:#263b4d;border:2px solid #bb995e;padding:9px;border-radius:6px;display:flex;align-items:center;justify-content:center}
+.zoom-mode .zoom-panel svg{width:100%;height:auto;min-height:130px;max-height: min(45dvh,330px);display:block;overflow:visible}
+.zoom-mode .zoom-goal{font-size:clamp(13px,3.6vw,17px);font-weight:800;color:#fff2cf;line-height:1.5}
+.zoom-mode .mark-legend{background:#273f4d;border:1px solid #7793a1;text-align:left;padding:9px;font-size:12px;line-height:1.65;color:#e8f1df}
+.zoom-mode .mark-legend .legend-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.zoom-mode .mark-legend .legend-row span{white-space:nowrap}
+.zoom-mode .primary{width:100%}
+.minirow .feedback{flex:1 1 auto;min-width:0}
+.app{padding-bottom:max(7px,env(safe-area-inset-bottom,0px))}
+@media(max-height:610px){.diagram-top{min-height:20px}.diagram-top .zoom-btn{font-size:10px;padding:1px 6px}.zoom-mode .zoom-panel svg{max-height:31dvh}}
+
+/* PROOF RUSH identity: consistent on game HUD and start menu */
+.brand-txt b{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.085em;font-weight:1000;font-size:clamp(16px,4.4vw,23px);color:#ffe3a5;text-shadow:2px 2px 0 #222b32}
+.brand-txt small{font-size:9px;letter-spacing:.03em}
+.review-mode .modal.stage-modal h2.rush-title,.modal h2.rush-title{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:clamp(28px,7.5vw,38px);font-weight:1000;line-height:1.1;letter-spacing:.12em;color:#ffe2a0;text-shadow:3px 3px 0 #745035,0 0 13px #edb76355;margin:0}
+.modal .rush-subtitle{font-size:clamp(11px,2.8vw,14px);font-weight:800;color:#d5ede9;line-height:1.35;margin:0}
+@media(max-height:610px){.review-mode .modal.stage-modal h2.rush-title{font-size:27px}.modal .rush-subtitle{font-size:11px}}
+
+/* Evidence choices: use stable edge→angle order, compact labels only when mixed. */
+.answer-kind{flex:0 0 23px;width:23px;min-height:21px;display:grid;place-items:center;font-size:10px;line-height:1;font-style:normal;font-weight:900;border:1px solid #acc9c6;background:#153843;color:#cde8df;border-radius:3px}
+.answer:has(.answer-kind){gap:6px}
+.answer .answer-kind+span{min-width:0;line-height:1.28}
+.answer.good .answer-kind{background:#e2f2e0;color:#145640;border-color:#97c4a5}
+@media(max-height:740px){.answer-kind{flex-basis:20px;width:20px;min-height:18px;font-size:9px}.answer:has(.answer-kind){gap:4px}}
+
+/* PROOF RUSH REFORGED — quiet math surface, active 16-bit underground strip. */
+.app{gap:5px;max-width:940px}
+.top{order:0}.status{order:1}.act-track{order:2}.diagram{order:3}.quiz{order:4}.mine{order:5}.footer{order:6}
+.act-track{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;flex:0 0 24px;min-height:24px}
+.act-cell{display:grid;place-items:center;background:#172b3a;border:1px solid #446070;color:#91b0b7;font:800 10px/1.1 system-ui,sans-serif}
+.act-cell.active{color:#ffe6a4;border-color:#d7ad68;background:#4d4536}.act-cell.done{color:#a8eacc;border-color:#53837b}
+.diagram{border-color:#b79660;background:#f6f0dd;box-shadow:inset 0 0 0 1px #fff9e7}
+.diagram-top strong{color:#354b50}.diagram-note{color:#344951}
+.quiz{background:#f8f4e9;border-color:#b69a6b;box-shadow:2px 2px 0 #0c121a;color:#20383c}
+.question h2{color:#264c4e}.question small{color:#5e6d6c}
+.answer{border:1.5px solid #b1c3c0;background:#fffdf8;color:#22383d;box-shadow:inset 2px 2px #ebeee7;font-size:clamp(12px,3.3vw,15px);min-height:42px;padding:7px 10px}
+.answer b{background:#203843;color:#ffe2aa;border-color:#b89a69}
+.answer:hover:not(:disabled){border-color:#287967;background:#f4faf4}
+.answer .math .tri,.answer .math .ang{color:#81552e;text-shadow:none}
+.answer .math .cong{color:#176b60}.answer .math .eq{color:#304850}
+.answer-kind{background:#e7eee8;color:#27584c;border-color:#b6c7bd}
+.feedback{color:#496369;font-size:11px}.minirow .hint{background:#ece4cd;border-color:#bca579;color:#554327}
+.mine{flex:1 1 95px;min-height:66px;max-height:148px;border-color:#906e49}
+.review-launch{font-size:12px;display:flex;align-items:center;justify-content:space-between;gap:8px}.review-launch small{font-size:10px;color:#b7e5d3}
+@media(min-width:700px){.app{max-width:900px}.figure{height:clamp(142px,23dvh,190px)}.mine{max-height:165px}.answer{min-height:44px}.act-track{flex-basis:27px}}
+@media(max-height:740px){.app{gap:3px}.act-track{flex-basis:19px;min-height:19px}.act-cell{font-size:9px}.figure{height:clamp(100px,15dvh,122px)}.mine{min-height:54px;max-height:88px}.answer{min-height:35px;padding:5px 8px;font-size:clamp(11px,3vw,14px)}.quiz{padding:5px 7px}.status{min-height:38px}}
+@media(max-height:590px){.figure{height:90px}.mine{min-height:44px;max-height:60px}.answer{min-height:31px;padding:4px 6px}}
+
+/* 2026-11: RUSH-only responsive interface */
+.app{max-width:940px}
+.race-rule{padding:9px 11px;border:1px solid #7f987f;background:#203f3d;color:#c8eed0;font-size:12px;font-weight:800}
+.goal-kicker{display:inline-grid;place-items:center;flex:0 0 auto;border:1px solid #88683a;background:#203d44;color:#ffe7a3;border-radius:3px;padding:5px 9px;font:900 12px/1.2 ui-monospace,monospace;letter-spacing:.05em}
+.diagram-note{padding:8px 10px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;border-top:1px solid #c6b690;background:#fff9e9;min-height:52px;color:#243a3d}
+.goal-content{font-size:clamp(16px,2.7vw,24px);line-height:1.28;letter-spacing:.01em;font-weight:900;text-align:center}
+.goal-content .math .tri,.goal-content .math .ang{color:#6b4b27}
+.diagram-top{min-height:31px}.diagram-top strong{font-size:clamp(11px,1.5vw,14px)}
+.figure{padding:5px 8px 6px;min-height:0}
+.race-row{order:5;display:block;flex:1 1 100px;min-height:64px;max-height:150px}
+.race-row .mine{width:100%;height:100%;max-height:none;min-height:0;flex:none}
+.mole-guide{display:none}
+.overlay.review-mode.menu-overlay{top:0!important;bottom:0;align-items:center;justify-content:center;overflow:auto}
+.menu-overlay .modal.stage-modal{max-height:min(92dvh,920px);width:min(640px,100%);height:auto;overflow:auto}
+@media(min-width:700px) and (max-width:899px){
+ .app{padding:12px 18px 16px;gap:9px;max-width:850px}
+ .top{height:44px;flex-basis:44px}.status{min-height:54px;flex-basis:54px}
+ .figure{height:clamp(160px,24dvh,230px)}
+ .diagram-note{min-height:60px}
+ .quiz{padding:14px 16px;gap:10px}.answer{font-size:clamp(15px,1.9vw,18px);min-height:54px;padding:11px 14px}
+ .question h2{font-size:18px}.race-row{max-height:135px;min-height:95px}
+}
+@media(min-width:900px){
+ html,body{overflow:hidden}
+ .app{max-width:1480px;width:100%;padding:14px clamp(18px,2.4vw,36px) 14px;gap:12px;height:100dvh;display:grid;
+   grid-template-columns:minmax(0,1.13fr) minmax(0,.87fr);
+   grid-template-rows:46px 56px 30px minmax(0,1fr) clamp(120px,17dvh,164px) 34px;
+   align-items:stretch;overflow:hidden}
+ .top{grid-column:1/-1;grid-row:1;order:unset;height:auto;min-height:0;padding:0 4px}
+ .top .brand-txt b{font-size:21px}.top .brand-txt small{font-size:10px}
+ .status{grid-column:1/-1;grid-row:2;order:unset;min-height:0;flex:none;padding:9px 18px;gap:20px}
+ .status .task-num{font-size:12px}.status .task-num span{font-size:12px}
+ .status .progress-text{font-size:13px}.status .timer{font-size:28px}
+ .act-track{grid-column:1/-1;grid-row:3;order:unset;min-height:0;flex:none;gap:10px}
+ .act-cell{font-size:12px;letter-spacing:.015em}
+ .diagram{grid-column:1;grid-row:4 / span 2;order:unset;min-height:0;grid-template-rows:45px minmax(0,1fr) auto;padding:3px;align-self:stretch}
+ .diagram-top{padding:6px 12px 3px}.diagram-top strong{font-size:15px}
+ .figure{height:100%;max-height:none;min-height:0;padding:8px 12px 16px;align-self:stretch}
+ .diagram-note{min-height:86px;padding:15px 12px;gap:13px;background:#fff9e6;border-top:2px solid #c7ac7c}
+ .goal-kicker{font-size:15px;padding:9px 13px}.goal-content{font-size:clamp(21px,2.05vw,29px)}
+ .quiz{grid-column:2;grid-row:4;order:unset;min-height:0;display:flex;flex-direction:column;gap:14px;padding:clamp(14px,1.7vw,25px);box-shadow:2px 2px 0 #0c121a;overflow:hidden}
+ .question{align-items:baseline;gap:12px}.question h2{font-size:clamp(19px,1.6vw,24px)}.question small{font-size:13px}
+ .answers{flex:1 1 auto;min-height:0;align-content:center;gap:12px}
+ .answer{min-height:clamp(62px,7dvh,78px);font-size:clamp(15px,1.32vw,20px);padding:12px 16px;gap:12px;line-height:1.42;border-width:2px}
+ .answer b{width:30px;height:30px;flex-basis:30px;font-size:15px}
+ .feedback{font-size:13px;line-height:1.5}.hint{font-size:12px;padding:9px 12px}
+ .race-row{grid-column:2;grid-row:5;order:unset;min-height:0;max-height:none;display:grid;grid-template-columns:minmax(180px,1.06fr) minmax(150px,.94fr);gap:10px;height:100%}
+ .race-row .mine{max-height:none;min-height:0;flex:none;border-width:2px;box-shadow:inset 0 0 0 1px #30241e}
+ .race-row .mine canvas{width:100%;height:100%}
+ .race-row .mine-top .speech{display:none}
+ .race-row .mine-bottom{bottom:2px}.race-row .lane-guide span{font-size:10px}
+ .mole-guide{display:flex;flex-direction:column;justify-content:center;gap:8px;min-width:0;padding:12px 15px;color:#d3eae5;background:#1b3340;border:1px solid #7d968c}
+ .mole-guide-heading{font-size:12px;font-weight:900;color:#ffda89;letter-spacing:.05em}
+ .mole-guide strong{font-size:clamp(14px,1.13vw,18px);line-height:1.5}
+ .mole-guide small{font-size:11px;line-height:1.5;color:#a9c7c4}
+ .footer{grid-column:1/-1;grid-row:6;order:unset;flex:none;align-self:center;min-height:0}
+ .footer small{font-size:12px}.footer button{padding:6px 13px;font-size:12px}
+ .overlay.review-mode{top:0!important;bottom:0;align-items:center;justify-content:center;padding:20px;background:#101c2bf2;overflow:auto}
+ .review-mode .modal{height:min(88dvh,820px);max-height:90dvh;width:min(840px,100%);padding:20px 24px;gap:12px}
+ .review-mode .modal h2{font-size:25px}.review-mode .modal p{font-size:14px;line-height:1.6}
+ .review-mode .proof button{font-size:15px;padding:10px 6px}
+ .review-mode .modal.stage-modal{height:auto;max-height:92dvh;width:min(690px,100%)}
+}
+@media(min-width:900px) and (max-width:1240px){
+ .question h2{font-size:clamp(15px,1.37vw,18px);line-height:1.4}
+ .question small{font-size:11px}
+ .quiz{padding:clamp(12px,1.35vw,18px)}
+}
+@media(min-width:900px) and (max-height:690px){
+ .app{gap:7px;padding-top:7px;padding-bottom:7px;grid-template-rows:38px 49px 23px minmax(0,1fr) 108px 29px}
+ .diagram{grid-template-rows:32px minmax(0,1fr) auto}.diagram-note{min-height:67px;padding:7px 9px}
+ .quiz{gap:7px;padding:10px 15px}.answers{gap:5px}.answer{min-height:44px;padding:6px 10px;font-size:14px}
+ .mole-guide{padding:6px 11px;gap:4px}.mole-guide small{display:none}
+}
+@media(max-width:899px){
+ .goal-content{font-size:clamp(15px,3.5vw,20px)}
+ .race-row .mine{min-height:0}
+}
+@media(max-width:600px){
+ .diagram-note{min-height:44px;padding:7px 6px;gap:7px}
+ .goal-kicker{font-size:11px;padding:4px 6px}.goal-content{font-size:clamp(14px,4vw,17px)}
+ .race-row{flex:1 1 80px;max-height:135px;min-height:52px}
+ .race-row .mine{height:100%}
+}
+
+
+/* ===========================================================
+   PORTRAIT CHASE — gameplay is the second full-height panel.
+   Figure / GOAL / choices are one connected column on the left.
+   The canvas has a matching pixel resolution and is never squashed.
+   =========================================================== */
+.chase-indicator{background:#152d35e8;color:#dcf7ce;border:1px solid #79a28b;
+ padding:4px 7px;font:800 10px/1.2 ui-monospace,monospace;white-space:nowrap;letter-spacing:.005em}
+.chase-indicator.danger{color:#ffd0bd;border-color:#e8a08a;background:#542b2ce8}
+.mine-top{align-items:center;justify-content:space-between;z-index:2;gap:5px;flex-wrap:wrap}
+.mine-top .speech{display:none}
+.race-row{isolation:isolate}
+.race-row .mine canvas{display:block;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges}
+.race-row .mine-bottom{z-index:1;bottom:6px}
+.race-row .lane-guide{max-width:unset}
+.race-row .lane-guide span{font-size:clamp(12px,1.25vw,17px)}
+@media(min-width:760px){
+ html,body{overflow:hidden}
+ .app{display:grid;width:100%;max-width:1600px;height:100dvh;overflow:hidden;
+   padding:clamp(8px,1.1vw,15px) clamp(10px,1.55vw,23px);
+   gap:clamp(6px,.82vw,12px);
+   grid-template-columns:minmax(0,1.1fr) minmax(290px,.9fr);
+   grid-template-rows:clamp(34px,4.5dvh,46px) clamp(43px,5.9dvh,56px)
+       clamp(23px,3dvh,30px) minmax(0,.98fr) minmax(0,1.02fr) 30px;
+   align-items:stretch}
+ .top{order:unset;grid-column:1/-1;grid-row:1;height:auto;min-height:0;padding:0 4px}
+ .status{order:unset;grid-column:1/-1;grid-row:2;min-height:0;height:100%;padding:5px 12px}
+ .act-track{order:unset;grid-column:1/-1;grid-row:3;height:100%;min-height:0;gap:7px}
+ .diagram{order:unset;grid-column:1;grid-row:4;min-height:0;display:grid;grid-template-rows:32px minmax(0,1fr) auto;align-self:stretch;padding:2px}
+ .diagram-top{min-height:0;padding:4px 9px 0}
+ .diagram-top strong{font-size:clamp(12px,1.2vw,15px)}
+ .diagram .figure{height:100%;min-height:0;max-height:none;width:100%;padding:3px 6px 0;align-self:stretch}
+ .diagram-note{min-height:64px;padding:9px 10px;gap:8px;align-items:center}
+ .goal-kicker{font-size:12px;padding:7px 9px}
+ .goal-content{font-size:clamp(21px,2.03vw,29px);font-weight:900;line-height:1.3}
+ .quiz{order:unset;grid-column:1;grid-row:5;min-height:0;align-self:stretch;display:flex;flex-direction:column;gap:clamp(5px,.85dvh,10px);
+  padding:clamp(9px,1.12vw,15px);overflow:hidden}
+ .question{align-items:baseline;gap:10px;flex:0 0 auto}
+ .question h2{font-size:clamp(15px,1.55vw,22px);line-height:1.4}
+ .question small{font-size:11px}
+ .answers{display:grid;flex:1 1 auto;min-height:0;align-content:center;gap:clamp(5px,.85dvh,10px)}
+ .answer{min-height:clamp(42px,6dvh,62px);padding:7px 12px;font-size:clamp(14px,1.3vw,18px);line-height:1.4;gap:10px}
+ .answer b{width:26px;height:26px;flex-basis:26px;font-size:13px}
+ .minirow{gap:8px;flex:0 0 auto}
+ .feedback{font-size:clamp(10px,1vw,13px)}
+ .hint{font-size:11px;padding:7px 10px}
+ .race-row{order:unset;grid-column:2;grid-row:4/6;display:flex;flex-direction:column;position:relative;
+  height:100%;max-height:none;min-height:0;gap:6px}
+ .race-row .mine{flex:1 1 auto;position:relative;width:100%;min-width:0;height:100%;max-height:none;min-height:0;
+  border:3px solid #947351;box-shadow:inset 0 0 0 2px #2c2320,2px 2px 0 #080c13}
+ .race-row .mine-top .speech{display:none}
+ .mole-guide{display:flex;flex-direction:row;align-items:center;gap:10px;flex:0 0 auto;min-height:38px;
+  justify-content:space-between;padding:7px 12px;border:1px solid #74928b;background:#1c3442;min-width:0}
+ .mole-guide .mole-guide-heading{font-size:11px;white-space:nowrap;color:#edcf8f}
+ .mole-guide strong{flex:1;min-width:0;text-align:right;line-height:1.3;font-size:clamp(11px,1vw,14px)}
+ .mole-guide small{display:none}
+ .footer{order:unset;grid-column:1/-1;grid-row:6;align-self:center;min-height:0;flex:none}
+ .footer small{font-size:11px}.footer button{padding:5px 11px;font-size:11px}
+ .overlay.review-mode{top:0!important;bottom:0;align-items:center;justify-content:center;background:#101b29eF;padding:12px;overflow:auto}
+ .review-mode .modal{height:min(89dvh,790px);max-height:92dvh;min-height:0;overflow:auto;width:min(850px,100%);padding:15px 20px}
+ .review-mode .modal.stage-modal{height:auto;max-height:92dvh}
+}
+@media(min-width:760px) and (max-width:1000px){
+ .app{grid-template-columns:minmax(0,1.12fr) minmax(260px,.88fr);grid-template-rows:34px 45px 23px minmax(0,.94fr) minmax(0,1.06fr) 27px}
+ .goal-content{font-size:clamp(19px,2.35vw,24px)}
+ .diagram-note{min-height:57px;padding:6px 8px}
+ .quiz{padding:8px 10px}.question h2{font-size:clamp(14px,1.75vw,17px)}
+ .answers{gap:5px}.answer{font-size:clamp(12px,1.6vw,15px);padding:5px 8px;min-height:38px}
+ .mole-guide{min-height:32px;padding:5px 8px}
+}
+@media(min-width:760px) and (max-height:690px){
+ .app{gap:5px;padding-top:6px;padding-bottom:6px;grid-template-rows:32px 43px 22px minmax(0,.92fr) minmax(0,1.08fr) 25px}
+ .diagram{grid-template-rows:25px minmax(0,1fr) auto}
+ .diagram-note{min-height:46px;padding:4px 8px}
+ .goal-content{font-size:clamp(18px,1.75vw,24px)}
+ .quiz{gap:4px;padding:6px 9px}.answers{gap:4px}.answer{min-height:32px;padding:4px 7px;font-size:13px}
+ .mole-guide{min-height:28px;padding:3px 8px}
+}
+@media(max-width:759px){
+ /* Keep all key mathematical controls visible on a phone; the tunnel receives
+    the remaining vertical space rather than pushing choices offscreen. */
+ .app{display:flex;max-width:760px;gap:4px;padding:4px 6px max(5px,env(safe-area-inset-bottom))}
+ .top{order:0}.status{order:1}.act-track{order:2}.diagram{order:3}.quiz{order:4}.race-row{order:5}.footer{order:6}
+ .diagram{flex:0 0 auto}.figure{height:clamp(90px,14dvh,150px)}
+ .diagram-note{min-height:42px;padding:5px 7px}.goal-content{font-size:clamp(15px,4vw,19px)}
+ .quiz{flex:0 0 auto;padding:7px;gap:6px}.answers{gap:5px}
+ .answer{min-height:clamp(35px,5.3dvh,47px);padding:5px 7px;font-size:clamp(11px,3.3vw,14px)}
+ .race-row{flex:1 1 180px;max-height:none;min-height:115px;display:block;position:relative}
+ .race-row .mine{height:100%;max-height:none;min-height:0}
+ .race-row .mine canvas{object-fit:cover;object-position:center 60%}
+ .chase-indicator{font-size:9px;padding:3px 5px}
+ .mole-guide{display:none}
+ .footer{flex:0 0 27px}
+}
+@media(max-width:759px) and (max-height:700px){
+ .figure{height:clamp(77px,12dvh,94px)}.diagram-note{min-height:35px;padding:3px 5px}
+ .quiz{gap:3px;padding:4px 6px}.answer{min-height:33px;padding:3px 6px}
+ .race-row{min-height:83px}.footer{flex-basis:22px}.minirow{gap:3px}
+}
+
+@media(min-width:760px) and (max-width:1000px){
+ .quiz .answers{align-content:start;padding-top:clamp(8px,1.6dvh,18px)}
+ .quiz .answer{min-height:clamp(44px,6dvh,60px)}
+}
+</style>
+<style>
+/* Perfect-clear certificate */
+.overlay.certificate-mode{position:fixed!important;inset:0!important;top:0!important;z-index:300;display:flex;align-items:center;justify-content:center;background:#10192cf5;padding:12px}
+.certificate-mode .modal{width:min(700px,100%);max-height:calc(100dvh - 24px);height:auto;overflow:auto;background:#15283b;border-color:#f3d28c;gap:10px;padding:18px}
+.certificate-mode .cert-eyebrow{color:#f8d68e;font-size:12px;font-weight:900;letter-spacing:.14em}
+.certificate-mode .cert-lead{color:#f7f1dc;font-size:13px}
+.certificate-mode .cert-name{display:block;width:100%;padding:12px;font-size:18px;border:2px solid #f0d18d;border-radius:9px;background:#fffdf3;color:#192a3b;text-align:center}
+.certificate-mode .cert-preview{display:block;width:100%;max-width:540px;margin:auto;border:2px solid #e9cc88;border-radius:5px;box-shadow:0 8px 24px #0006}
+.certificate-mode .cert-date{font-size:12px;color:#e6dcc1}
+.certificate-mode .cert-help{font-size:11px;color:#c9d7e7}
+.certificate-mode .cert-actions{display:flex;gap:8px;flex-wrap:wrap}
+.certificate-mode .cert-actions button{flex:1 1 180px}
+</style>
+<style>
+/* Compact language switch in the game header and every modal. */
+.lang-toggle{display:inline-flex;align-items:center;gap:2px;border:1px solid #809da7;border-radius:6px;background:#102635;padding:2px;flex:0 0 auto}
+.lang-toggle button{border:0;border-radius:4px;padding:4px 7px;background:transparent;color:#b8d0d4;font-size:10px;font-weight:900;line-height:1.2;letter-spacing:.02em;min-width:34px}
+.lang-toggle button.active{color:#132c3a;background:#f1d591;box-shadow:0 1px 2px #0005}
+.lang-toggle button:focus-visible{outline:2px solid #fff;border-radius:4px}
+.lang-toggle-header{margin-left:auto}
+.lang-toggle-modal{align-self:flex-end;position:sticky;top:0;z-index:15;box-shadow:0 2px 8px #0006}
+@media(max-width:380px){.top{gap:4px;padding:0 2px}.brand{gap:4px}.brand-txt b{font-size:13px}.lang-toggle button{min-width:31px;padding:3px 5px}.top .tiny{padding:4px 5px;font-size:10px}}
+@media(max-height:650px){.lang-toggle-modal{position:relative}.lang-toggle button{padding-top:2px;padding-bottom:2px}}
+</style>
+</head><body>
+<div class="app" id="app">
+<header class="top"><div class="brand"><div class="brand-mark">⛏</div><div class="brand-txt"><b>PROOF RUSH</b><small>考える × 掘り進む · 16-BIT</small></div></div><div class="lang-toggle lang-toggle-header" role="group" aria-label="Language"><button type="button" data-lang="ja">JPN</button><button type="button" data-lang="en">ENG</button></div><button id="pauseBtn" class="tiny" type="button" disabled>Ⅱ 一時停止</button></header>
+<section class="diagram" aria-label="証明に使う図形"><div class="diagram-top"><strong>📜 図を見て考えよう</strong><button type="button" id="zoomBtn" class="zoom-btn" aria-label="図を拡大して見る（制限時間は停止）">🔍 図を拡大</button><span id="given" aria-hidden="true"></span></div><svg id="figure" class="figure" viewBox="0 0 360 145" role="img" aria-label="問題の図形"></svg><div class="diagram-note" id="goal">正しい証明の道を掘り進もう！</div></section>
+<div class="status" aria-label="ヘビに追いつかれるまでの残り時間とライフ"><div class="task-num" id="taskNum">Q 1/3<span id="hearts">♥♥♥</span></div><div><div class="progress-text"><span id="gateCount">GATE 1 / 8</span><span id="statusTag">ヘビ接近中</span></div><div id="bar" class="timebar"><i id="barFill"></i></div></div><strong id="timer" class="timer">12.0</strong></div>
+<div class="act-track" id="actTrack" aria-label="証明の進行"><span>1 三角形</span><span>2 根拠</span><span>3 証明</span></div>
+<div class="race-row"><section class="mine" id="mine" aria-label="土を掘りながら自動で下へ逃げるモグラと追いかけるヘビのドット絵"><canvas id="world" width="288" height="400"></canvas><div class="mine-top"><span class="depth" id="depth">深さ 0 m</span><span class="chase-indicator" id="chaseIndicator" aria-label="ヘビの追跡状況">残り猶予 100%</span><span class="speech" id="message">土を掘ってヘビから逃げよう！</span></div><div class="mine-bottom"><div class="lane-guide"><span>①</span><span>②</span><span>③</span></div></div><div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="ゲームメニュー"><div class="modal" id="modalContent"><div class="big">⛏️ 🐾 💎</div><h2 class="rush-title">PROOF RUSH</h2><p class="rush-subtitle">ヘビから逃げて証明完成！</p><p>モグラは自動で土を掘って進む！<br><strong>上から追ってくるヘビにつかまる前に</strong>、正しい言葉・式・記号を選ぼう。<br>正解すれば掘り進む！ ヘビの追跡から逃げ切ろう！</p><div class="race-rule">🐍 RUSH専用：3回のライフで地下の証明を突破しよう</div><button class="primary" id="startBtn" type="button">▶ 冒険スタート！</button><span style="font-size:10px;color:#aecaee">三角形の合同条件は教科書表記。等しい式を選んだら、その理由も選ぼう。順番は自由！</span></div></div></section><aside class="mole-guide" aria-live="polite"><span class="mole-guide-heading">⛏️ NEXT DIG</span><strong id="molePrompt">正しい答えで道を開こう</strong><small>正解するとモグラが掘り進む</small></aside></div>
+<section class="quiz" aria-label="証明のパーツ選択"><div class="question"><h2 id="question">まずはゲームをスタートしよう！</h2><small id="stepType">証明の道</small></div><div class="answers" id="answers"><button class="answer" disabled><b>①</b><span>スタートすると選択肢が現れます。</span></button></div><div class="minirow"><span class="feedback" id="feedback" role="status">正しい道を選んで、モグラを助けよう。</span><button class="hint" id="hintBtn" type="button" disabled>💡 ヒント ＋3秒</button></div><div class="hint-reveal" id="hintText" hidden></div></section>
+<footer class="footer"><small id="modeSummary">図を読む → 根拠を探す → 証明する</small><div style="display:flex;gap:5px"><button id="muteBtn" type="button">♪ OFF</button><button id="stageMenuBtn" type="button">🗺 ステージ</button><button id="notebookBtn" type="button" disabled>📓 証明ノート</button></div></footer>
+</div>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id),canvas=$('world'),ctx=canvas.getContext('2d',{alpha:false});ctx.imageSmoothingEnabled=false;
+const W=288,PATHX=[52,144,236];
+let H=400;
+// Pixel canvas resolution tracks the visible tunnel aspect ratio.
+// This prevents the mole, snake, and soil pixels from being squashed on wide tablets.
+function resizeWorld(){
+ const mine=$('mine');if(!mine)return;
+ const rect=mine.getBoundingClientRect();if(rect.width<15||rect.height<15)return;
+ const next=Math.max(185,Math.min(850,Math.round(W*rect.height/rect.width)));
+ if(next===H&&canvas.width===W&&canvas.height===H)return;
+ H=next;canvas.width=W;canvas.height=H;ctx.imageSmoothingEnabled=false;
+}
+
+const CONDITIONS=['3組の辺がそれぞれ等しい。','2組の辺とその間の角がそれぞれ等しい。','1組の辺とその両端の角がそれぞれ等しい。'];
+// All figures use a 360x145 coordinate space. Paired vertices are exact geometric correspondences.
+const POINTS={
+ kite:{A:[180,30],B:[77,119],C:[283,119],D:[180,82]},
+ cross:{A:[74,24],B:[248,24],C:[286,124],D:[112,124],O:[180,74]},
+ separate:{A:[86,30],B:[47,119],C:[154,119],D:[260,30],E:[221,119],F:[328,119]},
+ turn:{A:[70,41],B:[49,108],C:[121,108],D:[317,64],E:[250,43],F:[250,115]},
+ mirror:{A:[66,29],B:[37,121],C:[158,121],D:[294,29],E:[323,121],F:[202,121]},
+ parallel:{A:[77,26],B:[219,26],C:[286,122],D:[144,122]},
+ crossTilt:{A:[72,32],B:[270,30],C:[288,128],D:[90,130],O:[180,80]}
+};
+// Explicit label positions prevent letters from touching angle arcs or being clipped on iPhone.
+const VERTEX_LABELS={
+ kite:{A:[180,21],B:[63,134],C:[297,134],D:[180,109]},
+ cross:{A:[60,18],B:[261,18],C:[298,139],D:[98,139],O:[191,78]},
+ separate:{A:[86,21],B:[35,135],C:[166,135],D:[260,21],E:[209,135],F:[341,135]},
+ turn:{A:[70,30],B:[36,121],C:[134,123],D:[330,58],E:[240,35],F:[236,130]},
+ mirror:{A:[66,20],B:[27,135],C:[170,135],D:[294,20],E:[333,135],F:[190,135]},
+ parallel:{A:[66,17],B:[219,17],C:[298,140],D:[144,140]},
+ crossTilt:{A:[60,21],B:[283,21],C:[301,140],D:[77,140],O:[193,75]}
+};
+const TASKS=[
+ {id:'kite-sss',title:'左右の角を証明',shape:'kite',kind:0,given:'AB＝AC、BD＝CD',goal:'∠BAD＝∠CAD を証明しよう',tri:'△ABDと△ACD',triWrong:['△ABCと△BDC','△ABDと△BCD'],fact:[{v:'AB＝AC',why:'仮定より',refs:['AB','AC']},{v:'BD＝CD',why:'仮定より',refs:['BD','CD']},{v:'AD＝AD',why:'共通な辺だから',refs:['AD']}],wrong:['AB＝BD','AC＝CD'],cong:'△ABD≡△ACD',congWrong:['△ABD≡△ADC','△ABD＝△ACD'],result:'∠BAD＝∠CAD',resultWrong:['∠BAD＝∠CDA','∠ABD＝∠CAD'],reason:'角',edgeGroups:[["AB","AC"],["BD","CD"]],angleGroups:[],shared:['AD'],resultRefs:['BAD','CAD']},
+ {id:'kite-asa',title:'左右の辺を証明',shape:'kite',kind:2,given:'∠BAD＝∠CAD、∠BDA＝∠CDA',goal:'BD＝CD を証明しよう',tri:'△ABDと△ACD',triWrong:['△ABCと△BDC','△ABDと△BCD'],fact:[{v:'∠BAD＝∠CAD',why:'仮定より',refs:['BAD','CAD']},{v:'∠BDA＝∠CDA',why:'仮定より',refs:['BDA','CDA']},{v:'AD＝AD',why:'共通な辺だから',refs:['AD']}],wrong:['AB＝BD','∠BAD＝∠BDA'],cong:'△ABD≡△ACD',congWrong:['△ABD≡△ADC','△ABD＝△ACD'],result:'BD＝CD',resultWrong:['AB＝BD','AD＝CD'],reason:'辺',edgeGroups:[],angleGroups:[['BAD','CAD'],['BDA','CDA']],shared:['AD'],resultRefs:['BD','CD']},
+ {id:'cross-sas',title:'向かい合う辺を証明',shape:'cross',kind:1,given:'AO＝CO、BO＝DO',goal:'AB＝CD を証明しよう',tri:'△AOBと△COD',triWrong:['△AOBと△COB','△AOBと△AOD'],fact:[{v:'AO＝CO',why:'仮定より',refs:['AO','CO']},{v:'BO＝DO',why:'仮定より',refs:['BO','DO']},{v:'∠AOB＝∠COD',why:'対頂角は等しいから',refs:['AOB','COD']}],wrong:['AO＝BO','∠AOB＝∠BOC'],cong:'△AOB≡△COD',congWrong:['△AOB≡△CDO','△AOB＝△COD'],result:'AB＝CD',resultWrong:['AO＝CD','AB＝CO'],reason:'辺',edgeGroups:[['AO','CO'],['BO','DO']],angleGroups:[],shared:[],implicitVertical:true,resultRefs:['AB','CD']},
+ {id:'pair-sss',title:'別々の三角形の角',shape:'separate',kind:0,given:'AB＝DE、BC＝EF、AC＝DF',goal:'∠ABC＝∠DEF を証明しよう',tri:'△ABCと△DEF',triWrong:['△ABCと△DFE','△ABCと△EFD'],fact:[{v:'AB＝DE',why:'仮定より',refs:['AB','DE']},{v:'BC＝EF',why:'仮定より',refs:['BC','EF']},{v:'AC＝DF',why:'仮定より',refs:['AC','DF']}],wrong:['AB＝EF','BC＝DF'],cong:'△ABC≡△DEF',congWrong:['△ABC≡△DFE','△ABC＝△DEF'],result:'∠ABC＝∠DEF',resultWrong:['∠ABC＝∠EDF','∠BAC＝∠DEF'],reason:'角',edgeGroups:[['AB','DE'],['BC','EF'],['AC','DF']],angleGroups:[],shared:[],resultRefs:['ABC','DEF']},
+ {id:'pair-sas',title:'別々の三角形の辺',shape:'separate',kind:1,given:'AB＝DE、AC＝DF、∠BAC＝∠EDF',goal:'BC＝EF を証明しよう',tri:'△ABCと△DEF',triWrong:['△ABCと△DFE','△ABCと△EFD'],fact:[{v:'AB＝DE',why:'仮定より',refs:['AB','DE']},{v:'AC＝DF',why:'仮定より',refs:['AC','DF']},{v:'∠BAC＝∠EDF',why:'仮定より',refs:['BAC','EDF']}],wrong:['AB＝EF','∠ABC＝∠EDF'],cong:'△ABC≡△DEF',congWrong:['△ABC≡△DFE','△ABC＝△DEF'],result:'BC＝EF',resultWrong:['BC＝DF','AB＝EF'],reason:'辺',edgeGroups:[['AB','DE'],['AC','DF']],angleGroups:[['BAC','EDF']],shared:[],resultRefs:['BC','EF']},
+ {id:'pair-asa',title:'2つの角を使う証明',shape:'separate',kind:2,given:'AB＝DE、∠BAC＝∠EDF、∠ABC＝∠DEF',goal:'AC＝DF を証明しよう',tri:'△ABCと△DEF',triWrong:['△ABCと△DFE','△ABCと△EFD'],fact:[{v:'AB＝DE',why:'仮定より',refs:['AB','DE']},{v:'∠BAC＝∠EDF',why:'仮定より',refs:['BAC','EDF']},{v:'∠ABC＝∠DEF',why:'仮定より',refs:['ABC','DEF']}],wrong:['AB＝EF','∠BAC＝∠DEF'],cong:'△ABC≡△DEF',congWrong:['△ABC≡△DFE','△ABC＝△DEF'],result:'AC＝DF',resultWrong:['AC＝EF','BC＝DF'],reason:'辺',edgeGroups:[['AB','DE']],angleGroups:[['BAC','EDF'],['ABC','DEF']],shared:[],resultRefs:['AC','DF']},
+ // STAGE 3 - two shared-side variants, and a SAS case.
+ {id:'kite-sas',title:'共通な辺とその間の角',shape:'kite',kind:1,given:'AB＝AC、∠BAD＝∠CAD',goal:'BD＝CD を証明しよう',tri:'△BADと△CAD',triWrong:['△BADと△CDA','△ABDと△CAD'],fact:[{v:'BA＝CA',why:'仮定より',refs:['AB','AC']},{v:'∠BAD＝∠CAD',why:'仮定より',refs:['BAD','CAD']},{v:'AD＝AD',why:'共通な辺だから',refs:['AD']}],wrong:['BA＝DA','∠BDA＝∠CAD'],cong:'△BAD≡△CAD',congWrong:['△BAD≡△CDA','△BAD＝△CAD'],result:'BD＝CD',resultWrong:['BD＝CA','BA＝CD'],reason:'辺',edgeGroups:[['AB','AC']],angleGroups:[['BAD','CAD']],shared:['AD'],resultRefs:['BD','CD']},
+ // STAGE 4 - one rotation, one reflection. Coordinates of both triangles are exactly congruent.
+ {id:'turn-sas',title:'回転した三角形',shape:'turn',kind:1,given:'AB＝DE、AC＝DF、∠BAC＝∠EDF',goal:'BC＝EF を証明しよう',tri:'△ABCと△DEF',triWrong:['△ABCと△DFE','△ABCと△EFD'],fact:[{v:'AB＝DE',why:'仮定より',refs:['AB','DE']},{v:'AC＝DF',why:'仮定より',refs:['AC','DF']},{v:'∠BAC＝∠EDF',why:'仮定より',refs:['BAC','EDF']}],wrong:['AB＝EF','∠ABC＝∠EDF'],cong:'△ABC≡△DEF',congWrong:['△ABC≡△DFE','△ABC＝△DEF'],result:'BC＝EF',resultWrong:['BC＝DF','AB＝EF'],reason:'辺',edgeGroups:[['AB','DE'],['AC','DF']],angleGroups:[['BAC','EDF']],shared:[],resultRefs:['BC','EF']},
+ {id:'mirror-asa',title:'左右反転した三角形',shape:'mirror',kind:2,given:'AB＝DE、∠BAC＝∠EDF、∠ABC＝∠DEF',goal:'AC＝DF を証明しよう',tri:'△ABCと△DEF',triWrong:['△ABCと△DFE','△ABCと△EFD'],fact:[{v:'AB＝DE',why:'仮定より',refs:['AB','DE']},{v:'∠BAC＝∠EDF',why:'仮定より',refs:['BAC','EDF']},{v:'∠ABC＝∠DEF',why:'仮定より',refs:['ABC','DEF']}],wrong:['AB＝EF','∠BAC＝∠DEF'],cong:'△ABC≡△DEF',congWrong:['△ABC≡△DFE','△ABC＝△DEF'],result:'AC＝DF',resultWrong:['AC＝EF','BC＝DF'],reason:'辺',edgeGroups:[['AB','DE']],angleGroups:[['BAC','EDF'],['ABC','DEF']],shared:[],resultRefs:['AC','DF']},
+ // STAGE 5 - given parallel lines => alternate interior angles, not already marked as equal.
+ {id:'parallel-sas',title:'平行線と共通な辺',shape:'parallel',kind:1,given:'AB∥CD、BA＝DC',goal:'BC＝DA を証明しよう',tri:'△BACと△DCA',triWrong:['△BACと△DAC','△BACと△CDA'],fact:[{v:'BA＝DC',why:'仮定より',refs:['AB','CD']},{v:'AC＝CA',why:'共通な辺だから',refs:['AC']},{v:'∠BAC＝∠DCA',why:'平行線の錯角は等しいから',refs:['BAC','DCA']}],wrong:['BA＝DA','∠BAC＝∠DAC'],cong:'△BAC≡△DCA',congWrong:['△BAC≡△CDA','△BAC＝△DCA'],result:'BC＝DA',resultWrong:['BC＝DC','BA＝DA'],reason:'辺',edgeGroups:[['AB','CD']],angleGroups:[],shared:['AC'],parallelGroups:[['AB','CD']],resultRefs:['BC','DA']},
+ {id:'parallel-asa',title:'2組の平行線と錯角',shape:'parallel',kind:2,given:'AB∥CD、BC∥AD',goal:'AB＝CD を証明しよう',tri:'△ABCと△CDA',triWrong:['△ABCと△CAD','△ABCと△DAC'],fact:[{v:'∠BAC＝∠DCA',why:'平行線の錯角は等しいから',refs:['BAC','DCA']},{v:'∠BCA＝∠DAC',why:'平行線の錯角は等しいから',refs:['BCA','DAC']},{v:'AC＝CA',why:'共通な辺だから',refs:['AC']}],wrong:['∠BAC＝∠DAC','AB＝BC'],cong:'△ABC≡△CDA',congWrong:['△ABC≡△CAD','△ABC＝△CDA'],result:'AB＝CD',resultWrong:['AB＝AD','BC＝CD'],reason:'辺',edgeGroups:[],angleGroups:[],shared:['AC'],parallelGroups:[['AB','CD'],['BC','AD']],resultRefs:['AB','CD']},
+ {id:'cross-angle',title:'対頂角を使って角を証明',shape:'crossTilt',kind:1,given:'AO＝CO、BO＝DO',goal:'∠OAB＝∠OCD を証明しよう',tri:'△AOBと△COD',triWrong:['△AOBと△CDO','△AOBと△OCB'],fact:[{v:'AO＝CO',why:'仮定より',refs:['AO','CO']},{v:'BO＝DO',why:'仮定より',refs:['BO','DO']},{v:'∠AOB＝∠COD',why:'対頂角は等しいから',refs:['AOB','COD']}],wrong:['AO＝BO','∠AOB＝∠BOC'],cong:'△AOB≡△COD',congWrong:['△AOB≡△CDO','△AOB＝△COD'],result:'∠OAB＝∠OCD',resultWrong:['∠OAB＝∠ODC','∠ABO＝∠OCD'],reason:'角',edgeGroups:[['AO','CO'],['BO','DO']],angleGroups:[],shared:[],implicitVertical:true,resultRefs:['OAB','OCD']}
+];
+
+// For introduction only the figure is given: students must infer the congruence condition.
+const introTask=(base,id,title)=>({...base,id,title,given:'図の同じ印の辺・角はそれぞれ等しい',goal:'図から合同条件を見分けよう'});
+TASKS.push(introTask(TASKS.find(t=>t.id==='pair-sss'),'intro-sss','3組の辺を見つけよう'));
+TASKS.push(introTask(TASKS.find(t=>t.id==='turn-sas'),'intro-sas','2組の辺と間の角'));
+TASKS.push(introTask(TASKS.find(t=>t.id==='mirror-asa'),'intro-asa','1組の辺と両端の角'));
+
+const STAGES=[
+ {id:'first',name:'合同条件の入口',desc:'図を見て3つの合同条件を選ぶ',icon:'🌱',timeFactor:1.25,tasks:['intro-sss','intro-sas','intro-asa'],steps:['condition']},
+ {id:'pairs',name:'対応する辺と角',desc:'三角形と等しい3組を見つける',icon:'🔎',timeFactor:1.16,tasks:['pair-sss','pair-sas','pair-asa'],steps:['tri','facts','facts','facts','condition','cong']},
+ {id:'reasons',name:'証明の地下道',desc:'仮定・共通な辺の理由も考える',icon:'⛏️',timeFactor:1.08,tasks:['kite-sss','kite-sas','kite-asa'],steps:['tri','facts','factWhy','facts','factWhy','facts','factWhy','condition','cong']},
+ {id:'conclusion',name:'合同の宝箱',desc:'合同を使って辺や角を証明',icon:'💎',timeFactor:1,tasks:['cross-sas','turn-sas','mirror-asa'],steps:['tri','facts','factWhy','facts','factWhy','facts','factWhy','condition','cong','reason','result']},
+ {id:'master',name:'最深部の証明',desc:'平行線・錯角・対頂角にも挑戦',icon:'🏰',timeFactor:1.1,tasks:['parallel-sas','parallel-asa','cross-angle'],steps:['tri','facts','factWhy','facts','factWhy','facts','factWhy','condition','cong','reason','result']}
+];
+const MISSES_KEY='mole-proof-rush-errors-v1';
+function getMisses(){try{const x=JSON.parse(localStorage.getItem(MISSES_KEY)||'{}');return x&&typeof x==='object'&&!Array.isArray(x)?x:{}}catch(_){return {}}}
+let missBook=getMisses();
+function saveMissBook(){try{localStorage.setItem(MISSES_KEY,JSON.stringify(missBook))}catch(_){}}
+function recordMiss(kind){
+ const id=task().id;const rec=missBook[id]||{count:0,types:{},last:0};
+ rec.count=Math.min(99,(rec.count||0)+1);rec.types[kind]=(rec.types[kind]||0)+1;rec.last=Date.now();
+ missBook[id]=rec;saveMissBook();
+}
+function reviewCandidates(){return Object.entries(missBook).filter(([id,val])=>TASKS.some(t=>t.id===id)&&val.count>0).sort((a,b)=>b[1].count-a[1].count||a[1].last-b[1].last).map(x=>x[0]);}
+function startReview(){
+ const candidates=reviewCandidates();if(!candidates.length)return;
+ const ids=[...candidates.slice(0,3)];
+ // Only one missed task? Add other figures involving the same congruence condition.
+ // Do not repeat the very same picture three times.
+ const first=TASKS.find(t=>t.id===candidates[0]);
+ const related=TASKS.filter(t=>t.kind===first.kind&&!ids.includes(t.id));
+ const rest=TASKS.filter(t=>!ids.includes(t.id)&&!related.some(r=>r.id===t.id));
+ for(const t of [...related,...rest]){if(ids.length>=3)break;if(!ids.includes(t.id))ids.push(t.id)}
+ startStage(3);state.reviewMode=true;state.taskIds=ids;state.taskIndex=0;loadTask();
+}
+const SAVE_KEY='mole-proof-rush-stage-v4';
+function readCompleted(){try{const data=JSON.parse(localStorage.getItem(SAVE_KEY)||'[]');return Array.isArray(data)?data.filter(id=>STAGES.some(t=>t.id===id)):[]}catch(_){return[]}}
+let stageClears=readCompleted();
+function saveClear(id){if(!stageClears.includes(id))stageClears.push(id);try{localStorage.setItem(SAVE_KEY,JSON.stringify(stageClears))}catch(_){}}
+
+const MODES={rush:[23,21,28]};
+let state={phase:'ready',idx:0,lives:3,remaining:12,limit:12,p:0,chosen:false,choice:1,wrong:0,hints:0,elapsed:0,taskStarted:0,taskWrong:0,taskHints:0,attempts:0,correctAnswers:0,hintUsed:false,notes:[],picked:[],taskIndex:0,taskIds:[],frame:0,hitFlash:0,correctFlash:0,collisionClock:0,penaltyFlash:0,mode:'rush',overlays:[],highlight:[],highlightId:-1,completed:[],reviewMode:false,selectedFact:null,totalSteps:1,stageIndex:0,steps:['condition'],stageId:'first'};
+let last=0,lastHud=0,audio=false,audioCtx=null,choiceMap=[];
+function sound(f=390,t='square',len=.07,volume=.035){if(!audio)return;try{audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=t;o.frequency.setValueAtTime(f,audioCtx.currentTime);g.gain.setValueAtTime(volume,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+len);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+len)}catch(e){}}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function formatMath(s){
+ let str=esc(String(s));
+ str=str.replace(/△([A-Z]{3})/g,'<span class="tri-group"><span class="tri">△</span><span class="name">$1</span></span>');
+ str=str.replace(/∠([A-Z]{3})/g,'<span class="ang-group"><span class="ang">∠</span><span class="name">$1</span></span>');
+ str=str.replace(/≡/g,'<span class="cong">≡</span>');
+ str=str.replace(/＝/g,'<span class="eq">＝</span>');
+ return '<span class="math" data-i18n-source="'+encodeURIComponent(String(s))+'">'+str+'</span>';
+}
+function shuffled(a){let b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function pickTasks(){return [...STAGES[state.stageIndex].tasks]}
+function stage(){return STAGES[state.stageIndex]}
+function task(){return TASKS.find(t=>t.id===state.taskIds[state.taskIndex])||TASKS[0]}
+function stepKind(){return state.steps[state.idx]||'condition'}
+function timeCategory(){const k=stepKind();return k==='facts'||k==='factWhy'?2:k==='tri'||k==='cong'||k==='result'?1:0}
+function resetTimer(){state.limit=+(MODES.rush[timeCategory()]*stage().timeFactor).toFixed(1);state.remaining=state.limit;state.p=0;state.chosen=false;state.choice=1;state.hintUsed=false;state.hitFlash=0;state.correctFlash=0;state.penaltyFlash=0}
+function currentSpec(){let t=task(),k=stepKind();if(k==='tri')return {title:'合同に使う2つの三角形を選ぼう',type:'三角形',choices:[t.tri,...t.triWrong],correct:[t.tri],hint:'図の印を見ながら、対応する頂点の順序を考えよう。'};
+ if(k==='facts') {let good=t.fact.filter(f=>!state.picked.includes(f.v)).map(f=>f.v);return {title:`等しい辺・角を選ぼう（${state.picked.length}/3）`,type:'等しい式を選ぶ',choices:[...good,...t.wrong].slice(0,5),correct:good,hint:t.shape==='parallel'?'平行線からわかる錯角と、2つの三角形の共通な辺に注目。':t.kind===2?'与えられた角と、その両端を結ぶ辺に注目。':t.kind===1?'2組の辺と、その間の角に注目しよう。':'3組の辺の等しさを集めよう。'};}
+ if(k==='factWhy'){
+  const f=state.selectedFact;
+  return {title:`なぜ ${f?.v||'この式'} といえる？`,type:'等しい理由を選ぶ',
+   choices:['仮定より','共通な辺だから','対頂角は等しいから','平行線の錯角は等しいから'],
+   correct:[f?.why||''],
+   hint:'仮定・共通な辺・対頂角・平行線の性質から、使える理由を探そう。'};
+ }
+ if(k==='condition')return{title:'使える合同条件は？',type:'合同条件',choices:CONDITIONS,correct:[CONDITIONS[t.kind]],hint:'集めた等しさは「辺」が何組、「角」が何組かな？'};
+ if(k==='cong')return{title:'合同を正しく表す式は？',type:'合同の式',choices:[t.cong,...t.congWrong],correct:[t.cong],hint:'合同な三角形どうしは「≡」で表す。辺・角の等しさと区別し、頂点の対応順を確かめよう。'};
+ if(k==='reason'){let correct=`合同な図形の対応する${t.reason}はそれぞれ等しいので、`,other=t.reason==='辺'?'角':'辺';return{title:'合同から結論を導く理由は？',type:'合同の利用',choices:[correct,`合同な図形の対応する${other}はそれぞれ等しいので、`,'仮定より、'],correct:[correct],hint:'結論で示すのは「辺」の等しさ？「角」の等しさ？'};}
+ return{title:'最後に証明する式は？',type:'結論',choices:[t.result,...t.resultWrong],correct:[t.result],hint:'図の下にある目標を確認しよう。'};
+}
+// Keep search positions predictable without revealing which option is correct.
+// For equations only: side equalities -> angle equalities, then alphabetical vertex order.
+// A compact edge/angle tag appears only if the three choices mix both kinds.
+function answerFormulaKind(v){
+ const text=String(v).trim();
+ if(text.startsWith('∠'))return '角';
+ if(/^[A-Z]{2}[＝=][A-Z]{2}$/.test(text))return '辺';
+ return '';
+}
+function compareFormulaChoices(a,b){
+ const kind=a=>answerFormulaKind(a)==='辺'?0:answerFormulaKind(a)==='角'?1:2;
+ return kind(a)-kind(b)||String(a).replace(/^∠/,'').localeCompare(String(b).replace(/^∠/,''),'ja');
+}
+const REASON_CHOICE_ORDER=['仮定より','共通な辺だから','対頂角は等しいから','平行線の錯角は等しいから'];
+function orderGameChoices(pool,k){
+ if(k==='facts'||k==='result'){
+  const sides=shuffled(pool.filter(v=>answerFormulaKind(v)==='辺'));
+  const angles=shuffled(pool.filter(v=>answerFormulaKind(v)==='角'));
+  const other=shuffled(pool.filter(v=>!answerFormulaKind(v)));
+  return [...sides,...angles,...other];
+ }
+ // Keep answer order shuffled for reasons, conditions and correspondence.
+ // It avoids teaching the correct button position rather than mathematical reasoning.
+ return pool;
+}
+function makeChoices(spec){let pool=spec.choices,k=stepKind();
+ // 辺・角の等しさでは「≡」をひっかけにしない。≡の判別は三角形の合同の関門だけ。
+ if(k==='facts'||k==='result')pool=pool.filter(v=>v.includes('△')||!v.includes('≡'));
+ if(k==='facts'){
+  let good=pool.filter(x=>spec.correct.includes(x)),bad=pool.filter(x=>!spec.correct.includes(x));
+  const count=Math.min(2,good.length);
+  pool=[...shuffled(good).slice(0,count),...shuffled(bad).slice(0,3-count)];
+ }else if(k==='factWhy'){
+  const good=spec.correct[0],bad=shuffled(pool.filter(x=>x!==good));
+  pool=[good,...bad.slice(0,2)];
+ }else{
+  pool=shuffled(pool).slice(0,3);
+ }
+ return orderGameChoices(pool,k);
+}
+function currentAct(){const k=stepKind();if(k==='tri'||(stage().id==='first'&&k==='condition'))return 1;if(k==='facts'||k==='factWhy')return 2;return 3;}
+function refreshActs(){$('actTrack').hidden=stage().id==='first'&&!state.reviewMode;const act=currentAct();const actNames=['三角形','根拠','証明'];$('actTrack').innerHTML=actNames.map((name,i)=>`<span class="act-cell ${act===i+1?'active':act>i+1?'done':''}">${act>i+1?'✓':i+1} ${name}</span>`).join('');}
+function updateUI(){if(state.phase==='ready')return;refreshActs();let t=task();$('gateCount').textContent=`GATE ${state.idx+1} / ${state.totalSteps}`;$('taskNum').innerHTML=`${state.reviewMode?'REVIEW':`ST${state.stageIndex+1}`} ${state.taskIndex+1}/${state.taskIds.length}<span id="hearts">${'♥'.repeat(state.lives)+'♡'.repeat(3-state.lives)}</span>`;$('timer').textContent=state.remaining.toFixed(1);let warning=state.remaining<=3&&state.phase==='playing'&&!state.chosen;$('timer').classList.toggle('warning',warning);$('mine').classList.toggle('chase-warning',warning);$('bar').classList.toggle('warning',warning);$('barFill').style.width=`${Math.max(0,Math.min(100,state.remaining/state.limit*100))}%`;$('statusTag').textContent=state.chosen?'掘り進め！':state.phase==='collision'?'つかまった！':'🐍 追跡中';$('depth').textContent=`深さ ${Math.round((state.idx+state.p)*12+state.taskIndex*100+state.stageIndex*300)}m`;
+ const ci=$('chaseIndicator');if(ci){const margin=Math.max(0,Math.min(100,Math.round((state.remaining/state.limit)*100)));ci.textContent=`🐍 残り猶予 ${margin}%`;ci.classList.toggle('danger',margin<=22)}$('pauseBtn').disabled=state.phase!=='playing'&&state.phase!=='paused';$('pauseBtn').textContent=state.phase==='paused'?'▶ 再開':'Ⅱ 一時停止'}
+function setMessage(str){$('message').textContent=str}
+function wrongFeedback(k){
+ if(k==='tri')return '2つの三角形の頂点の対応順を、図で確認しよう。';
+ if(k==='cong')return '三角形どうしの合同は「≡」。頂点の順番も確かめよう。';
+ if(k==='facts')return '同じ印の辺・角と対応関係に注目。記号の違いではなく根拠を考えよう。';
+ if(k==='factWhy')return '「仮定」「共通」「対頂角」「錯角」のどれからいえるか考えよう。';
+ if(k==='condition')return '辺と角の組数、角の位置を図で確認しよう。';
+ if(k==='reason')return '証明したい結論が辺なのか角なのかを確認。';
+ return 'GOALで示したい辺の長さ・角の大きさと対応関係を確認しよう。';
+}
+function markDiagram(){let t=task();$('given').textContent='';$('goal').innerHTML=`<span class="goal-kicker">GOAL</span><strong class="goal-content">${formatMath(t.goal)}</strong>`;drawFigure(state.highlight)}
+function showStageMenu(){
+ $('overlay').classList.remove('certificate-mode');
+ state.phase='ready';
+ const rec=STAGES.findIndex(t=>!stageClears.includes(t.id));
+ const previewIndex=rec<0?0:rec;state.stageIndex=previewIndex;state.stageId=STAGES[previewIndex].id;state.taskIds=[STAGES[previewIndex].tasks[0]];state.taskIndex=0;state.idx=0;state.steps=[...STAGES[previewIndex].steps];state.totalSteps=state.steps.length;state.notes=[];state.highlight=[];markDiagram();
+ const cards=STAGES.map((st,i)=>`<button type="button" class="stage-card ${stageClears.includes(st.id)?'done':''} ${i===rec?'recommended':''}" data-stage="${i}">
+ <span class="stage-icon">${st.icon}</span><span class="stage-info"><strong>STAGE ${i+1}　${st.name}</strong><small>${st.desc} ・ 3問</small></span><span class="stage-tag">${stageClears.includes(st.id)?'✓ クリア':i===rec?'おすすめ':'挑戦'}</span></button>`).join('');
+ showOverlay(`<h2 class="rush-title">PROOF RUSH</h2><p class="rush-subtitle">🐍 ヘビから逃げて、証明を完成させろ！</p><p class="stage-menu-help">やさしい問題から本格的な証明へ。クリアはこのブラウザに保存されます。<br>図の印：同じ刻み＝等しい辺 ／ 同じ弧＝等しい角 ／ 同じ矢印＝平行</p><div class="stage-menu-top"><b>3問ずつ・全15問</b><span>${stageClears.length}/5 クリア・▼ スクロール</span></div><div class="stage-picker">${cards}</div>${reviewCandidates().length?`<button class="secondary review-launch" id="reviewLaunch" type="button">↻ 苦手な証明を復習（3問） <small>苦手問題と同じ合同条件を含む3問</small></button>`:""}<div class="stage-menu-top"><b>RUSH · タイムアタック</b><span>ライフ3つ・ヒントで＋3秒</span></div><span class="stage-menu-help">全ステージ自由に選べます。時間切れでも何度でも再挑戦できます。</span>`,true);
+ $('modalContent').classList.add('stage-modal');$('overlay').classList.add('menu-overlay');
+ if($('reviewLaunch'))$('reviewLaunch').onclick=startReview;
+ for(const button of document.querySelectorAll('.stage-card'))button.onclick=()=>startStage(Number(button.dataset.stage));
+ updateUI();
+}
+function startStage(stageIndex){
+ if(!STAGES[stageIndex])return;
+ const st=STAGES[stageIndex],chosenMode='rush';
+ state={...state,phase:'playing',mode:chosenMode,stageIndex,stageId:st.id,steps:[...st.steps],totalSteps:st.steps.length,idx:0,lives:3,taskIndex:0,taskIds:[...st.tasks],picked:[],selectedFact:null,notes:[],completed:[],reviewMode:false,wrong:0,hints:0,elapsed:0,attempts:0,correctAnswers:0,highlight:[],highlightId:-1};
+ $('overlay').hidden=true;$('overlay').classList.remove('review-mode');$('modalContent').classList.remove('stage-modal');
+ $('notebookBtn').disabled=false;loadTask();sound(640,'square',.08)
+}
+function start(){startStage(state.stageIndex)}
+function loadTask(){state.taskStarted=state.elapsed;state.taskWrong=state.wrong;state.taskHints=state.hints;state.idx=0;state.lives=3;state.picked=[];state.selectedFact=null;state.notes=[];state.highlight=[];state.highlightId=-1;markDiagram();setStep()}
+function setStep(){resetTimer();let spec=currentSpec();const cue={tri:'対応する頂点を確かめよう',facts:'図の印から等しい組を探そう',factWhy:'その等しさの理由を考えよう',condition:'合同条件を決めよう',cong:'三角形の合同を示そう',reason:'合同からわかることは？',result:'最後の結論を完成させよう'};const prompt=document.getElementById('molePrompt');if(prompt)prompt.textContent=cue[stepKind()]||'証明の道を掘ろう';$('modeSummary').textContent=state.reviewMode?'復習チャレンジ ・ 3問':state.idx>0?'同じ色の頂点どうしが対応':`STAGE ${state.stageIndex+1} ・ ${stage().name}`;$('question').textContent=spec.title;$('stepType').textContent=spec.type;$('hintBtn').disabled=false;$('hintBtn').textContent='💡 ヒント ＋3秒';$('hintText').hidden=true;$('hintText').textContent='';$('feedback').textContent='ヘビが迫る前に、正しい答えを選ぼう！';let root=$('answers');root.replaceChildren();choiceMap=makeChoices(spec);const kinds=choiceMap.map(answerFormulaKind);const mixedKinds=stepKind()==='facts'&&kinds.includes('辺')&&kinds.includes('角');choiceMap.forEach((word,i)=>{let b=document.createElement('button');b.type='button';b.className='answer';b.dataset.idx=String(i);let n=document.createElement('b');n.textContent=['①','②','③','④'][i];let txt=document.createElement('span');txt.innerHTML=formatMath(word);if(mixedKinds&&kinds[i]){let tag=document.createElement('span');tag.className='answer-kind';tag.textContent=kinds[i];b.append(n,tag,txt)}else{b.append(n,txt)}b.addEventListener('click',()=>answer(i));root.appendChild(b)});setMessage('🐍 ヘビが上から迫ってくる！');updateUI()}
+function answer(i){if(state.phase!=='playing'||state.chosen||!choiceMap[i])return;let spec=currentSpec(),v=choiceMap[i],buttons=[...document.querySelectorAll('#answers .answer')];state.attempts++;if(spec.correct.includes(v)){state.correctAnswers++;state.choice=i;state.chosen=true;state.correctFlash=1;buttons[i].classList.add('good');buttons.forEach(b=>b.disabled=true);$('hintBtn').disabled=true;$('feedback').textContent='正解！ ヘビを引き離した！';setMessage('🐍 ヘビを引き離した！');sound(650,'square',.09);let t=task();let f=t.fact.find(x=>x.v===v);state.pending={text:v,fact:f||null};const k=stepKind();const refs=k==='factWhy'?(state.selectedFact?.refs||[]):k==='facts'?(f?.refs||[]):k==='result'?task().resultRefs:k==='condition'?task().fact.flatMap(f=>f.refs):[];if(refs.length)drawFigure(refs);}
+ else{state.wrong++;recordMiss(stepKind());state.hitFlash=1;state.remaining=Math.max(0,state.remaining-2);state.p=Math.max(0,1-state.remaining/state.limit);const b=buttons[i];b.classList.add('wrong');b.disabled=true;$('feedback').textContent='違う道！ '+wrongFeedback(stepKind())+'（－2秒）';setMessage('🐍 ヘビが近い！ 急いで！');sound(140,'sawtooth',.13);if(state.remaining<=0)collision();}updateUI()}
+function hint(){
+ if(state.phase!=='playing'||state.chosen||state.hintUsed)return;
+ state.hintUsed=true;state.hints++;
+ state.remaining=Math.min(state.limit+3,state.remaining+3);
+ state.p=Math.max(0,1-state.remaining/state.limit);
+ const help=currentSpec().hint;
+ $('hintText').textContent='💡 '+help;$('hintText').hidden=false;
+ $('hintBtn').disabled=true;$('hintBtn').textContent='💡 使用済み';
+ $('feedback').textContent='ヒント使用・＋3秒（読む間はタイマー停止）';
+ state.phase='paused';
+ showOverlay(`<div class="big">💡</div><h2>ヒント</h2><p style="font-size:15px;line-height:1.7">${esc(help)}</p><p>読む間はヘビが止まっています。再開すると＋3秒です。</p><button class="primary" id="closeHint" type="button">▶ ゲームを再開</button>`,true);
+ $('closeHint').onclick=resume;
+ sound(480,'sine',.12);updateUI();
+}
+function addLine(text,refs=[]){state.notes.push({text,refs});state.highlight=refs;drawFigure(refs)}
+function advanceStep(){let t=task(),k=stepKind(),v=state.pending?.text||'';let f=state.pending?.fact;state.pending=null;sound(870,'square',.08);
+ if(k==='tri'){addLine(t.tri+'において、');}
+ else if(k==='facts'){
+  if(!f){setStep();return}
+  if(state.steps[state.idx+1]==='factWhy')state.selectedFact=f;
+  else {state.picked.push(f.v);addLine(f.why+'、'+f.v+' ……'+['①','②','③'][state.picked.length-1],f.refs)}
+ }
+ else if(k==='factWhy'){
+  const selected=state.selectedFact;
+  if(!selected){setStep();return}
+  state.picked.push(selected.v);
+  addLine(v+'、'+selected.v+' ……'+['①','②','③'][state.picked.length-1],selected.refs);
+  state.selectedFact=null;
+ }
+ else if(k==='condition'){
+  if(state.steps.length===1)addLine('合同条件：'+CONDITIONS[t.kind]);
+  else addLine('①、②、③より、'+CONDITIONS[t.kind].replace(/。$/,'')+'ので、',t.fact.flatMap(f=>f.refs));
+ }
+ else if(k==='cong'){addLine(t.cong)}
+ else if(k==='reason'){addLine(`合同な図形の対応する${t.reason}はそれぞれ等しいので、`)}
+ else if(k==='result'){addLine(t.result,t.resultRefs)}
+ if(state.idx===state.totalSteps-1){finishTask();return}state.idx++;setStep()
+}
+function collision(){if(state.phase!=='playing')return;state.phase='collision';state.lives--;state.wrong++;recordMiss(stepKind());state.collisionClock=900;state.hitFlash=1;setMessage('🐍 ヘビに追いつかれた！');$('feedback').textContent=state.lives?'つかまった！ 同じ関門から再挑戦':'ライフがなくなった！';sound(100,'sawtooth',.2);updateUI()}
+function retryCurrentRun(){if(state.reviewMode){const ids=[...state.taskIds];startStage(3);state.reviewMode=true;state.taskIds=ids;state.taskIndex=0;loadTask();}else startStage(state.stageIndex)}
+function gameOver(){state.phase='gameover';showOverlay(`<div class="big">🐍 💥</div><h2>ヘビにつかまった！</h2><p>${state.taskIndex+1}問目の関門で失敗。<br>正しい証明をもう一度つなげよう。</p><button class="primary" id="retry">↺ 最初から再挑戦</button><button class="secondary" id="notesBtn">📓 途中までの証明を見る</button><button class="secondary" id="toStages">🗺 ステージを選び直す</button>`);$('retry').onclick=retryCurrentRun;$('notesBtn').onclick=showNotes;$('toStages').onclick=showStageMenu;updateUI()}
+function proofHtml(){const rows=state.notes.map((line,i)=>`<button type="button" class="proofrow" data-line="${i}"><b>${String(i+1).padStart(2,'0')}.</b> ${formatMath(line.text)}</button>`).join('');return `<div class="proof"><h3>学習の記録（各行を押すと図で確認）</h3>${rows||'<p>まだ証明は始まっていません。</p>'}</div>`}
+function wireProof(){for(let b of document.querySelectorAll('.proofrow')){b.onclick=()=>{let i=Number(b.dataset.line),line=state.notes[i];state.highlight=line.refs;state.highlightId=i;drawFigure(line.refs);for(let x of document.querySelectorAll('.proofrow'))x.classList.toggle('active',x===b);setMessage('図形で根拠を確認！')}}}
+
+function certificateDate(date){
+ return new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(date);
+}
+function certificateTheme(kind){
+ if(kind==='perfect') return {
+  filename:'パーフェクト認定証',
+  overlayTitle:'🏆 パーフェクトクリア！',
+  eyebrow:'💎 SPECIAL ACHIEVEMENT 💎',
+  lead:'ミス０回・♥３つを維持してステージを完走！<br>名前を入力して、認定証を画像で保存しよう。',
+  message:'🏆 パーフェクトクリア！ 認定証を保存しよう',
+  bg1:'#fffdf1',bg2:'#f5e8c6',
+  outer:'#183f5b',middle:'#c49b46',inner:'#d9bd7c',accent:'#c49b46',
+  title1:'★  PERFECT CLEAR  ★',title1Color:'#a87a28',
+  title2:'パーフェクトクリア認定証',title2Color:'#173b55',
+  hearts:'♥  ♥  ♥',heartsColor:'#d45362',
+  status:'ミス ０ 回　｜　ライフ ３ / ３',
+  line:'#c8ac71',
+  body:'あなたは一度も間違えず、すべての証明を完成させました。',
+  footer:'#846c40'
+ };
+ return {
+  filename:'クリア認定証',
+  overlayTitle:'🥈 ステージクリア！',
+  eyebrow:'✨ STAGE CLEAR ✨',
+  lead:'ステージを最後までクリア！<br>名前を入力して、シルバーの認定証を画像で保存しよう。',
+  message:'🥈 ステージクリア！ 認定証を保存しよう',
+  bg1:'#f9fbff',bg2:'#dde4ee',
+  outer:'#314255',middle:'#9aa6b5',inner:'#cdd4dc',accent:'#9aa6b5',
+  title1:'★  STAGE CLEAR  ★',title1Color:'#6c7788',
+  title2:'クリア認定証',title2Color:'#23384c',
+  hearts:'CLEAR',heartsColor:'#6d7888',
+  status:'最後までよくがんばりました',
+  line:'#a7b0bb',
+  body:'あなたは証明の道を最後まで進み、ステージを見事にクリアしました。',
+  footer:'#6f7783'
+ };
+}
+function drawCertificate(name,stamp,stageName,stageNumber,kind='perfect'){
+ const theme=certificateTheme(kind);
+ const c=document.createElement('canvas');c.width=1400;c.height=990;
+ const g=c.getContext('2d');const W=c.width,H=c.height;
+ const fill=(color,x,y,w,h)=>{g.fillStyle=color;g.fillRect(x,y,w,h)};
+ const center=(str,y,size,color,weight='bold',localize=true)=>{
+   g.fillStyle=color;g.font=`${weight} ${size}px "Noto Sans JP","Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif`;
+   g.textAlign='center';g.textBaseline='middle';g.fillText(localize&&window.__proofI18n?window.__proofI18n.translate(str):str,W/2,y,W-215);
+ };
+ const grad=g.createLinearGradient(0,0,W,H);grad.addColorStop(0,theme.bg1);grad.addColorStop(1,theme.bg2);fill(grad,0,0,W,H);
+ g.strokeStyle=theme.outer;g.lineWidth=18;g.strokeRect(35,35,W-70,H-70);
+ g.strokeStyle=theme.middle;g.lineWidth=6;g.strokeRect(55,55,W-110,H-110);
+ g.strokeStyle=theme.inner;g.lineWidth=2;g.strokeRect(70,70,W-140,H-140);
+ for(const [x,y] of [[95,95],[1305,95],[95,895],[1305,895]]){
+  g.beginPath();g.arc(x,y,14,0,Math.PI*2);g.fillStyle=theme.accent;g.fill();
+ }
+ center('PROOF RUSH',159,45,'#244961','900');
+ center(theme.title1,225,43,theme.title1Color,'900');
+ center(theme.title2,315,57,theme.title2Color,'900');
+ center(theme.hearts,408,70,theme.heartsColor);
+ center(theme.status,488,32,'#334d61');
+ center(name||'お名前を入力してください',600,70,'#1a354a','900',!name);
+ fill(theme.line,W/2-390,654,780,3);
+ center(theme.body,713,30,'#355268');
+ center(`STAGE ${stageNumber}　${stageName}`,780,28,'#354e62');
+ center('達成日時（日本時間）  '+certificateDate(stamp),842,26,'#42586b');
+ center('PROOF RUSH  |  GEOMETRY / PROOF',908,22,theme.footer);
+ return c;
+}
+function showCertificate(kind='perfect'){
+ const achievedAt=new Date();const stageName=stage().name;const stageNumber=state.stageIndex+1;const theme=certificateTheme(kind);
+ state.phase='certificate';
+ showOverlay(`<div class="cert-eyebrow">${theme.eyebrow}</div>
+ <h2>${theme.overlayTitle}</h2>
+ <p class="cert-lead">${theme.lead}</p>
+ <label for="certificateName" style="color:#ffdf96;font-size:13px;font-weight:800">認定証に記載する名前</label>
+ <input class="cert-name" id="certificateName" maxlength="32" autocomplete="name" placeholder="例：山田 太郎" aria-label="認定証に記載する名前">
+ <div class="cert-date">達成日時：${certificateDate(achievedAt)}（日本時間）</div>
+ <img id="certificatePreview" class="cert-preview" alt="認定証のプレビュー">
+ <p class="cert-help">画像を保存して、先生の指定する方法で提出してください。名前を入力すると画像にも反映されます。</p>
+ <div class="cert-actions"><button class="primary" type="button" id="downloadCertificate">⬇ 認定証を画像保存（PNG）</button><button class="secondary" type="button" id="certificateStages">🗺 ステージを選ぶ</button></div>
+ <p id="certificateError" role="status"></p>`);
+ $('overlay').classList.remove('review-mode','zoom-mode');
+ $('overlay').classList.add('certificate-mode');$('overlay').style.top='0px';
+ let currentCanvas;
+ const update=()=>{currentCanvas=drawCertificate($('certificateName').value.trim(),achievedAt,stageName,stageNumber,kind);$('certificatePreview').src=currentCanvas.toDataURL('image/png')};
+ $('certificateName').addEventListener('input',update);update();
+ $('downloadCertificate').onclick=()=>{
+  const name=$('certificateName').value.trim();
+  if(!name){$('certificateError').textContent='名前を入力してから保存してください。';$('certificateName').focus();return}
+  $('certificateError').textContent='';
+  currentCanvas=drawCertificate(name,achievedAt,stageName,stageNumber,kind);
+  const link=document.createElement('a');link.href=currentCanvas.toDataURL('image/png');
+  link.download=`PROOF_RUSH_${window.__proofI18n?window.__proofI18n.translate(theme.filename):theme.filename}_STAGE${stageNumber}_${achievedAt.getTime()}.png`;
+  document.body.appendChild(link);link.click();link.remove();
+ };
+ $('certificateStages').onclick=()=>{ $('overlay').classList.remove('certificate-mode');showStageMenu() };
+ setMessage(theme.message);
+ updateUI();
+}
+function showPerfectCertificate(){showCertificate('perfect')}
+function showClearCertificate(){showCertificate('clear')}
+
+function finishTask(repeat=false){
+ state.phase='between';if(!repeat)state.completed.push(task().id);
+ const misses=state.wrong-state.taskWrong,used=state.hints-state.taskHints,seconds=Math.round(state.elapsed-state.taskStarted),stars=misses===0&&used===0?3:misses<=2?2:1;
+ const more=state.taskIndex<state.taskIds.length-1;
+ if(!repeat&&!more&&!state.reviewMode){
+  saveClear(stage().id);
+  if(state.wrong===0&&state.lives===3){showPerfectCertificate();return;}
+  showClearCertificate();return;
+ }
+ const head=more?'証明の道、突破！':state.reviewMode?'復習チャレンジ完了！':'ステージクリア！';
+ if(!repeat&&state.reviewMode&&misses===0){const r=missBook[task().id];if(r){r.count=Math.max(0,r.count-1);saveMissBook();}}
+ const accuracy=Math.round(state.correctAnswers/Math.max(1,state.correctAnswers+state.wrong)*100);
+ showOverlay(`<div class="big">💎 🐾 💎</div><h2>${head}</h2><div class="result-stars">${'★'.repeat(stars)+'☆'.repeat(3-stars)}</div><p>STAGE ${state.stageIndex+1} ・ ${state.taskIndex+1}/${stage().tasks.length} 問<br>この問題：${seconds}秒・ミス${misses}回・ヒント${used}回<br>ここまでの解答成功率：${accuracy}%（時間切れも失敗として集計）<br>各行をタップすると図で確かめられるよ。</p>${proofHtml()}<button class="primary" id="continue">${more?'▶ 次の問題へ':'🗺 ステージを選ぶ'}</button>${!more&&!state.reviewMode&&state.stageIndex<STAGES.length-1?'<button class="secondary" id="nextStage">⛏ 次のステージに挑戦</button>':''}`);
+ wireProof();
+ $('continue').onclick=()=>{if(more){state.taskIndex++;state.phase='playing';$('overlay').hidden=true;loadTask()}else showStageMenu()};
+ if($('nextStage'))$('nextStage').onclick=()=>startStage(state.stageIndex+1);
+ setMessage('証明完成！');sound(980,'square',.19);updateUI()
+}
+function showOverlay(html,review=false){
+ let el=$('overlay');el.classList.remove('zoom-mode','menu-overlay');let showReview=review||state.phase==='between';
+ document.body.appendChild(el);el.classList.add('review-mode');el.style.top=showReview&&state.phase!=='ready'?Math.max(0,document.querySelector('.diagram').getBoundingClientRect().bottom+3)+'px':'0px';
+ $('modalContent').innerHTML='<div class="lang-toggle lang-toggle-modal" role="group" aria-label="Language"><button type="button" data-lang="ja">JPN</button><button type="button" data-lang="en">ENG</button></div>'+html;el.hidden=false
+}
+function showDiagramZoom(){
+ const before=state.phase;
+ if(before!=='playing')return;
+ state.phase='paused';
+ showOverlay(`<h2>🔍 図形を拡大</h2><div class="zoom-panel" id="zoomPanel"></div><div class="zoom-goal">${formatMath(task().goal)}</div><div class="mark-legend"><div class="legend-row"><span>／　同じ刻み → 等しい辺</span><span>⌒　同じ弧 → 等しい角</span><span>➜　同じ矢印 → 平行</span></div><div style="margin-top:4px;text-align:center">同じ辺を共有する場合は、その辺にも注目しよう。</div></div><p>図を確認している間、タイマーは停止します。</p><button type="button" class="primary" id="closeZoom">▶ ゲームを再開</button>`,true);
+ const el=$('overlay');el.classList.add('zoom-mode');el.style.top='0px';
+ const clone=$('figure').cloneNode(true);clone.removeAttribute('id');clone.removeAttribute('class');clone.setAttribute('aria-label','拡大した問題の図');
+ $('zoomPanel').replaceChildren(clone);
+ $('closeZoom').onclick=()=>{el.classList.remove('zoom-mode');if(before==='playing')resume();else{$('overlay').hidden=true;updateUI()}};
+ updateUI();
+}
+function showNotes(){let old=state.phase;if(old==='playing')state.phase='paused';showOverlay(`<div class="big">📓</div><h2>証明ノート</h2>${proofHtml()}<button class="primary" id="closeNote">▶ ${old==='playing'?'ゲームを再開':'閉じる'}</button>`,true);wireProof();$('closeNote').onclick=()=>{if(old==='playing'){resume()}else if(old==='gameover'){gameOver()}else if(old==='between'){finishTask(true);}else{$('overlay').hidden=true}};updateUI()}
+function togglePause(){if(state.phase==='playing'){state.phase='paused';showOverlay(`<div class="big">⏸</div><h2>一時停止</h2><p>タイマーを止めています。</p><button class="primary" id="resume">▶ 再開する</button><button class="secondary" id="restart">↺ このステージをやり直す</button><button class="secondary" id="toStages">🗺 ステージ選択</button>`);$('resume').onclick=resume;$('restart').onclick=retryCurrentRun;$('toStages').onclick=showStageMenu}else if(state.phase==='paused')resume();updateUI()}
+function resume(){state.phase='playing';$('overlay').hidden=true;$('overlay').classList.remove('zoom-mode');last=performance.now();updateUI()}
+function drawFigure(highlight=[]){
+ const t=task(),pts=POINTS[t.shape],labels=VERTEX_LABELS[t.shape];
+ const vertexGroups=trianglesFromPair(t.tri);
+ const showCorrespondence=(state.idx>0||state.notes.length>0||state.phase==='between')&&stage().id!=='first';
+ const palette=['#9c4c37','#147e73','#64569f'];
+ let vertexColors={};
+ if(showCorrespondence&&vertexGroups){
+  for(let i=0;i<3;i++){
+   vertexColors[vertexGroups[0][i]]=palette[i];
+   vertexColors[vertexGroups[1][i]]=palette[i];
+  }
+ }
+ const lines=t.shape==='kite'?[['A','B'],['B','D'],['D','A'],['A','C'],['C','D']]:(t.shape==='cross'||t.shape==='crossTilt')?[['A','O'],['O','B'],['B','A'],['C','O'],['O','D'],['D','C']]:t.shape==='parallel'?[['A','B'],['B','C'],['C','D'],['D','A'],['A','C']]:[['A','B'],['B','C'],['C','A'],['D','E'],['E','F'],['F','D']];
+ const segment=(a,b,col='#36566b',width=3)=>`<line x1="${pts[a][0]}" y1="${pts[a][1]}" x2="${pts[b][0]}" y2="${pts[b][1]}" stroke="${col}" stroke-width="${width}" stroke-linecap="round"/>`;
+ const poly=(names,col)=>`<polygon points="${names.map(k=>pts[k].join(',')).join(' ')}" fill="${col}" fill-opacity=".68"/>`;
+ let svg='';
+ if(t.shape==='kite')svg+=poly(['A','B','D'],'#bbd9e4')+poly(['A','D','C'],'#c8e5e2');
+ else if(t.shape==='cross'||t.shape==='crossTilt')svg+=poly(['A','O','B'],'#bbd9e4')+poly(['C','O','D'],'#c8e5e2');
+ else if(t.shape==='parallel')svg+=poly(['A','B','C'],'#bbd9e4')+poly(['C','D','A'],'#c8e5e2');
+ else svg+=poly(['A','B','C'],'#bbd9e4')+poly(['D','E','F'],'#c8e5e2');
+ for(const pair of lines)svg+=segment(pair[0],pair[1]);
+ for(const pair of t.shared)svg+=segment(pair[0],pair[1],'#227b95',4);
+ // Matching side marks: one / two / three ticks denote each equal-side pair.
+ function tick(code,count){
+  const p=pts[code[0]],q=pts[code[1]];
+  const dx=q[0]-p[0],dy=q[1]-p[1],len=Math.hypot(dx,dy);
+  const tx=dx/len,ty=dy/len,nx=-ty,ny=tx;
+  let result='';
+  for(let i=0;i<count;i++){
+   const o=(i-(count-1)/2)*9;
+   const cx=(p[0]+q[0])/2+tx*o,cy=(p[1]+q[1])/2+ty*o;
+   const col=['#d06a30','#8753a2','#14847c'][count-1]||'#d06a30';
+   result+=`<line x1="${(cx-7*nx).toFixed(2)}" y1="${(cy-7*ny).toFixed(2)}" x2="${(cx+7*nx).toFixed(2)}" y2="${(cy+7*ny).toFixed(2)}" stroke="${col}" stroke-width="3.3" stroke-linecap="round"/>`;
+  }
+  return result;
+ }
+ // Draw the smaller interior angle, explicitly referenced as ∠XYZ (vertex Y).
+ function arc(code,r=16,color='#8753a2',width=2.8){
+  const a=pts[code[0]],b=pts[code[1]],c=pts[code[2]];
+  let aa=Math.atan2(a[1]-b[1],a[0]-b[0]),bb=Math.atan2(c[1]-b[1],c[0]-b[0]);
+  const difference=(bb-aa+Math.PI*3)%(Math.PI*2)-Math.PI;
+  const positions=[];
+  for(let i=0;i<=18;i++){
+   const theta=aa+difference*i/18;
+   positions.push(`${(b[0]+r*Math.cos(theta)).toFixed(2)},${(b[1]+r*Math.sin(theta)).toFixed(2)}`);
+  }
+  return `<polyline points="${positions.join(' ')}" fill="none" stroke="${color}" stroke-width="${width}" stroke-linecap="round"/>`;
+ }
+ t.edgeGroups.forEach((group,i)=>group.forEach(code=>svg+=tick(code,i+1)));
+ t.angleGroups.forEach((group,i)=>group.forEach(code=>{for(let count=0;count<=i;count++)svg+=arc(code,16+count*7);}));
+ // Parallelism arrows are different from equality ticks: one or two arrows on each pair.
+ function parallelArrow(code,count){
+  const p=pts[code[0]],q=pts[code[1]],dx=q[0]-p[0],dy=q[1]-p[1],len=Math.hypot(dx,dy),direction=(dx<0||(dx===0&&dy<0))?-1:1,ux=direction*dx/len,uy=direction*dy/len,nx=-uy,ny=ux;
+  let result='';for(let i=0;i<count;i++){
+   const cx=(p[0]+q[0])/2+(0.23*len+(i-(count-1)/2)*14)*ux,cy=(p[1]+q[1])/2+(0.23*len+(i-(count-1)/2)*14)*uy;
+   result+=`<path d="M ${(cx-6*ux+4*nx).toFixed(1)} ${(cy-6*uy+4*ny).toFixed(1)} L ${(cx+6*ux).toFixed(1)} ${(cy+6*uy).toFixed(1)} L ${(cx-6*ux-4*nx).toFixed(1)} ${(cy-6*uy-4*ny).toFixed(1)}" fill="none" stroke="#2876a5" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>`;
+  }return result;
+ }
+ (t.parallelGroups||[]).forEach((group,i)=>group.forEach(code=>svg+=parallelArrow(code,i+1)));
+ // Highlight both sides/angles named in the tapped proof statement.
+ for(const code of highlight){
+  if(code.length===2 && pts[code[0]] && pts[code[1]])svg+=segment(code[0],code[1],'#e99c1b',6);
+  if(code.length===3 && pts[code[0]] && pts[code[1]] && pts[code[2]])svg+=arc(code,29,'#e99c1b',5);
+ }
+ for(const [name,xy] of Object.entries(pts)){
+  const lab=labels[name];
+  svg+=`<circle cx="${xy[0]}" cy="${xy[1]}" r="2.3" fill="#213d56"/>`;
+  svg+=`<text x="${lab[0]}" y="${lab[1]}" text-anchor="middle" font-size="16" font-weight="800" stroke="#f7f0db" stroke-width="4" paint-order="stroke" stroke-linejoin="round" fill="${vertexColors[name]||'#253a50'}">${name}</text>`;
+ }
+ $('figure').innerHTML=svg;
+ $('figure').setAttribute('aria-label',`図形：${t.given}。証明すること：${t.goal}。頂点は各三角形の対応順に記す。`);
+}
+// Parse vertex order from △ABCと△DEF; always use the same three correspondences.
+function trianglesFromPair(text){const m=text.match(/^△([A-Z]{3})と△([A-Z]{3})$/);return m?[m[1],m[2]]:null}
+function hash(x,y,z=0){let n=Math.imul(x+139,374761393)^Math.imul(y+z+17,668265263);n=Math.imul(n^(n>>>13),1274126177);return ((n^(n>>>16))>>>0)/4294967295}
+function pix(x,y,w,h,col){ctx.fillStyle=col;ctx.fillRect(Math.round(x),Math.round(y),Math.ceil(w),Math.ceil(h))}
+const palettes=[['#64452f','#745034','#826044','#523d32'],['#56413d','#60464b','#785253','#42393d'],['#3a465c','#4a526b','#586174','#323b50'],['#375565','#476576','#567486','#2c4959']];
+function drawSnake(time,headX,headY){
+ // Original 16-bit pixel serpent. The body follows the already-excavated tunnel.
+ const sw=Math.sin(time/240)*2.6, cx=headX+sw;
+ for(let j=8;j>=0;j--){
+  const sy=headY-j*10;
+  if(sy<-20||sy>H+20)continue;
+  const sx=cx+Math.sin(time/270-j*.68)*(4+j*.32);
+  const width=Math.max(13,23-j*.75);
+  pix(sx-width/2-2,sy-5,width+4,13,'#203a30');
+  pix(sx-width/2,sy-7,width,12,j%2?'#357f63':'#3e956a');
+  pix(sx-width/2+4,sy-7,width-8,3,'#78c18a');
+  pix(sx-width/2+3,sy+3,width-6,2,'#173e3b');
+ }
+ const y=headY,x=cx;
+ // Square scales, jaw, nose, eyes, and red forked tongue.
+ pix(x-17,y-10,34,21,'#183c32');pix(x-15,y-13,30,19,'#317d55');
+ pix(x-12,y-14,24,5,'#7cc88c');pix(x-19,y-1,38,14,'#286a4e');
+ pix(x-15,y+7,30,5,'#c6ca8a');pix(x-12,y+11,24,3,'#1e4d3c');
+ pix(x-11,y-5,7,7,'#f4d080');pix(x+4,y-5,7,7,'#f4d080');
+ pix(x-9,y-4,3,5,'#b72d39');pix(x+7,y-4,3,5,'#b72d39');
+ pix(x-4,y+4,8,3,'#172f2c');
+ pix(x-2,y+12,4,11,'#ed7470');pix(x-7,y+21,5,3,'#ed7470');pix(x+2,y+21,5,3,'#ed7470');
+ pix(x-10,y+9,4,5,'#f6e4ba');pix(x+6,y+9,4,5,'#f6e4ba');
+}
+function world(time){
+ const moleY=Math.round(H*.62);
+ const phase=(state.idx+state.p)*235+state.taskIndex*178;
+ const shade=palettes[Math.min(3,Math.floor(state.idx/2))];
+ // IMPORTANT: soil is filled everywhere. There is NO pre-dug vertical shaft.
+ pix(0,0,W,H,shade[0]);
+ const offset=phase%16;
+ for(let iy=-1;iy<=Math.ceil(H/16)+1;iy++){
+  const wy=iy+Math.floor(phase/16);
+  for(let ix=0;ix<18;ix++){
+   const xx=ix*16,yy=iy*16-offset,k=hash(ix,wy);
+   pix(xx,yy,16,16,shade[Math.floor(k*4)]);
+   pix(xx,yy,16,2,shade[3]);
+   if(k>.42){pix(xx+3,yy+7,5,2,'#b0956e');pix(xx+9,yy+12,3,2,'#342e2e')}
+   if(hash(ix,wy,2)>.966){pix(xx+6,yy+3,4,9,'#4e968e');pix(xx+8,yy+3,2,7,'#b0f0d0')}
+  }
+ }
+ // Rock and mineral patches remain embedded in solid earth outside the tunnel.
+ for(let j=0;j<Math.ceil(H/34);j++){
+  let y=(j*57-phase*.68) % (H+140);
+  if(y<-25||y>H+18)continue;
+  let x=j%2===0?27:250;
+  pix(x,y,13,16,j%4===0?'#5f8e8d':'#a08b74');
+  pix(x+3,y-3,6,8,j%4===0?'#9fe7d1':'#d2b68f');
+  pix(x+5,y+4,3,4,'#423d39');
+ }
+ const digProgress=state.phase==='playing'||state.phase==='collision';
+ const shaking=state.hitFlash>0?Math.round(Math.sin(time/40)*3):0;
+ const sprint=state.chosen?Math.min(1,Math.max(0,(state.p-.35)/.65)):0;
+ // Following a correct answer, the mole curves into the selected branch.
+ const moleX=144+(state.chosen?PATHX[state.choice]-144:0)*sprint+shaking;
+ const moleBob=state.phase==='playing'?Math.round(Math.sin(time/104)*2):0;
+ // The excavated tunnel exists ONLY BEHIND the mole, not ahead of it.
+ // The rough outer boundary makes the freshly dug soil visibly different from the tunnel.
+ ctx.lineCap='square';ctx.lineJoin='bevel';
+ function carve(color,width){
+  ctx.strokeStyle=color;ctx.lineWidth=width;ctx.beginPath();
+  ctx.moveTo(144,-35);ctx.lineTo(144,moleY-60);
+  ctx.lineTo(144+(moleX-144)*.23,moleY-33);
+  ctx.lineTo(moleX,moleY+13);ctx.stroke();
+ }
+ const core=H>260?100:79;carve('#8b6546',core+20);carve('#48372e',core+10);carve('#1b2b33',core);
+ // Loose soil clings to the freshly excavated walls.
+ for(let j=0;j<Math.ceil(moleY/11);j++){
+  let yy=((j*19+time*.017)%(moleY+32))-10;
+  let laneX=144+(moleX-144)*Math.max(0,Math.min(1,(yy-(moleY-60))/75));
+  const side=core/2+4;
+  pix(laneX-side,yy,3+(j%3),4,'#ad8760');
+  pix(laneX+side-3,yy+5,3+(j%2),3,'#c19a6e');
+ }
+ // Ahead of the mole, below the cutting claws, the soil is still solid.
+ // Dirt breaks away into square pixel fragments as the mole advances.
+ const running=state.phase==='playing';
+ if(running){
+  let dig=state.chosen?1.8:1;
+  for(let j=0;j<13;j++){
+   let a=time*.025*dig+j*31,yy=moleY+16+(a%49);
+   const xx=moleX+Math.sin(j*2.9+a*.22)*(8+(a%15));
+   if(yy>H-4)continue;
+   pix(xx,yy,3+j%4,3+j%3,['#e6be85','#b99464','#79503b','#d6a36c'][j%4]);
+  }
+  // Animated front cutting edge: this is solid soil being excavated now.
+  for(let j=0;j<7;j++){
+   let xx=moleX-29+j*9, yy=moleY+24+((j+Math.floor(time/100))%3)*3;
+   pix(xx,yy,7,4,j%2?'#c09a70':'#6d4d38');
+  }
+ }
+ // Incoming stone gates are BELOW the mole and rise with the passage of time.
+ const gateY=H+42-state.p*Math.min(170,H*.43);
+ if(gateY>moleY+12 && gateY<H+52){
+  pix(0,gateY,288,8,'#252b2b');pix(0,gateY+8,288,4,'#c79b60');
+  pix(11,gateY-33,266,33,'#554b49');
+  for(let j=0;j<3;j++){
+   let center=PATHX[j],selected=state.chosen&&state.choice===j;
+   pix(center-31,gateY-31,62,29,'#242d37');
+   pix(center-27,gateY-28,54,24,selected?'#267f5a':'#6c5651');
+   pix(center-24,gateY-26,48,3,selected?'#b8fac5':'#b9a27d');
+   pix(center-23,gateY-19,46,16,selected?'#1d5445':'#36404b');
+   ctx.fillStyle=selected?'#d4ffe7':'#f8deb0';
+   ctx.font='bold 14px monospace';ctx.textAlign='center';ctx.fillText(String(j+1),center,gateY-7);ctx.textAlign='start';
+  }
+ }
+ // The snake chases from ABOVE, through the tunnel the mole just made.
+ // Answering in time opens distance. Running out of time lets the snake catch up.
+ const timeFrac=Math.max(0,Math.min(1,state.remaining/Math.max(1,state.limit)));
+ const extraEscape=state.chosen?state.p*73:0;
+ const chaseGap=14+timeFrac*Math.max(99,H*.43)+extraEscape;
+ const snakeY=moleY-chaseGap;
+ const snakeX=144+(moleX-144)*.19;
+ if(state.phase!=='ready'&&state.phase!=='gameover'&&state.phase!=='between'){
+  ctx.save();ctx.translate(snakeX,snakeY);ctx.scale(1.32,1.32);ctx.translate(-snakeX,-snakeY);
+  drawSnake(time,snakeX,snakeY);ctx.restore();
+ }
+ if(state.chosen&&state.p>.38){
+  // Collapsing dirt briefly slows the snake after the correct choice.
+  const yy=moleY-51-state.p*30;
+  pix(109,yy,70,8,'#a68557');
+  for(let j=0;j<7;j++)pix(114+j*10,yy+8+(j%2)*3,8,7,'#71523e');
+ }
+ // Original pixel mole, now actively digging DOWN into solid earth.
+ const x=moleX,y=moleY+moleBob;
+ ctx.save();ctx.translate(x,y);ctx.scale(H>260?1.58:1.25,H>260?1.58:1.25);ctx.translate(-x,-y);
+ pix(x-23,y-28,46,42,'#26343c');pix(x-20,y-25,40,38,'#7d523d');
+ pix(x-17,y-22,33,33,'#ab7450');pix(x-12,y-21,20,16,'#ca8f64');
+ pix(x-9,y-20,7,10,'#e5b38a');pix(x+10,y-16,9,11,'#f0c3a1');
+ pix(x+16,y-12,8,6,'#433139');pix(x+1,y-16,7,8,'#2b2c31');
+ pix(x+3,y-16,3,4,'#fffbe7');
+ const claw=Math.round(Math.sin(time/105)*4);
+ pix(x-25,y-13,10,18,'#4c3731');pix(x-30,y+2+claw,15,15,'#dba47d');
+ pix(x-28,y+12+claw,5,5,'#ffe3b4');pix(x-22,y+12+claw,4,5,'#ffe3b4');
+ pix(x+13,y-2,17,13,'#725140');pix(x+21,y+3-claw,13,15,'#dba47d');
+ pix(x+25,y+13-claw,4,5,'#f7dbab');pix(x+30,y+13-claw,3,5,'#f7dbab');
+ pix(x-15,y+13,13,7,'#342e31');pix(x+4,y+13,13,7,'#342e31');
+ pix(x-21,y-28,43,11,'#253742');pix(x-15,y-32,28,10,'#558b96');
+ pix(x-12,y-32,25,3,'#9dd4cc');pix(x+12,y-27,15,11,'#29343c');
+ pix(x+17,y-26,10,8,state.correctFlash>0?'#c8ffe1':'#f3d78e');pix(x+19,y-25,6,4,'#ffffdf');
+ ctx.restore();
+ if(state.hitFlash>0){pix(0,0,W,5,'#eb7d70');pix(0,H-5,W,5,'#eb7d70')}
+ if(state.correctFlash>0){pix(0,0,W,4,'#8bffd2')}
+}
+
+function frame(t){let dt=Math.min(100,Math.max(0,t-(last||t)));last=t;if(state.phase==='playing'){
+ state.elapsed+=dt/1000;
+ if(!state.chosen){state.remaining=Math.max(0,state.remaining-dt/1000);state.p=Math.min(1,1-state.remaining/state.limit);if(state.remaining<=0)collision()}
+ else{state.p=Math.min(1,state.p+dt/300);if(state.p>=1)advanceStep()}
+} else if(state.phase==='collision'){state.collisionClock-=dt;if(state.collisionClock<=0){if(state.lives===0)gameOver();else{state.phase='playing';setStep()}}}
+state.hitFlash=Math.max(0,state.hitFlash-dt/450);state.correctFlash=Math.max(0,state.correctFlash-dt/750);world(t);if(t-lastHud>80){lastHud=t;updateUI()}requestAnimationFrame(frame)}
+function setup(){$('startBtn').onclick=()=>startStage(0);$('pauseBtn').onclick=togglePause;$('hintBtn').onclick=hint;$('zoomBtn').onclick=showDiagramZoom;$('figure').addEventListener('click',showDiagramZoom);$('notebookBtn').onclick=showNotes;$('stageMenuBtn').onclick=()=>{if(state.phase==='playing'){state.phase='paused'}showStageMenu()};$('muteBtn').onclick=()=>{audio=!audio;$('muteBtn').textContent=audio?'♫ ON':'♪ OFF';sound(600,'sine',.1)};document.addEventListener('keydown',e=>{if(state.phase==='playing'&&['1','2','3','4'].includes(e.key))answer(Number(e.key)-1);if(e.key==='Escape'&&['playing','paused'].includes(state.phase))togglePause()});document.addEventListener('visibilitychange',()=>{if(document.hidden&&state.phase==='playing')togglePause()});$('figure').innerHTML='';const initial=TASKS[0];state.taskIds=[initial.id];markDiagram();showStageMenu();resizeWorld();
+ if(typeof ResizeObserver!=='undefined'){new ResizeObserver(()=>resizeWorld()).observe($('mine'))}
+ window.addEventListener('resize',resizeWorld);
+ requestAnimationFrame(frame)}
+window.__moleRush2={get state(){return{...state,notes:[...state.notes],picked:[...state.picked]}},get task(){return task().id},get options(){return[...choiceMap]},get spec(){return currentSpec()},start,startStage,showStageMenu,get stages(){return STAGES},get stage(){return stage().id},get points(){return POINTS},answer,hint,forceTimeout:()=>{if(state.phase==='playing'){state.remaining=0;collision()}},showNotes,chooseTaskIds:ids=>{if(ids.every(id=>TASKS.some(t=>t.id===id))&&ids.length===3){state.taskIds=ids;state.taskIndex=0;state.phase='playing';$('overlay').hidden=true;loadTask()}},tasks:TASKS};setup();
+})();</script><script>
+/* PROOF RUSH — Japanese / English interface. Mathematical answers remain language-neutral. */
+(()=>{
+'use strict';
+const KEY='proof-rush-language-v1';
+let language='ja';
+try{language=localStorage.getItem(KEY)==='en'?'en':'ja'}catch(e){}
+const dictionary=[
+['2組の辺とその間の角がそれぞれ等しい。','Two pairs of corresponding sides and their included angles are equal.'],
+['1組の辺とその両端の角がそれぞれ等しい。','One pair of corresponding sides and their adjacent angles are equal.'],
+['3組の辺がそれぞれ等しい。','Three pairs of corresponding sides are equal.'],
+['図から合同条件を見分けよう','Identify the congruence condition from the diagram'],
+['拡大した問題の図','Enlarged problem diagram'],
+['パーフェクト認定証','Perfect Certificate'],
+['この式','this equality'],
+['違う道！ ','Wrong path! '],
+['（－2秒）','(-2s)'],
+['図の同じ印の辺・角はそれぞれ等しい','Matching marks indicate equal sides or equal angles'],
+['合同な図形の対応する辺はそれぞれ等しいので、','Since corresponding sides of congruent triangles are equal,'],
+['合同な図形の対応する角はそれぞれ等しいので、','Since corresponding angles of congruent triangles are equal,'],
+['平行線の錯角は等しいから','Alternate interior angles are equal'],
+['対頂角は等しいから','Vertically opposite angles are equal'],
+['共通な辺だから','They share the same side'],
+['仮定より','Given'],
+['合同条件の入口','Recognize Congruence'],
+['対応する辺と角','Matching Sides & Angles'],
+['証明の地下道','Build the Proof'],
+['合同の宝箱','Use Congruence'],
+['最深部の証明','Advanced Proofs'],
+['図を見て3つの合同条件を選ぶ','Identify the three triangle congruence conditions'],
+['三角形と等しい3組を見つける','Match vertices and three equal pairs'],
+['仮定・共通な辺の理由も考える','Explain the given facts and shared sides'],
+['合同を使って辺や角を証明','Prove equal sides or angles using congruence'],
+['平行線・錯角・対頂角にも挑戦','Use parallel lines and angle properties'],
+['左右の角を証明','Prove Two Angles Equal'],
+['左右の辺を証明','Prove Two Sides Equal'],
+['向かい合う辺を証明','Prove Opposite Sides Equal'],
+['別々の三角形の角','Two Separate Triangles: Angles'],
+['別々の三角形の辺','Two Separate Triangles: Sides'],
+['2つの角を使う証明','Prove Using Two Angles'],
+['共通な辺とその間の角','A Shared Side and Included Angle'],
+['回転した三角形','Rotated Triangles'],
+['左右反転した三角形','Reflected Triangles'],
+['平行線と共通な辺','Parallel Lines and Shared Side'],
+['2組の平行線と錯角','Two Pairs of Parallel Lines'],
+['対頂角を使って角を証明','Prove Angles Using Vertical Angles'],
+['3組の辺を見つけよう','Find Three Equal Side Pairs'],
+['2組の辺と間の角','Two Sides and Included Angle'],
+['1組の辺と両端の角','One Side and Adjacent Angles'],
+['合同に使う2つの三角形を選ぼう','Choose the two triangles to prove congruent'],
+['合同を正しく表す式は？','Which expression correctly shows congruence?'],
+['使える合同条件は？','Which congruence condition applies?'],
+['合同から結論を導く理由は？','Why does the conclusion follow from congruence?'],
+['最後に証明する式は？','Which equality completes the proof?'],
+['図の印を見ながら、対応する頂点の順序を考えよう。','Use the marks to match corresponding vertices in the right order.'],
+['平行線からわかる錯角と、2つの三角形の共通な辺に注目。','Look for alternate interior angles and a side shared by the triangles.'],
+['与えられた角と、その両端を結ぶ辺に注目。','Look at the given angles and the side between them.'],
+['2組の辺と、その間の角に注目しよう。','Look for two corresponding side pairs and the included angle.'],
+['3組の辺の等しさを集めよう。','Find three pairs of equal corresponding sides.'],
+['仮定・共通な辺・対頂角・平行線の性質から、使える理由を探そう。','Use the givens, shared sides, vertical angles, or properties of parallel lines.'],
+['集めた等しさは「辺」が何組、「角」が何組かな？','How many pairs of sides and angles have you matched?'],
+['合同な三角形どうしは「≡」で表す。辺・角の等しさと区別し、頂点の対応順を確かめよう。','Use ≡ for congruent triangles, and = for equal sides or angles. Check the vertex order.'],
+['結論で示すのは「辺」の等しさ？「角」の等しさ？','Are you proving equal sides or equal angles?'],
+['図の下にある目標を確認しよう。','Check the GOAL below the diagram.'],
+['2つの三角形の頂点の対応順を、図で確認しよう。','Check the order of corresponding vertices in the diagram.'],
+['三角形どうしの合同は「≡」。頂点の順番も確かめよう。','Triangles use ≡. Check the order of the vertices.'],
+['同じ印の辺・角と対応関係に注目。記号の違いではなく根拠を考えよう。','Look for matching side/angle marks and explain why they are equal.'],
+['「仮定」「共通」「対頂角」「錯角」のどれからいえるか考えよう。','Use the givens, a shared side, vertical angles, or alternate interior angles.'],
+['辺と角の組数、角の位置を図で確認しよう。','Count the side and angle pairs, and check where the angles lie.'],
+['証明したい結論が辺なのか角なのかを確認。','Check whether the conclusion concerns a side or an angle.'],
+['GOALで示したい辺の長さ・角の大きさと対応関係を確認しよう。','Check the target equality and corresponding parts in the GOAL.'],
+['対応する頂点を確かめよう','Check the corresponding vertices'],
+['図の印から等しい組を探そう','Find equal pairs in the diagram'],
+['その等しさの理由を考えよう','Explain why they are equal'],
+['合同条件を決めよう','Choose the congruence condition'],
+['三角形の合同を示そう','Show triangle congruence'],
+['合同からわかることは？','What follows from congruence?'],
+['最後の結論を完成させよう','Complete the conclusion'],
+['正しい答えで道を開こう','Choose correctly to clear the path'],
+['正解するとモグラが掘り進む','Correct answers help the mole dig'],
+['考える × 掘り進む · 16-BIT','THINK × DIG · 16-BIT'],
+['図を見て考えよう','Study the diagram'],
+['図を拡大して見る（制限時間は停止）','Enlarge the diagram (timer pauses)'],
+['証明に使う図形','Diagram for the proof'],
+['問題の図形','Problem diagram'],
+['正しい証明の道を掘り進もう！','Dig your way through the proof!'],
+['ヘビに追いつかれるまでの残り時間とライフ','Remaining time and lives'],
+['証明の進行','Proof progress'],
+['土を掘りながら自動で下へ逃げるモグラと追いかけるヘビのドット絵','Pixel-art mole digging down as a snake chases it'],
+['ヘビの追跡状況','Snake pursuit progress'],
+['ゲームメニュー','Game menu'],
+['証明のパーツ選択','Choose the proof step'],
+['証明の道','Proof path'],
+['図を読む → 根拠を探す → 証明する','Read diagram → Find reasons → Prove'],
+['モグラは自動で土を掘って進む！','The mole digs automatically!'],
+['上から追ってくるヘビにつかまる前に','Before the snake catches you'],
+['正しい言葉・式・記号を選ぼう。','choose the right words, equations and symbols.'],
+['正解すれば掘り進む！ ヘビの追跡から逃げ切ろう！','Each correct answer helps you dig deeper and escape!'],
+['ヘビから逃げて証明完成！','Escape the snake and complete the proof!'],
+['RUSH専用：3回のライフで地下の証明を突破しよう','RUSH: Complete the proofs with three lives'],
+['三角形の合同条件は教科書表記。等しい式を選んだら、その理由も選ぼう。順番は自由！','Congruence conditions use textbook wording. Choose equalities and explain why they hold.'],
+['まずはゲームをスタートしよう！','Start the game!'],
+['スタートすると選択肢が現れます。','Your choices will appear here.'],
+['正しい道を選んで、モグラを助けよう。','Choose the correct path to help the mole.'],
+['土を掘ってヘビから逃げよう！','Dig fast and escape the snake!'],
+['ヘビ接近中','Snake approaching'],
+['正しい答えで道を開こう','Choose the right answer to dig'],
+['証明の道を掘ろう','Dig the proof path'],
+['ヘビが迫る前に、正しい答えを選ぼう！','Choose the right answer before the snake catches up!'],
+['🐍 ヘビが上から迫ってくる！','🐍 The snake is coming!'],
+['正解！ ヘビを引き離した！','Correct! You escaped the snake!'],
+['🐍 ヘビを引き離した！','🐍 You pulled ahead!'],
+['🐍 ヘビが近い！ 急いで！','🐍 The snake is close! Hurry!'],
+['🐍 ヘビに追いつかれた！','🐍 The snake caught you!'],
+['つかまった！ 同じ関門から再挑戦','Caught! Try this step again'],
+['ライフがなくなった！','Out of lives!'],
+['掘り進め！','Keep digging!'],
+['つかまった！','Caught!'],
+['🐍 追跡中','🐍 Chasing!'],
+['ヘビから逃げて、証明を完成させろ！','Escape the snake and complete the proof!'],
+['やさしい問題から本格的な証明へ。クリアはこのブラウザに保存されます。','Progress from basics to full proofs. Completed stages are saved in this browser.'],
+['図の印：同じ刻み＝等しい辺 ／ 同じ弧＝等しい角 ／ 同じ矢印＝平行','Diagram marks: matching ticks = equal sides / arcs = equal angles / arrows = parallel'],
+['苦手な証明を復習（3問）','Review tricky proofs (3 questions)'],
+['苦手問題と同じ合同条件を含む3問','Three questions with similar congruence conditions'],
+['ライフ3つ・ヒントで＋3秒','3 lives · Hint adds 3 seconds'],
+['全ステージ自由に選べます。時間切れでも何度でも再挑戦できます。','Choose any stage. You can retry as many times as you like.'],
+['クリア・▼ スクロール','cleared · ▼ scroll'],
+['3問ずつ・全15問','3 each · 15 total'],
+['証明の道、突破！','Proof completed!'],
+['復習チャレンジ完了！','Review completed!'],
+['ステージクリア！','Stage clear!'],
+['パーフェクトクリア！','Perfect clear!'],
+['パーフェクトクリア認定証','Perfect Clear Certificate'],
+['クリア認定証','Stage Clear Certificate'],
+['ミス ０ 回　｜　ライフ ３ / ３','0 mistakes | 3 / 3 lives'],
+['最後までよくがんばりました','Well done completing the stage'],
+['あなたは一度も間違えず、すべての証明を完成させました。','You completed every proof without a single mistake.'],
+['あなたは証明の道を最後まで進み、ステージを見事にクリアしました。','You completed the proof challenge and cleared the stage.'],
+['ミス０回・♥３つを維持してステージを完走！','You cleared the stage without a mistake and kept all 3 lives!'],
+['名前を入力して、認定証を画像で保存しよう。','Enter your name and save the certificate as an image.'],
+['ステージを最後までクリア！','You completed the whole stage!'],
+['名前を入力して、シルバーの認定証を画像で保存しよう。','Enter your name and save your silver certificate.'],
+['認定証に記載する名前','Name on certificate'],
+['お名前を入力してください','Enter your name'],
+['例：山田 太郎','e.g. Alex Smith'],
+['認定証のプレビュー','Certificate preview'],
+['画像を保存して、先生の指定する方法で提出してください。名前を入力すると画像にも反映されます。','Save the image and submit it as instructed by your teacher. Your typed name appears on the certificate.'],
+['名前を入力してから保存してください。','Enter your name before saving.'],
+['認定証を画像保存（PNG）','Save certificate (PNG)'],
+['認定証を保存しよう','Save your certificate'],
+['達成日時（日本時間）','Completed (Japan time)'],
+['日本時間','Japan time'],
+['証明完成！','Proof completed!'],
+['学習の記録（各行を押すと図で確認）','Your proof (tap a line to highlight it)'],
+['まだ証明は始まっていません。','The proof has not started yet.'],
+['図形で根拠を確認！','Check the reason in the diagram!'],
+['ヘビにつかまった！','The snake caught you!'],
+['正しい証明をもう一度つなげよう。','Try building the proof again.'],
+['途中までの証明を見る','View your partial proof'],
+['ステージを選び直す','Choose another stage'],
+['このステージをやり直す','Restart this stage'],
+['ステージ選択','Choose stage'],
+['ステージを選ぶ','Choose stage'],
+['次のステージに挑戦','Try the next stage'],
+['次の問題へ','Next question'],
+['冒険スタート！','Start adventure!'],
+['ゲームを再開','Resume game'],
+['図形を拡大','Enlarge diagram'],
+['図を拡大','Enlarge'],
+['図を確認している間、タイマーは停止します。','The timer is paused while you inspect the diagram.'],
+['／　同じ刻み → 等しい辺','／ Matching tick marks → equal sides'],
+['⌒　同じ弧 → 等しい角','⌒ Matching arcs → equal angles'],
+['➜　同じ矢印 → 平行','➜ Matching arrows → parallel lines'],
+['同じ辺を共有する場合は、その辺にも注目しよう。','Remember that triangles may share a common side.'],
+['タイマーを止めています。','The timer is paused.'],
+['読む間はヘビが止まっています。再開すると＋3秒です。','The snake is paused while you read. You get 3 extra seconds when you resume.'],
+['ヒント使用・＋3秒（読む間はタイマー停止）','Hint used: +3 seconds (timer paused)'],
+['ヒント ＋3秒','Hint +3s'],
+['使用済み','Used'],
+['証明ノート','Proof notes'],
+['閉じる','Close'],
+['一時停止','Pause'],
+['再開','Resume'],
+['等しい理由を選ぶ','Choose the reason'],
+['等しい式を選ぶ','Select an equality'],
+['合同の利用','Use congruence'],
+['合同の式','Congruence statement'],
+['合同条件','Congruence condition'],
+['三角形','Triangles'],
+['結論','Conclusion'],
+['根拠','Reason'],
+['証明','Proof'],
+['同じ色の頂点どうしが対応','Same-colored vertices correspond'],
+['復習チャレンジ ・ 3問','Review challenge · 3 questions'],
+['復習','Review'],
+['クリア','Clear'],
+['おすすめ','Recommended'],
+['挑戦','Play'],
+['ヒント','Hint'],
+['辺','Side'],
+['角','Angle'],
+['問',' questions'],
+['深さ','Depth'],
+['残り猶予','Time left'],
+['達成日時','Completion date'],
+];
+dictionary.sort((a,b)=>b[0].length-a[0].length);
+function translateJapanese(source){
+ let s=String(source);
+ if(!/[\u3040-\u30ff\u3400-\u9fff]/.test(s))return s;
+ s=s.replace(/^(△[A-Z]{3})と(△[A-Z]{3})において、$/,(_m,a,b)=>'In '+a+' and '+b+',');
+ s=s.replace(/^(.+?) を証明しよう$/,'Prove $1');
+ s=s.replace(/△([A-Z]{3})と△([A-Z]{3})/g,'△$1 and △$2');
+ s=s.replace(/^なぜ (.+) といえる？$/,'Why is $1 true?');
+ s=s.replace(/^等しい辺・角を選ぼう（([0-9]+)\/3）$/,'Select equal sides / angles ($1/3)');
+ s=s.replace(/^①、②、③より、(.+)ので、$/,(_m,p)=>'From ①, ② and ③: '+translateJapanese(p+'。').replace(/[.]$/,'')+'; therefore,');
+ s=s.replace(/^合同条件：(.+)$/,(_m,p)=>'Congruence condition: '+translateJapanese(p));
+ s=s.replace(/^(仮定より|共通な辺だから|対頂角は等しいから|平行線の錯角は等しいから)、(.+)$/,_m=>{const j=_m.indexOf('、');return translateJapanese(_m.slice(0,j))+': '+_m.slice(j+1)});
+ s=s.replace(/^(.+) ……([①②③])$/,'$1 ……$2');
+ s=s.replace(/^図形：(.+)。証明すること：(.+)。頂点は各三角形の対応順に記す。$/,(all,a,b)=>'Diagram: '+a+'. Goal: '+translateJapanese(b)+'. Match corresponding vertices in order.');
+ s=s.replace(/^深さ ([0-9]+) ?m$/,'Depth $1 m');
+ s=s.replace(/^🐍 残り猶予 ([0-9]+)%$/,'🐍 Time left $1%');
+ s=s.replace(/^([0-9]+)問目の関門で失敗。$/,'Failed on question $1.');
+ s=s.replace(/^この問題：([0-9]+)秒・ミス([0-9]+)回・ヒント([0-9]+)回$/,'This question: $1s · $2 mistakes · $3 hints');
+ s=s.replace(/^ここまでの解答成功率：([0-9]+)%（時間切れも失敗として集計）$/,'Accuracy so far: $1% (timeouts count as errors)');
+ s=s.replace(/^達成日時：(.+)（日本時間）$/,'Completed: $1 (Japan time)');
+ for(const [ja,en] of dictionary)if(s.includes(ja))s=s.split(ja).join(en);
+ return s;
+}
+const translatedText=new WeakMap(), translatedAttrs=new WeakMap();
+function applyText(n){
+ if(!n||n.nodeType!==3||!n.parentElement||n.parentElement.closest('script,style,svg,.lang-toggle'))return;
+ let rec=translatedText.get(n),v=n.nodeValue;
+ if(!rec||v!==rec.display){rec={original:v,display:v};translatedText.set(n,rec)}
+ const target=language==='en'?translateJapanese(rec.original):rec.original;
+ if(v!==target){rec.display=target;n.nodeValue=target}else rec.display=v;
+}
+function escapeHTML(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function mathHTML(s){
+ let str=escapeHTML(s);
+ str=str.replace(/△([A-Z]{3})/g,'<span class="tri-group"><span class="tri">△</span><span class="name">$1</span></span>');
+ str=str.replace(/∠([A-Z]{3})/g,'<span class="ang-group"><span class="ang">∠</span><span class="name">$1</span></span>');
+ str=str.replace(/≡/g,'<span class="cong">≡</span>');
+ str=str.replace(/＝/g,'<span class="eq">＝</span>');
+ return str;
+}
+function applyMath(el){
+ const source=el.getAttribute('data-i18n-source');
+ if(source===null)return;
+ if(el.dataset.renderLanguage===language)return;
+ let raw;
+ try{raw=decodeURIComponent(source)}catch(e){raw=source}
+ el.dataset.renderLanguage=language;
+ el.innerHTML=mathHTML(language==='en'?translateJapanese(raw):raw);
+}
+function applyAttrs(el){
+ let records=translatedAttrs.get(el);
+ if(!records){records={};translatedAttrs.set(el,records)}
+ for(const name of ['aria-label','placeholder','title']){
+  if(!el.hasAttribute(name))continue;
+  const actual=el.getAttribute(name),prev=records[name];
+  if(!prev||actual!==prev.display)records[name]={original:actual,display:actual};
+  const entry=records[name],dest=language==='en'?translateJapanese(entry.original):entry.original;
+  if(actual!==dest){entry.display=dest;el.setAttribute(name,dest)}else entry.display=actual;
+ }
+}
+function localizeNode(node){
+ if(!node)return;
+ if(node.nodeType===3){applyText(node);return}
+ if(node.nodeType!==1)return;
+ const el=node;
+ if(el.matches('script,style,svg'))return;
+ if(el.classList.contains('math')){applyMath(el);return}
+ applyAttrs(el);
+ if(!el.classList.contains('lang-toggle'))for(const child of [...el.childNodes])localizeNode(child);
+}
+function syncButtons(){
+ document.querySelectorAll('.lang-toggle [data-lang]').forEach(b=>{
+  const active=b.dataset.lang===language;
+  b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));
+ });
+ document.documentElement.lang=language;
+ document.title=language==='en'?'PROOF RUSH | Triangle Congruence & Proof':'PROOF RUSH｜三角形の合同・証明ゲーム';
+}
+function localizeAll(){localizeNode(document.getElementById('app'));localizeNode(document.getElementById('overlay'));syncButtons()}
+function changeLanguage(lang){
+ if(lang!=='ja'&&lang!=='en')return;
+ language=lang;
+ try{localStorage.setItem(KEY,lang)}catch(e){}
+ localizeAll();
+ const cert=document.getElementById('certificateName');
+ if(cert)cert.dispatchEvent(new Event('input'));
+}
+document.addEventListener('click',event=>{
+ const button=event.target.closest&&event.target.closest('.lang-toggle [data-lang]');
+ if(button)changeLanguage(button.dataset.lang);
+});
+const observer=new MutationObserver(records=>{
+ for(const rec of records){
+  if(rec.type==='characterData')applyText(rec.target);
+  else if(rec.type==='attributes'){
+   if(rec.attributeName==='data-i18n-source'&&rec.target.classList.contains('math'))applyMath(rec.target);
+   else if(rec.attributeName!=='data-render-language')applyAttrs(rec.target);
+  }else if(rec.type==='childList')for(const node of rec.addedNodes)localizeNode(node);
+ }
+ syncButtons();
+});
+observer.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['aria-label','placeholder','title','data-i18n-source']});
+window.__proofI18n={get language(){return language},translate:s=>language==='en'?translateJapanese(s):String(s),setLanguage:changeLanguage};
+localizeAll();
+})();
+</script></body></html>

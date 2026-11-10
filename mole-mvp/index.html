@@ -657,9 +657,9 @@ function drawCertificate(name,stamp,stageName,stageNumber,kind='perfect'){
  const c=document.createElement('canvas');c.width=1400;c.height=990;
  const g=c.getContext('2d');const W=c.width,H=c.height;
  const fill=(color,x,y,w,h)=>{g.fillStyle=color;g.fillRect(x,y,w,h)};
- const center=(str,y,size,color,weight='bold')=>{
+ const center=(str,y,size,color,weight='bold',localize=true)=>{
    g.fillStyle=color;g.font=`${weight} ${size}px "Noto Sans JP","Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif`;
-   g.textAlign='center';g.textBaseline='middle';g.fillText(window.__proofI18n?window.__proofI18n.translate(str):str,W/2,y,W-215);
+   g.textAlign='center';g.textBaseline='middle';g.fillText(localize&&window.__proofI18n?window.__proofI18n.translate(str):str,W/2,y,W-215);
  };
  const grad=g.createLinearGradient(0,0,W,H);grad.addColorStop(0,theme.bg1);grad.addColorStop(1,theme.bg2);fill(grad,0,0,W,H);
  g.strokeStyle=theme.outer;g.lineWidth=18;g.strokeRect(35,35,W-70,H-70);
@@ -673,7 +673,7 @@ function drawCertificate(name,stamp,stageName,stageNumber,kind='perfect'){
  center(theme.title2,315,57,theme.title2Color,'900');
  center(theme.hearts,408,70,theme.heartsColor);
  center(theme.status,488,32,'#334d61');
- center(name||'お名前を入力してください',600,70,'#1a354a','900');
+ center(name||'お名前を入力してください',600,70,'#1a354a','900',!name);
  fill(theme.line,W/2-390,654,780,3);
  center(theme.body,713,30,'#355268');
  center(`STAGE ${stageNumber}　${stageName}`,780,28,'#354e62');

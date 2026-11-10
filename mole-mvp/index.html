@@ -343,9 +343,20 @@ button{font:inherit;cursor:pointer;touch-action:manipulation}button:focus-visibl
 .certificate-mode .cert-actions{display:flex;gap:8px;flex-wrap:wrap}
 .certificate-mode .cert-actions button{flex:1 1 180px}
 </style>
+<style>
+/* Compact language switch in the game header and every modal. */
+.lang-toggle{display:inline-flex;align-items:center;gap:2px;border:1px solid #809da7;border-radius:6px;background:#102635;padding:2px;flex:0 0 auto}
+.lang-toggle button{border:0;border-radius:4px;padding:4px 7px;background:transparent;color:#b8d0d4;font-size:10px;font-weight:900;line-height:1.2;letter-spacing:.02em;min-width:34px}
+.lang-toggle button.active{color:#132c3a;background:#f1d591;box-shadow:0 1px 2px #0005}
+.lang-toggle button:focus-visible{outline:2px solid #fff;border-radius:4px}
+.lang-toggle-header{margin-left:auto}
+.lang-toggle-modal{align-self:flex-end;position:sticky;top:0;z-index:15;box-shadow:0 2px 8px #0006}
+@media(max-width:380px){.top{gap:4px;padding:0 2px}.brand{gap:4px}.brand-txt b{font-size:13px}.lang-toggle button{min-width:31px;padding:3px 5px}.top .tiny{padding:4px 5px;font-size:10px}}
+@media(max-height:650px){.lang-toggle-modal{position:relative}.lang-toggle button{padding-top:2px;padding-bottom:2px}}
+</style>
 </head><body>
 <div class="app" id="app">
-<header class="top"><div class="brand"><div class="brand-mark">⛏</div><div class="brand-txt"><b>PROOF RUSH</b><small>考える × 掘り進む · 16-BIT</small></div></div><button id="pauseBtn" class="tiny" type="button" disabled>Ⅱ 一時停止</button></header>
+<header class="top"><div class="brand"><div class="brand-mark">⛏</div><div class="brand-txt"><b>PROOF RUSH</b><small>考える × 掘り進む · 16-BIT</small></div></div><div class="lang-toggle lang-toggle-header" role="group" aria-label="Language"><button type="button" data-lang="ja">JPN</button><button type="button" data-lang="en">ENG</button></div><button id="pauseBtn" class="tiny" type="button" disabled>Ⅱ 一時停止</button></header>
 <section class="diagram" aria-label="証明に使う図形"><div class="diagram-top"><strong>📜 図を見て考えよう</strong><button type="button" id="zoomBtn" class="zoom-btn" aria-label="図を拡大して見る（制限時間は停止）">🔍 図を拡大</button><span id="given" aria-hidden="true"></span></div><svg id="figure" class="figure" viewBox="0 0 360 145" role="img" aria-label="問題の図形"></svg><div class="diagram-note" id="goal">正しい証明の道を掘り進もう！</div></section>
 <div class="status" aria-label="ヘビに追いつかれるまでの残り時間とライフ"><div class="task-num" id="taskNum">Q 1/3<span id="hearts">♥♥♥</span></div><div><div class="progress-text"><span id="gateCount">GATE 1 / 8</span><span id="statusTag">ヘビ接近中</span></div><div id="bar" class="timebar"><i id="barFill"></i></div></div><strong id="timer" class="timer">12.0</strong></div>
 <div class="act-track" id="actTrack" aria-label="証明の進行"><span>1 三角形</span><span>2 根拠</span><span>3 証明</span></div>
@@ -457,7 +468,7 @@ function formatMath(s){
  str=str.replace(/∠([A-Z]{3})/g,'<span class="ang-group"><span class="ang">∠</span><span class="name">$1</span></span>');
  str=str.replace(/≡/g,'<span class="cong">≡</span>');
  str=str.replace(/＝/g,'<span class="eq">＝</span>');
- return '<span class="math">'+str+'</span>';
+ return '<span class="math" data-i18n-source="'+encodeURIComponent(String(s))+'">'+str+'</span>';
 }
 function shuffled(a){let b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
 function pickTasks(){return [...STAGES[state.stageIndex].tasks]}
@@ -648,7 +659,7 @@ function drawCertificate(name,stamp,stageName,stageNumber,kind='perfect'){
  const fill=(color,x,y,w,h)=>{g.fillStyle=color;g.fillRect(x,y,w,h)};
  const center=(str,y,size,color,weight='bold')=>{
    g.fillStyle=color;g.font=`${weight} ${size}px "Noto Sans JP","Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif`;
-   g.textAlign='center';g.textBaseline='middle';g.fillText(str,W/2,y,W-215);
+   g.textAlign='center';g.textBaseline='middle';g.fillText(window.__proofI18n?window.__proofI18n.translate(str):str,W/2,y,W-215);
  };
  const grad=g.createLinearGradient(0,0,W,H);grad.addColorStop(0,theme.bg1);grad.addColorStop(1,theme.bg2);fill(grad,0,0,W,H);
  g.strokeStyle=theme.outer;g.lineWidth=18;g.strokeRect(35,35,W-70,H-70);
@@ -694,7 +705,7 @@ function showCertificate(kind='perfect'){
   $('certificateError').textContent='';
   currentCanvas=drawCertificate(name,achievedAt,stageName,stageNumber,kind);
   const link=document.createElement('a');link.href=currentCanvas.toDataURL('image/png');
-  link.download=`PROOF_RUSH_${theme.filename}_STAGE${stageNumber}_${achievedAt.getTime()}.png`;
+  link.download=`PROOF_RUSH_${window.__proofI18n?window.__proofI18n.translate(theme.filename):theme.filename}_STAGE${stageNumber}_${achievedAt.getTime()}.png`;
   document.body.appendChild(link);link.click();link.remove();
  };
  $('certificateStages').onclick=()=>{ $('overlay').classList.remove('certificate-mode');showStageMenu() };
@@ -725,7 +736,7 @@ function finishTask(repeat=false){
 function showOverlay(html,review=false){
  let el=$('overlay');el.classList.remove('zoom-mode','menu-overlay');let showReview=review||state.phase==='between';
  document.body.appendChild(el);el.classList.add('review-mode');el.style.top=showReview&&state.phase!=='ready'?Math.max(0,document.querySelector('.diagram').getBoundingClientRect().bottom+3)+'px':'0px';
- $('modalContent').innerHTML=html;el.hidden=false
+ $('modalContent').innerHTML='<div class="lang-toggle lang-toggle-modal" role="group" aria-label="Language"><button type="button" data-lang="ja">JPN</button><button type="button" data-lang="en">ENG</button></div>'+html;el.hidden=false
 }
 function showDiagramZoom(){
  const before=state.phase;
@@ -974,4 +985,4 @@ function setup(){$('startBtn').onclick=()=>startStage(0);$('pauseBtn').onclick=t
  window.addEventListener('resize',resizeWorld);
  requestAnimationFrame(frame)}
 window.__moleRush2={get state(){return{...state,notes:[...state.notes],picked:[...state.picked]}},get task(){return task().id},get options(){return[...choiceMap]},get spec(){return currentSpec()},start,startStage,showStageMenu,get stages(){return STAGES},get stage(){return stage().id},get points(){return POINTS},answer,hint,forceTimeout:()=>{if(state.phase==='playing'){state.remaining=0;collision()}},showNotes,chooseTaskIds:ids=>{if(ids.every(id=>TASKS.some(t=>t.id===id))&&ids.length===3){state.taskIds=ids;state.taskIndex=0;state.phase='playing';$('overlay').hidden=true;loadTask()}},tasks:TASKS};setup();
-})();</script></body></html>
+})();</script><script src="./lang.js"></script></body></html>

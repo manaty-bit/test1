@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111d31">
+<title>証明探偵団｜図形に隠された6つの謎</title>
+<style>
+:root{--night:#111d31;--deep:#0b1425;--mid:#203650;--paper:#fff9eb;--ink:#243248;--muted:#68768b;--gold:#e8be65;--gold2:#c89638;--line:#dfd7c4;--good:#167e62;--bad:#b84d3b;--ui:system-ui,-apple-system,'Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,sans-serif;--serif:'Yu Mincho','Hiragino Mincho ProN','Noto Serif JP',serif}
+*{box-sizing:border-box}html{min-height:100%}body{margin:0;background:radial-gradient(ellipse at 13% 0%,#263953 0,transparent 52%),linear-gradient(150deg,#111d31,#0a1323);color:#f4f0e6;font-family:var(--ui);line-height:1.6;min-height:100vh}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #71cbf6;outline-offset:3px}.hidden{display:none!important}.shell{max-width:1260px;padding:clamp(12px,2.5vw,32px);margin:0 auto}.topbar{min-height:63px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #ffffff24;margin-bottom:21px}.brand{display:flex;align-items:center;gap:12px;color:#f4f0e6}.brand-icon{height:38px;width:38px;border:1px solid #e8be6580;border-radius:12px;display:grid;place-items:center;background:#e8be6517;font-size:21px}.brand-text{font-family:var(--serif);font-size:clamp(15px,2.2vw,20px);font-weight:800;letter-spacing:.06em}.brand-small{font-size:10px;letter-spacing:.25em;color:var(--gold);font-family:var(--ui);font-weight:700}.top-actions{display:flex;gap:8px;flex-shrink:0}.smallbtn{white-space:nowrap;background:#ffffff0c;color:#f4f0e6;border:1px solid #ffffff3a;border-radius:9px;padding:8px 12px;font-size:12px;font-weight:700}.smallbtn:hover{border-color:var(--gold)}.goldbtn{background:linear-gradient(130deg,#ffdf95,#e5b558);color:#30250f;border:none;border-radius:12px;font-weight:900;padding:13px 21px;box-shadow:0 7px 22px #0004;transition:transform .15s,filter .15s}.goldbtn:hover{transform:translateY(-2px);filter:brightness(1.05)}.ghostbtn{background:transparent;color:inherit;border:1px solid currentColor;border-radius:10px;padding:11px 17px;font-weight:700}.eyebrow{font-size:11px;color:var(--gold);font-weight:900;letter-spacing:.2em;text-transform:uppercase}.intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:24px;align-items:stretch;margin-top:30px}.hero{border:1px solid #e8be6540;border-radius:24px;min-height:460px;padding:clamp(25px,4vw,55px);background:radial-gradient(circle at 85% 8%,#52617b55,transparent 46%),linear-gradient(140deg,#1a3047,#122137);position:relative;overflow:hidden}.hero:after{content:'◈';position:absolute;right:-35px;bottom:-140px;font-size:420px;color:#e8be6510;line-height:1;pointer-events:none}.hero h1{font-family:var(--serif);font-size:clamp(30px,4.2vw,54px);line-height:1.35;letter-spacing:.03em;margin:14px 0;color:#fff5d7;position:relative;z-index:1}.hero p{font-size:15px;max-width:540px;color:#d2dae5;position:relative;z-index:1}.hero .lead{font-weight:800;color:#fff3d3;font-size:18px}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin:29px 0 0;position:relative;z-index:1}.intro-side{display:flex;flex-direction:column;gap:15px}.info-card{border:1px solid #ffffff25;background:#ffffff0b;border-radius:20px;padding:24px;flex:1}.info-card h2{font-family:var(--serif);font-size:20px;margin:0 0 15px}.mini-ranks{list-style:none;margin:0;padding:0;display:grid;gap:9px}.mini-ranks li{display:flex;gap:9px;align-items:baseline;font-size:12px;color:#dce5ee}.mini-ranks b{color:var(--gold);min-width:52px}.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.stat{padding:14px 8px;text-align:center;border-radius:13px;border:1px solid #ffffff26;background:#ffffff0a}.stat strong{font-size:27px;color:#f5d78e;display:block;line-height:1.2}.stat span{font-size:11px;color:#b6c5d6}.game-layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:18px;align-items:start}.rail{border:1px solid #ffffff21;background:#ffffff09;border-radius:19px;padding:16px;position:sticky;top:14px}.rail-heading{font-size:11px;color:#a4b8ce;font-weight:900;letter-spacing:.2em;margin:3px 3px 13px}.rank-item{padding:12px 10px;display:flex;align-items:center;gap:10px;border-radius:12px;margin-bottom:6px;border:1px solid transparent;opacity:.53}.rank-item.active{opacity:1;border-color:#f3c77675;background:#e8be651a}.rank-item.done{opacity:.9}.rank-number{flex:none;width:29px;height:29px;border-radius:9px;background:#ffffff12;display:grid;place-items:center;font-size:12px;font-weight:900;color:#f3d795}.rank-item.active .rank-number{background:var(--gold);color:#222}.rank-desc{font-size:11px;line-height:1.4}.rank-desc strong{display:block;font-size:12px;color:#fff3d5;margin-bottom:2px}.rail-tip{font-size:11px;color:#a9bbd0;border-top:1px solid #ffffff20;padding:15px 4px 2px;margin-top:10px}.work{min-width:0}.mission-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:9px;margin-bottom:11px}.mission-label{font-weight:900;color:#f3d898;letter-spacing:.05em;font-size:13px}.mission-no{font-size:12px;color:#b3c2d4}.meter{height:7px;background:#ffffff22;border-radius:20px;overflow:hidden;margin-bottom:17px}.meter-fill{height:100%;width:0;background:linear-gradient(90deg,#e6b85d,#ffebad);border-radius:20px;transition:width .35s}.case-paper{background:var(--paper);color:var(--ink);border-radius:19px;overflow:hidden;box-shadow:0 16px 40px #0005;border:1px solid #fff5d8;position:relative}.case-paper:before{content:'CASE FILE · CONFIDENTIAL';font-weight:900;font-size:9px;letter-spacing:.18em;color:#fff;background:#b45049;position:absolute;right:18px;top:0;padding:6px 12px;border-radius:0 0 5px 5px;z-index:2}.paper-heading{padding:23px 27px 9px}.case-id{font-size:11px;color:#947b52;letter-spacing:.13em;font-weight:900}.paper-heading h2{font-family:var(--serif);line-height:1.35;font-size:clamp(19px,2.3vw,28px);margin:5px 0 8px}.scenario{color:#3b4a60;font-size:14px;line-height:1.85;white-space:pre-line}.diagram-wrap{padding:4px 25px 8px}.diagram-frame{border:1px solid #e1d8c4;border-radius:12px;background:linear-gradient(0deg,#fffdfa,#fffefb);background-image:linear-gradient(#e0e5eb50 1px,transparent 1px),linear-gradient(90deg,#e0e5eb50 1px,transparent 1px);background-size:25px 25px;min-height:146px;display:grid;place-items:center;overflow:hidden}.diagram-frame svg{width:100%;max-width:640px;height:auto;max-height:230px;display:block}.diagram-caption{font-size:11px;color:#8b785b;margin-top:5px;text-align:center}.question-box{margin:12px 24px 23px;padding:14px 15px;border-left:4px solid var(--gold2);background:#fff0cf;border-radius:4px 10px 10px 4px;font-weight:900;font-size:15px}.question-label{font-size:10px;letter-spacing:.15em;color:#9d6e25;display:block;margin-bottom:5px}.answer-heading{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:17px 1px 11px}.answer-heading strong{font-size:13px}.answer-heading span{font-size:11px;color:#aec1d6}.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.option{border:1px solid #53657d;color:#e8edf6;background:#1b2e46;border-radius:13px;padding:14px;display:flex;align-items:flex-start;gap:11px;min-height:72px;text-align:left;transition:.16s}.option:hover:not(:disabled){border-color:var(--gold);background:#2a415c;transform:translateY(-1px)}.option:disabled{cursor:default}.option .num{width:27px;height:27px;flex:none;border-radius:7px;border:1px solid #e8be6580;color:var(--gold);font-weight:900;display:grid;place-items:center;font-size:12px}.option .opttext{font-size:13px;font-weight:700;line-height:1.6;white-space:pre-line}.option.eliminated{opacity:.43;border-color:#a65c50}.option.correct-choice{background:#114c40;border-color:#3dd3a8}.option.correct-choice .num{border-color:#9beacb;color:#c6ffe9}.actionline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;flex-wrap:wrap}.hint-btn{background:none;border:none;color:#f2d499;padding:7px 0;font-weight:800;font-size:12px;text-decoration:underline;text-underline-offset:4px}.hint-note{font-size:12px;color:#ead59f;background:#3d3540;border:1px solid #76654f;border-radius:9px;padding:11px 14px;margin-top:2px}.feedback{border-radius:14px;margin-top:10px;border:1px solid;padding:17px 19px;animation:up .22s ease-out}.feedback.good{background:#113b34;border-color:#3b987c}.feedback.bad{background:#422c30;border-color:#bb7769}.feedback h3{font-size:17px;margin:0 0 6px}.feedback p{font-size:13px;white-space:pre-line;line-height:1.85;margin:0 0 12px}.feedback .continue{display:flex;justify-content:flex-end}.feedback .goldbtn{font-size:13px;padding:11px 18px}.progress-mini{color:#a9bfd2;font-size:11px;display:flex;gap:18px;margin-top:18px;flex-wrap:wrap}.footer{font-size:10px;text-align:center;color:#7f96ac;padding:25px 5px 15px}.result{max-width:780px;margin:22px auto;text-align:center}.medal{height:92px;width:92px;border-radius:50%;display:grid;place-items:center;margin:auto;font-size:44px;background:#e8be6525;border:2px solid #f2d187;box-shadow:0 0 48px #d4af3760}.result h1{font-family:var(--serif);color:#ffebbc;font-size:clamp(28px,4vw,44px)}.result p{color:#d1dfeb}.result-card{border-radius:20px;padding:29px;background:var(--paper);color:var(--ink);margin:25px 0;text-align:left}.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;text-align:center}.result-grid div{background:#efe7d6;border-radius:13px;padding:15px 8px}.result-grid strong{font-size:27px;display:block}.name-field{display:block;font-size:12px;font-weight:900;margin:20px 0 8px}.name-input{background:#fff;color:#17243c;border:1px solid #b2a58b;border-radius:10px;padding:12px;width:100%;max-width:380px}.result-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:16px}.notebook-dialog{border:1px solid #dcc495;background:#fff9eb;color:#20324a;padding:0;border-radius:18px;max-width:550px;width:calc(100vw - 24px);box-shadow:0 40px 100px #0008}.notebook-dialog::backdrop{background:#080f1cbb;backdrop-filter:blur(3px)}.notebook-inner{padding:27px}.notebook-inner h2{font-family:var(--serif);margin:0 0 5px}.notebook-inner h3{margin:22px 0 8px;font-size:14px;border-bottom:1px solid #ddd0b6;padding-bottom:5px}.notebook-inner p,.notebook-inner li{font-size:13px;line-height:1.85}.notebook-inner ol{padding-left:22px}.notebook-close{float:right;background:#23344c;color:white;border:0;border-radius:9px;padding:7px 11px}.bookline{background:#f4e9d3;padding:13px;border-radius:10px;margin:10px 0}.sticker{font-size:11px;color:#a9bdd2}.button-row{display:flex;flex-wrap:wrap;gap:9px}.only-mobile{display:none}@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@media(max-width:800px){.game-layout{grid-template-columns:1fr}.rail{position:static;display:block;overflow-x:auto;padding:9px}.rail #rank-nav{display:flex;gap:7px;width:max-content}.rail-heading,.rail-tip{display:none}.rank-item{flex:none;width:138px;margin:0;padding:8px;gap:7px}.rank-desc{font-size:10px}.rank-desc strong{font-size:11px}.intro{grid-template-columns:1fr}.hero{min-height:0}.intro-side{display:grid;grid-template-columns:1fr 1fr}.info-card{padding:16px}.mini-ranks{gap:6px}}@media(max-width:560px){.shell{padding:10px}.brand-icon{width:32px;height:32px;font-size:18px}.brand-text{font-size:14px}.topbar{margin-bottom:14px;min-height:56px}.smallbtn{padding:7px 6px;font-size:10px}.brand-small{font-size:8px;letter-spacing:.14em}.brand-text{font-size:12px}.top-actions{gap:5px}.options{grid-template-columns:1fr;gap:8px}.option{min-height:55px;padding:11px}.paper-heading{padding:20px 17px 6px}.diagram-wrap{padding:2px 10px 5px}.diagram-frame svg{max-height:190px}.question-box{margin:12px 13px 17px;padding:12px}.intro-side{grid-template-columns:1fr}.hero{padding:27px 21px}.result-card{padding:18px}.result-grid{gap:6px}.result-grid strong{font-size:22px}.mission-no{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
+/* Textbook Master edition */
+.diagram-frame{min-height:205px;background-color:#fffdfa}.diagram-frame svg{max-height:275px}
+.option .opttext{font-size:clamp(14px,1.32vw,16px);line-height:1.7}
+.scenario{font-size:clamp(14px,1.25vw,16px)}
+.question-box{font-size:clamp(15px,1.35vw,18px)}
+.feedback p{font-size:14px}
+.draft-panel,.proof-panel{margin-top:14px;border:1px solid #5c748d;border-radius:12px;background:#16293f;padding:13px 16px}
+.draft-panel summary,.proof-panel summary{font-size:14px;font-weight:800;color:#f4d792;cursor:pointer}
+.draft-panel p{font-size:12px;color:#bbcbdc;line-height:1.8}
+.draft-panel textarea{display:block;width:100%;resize:vertical;min-height:135px;background:#fff9ec;color:#213449;border:1px solid #a8b7c6;border-radius:9px;padding:13px;font:15px/1.85 var(--ui)}
+.draft-status{font-size:11px;color:#9fb8d2;margin-top:8px}
+.proof-panel{background:#f5eddb;color:#26364a;border-color:#ceb783}
+.proof-panel summary{color:#59441f}
+.proof-panel pre{margin:11px 0 0;white-space:pre-wrap;word-break:normal;line-height:1.95;font:500 15px/1.95 var(--ui);padding:14px;background:#fffdf8;border:1px solid #e0cfad;border-radius:10px}
+.case-id{padding-right:125px;line-height:1.5}
+@media(max-width:560px){.diagram-frame{min-height:180px}.diagram-frame svg{max-height:none}.option .opttext{font-size:15px}.proof-panel pre{font-size:14px}.case-id{font-size:10px;padding-right:100px}.paper-heading h2{font-size:21px}.scenario{font-size:14px}}
+
+
+/* UI polish v6: text sizing, card boundaries, narrow screens */
+html,body{max-width:100%;overflow-x:clip}
+button,input,textarea{max-width:100%}
+.brand,.work,.case-paper,.paper-heading,.scenario,.question-box,.options,.option,.opttext{min-width:0}
+.brand-text{overflow-wrap:anywhere}
+.case-paper:before{right:16px;top:0;max-width:calc(100% - 32px);text-align:center;line-height:1.3}
+.paper-heading{padding-top:40px}
+.case-id{padding-right:0;overflow-wrap:anywhere;font-size:11px;letter-spacing:.09em}
+.paper-heading h2{font-size:clamp(22px,2.35vw,29px);line-height:1.45;overflow-wrap:anywhere;margin-top:5px}
+.scenario{font-size:clamp(15px,1.2vw,16px);line-height:1.76;overflow-wrap:anywhere}
+.diagram-wrap{padding:8px 24px 8px}
+.diagram-frame{padding:10px;min-height:176px;overflow:hidden}
+.diagram-frame svg{width:100%;height:auto;max-width:690px;max-height:290px}
+.diagram-foot{display:flex;align-items:center;justify-content:space-between;gap:9px 14px;flex-wrap:wrap;margin-top:7px}
+.diagram-caption{flex:1 1 220px;margin:0;text-align:left;line-height:1.55;font-size:11px}
+.diagram-zoom{flex:0 0 auto;display:inline-flex;gap:5px;align-items:center;border:1px solid #bcaa83;border-radius:8px;color:#584b31;background:#fff4dc;font-weight:800;font-size:12px;padding:7px 10px;min-height:35px}
+.diagram-zoom:hover{background:#fde7ba}
+.question-box{font-size:clamp(16px,1.4vw,18px);line-height:1.7;overflow-wrap:anywhere;padding:14px 17px}
+.question-label{line-height:1.5;font-size:10px}
+.options{align-items:stretch}
+.options.reading-mode{grid-template-columns:minmax(0,1fr)}
+.option{min-width:0;align-items:flex-start;padding:15px 16px;gap:12px}
+.option .num{width:30px;height:30px;font-size:13px}
+.option .opttext{display:block;flex:1 1 auto;min-width:0;max-width:100%;font-size:clamp(15px,1.23vw,17px);line-height:1.75;overflow-wrap:anywhere;word-break:normal}
+.answer-heading{flex-wrap:wrap;line-height:1.5}
+.answer-heading strong{font-size:clamp(13px,1.15vw,15px)}
+.feedback p,.hint-note{font-size:14px;line-height:1.75;overflow-wrap:anywhere}
+.draft-panel,.proof-panel{min-width:0;overflow:hidden}
+.draft-panel textarea,.proof-panel pre{max-width:100%;overflow-wrap:anywhere;word-break:normal}
+.proof-panel pre{font-size:clamp(14px,1.25vw,16px);line-height:1.85}
+.smallbtn{min-height:35px}
+.notebook-dialog{max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain}
+.zoom-dialog{border:1px solid #d7c49e;background:#fff9ee;color:#22364f;border-radius:18px;width:min(800px,calc(100vw - 20px));max-width:none;max-height:calc(100dvh - 20px);padding:0;box-shadow:0 35px 80px #0009;overflow:hidden}
+.zoom-dialog::backdrop{background:#071323da;backdrop-filter:blur(3px)}
+.zoom-head{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #e3d6bb;padding:12px 17px;font-size:15px}
+.zoom-close{border:1px solid #b7a887;background:#fff;color:#263850;border-radius:8px;padding:8px 13px;font-weight:800;min-height:38px}
+.zoom-scroll{overflow:auto;max-height:calc(100dvh - 145px);padding:15px;overscroll-behavior:contain}
+.zoom-scroll svg{display:block;width:100%;max-width:740px;height:auto;margin:auto;border:1px solid #e2d5bd;border-radius:10px;background-color:#fff}
+.zoom-help{font-size:11px;color:#6c5a3e;margin:0;padding:0 17px 12px;text-align:center}
+@media(max-width:920px){.game-layout{grid-template-columns:1fr}.rail{position:static;overflow:visible;padding:8px 12px;border-radius:14px}.rail-heading,.rail-tip{display:none}.rail #rank-nav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));width:100%;gap:7px}.rank-item{justify-content:center;min-width:0;width:auto;max-width:none;min-height:37px;margin:0;padding:5px 3px;border-radius:9px;opacity:.8}.rank-number{width:27px;height:27px;border-radius:8px}.rank-desc{display:none}.game-layout{gap:15px}}
+@media(max-width:600px){
+ .shell{padding:10px 12px}
+ .topbar{gap:7px;margin-bottom:14px;padding-bottom:9px}
+ .brand{gap:8px}
+ .brand-text{font-size:clamp(12px,3.7vw,15px);letter-spacing:0}
+ .brand-small{font-size:8px;letter-spacing:.12em}
+ .top-actions{gap:5px}
+ .smallbtn{padding:7px 8px;min-height:36px;font-size:11px}
+ .rail{padding:6px 7px}
+ .rail #rank-nav{gap:5px}
+ .mission-top{gap:2px 8px;align-items:flex-start}
+ .mission-label{font-size:13px}
+ .mission-no{font-size:11px}
+ .case-paper{border-radius:16px}
+ .case-paper:before{font-size:8px;letter-spacing:.09em;right:12px;padding:5px 9px}
+ .paper-heading{padding:39px 16px 7px}
+ .case-id{font-size:10px;line-height:1.55;letter-spacing:.055em}
+ .paper-heading h2{font-size:clamp(20px,5.45vw,24px);line-height:1.45}
+ .scenario{font-size:15px;line-height:1.8}
+ .diagram-wrap{padding:5px 12px 7px}
+ .diagram-frame{padding:7px;min-height:130px}
+ .diagram-frame svg{max-height:none}
+ .diagram-caption{text-align:left;font-size:11px}
+ .diagram-zoom{padding:6px 10px}
+ .question-box{margin:12px 12px 16px;padding:12px 13px;font-size:16px;line-height:1.7}
+ .question-label{font-size:10px;letter-spacing:.065em}
+ .options{grid-template-columns:minmax(0,1fr);gap:9px}
+ .option{min-height:57px;padding:12px 11px;gap:10px}
+ .option .num{width:29px;height:29px}
+ .option .opttext{font-size:15px;line-height:1.65}
+ .draft-panel,.proof-panel{padding:13px}
+ .draft-panel summary,.proof-panel summary{font-size:14px;line-height:1.6}
+ .proof-panel pre{padding:11px;font-size:14px;line-height:1.8}
+ .answer-heading{gap:2px 8px}
+ .answer-heading strong{font-size:14px}
+ .answer-heading span{font-size:11px}
+ .hero .lead{font-size:16px}
+ .hero p{line-height:1.75}
+ .zoom-scroll{padding:12px 6px}
+ .zoom-scroll svg{width:640px;max-width:none;margin:0}
+ .zoom-help{text-align:left}
+}
+@media(max-width:360px){
+ .shell{padding:8px}
+ .topbar{flex-wrap:wrap}
+ .brand{flex:1 1 auto}
+ .brand-icon{height:30px;width:30px}
+ .smallbtn{padding:6px;font-size:10px}
+ .top-actions{margin-left:auto}
+ .hero{padding:23px 18px}
+ .paper-heading{padding-left:13px;padding-right:13px}
+ .paper-heading h2{font-size:20px}
+ .scenario{font-size:14px}
+ .diagram-wrap{padding-left:9px;padding-right:9px}
+ .option .opttext{font-size:14px}
+ .progress-mini{gap:9px}
+ .stat span{font-size:10px}
+}
+.math-unit{display:inline-block;white-space:nowrap;font-weight:750;letter-spacing:.01em}
+
+/* ========== 証明探偵団：世界観・入団・認定証 ========= */
+:root{--gold:#f3c979;--gold2:#d39d3e;--paper:#fffaf0}
+.brand-icon{background:#f2cb7d24;color:#ffdfa0;font:900 25px var(--ui);border:1.5px solid #e8be65;transform:rotate(-5deg)}
+.brand-sub{font-weight:500;font-size:.8em;color:#cad4df}
+.top-actions{align-items:center}
+.member-chip{max-width:160px;display:inline-block;padding:5px 11px;border-radius:40px;border:1px solid #e8be6560;background:#e8be6517;color:#ffdea2;font-size:12px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hero{min-height:0;overflow:hidden;background:radial-gradient(circle at 90% 12%,#53758166,transparent 44%),linear-gradient(140deg,#1b3550,#13263b);}
+.hero:after{content:'?';right:-26px;bottom:-185px;font-family:serif;font-weight:900;font-size:500px;transform:rotate(-12deg);color:#ffe5a00c}
+.hero-seal{width:77px;height:77px;border:2px solid #f3ce7a;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#f8dba4;position:absolute;right:35px;top:40px;transform:rotate(14deg);box-shadow:0 0 0 5px #f3ce7a1e,0 0 0 7px #f3ce7a40}
+.hero-seal span{font-size:32px;line-height:1}.hero-seal small{font:900 10px ui-monospace,monospace;letter-spacing:.14em}
+.hero h1{font-size:clamp(37px,4.35vw,63px);margin:18px 0 10px;max-width:570px;line-height:1.28}
+.hero .lead{font-size:clamp(18px,2vw,25px);color:#ffd686;margin:0 0 23px}
+.hero .storyline{line-height:1.9;font-size:15px;max-width:540px}
+.hero .storyline strong{color:#fff2c2}
+.letter-note{position:relative;border-radius:12px;border-left:4px solid #f0c674;margin:19px 0 26px;background:#0b1a2b82;padding:13px 18px;color:#f8efdb}
+.letter-note>span{font-size:11px;font-weight:900;color:#efc680;letter-spacing:.07em}
+.letter-note p{font-size:14px;color:#e5eff2;line-height:1.85;margin:7px 0 0}.letter-note strong{color:#ffdf9b}
+.join-box{position:relative;z-index:3;border-top:1px dashed #f3d2864d;padding-top:19px}
+.join-box label{font-weight:900;display:block;font-size:16px;color:#fff0cb;margin-bottom:9px}
+.join-row{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch}
+.join-input{width:min(270px,100%);min-width:0;flex:1 1 180px;background:#fffdf4;border:2px solid #d9c18b;color:#203348;border-radius:12px;font-size:16px;font-weight:700;padding:13px 15px}
+.join-input[readonly]{background:#e2e9ed;color:#4a6072}
+.join-row .goldbtn{flex:1 0 auto;max-width:100%;min-height:52px}
+.hero p.join-tip{margin:7px 0 0;font-size:11px;color:#b6c8d7;line-height:1.6}
+.hero p.join-error{color:#ffd0b8;font-size:13px;font-weight:900;margin:6px 0 0}
+.reset-link{padding:10px 0 0;background:transparent;color:#bfd1db;border:0;text-decoration:underline;font-size:12px}
+.chapter-card{background:#172d41a8}
+.chapter-lead{font-size:12px;color:#bdd0df;line-height:1.7}
+.chapter-card .mini-ranks{gap:8px;margin-top:19px}
+.mini-ranks li{align-items:center;gap:11px;border-radius:10px;padding:7px;background:#fff8e607;min-width:0;line-height:1.3}
+.mini-ranks .chapter-icon{display:grid;place-items:center;width:37px;height:37px;flex:0 0 37px;border-radius:10px;background:#ffffff0e;font-size:18px}
+.mini-ranks li>div{min-width:0;flex:1}
+.mini-ranks b{display:block;font-size:13px;color:#f5daa0;min-width:0}
+.mini-ranks small{display:block;font-size:11px;color:#b9ccd7;line-height:1.45;margin-top:2px}
+.mini-ranks em{font-size:10px;font-style:normal;color:#b9edc9;white-space:nowrap}
+.club-rule{flex:0 0 auto;padding:17px 22px}.club-rule>strong{font-size:14px;color:#fff0c2}.club-rule p{font-size:12px;color:#c8d7e1;line-height:1.9;margin:4px 0 0}
+.rank-item.done .rank-number{background:#1b675a;color:#ccffea}
+.tiny-earned{display:block;font-size:10px;color:#b2f0d9}
+.retry-note{font-size:12px;color:#f4ccc4}
+.result-congrats{padding:16px;margin:18px 0;background:#eee4cd;border:1px dashed #c5a873;border-radius:12px;line-height:1.7}
+/* Native dialogs keep keyboard/focus and the canvas preview usable on phones. */
+.archive-dialog,.award-dialog{padding:clamp(15px,3vw,28px);background:#fef9ec;color:#21354a;border:1px solid #d9c393;border-radius:22px;width:min(820px,calc(100vw - 20px));max-width:none;max-height:calc(100dvh - 24px);box-shadow:0 32px 90px #0009;overflow:auto}
+.archive-dialog::backdrop,.award-dialog::backdrop{background:#091422dd;backdrop-filter:blur(4px)}
+.modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:13px}
+.modal-head .eyebrow{color:#9b7639;font-size:10px;letter-spacing:.12em}
+.modal-head h2{font-family:var(--serif);font-size:clamp(23px,3.3vw,32px);margin:2px 0 5px}
+.modal-head p{font-size:13px;color:#597084;margin:4px 0 0}
+.smallclose{border:1px solid #bbaf99;border-radius:10px;padding:9px 12px;color:#3b4e5e;background:#fff;font-size:12px;font-weight:800;white-space:nowrap}
+.archive-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.archive-card{background:#ebe9e4;border:1px solid #d2d6d6;opacity:.72;border-radius:14px;padding:14px;display:flex;align-items:center;gap:11px;min-width:0}
+.archive-card.earned{background:#fff7df;border-color:#d7af64;opacity:1}
+.archive-emblem{flex:0 0 42px;width:42px;height:42px;background:#e8e2d4;border-radius:12px;display:grid;place-items:center;font-size:22px}
+.archive-card.earned .archive-emblem{background:#f7e5ad}
+.archive-info{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.archive-info small{color:#987744;font-weight:900;font-size:10px}
+.archive-info strong{color:#273b4a;font-size:14px}
+.archive-info span{font-size:11px;color:#65798a;overflow-wrap:anywhere}
+.archive-view{border:1px solid #ab873b;background:#f8e5b8;color:#4a381b;font-weight:900;border-radius:9px;padding:8px 10px;font-size:12px;flex:none}
+.award-story{background:#f0e5cd;color:#534524;border-left:4px solid #caa054;border-radius:8px;padding:13px;font-size:14px;line-height:1.8}
+.award-preview{background:#eee4ca;border-radius:12px;padding:10px;border:1px solid #d2bd96;max-height:55dvh;overflow:auto}
+.award-preview canvas{display:block;width:100%;height:auto;max-width:680px;margin:auto;background:#fff;border:1px solid #d4ba7e;box-shadow:0 7px 18px #0002}
+.award-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}
+.award-actions .goldbtn{flex:1 1 260px}.award-actions .ghostbtn{flex:1 1 145px;color:#3d5162}
+.award-note{text-align:center;color:#7c6f55;font-size:11px;line-height:1.4;margin:9px 0 0}
+@media(max-width:920px){.intro{gap:14px}.hero-seal{width:61px;height:61px;right:22px;top:24px}.hero-seal span{font-size:26px}.hero h1{padding-right:50px}}
+@media(max-width:600px){.intro{margin-top:8px}.hero{padding:24px 19px}.hero h1{font-size:clamp(33px,9vw,44px);padding-right:0;margin-top:15px}.hero .lead{font-size:19px}.hero-seal{top:16px;right:15px;width:47px;height:47px}.hero-seal span{font-size:19px}.hero-seal small{font-size:8px}.hero .storyline{font-size:14px}.letter-note p{font-size:13px}.join-row{display:grid;grid-template-columns:1fr}.join-input{width:100%;min-height:49px}.join-row .goldbtn{width:100%}.member-chip{max-width:120px;padding:4px 6px;font-size:10px}.brand-sub{display:none}.archive-grid{grid-template-columns:1fr}.archive-card{padding:10px;gap:8px}.archive-info strong{font-size:13px}.award-preview{padding:5px;max-height:47dvh}.award-dialog{padding:13px}.award-actions{gap:6px}.award-actions .goldbtn,.award-actions .ghostbtn{width:100%}}
+@media(max-width:390px){.brand-icon{width:28px;height:28px;font-size:17px}.brand-text{font-size:12px}.top-actions{gap:4px}.top-actions .smallbtn{font-size:10px;padding:6px}.member-chip{max-width:85px}.hero .eyebrow{font-size:9px;letter-spacing:.12em}.hero h1{font-size:32px}.modal-head h2{font-size:22px}}
+
+</style>
+<style>
+/* 証明探偵団 2.0 — visual & accessibility upgrade. Main question bank remains unchanged. */
+:root{--night:#0a1727;--deep:#07111d;--mid:#1d3549;--paper:#fff9e9;--ink:#1e3448;--gold:#ffd17d;--gold2:#c78d30;--good:#117d64;--line:#e6ddcb}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(ellipse 65% 55% at 5% 0%,#223e55 0,transparent 78%),radial-gradient(ellipse 45% 65% at 100% 22%,#14313b 0,transparent 78%),#081523;color:#f5f6f0}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:linear-gradient(#ffffff07 1px,transparent 1px),linear-gradient(90deg,#ffffff07 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(180deg,#0009,transparent 90%)}
+.shell{max-width:1370px;padding:clamp(12px,2.2vw,28px)}
+.topbar{margin-bottom:24px;min-height:70px;border-bottom:1px solid #adbfce30}
+.brand-icon{height:43px;width:43px;font-size:28px;background:linear-gradient(135deg,#fff2b030,#9c6c2538);box-shadow:0 0 0 4px #e8be6512,0 5px 13px #0004;transform:rotate(-6deg)}
+.brand-small{font-size:10px;letter-spacing:.22em;color:#ffdf9a}
+.brand-text{font-size:clamp(16px,2vw,22px)}
+.smallbtn{font-size:12px;padding:9px 12px;border-radius:11px;background:#14283c;border-color:#a4bfd04a;color:#eff7f5;transition:background .14s,border-color .14s}
+.smallbtn:hover{background:#24445a;border-color:#f2d38c}
+.member-chip{border:1px solid #f4c66a88;background:#f2bb5740;color:#ffedbf;max-width:190px}
+.goldbtn{background:linear-gradient(125deg,#ffe8a8,#f5c66f 60%,#dfa747);color:#31210e;box-shadow:0 6px 0 #9a652f66,0 12px 23px #0005;letter-spacing:.015em;min-height:48px;transition:transform .15s,filter .15s,box-shadow .15s}
+.goldbtn:hover{transform:translateY(-2px);box-shadow:0 8px 0 #9a652f66,0 14px 27px #0005}
+.goldbtn:active{transform:translateY(2px);box-shadow:0 2px 0 #9a652f66}
+.eyebrow{letter-spacing:.15em}
+.intro{gap:clamp(14px,2vw,26px);margin-top:10px;grid-template-columns:minmax(0,1.15fr) minmax(275px,.85fr)}
+.hero{padding:clamp(26px,4.3vw,60px);border-radius:28px;border:1px solid #f3c97877;background:radial-gradient(circle at 110% -10%,#4a728166 0,transparent 56%),radial-gradient(circle at -20% 112%,#39605530,transparent 55%),linear-gradient(145deg,#173147,#0e2337 73%);box-shadow:inset 0 1px #fff2,0 22px 48px #0005;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:15px;border:1px solid #f8d79b34;border-radius:18px;pointer-events:none}
+.hero::after{right:-42px;bottom:-210px;font-size:530px;color:#f4cc7510}
+.hero .eyebrow{display:inline-block;background:#f3c8791b;padding:5px 12px;border:1px solid #f4d69854;border-radius:6px;font-size:11px}
+.hero h1{font-family:var(--serif);font-size:clamp(39px,4.65vw,68px);line-height:1.27;letter-spacing:.045em;margin:19px 0 13px;text-shadow:0 2px 20px #0006}
+.hero .lead{font-size:clamp(17px,2.1vw,26px);letter-spacing:.015em}
+.hero .storyline{font-size:clamp(14px,1.33vw,17px);line-height:1.9}
+.hero-seal{top:38px;right:35px;box-shadow:0 0 0 5px #ffdb8f14,0 0 0 7px #ffdb8f40,0 9px 22px #0005}
+.letter-note{background:linear-gradient(90deg,#071726c7,#10263ab0);border-left-color:#ffce72;border-radius:11px;box-shadow:inset 0 1px #fff1}
+.letter-note>span{color:#ffe09c}
+.join-box{margin-top:18px}.join-box label{font-size:clamp(14px,1.4vw,17px)}
+.join-input{border:2px solid #e9cf92;box-shadow:inset 0 2px 6px #0002}
+.info-card{background:linear-gradient(160deg,#1d364aae,#102b3ba8);border-color:#d7c39b45;box-shadow:inset 0 1px #ffffff0c}
+.chapter-card h2{font-size:22px}.mini-ranks li{padding:10px 12px;border:1px solid #d7e8e719;background:#e3f2ed0a;transition:background .15s,border-color .15s}
+.mini-ranks li:hover{background:#ffde9e13;border-color:#e3c88b63}
+.mini-ranks .chapter-icon{background:#e6c37820;border:1px solid #e8ce9840;width:40px;height:40px}
+.mini-ranks b{font-size:14px}.mini-ranks small{font-size:12px;color:#ccdae3}
+.stat{background:#f5da9812;border:1px solid #f9df9966}.stat strong{font-size:32px}
+.club-rule{background:linear-gradient(120deg,#16413786,#112c39bd);border-color:#7ab5a34f}
+.game-layout{grid-template-columns:245px minmax(0,1fr);gap:22px}
+.rail{background:linear-gradient(155deg,#1a3348,#112639);border:1px solid #68829255;padding:17px;box-shadow:0 12px 29px #0003}
+.rail-heading{color:#e3c486;font-size:11px;letter-spacing:.14em}
+.rank-item{position:relative;margin-bottom:8px;border-radius:12px;transition:background .2s}
+.rank-item.active{background:linear-gradient(115deg,#f4c97033,#f4c97010);border-color:#f2d080b5;box-shadow:inset 3px 0 #ffda8d}
+.rank-item.done{opacity:1;background:#19604b27}
+.rank-desc strong{font-size:13px}.rank-desc{font-size:11px}
+.rank-number{font-size:13px;width:32px;height:32px}
+.mission-top{margin-bottom:10px}.mission-label{font-size:clamp(14px,1.5vw,18px);color:#ffdb90}
+.mission-no{color:#cbd7df;font-size:12px}
+.meter{height:8px;background:#3e5566aa;margin-bottom:13px;box-shadow:inset 0 1px 3px #0005}
+.meter-fill{background:linear-gradient(90deg,#e2a551,#ffdf91);box-shadow:0 0 12px #ffdb8b80}
+.brief-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:linear-gradient(95deg,#1a4650,#183747);border:1px solid #87b7ad73;border-left:4px solid #ffd37f;border-radius:13px;padding:12px 15px;margin:0 0 14px;box-shadow:0 5px 15px #0002}
+.brief-left{display:flex;align-items:center;gap:11px;min-width:0}.brief-symbol{font-size:22px;background:#f9d78f26;width:38px;height:38px;display:grid;place-items:center;border-radius:11px;border:1px solid #f9d78f70;flex:none}
+.brief-left strong{font-size:14px;color:#fff5d7;display:block;line-height:1.4}.brief-left small{font-size:11px;color:#b9d7d8;display:block}
+.brief-counter{font-size:12px;font-weight:900;color:#ffe7ac;background:#102837;border:1px solid #9eb59d8c;border-radius:999px;padding:7px 12px;white-space:nowrap}
+.case-paper{border-radius:22px;border:1px solid #fff5d3;box-shadow:0 14px 42px #0006;background:#fffbf2}
+.case-paper::before{background:#b24b43;right:19px;font-size:10px;letter-spacing:.15em;box-shadow:0 4px 9px #0002}
+.paper-heading{padding:27px 29px 12px}.case-id{font-size:11px;color:#9e773f}
+.paper-heading h2{font-size:clamp(24px,2.7vw,34px);font-weight:900;margin:9px 0 12px;color:#182f49}
+.scenario{font-size:clamp(14px,1.35vw,17px);line-height:1.85;color:#2f465b;font-weight:500}
+.diagram-wrap{padding:6px 27px 12px}.diagram-frame{border:1.5px solid #d6c5a5;border-radius:15px;background-color:#fffefa;background-image:linear-gradient(#d4e2e93b 1px,transparent 1px),linear-gradient(90deg,#d4e2e93b 1px,transparent 1px);background-size:22px 22px;min-height:180px;box-shadow:inset 0 2px 12px #b4ab9620}
+.diagram-frame svg{max-height:260px}
+.diagram-caption{font-size:12px;color:#846c4f}
+.diagram-zoom{border-radius:9px;font-size:12px;padding:8px 12px}
+.question-box{background:linear-gradient(95deg,#fff0c7,#ffefcb);margin:14px 26px 26px;padding:17px 20px 18px;font-size:clamp(16px,1.5vw,19px);border-left:5px solid #ca943c;border-radius:5px 13px 13px 5px;line-height:1.8}
+.question-label{font-size:11px;letter-spacing:.1em;color:#936322}
+.answer-heading{margin:20px 1px 10px}.answer-heading strong{font-size:clamp(14px,1.36vw,17px);color:#eef8f8}
+.options{gap:12px}.option{background:#183248;border:1.5px solid #5d8191;border-radius:15px;min-height:75px;padding:15px 16px;gap:12px;box-shadow:0 5px 13px #0002}
+.option .num{width:31px;height:31px;border-color:#e8c377b3;background:#ebc96a1a;color:#ffdd90;font-size:14px;border-radius:9px}
+.option .opttext{font-size:clamp(14px,1.22vw,17px);line-height:1.75;color:#f1f7f6;overflow-wrap:anywhere}
+.option:hover:not(:disabled){background:#21465b;border-color:#f5cb79;box-shadow:0 8px 20px #0004}
+.option.correct-choice{background:#145447;border-color:#71ddaf;box-shadow:0 0 0 2px #74e4a344}
+.option.eliminated{opacity:.5}
+.actionline{padding-top:4px}.hint-btn{font-size:13px;background:#e8c77812;border:1px solid #e8c7785a;padding:9px 13px;border-radius:9px;text-decoration:none}.hint-btn:hover{background:#e8c77826}
+.feedback{border-radius:14px;padding:18px 20px}.feedback.good{background:#104639;border-color:#58c09d}.feedback.bad{background:#422d35;border-color:#c08a74}
+.feedback h3{font-size:19px}.feedback p{font-size:15px}
+.draft-panel,.proof-panel{border-radius:13px}
+.draft-panel summary,.proof-panel summary{font-size:15px}
+.progress-mini{font-size:12px;gap:17px;margin-top:18px}
+.award-dialog,.archive-dialog{border-radius:24px;border:2px solid #dec080;box-shadow:0 30px 110px #000b}.award-preview{background:#f3e7ca;box-shadow:inset 0 2px 10px #0001}.archive-card.earned{border-color:#cf9d4a;background:#fff4d5}.archive-view{min-height:38px}
+.footer{color:#94b0bb;font-size:11px}
+@media(max-width:920px){.intro{grid-template-columns:1fr}.intro-side{display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,.7fr);align-items:stretch}.stats-row{grid-column:2;grid-row:1}.club-rule{grid-column:2;grid-row:1;align-self:end;margin-top:125px}.chapter-card{grid-column:1;grid-row:1/3}.game-layout{grid-template-columns:1fr;gap:12px}.rail{position:static;padding:9px;border-radius:12px}.rail #rank-nav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}.rank-item{min-height:42px;padding:5px;margin:0}.rank-number{width:28px;height:28px}.rail-heading,.rail-tip,.rank-desc{display:none}}
+@media(max-width:700px){.intro-side{display:flex}.stats-row{order:-1}.club-rule{margin-top:0}.topbar{gap:7px;min-height:60px}.top-actions{gap:5px}.brand{gap:8px}.hero{padding:28px 20px;border-radius:18px}.hero::before{inset:9px;border-radius:12px}.hero h1{font-size:clamp(35px,9vw,49px)}.hero-seal{top:18px;right:15px}.hero .eyebrow{font-size:10px}.letter-note{padding:12px 14px}.join-row{gap:10px}.chapter-card h2{font-size:20px}.brief-bar{padding:10px 11px;gap:7px}.brief-left{gap:8px}.brief-left strong{font-size:12px}.brief-left small{font-size:10px}.brief-counter{font-size:11px;padding:5px 8px}.brief-symbol{width:33px;height:33px;font-size:18px}.paper-heading{padding:39px 15px 12px}.paper-heading h2{font-size:clamp(22px,5.6vw,28px)}.scenario{font-size:15px}.diagram-wrap{padding:5px 11px 8px}.diagram-frame{min-height:150px}.diagram-frame svg{max-height:none}.question-box{margin:12px 11px 17px;padding:14px;font-size:16px}.options{grid-template-columns:1fr;gap:9px}.option{min-height:58px;padding:11px 12px;gap:10px}.option .opttext{font-size:15px;line-height:1.65}.answer-heading{margin:17px 1px 8px}.answer-heading strong{font-size:14px}.member-chip{max-width:95px}.brand-icon{width:35px;height:35px;font-size:23px}}
+@media(max-width:400px){.shell{padding:9px}.topbar{flex-wrap:wrap;min-height:57px;padding-bottom:8px}.brand{flex:1 0 auto}.top-actions{margin-left:auto;gap:4px}.brand-text{font-size:15px}.brand-small{font-size:8px;letter-spacing:.11em}.smallbtn{font-size:10px;padding:6px 7px}.member-chip{max-width:105px}.hero{padding:23px 16px}.hero h1{font-size:35px}.hero-seal{width:42px;height:42px}.hero-seal span{font-size:19px}.brief-left strong{font-size:11px}.brief-counter{font-size:10px}.paper-heading h2{font-size:22px}.case-paper:before{font-size:8px;padding:4px 7px;right:10px}.rank-item{min-height:34px;padding:3px}.rank-number{width:25px;height:25px;font-size:11px}.option .opttext{font-size:14px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="topbar">
+  <div class="brand"><div class="brand-icon" aria-hidden="true">△</div><div><div class="brand-small">SHOMEI DETECTIVE CLUB</div><div class="brand-text">証明探偵団 <span class="brand-sub">｜図形事件簿</span></div></div></div>
+  <div class="top-actions"><span class="member-chip hidden" id="member-chip"></span><button class="smallbtn" id="archive-btn">🏅 証明書 <b id="award-counter">0</b>/6</button><button class="smallbtn" id="notebook-btn">📖 捜査手帳</button><button class="smallbtn hidden" id="home-btn">最初から</button></div>
+</header>
+<main>
+<section id="start-screen" class="intro">
+  <div class="hero">
+    <div class="eyebrow">✉ SECRET INVITATION · JOIN OUR CLUB</div>
+    <div class="hero-seal" aria-hidden="true"><span>△</span><small>SDC</small></div>
+    <h1>図形は、<br>ウソをつかない。</h1>
+    <p class="lead">証拠を見つけるのは、キミだ。</p>
+    <p class="storyline">放課後、机の上に一通の封筒が置かれていた。<br>差出人は、<strong>「証明探偵団」</strong>。<br>そこには、こんなメッセージが……。</p>
+    <div class="letter-note"><span>団長からの秘密の手紙</span><p>「きみの観察力を見込んで、新しい団員に選んだ。<br>図形に隠された手がかりを集め、6つの謎を解いてほしい。<br>見た目で決めつけるな。<strong>証拠は、いつも図の中にある。</strong>」</p></div>
+    <div class="join-box">
+      <label for="join-name">🪪 まずは探偵名を登録しよう</label>
+      <div class="join-row"><input type="text" class="join-input" id="join-name" maxlength="20" autocomplete="nickname" placeholder="名前・ニックネーム（20文字まで）" aria-describedby="join-tip join-error"><button class="goldbtn" id="start-btn">🔎 入団して捜査開始</button></div>
+      <p class="join-tip" id="join-tip">登録名は6つの認定証に刻まれるぞ。進行記録はこの端末にだけ保存される。</p>
+      <p class="join-error hidden" id="join-error" role="alert">探偵名を入力してから入団しよう！</p>
+      <button class="reset-link hidden" id="restart-intro-btn">捜査記録を消して、別の名前で最初から始める</button>
+    </div>
+  </div>
+  <div class="intro-side">
+    <div class="info-card chapter-card"><div class="eyebrow" style="font-size:10px">TOP SECRET · 6 CHAPTERS</div><h2>🗂️ 証明探偵団の任務</h2><p class="chapter-lead">事件を解決するたびに実力が上がる。<strong>各章を突破すれば、名前入りの認定証</strong>を手に入れられる！</p><ul class="mini-ranks" id="intro-ranks"></ul></div>
+    <div class="stats-row"><div class="stat"><strong>6</strong><span>秘密の章</span></div><div class="stat"><strong id="intro-case-count">54</strong><span>事件ファイル</span></div><div class="stat"><strong>6</strong><span>集める認定証</span></div></div>
+    <div class="info-card club-rule"><strong>🔐 団員の掟</strong><p>① 見た目で決めつけない<br>② 対応する順番をそろえる<br>③ 等しい理由を必ず確かめる</p></div>
+  </div>
+</section>
+<section id="game-screen" class="hidden game-layout">
+  <aside class="rail" aria-label="捜査ランク"><div class="rail-heading">SECRET MISSION MAP</div><div id="rank-nav"></div><div class="rail-tip">団長のひとこと：図の見た目は証拠にならない。仮定・性質・対応順を一つずつ確認しよう。</div></aside>
+  <div class="work"><div class="mission-top"><div class="mission-label" id="rank-label"></div><div class="mission-no" id="mission-no"></div></div><div class="meter" role="progressbar" aria-label="捜査進行度" aria-valuemin="0" aria-valuemax="54" aria-valuenow="0" id="progress-track"><div class="meter-fill" id="progress-fill"></div></div>
+    <article class="case-paper"><div class="paper-heading"><div class="case-id" id="case-id"></div><h2 id="case-title"></h2><div class="scenario" id="scenario"></div></div><div class="diagram-wrap"><div class="diagram-frame" id="diagram"></div><div class="diagram-foot"><div class="diagram-caption">図は模式図。印と問題文に書かれた条件だけを証拠にしよう。</div><button type="button" class="diagram-zoom" id="diagram-zoom">🔎 図を拡大</button></div></div><div class="question-box"><span class="question-label">MISSION NOTE · 団長からの極秘指令</span><span id="question"></span></div></article>
+    <details id="draft-panel" class="draft-panel hidden"><summary>✍️ 自分で推理調書を書いてみる（任意・自動保存）</summary><p>調書を自分で書いてから4択を選ぶと、より力がつく。正解後に模範証明と比べられるぞ。</p><textarea id="draft-text" rows="7" spellcheck="false" placeholder="【証明】
+△＿＿ と △＿＿ において
+仮定より……
+……だから……"></textarea><div class="draft-status">書いた内容は、この端末だけに保存される。</div></details>
+    <div class="answer-heading"><strong>🔍 4つの推理から、正しいものを1つ選ぼう</strong><span>正解は必ず1つ</span></div><div id="options" class="options"></div>
+    <div class="actionline"><button class="hint-btn" id="hint-btn">💡 団長にヒントを聞く</button><span style="font-size:11px;color:#acbed2">正解するまで次の事件には進めない</span></div><div class="hint-note hidden" id="hint-note" aria-live="polite"></div>
+    <div class="feedback hidden" id="feedback" role="status" aria-live="polite"><h3 id="feedback-title"></h3><p id="feedback-text"></p><div class="continue" id="feedback-actions"></div></div>
+    <details id="proof-panel" class="proof-panel hidden"><summary>📜 団長の模範調書を見る（正解後に公開）</summary><pre id="proof-content"></pre></details>
+    <div class="progress-mini"><span id="mini-score"></span><span id="mini-miss"></span><span id="mini-hints"></span></div>
+  </div>
+</section>
+<section id="result-screen" class="result hidden"><div class="medal" id="result-medal">🏅</div><div class="eyebrow" style="margin-top:17px">THE FINAL MYSTERY — SOLVED</div><h1 id="result-title">全事件、解決。</h1><p id="result-lead"></p><div class="result-card"><h2 style="font-family:var(--serif);margin-top:0">📋 キミの最終捜査記録</h2><div class="result-grid"><div><strong id="end-score">0</strong><span>獲得ポイント</span></div><div><strong id="end-miss">0</strong><span>再捜査</span></div><div><strong id="end-hints">0</strong><span>ヒント</span></div></div><div class="result-congrats">🎖️ 各章の認定証は「証明書アルバム」でいつでも確認・画像保存できるぞ。</div><div class="result-actions"><button class="goldbtn" id="save-certificate">🏅 第6章の認定証を見る</button><button class="ghostbtn" style="color:#35465d" id="play-again">もう一度、最初から捜査する</button></div></div></section>
+</main><footer class="footer">SHOMEI DETECTIVE CLUB · 証明探偵団 · 図形はウソをつかない</footer>
+</div>
+<dialog id="notebook" class="notebook-dialog"><div class="notebook-inner"><button class="notebook-close" id="close-notebook">閉じる ✕</button><div class="eyebrow" style="color:#a9823c">DETECTIVE'S NOTEBOOK</div><h2>📖 捜査手帳</h2><p>正確な証明をつくるための基本ルールだ。迷ったらいつでも確認しよう。</p><h3>合同条件はこの3つだけ</h3><div class="bookline"><ol><li><strong>3組の辺がそれぞれ等しい。</strong></li><li><strong>2組の辺とその間の角がそれぞれ等しい。</strong></li><li><strong>1組の辺とその両端の角がそれぞれ等しい。</strong></li></ol></div><h3>対応する順番（最重要）</h3><p>△ABC ≡ △DEF なら A↔D、B↔E、C↔F。たとえば AB = DE、∠ABC = ∠DEF だ。<strong>合同の証明では、角の3文字も左と右で同じ位置に対応する頂点が来るように書こう。</strong> ∠QOP の Q-O-P に対応する頂点が R-O-P なら、<strong>∠QOP = ∠ROP</strong> と記す。正しい対応を保った並べ替え（△BCA ≡ △EFD など）も数学的には正しい。</p><h3>記号と角のルール</h3><p>三角形の合同には <strong>≡</strong>、辺の長さ・角の大きさの等しさには <strong>=</strong> を使う。∠ABC の頂点は真ん中の B。∠ABC と ∠CBA は同じ角を表す。<strong>逆順だから角の大きさが違うわけではない。</strong>ただし、このゲームの「対応順をそろえる」問題では、同じ角でも文字の順が対応しない表記は採用しない。</p><h3>正しい式と、正しい理由は別々にチェック</h3><p>例えば ∠AOC=∠BOD は対頂角のため等しい。「錯角だから」と書くのは根拠が誤り。角の等式だけを見て、理由まで正しいと判断しないこと。<strong>与えられた条件 → 等式 → 等しい理由 → 合同条件 → 合同</strong>を一つずつ裏取りしよう。</p><h3>調書の基本手順</h3><p>① どの三角形か宣言 → ② 等しい辺・角とその根拠 → ③ 合同条件 → ④ 合同 → ⑤ 対応する辺・角が等しいことから最終結論。</p><h3>証拠の捏造は禁止</h3><p>「見た目が同じ」は根拠にならない。「2組の辺と1組の角」だけでは、その角が<strong>間の角</strong>か確認が必要。結論を証拠に用いる循環論法も禁止だ。</p><h3>この事件簿で身につく力</h3><p>仮定と結論、合同条件、共通な辺、対頂角、平行線の錯角、引き算で示す辺の等しさ、角の二等分線、垂線、合同から平行を導く証明まで、少しずつ挑戦できる。</p><h3>平行を示す逆向きの推理</h3><p>平行なら錯角は等しい。また、錯角が等しければ2直線は平行といえる。最後の問題では、合同によって対応する角が等しいことを示してから、この逆の性質を利用する。</p></div></dialog>
+<dialog id="zoom-dialog" class="zoom-dialog" aria-label="図形の拡大表示"><div class="zoom-head"><strong>🔎 図形を詳しく見る</strong><button type="button" class="zoom-close" id="zoom-close">閉じる ✕</button></div><div class="zoom-scroll" id="zoom-scroll"></div><p class="zoom-help">スマホでは左右に動かして細部を確認できます。</p></dialog>
+<dialog id="archive-dialog" class="archive-dialog" aria-label="証明書アルバム">
+  <div class="modal-head"><div><div class="eyebrow">DETECTIVE'S AWARD COLLECTION</div><h2>🏅 証明書アルバム</h2><p>クリアした章の証明書を何度でもダウンロードできるぞ。</p></div><button type="button" class="smallclose" id="archive-close">閉じる ✕</button></div>
+  <div id="archive-grid" class="archive-grid"></div>
+</dialog>
+<dialog id="award-dialog" class="award-dialog" aria-label="ランク修了認定証">
+  <div class="modal-head"><div><div class="eyebrow">CHAPTER CLEARED · NEW TITLE UNLOCKED</div><h2 id="award-heading">任務達成！</h2></div><button type="button" class="smallclose" id="award-close">閉じる ✕</button></div>
+  <p id="award-story" class="award-story"></p>
+  <div class="award-preview"><canvas id="award-canvas" width="1600" height="1120" role="img" aria-label="名前入りのランク認定証"></canvas></div>
+  <div class="award-actions"><button class="goldbtn" id="award-download">⬇ 認定証をPNG画像で保存</button><button class="ghostbtn" id="award-next">捜査へ戻る</button></div>
+  <p class="award-note">この認定証は画像として保存できます。名前・称号・修了日入りです。</p>
+</dialog>
+<script>
+'use strict';
+const rankInfo=[
+ ['最初の暗号','対応順・記号・角の読み取り'],
+ ['3つの秘密の鍵','合同条件の正確な理解'],
+ ['現場の手がかり','仮定・共通・対頂角・錯角'],
+ ['調書を完成せよ','証明の穴埋め・根拠の裏取り'],
+ ['真実への最後の一手','合同から結論を導く'],
+ ['最後の大事件','複雑な図形と実戦的な証明']
+];
+const chapterIcons=['🔎','🔐','🧩','📋','🧠','🏆'];
+const rankAwards=[
+ {title:'対応捜査員',subtitle:'頂点の対応を見破った証',story:'最初の暗号、見事に解読したな。これでキミも立派な証明探偵団の一員だ。'},
+ {title:'合同条件鑑定士',subtitle:'3つの合同条件を使いこなした証',story:'3つの秘密の鍵がそろった。犯人ならぬ「合同」は、もう逃げられない！'},
+ {title:'証拠分析官',subtitle:'仮定と図形の性質を見抜いた証',story:'現場に残る小さな手がかりを拾い集めた。見た目に惑わされない眼は、名探偵の才能だ。'},
+ {title:'論理調書官',subtitle:'筋道の通った証明を構築した証',story:'バラバラの証拠が、一本の筋道につながった。法廷に提出できる調書に近づいてきたぞ。'},
+ {title:'結論解明官',subtitle:'合同から結論を導く推理力の証',story:'合同を示して終わりではない。真実への最後の一手まで見通したな。'},
+ {title:'証明名探偵',subtitle:'6つの章を突破し、全事件を解決した証',story:'事件簿の最後のページが開いた。答えを当てるだけでなく、「なぜ」を説明できる。それこそが証明探偵団のエースだ。'}
+];
+// 各事件は数学的に正解が1つとなるよう、条件・対応・根拠を明記している。
+const cases=[
+ {rank:0,title:'入れ替わった指名手配書',diagram:'pair',scenario:'△ABC と △DEF はぴったり重なる。対応する頂点は A と D、B と E、C と F だ。',question:'三角形が合同であることを、正確に表す調書はどれだ？',hint:'「≡」の使い方と、文字の並びが示す対応関係を両方チェック。',options:[
+  ['△ABC = △DEF','「=」では三角形の合同を表さない。合同の記号は「≡」だ。'],
+  ['△ABC ≡ △DFE','対応順が違う。これでは B と F、C と E が対応することになってしまう。'],
+  ['△ABC ≡ △DEF','見事！A↔D、B↔E、C↔F の対応が正しく、合同記号も使えている。',1],
+  ['△ABC ≡ △EFD','A に対応するのは D だ。E を先頭にすると別の対応関係になってしまう。']]},
+ {rank:0,title:'角の正体を突き止めろ',diagram:'pair',scenario:'△ABC ≡ △DEF がわかっている。',question:'∠ABC に対応する角を、3文字とも対応順をそろえて書くとどれだ？',hint:'A→D、B→E、C→F。3文字をそれぞれ同じ位置に置き換えよう。',options:[
+  ['∠ABC = ∠DFE','∠DFE の頂点は F。B に対応する頂点は E だ。'],
+  ['∠ABC = ∠DEF','正解！B↔E なので、∠ABC と ∠DEF は対応する角だ。',1],
+  ['∠ABC = ∠FED','∠FED も ∠DEF と同じ角を表す。ただし今回は A-B-C の文字を D-E-F の順にそろえて書く問題だ。'],
+  ['∠ABC ≡ ∠DEF','角の大きさが等しいことは「=」で表そう。三角形の合同には「≡」を使う。']]},
+ {rank:0,title:'等号と合同記号の鑑識',diagram:'pair',scenario:'△ABC ≡ △DEF。したがって A↔D、B↔E、C↔F だ。',question:'証拠品の書き方として正しいものはどれだ？',hint:'辺の「長さ」が等しいときと、三角形そのものが合同のときでは記号が違う。',options:[
+  ['AB ≡ DE','この教材では、辺の長さが等しいことを AB = DE と書く。'],
+  ['∠BAC ≡ ∠EDF','角の大きさが等しいときは「=」を使う。'],
+  ['△ABC = △DEF','三角形の合同は「≡」で表す。'],
+  ['BC = EF','正解！B↔E、C↔F なので BC と EF の長さは等しい。',1]]},
+ {rank:1,title:'3辺の証言',diagram:'sss',scenario:'2つの三角形で、対応する3組の辺がすべて等しいことが確認できた。',question:'使用できる合同条件の正式な表現はどれだ？',hint:'条件文には「何組」「何が」「どう等しい」が必要だ。',options:[
+  ['3組の角がそれぞれ等しい。','3組の角が等しいだけでは大きさは決まらず、合同とは限らない。'],
+  ['3組の辺がそれぞれ等しい。','完璧！3組の対応する辺の長さがそれぞれ等しいことが合同条件になる。',1],
+  ['3つの辺の長さの和が等しい。','周の長さが等しくても、三角形の形はさまざまだ。'],
+  ['2組の辺がそれぞれ等しい。','2組の辺だけでは合同は決まらない。もう1つ証拠が必要だ。']]},
+ {rank:1,title:'その「間」を逃すな',diagram:'sas',scenario:'△ABC と △DEF で、AB = DE、AC = DF、∠BAC = ∠EDF が判明した。',question:'この3つの証拠から使える合同条件はどれだ？',hint:'∠BAC は、AB と AC のどこにある角だろう？',options:[
+  ['3組の辺がそれぞれ等しい。','判明したのは2組の辺と1組の角。3組目の辺はまだ調べていない。'],
+  ['1組の辺とその両端の角がそれぞれ等しい。','等しい角は1組だけ。両端の角が2組そろっているわけではない。'],
+  ['2組の辺とその間の角がそれぞれ等しい。','正解！AB・AC に挟まれた角が ∠BAC、DE・DF に挟まれた角が ∠EDF だ。',1],
+  ['2組の辺とその外側の角がそれぞれ等しい。','「外側の角」は合同条件ではない。間の角であることが重要だ。']]},
+ {rank:1,title:'足りない証拠',diagram:'ssa',scenario:'△ABC と △DEF で、AB = DE、BC = EF、∠BAC = ∠EDF だけがわかっている。その他の条件は与えられていない。',question:'この情報だけで2つの三角形は合同と断定できるか？',hint:'角 ∠BAC は、等しいとわかっている2辺 AB・BC の「間」だろうか？',options:[
+  ['2組の辺とその間の角がそれぞれ等しいから、合同。','∠BAC は AB と AC の間の角。AB・BC の間の角ではない。'],
+  ['1組の辺とその両端の角がそれぞれ等しいから、合同。','等しい角は1組しかわかっていない。'],
+  ['3組の辺がそれぞれ等しいから、合同。','3組目の辺 AC = DF は示されていない。'],
+  ['まだ合同とは断定できない。','正解！与えられた2組の辺と角は、3つの合同条件のいずれにもそのまま当てはまらない。',1]]},
+ {rank:2,title:'交差点の目撃証言',diagram:'x',scenario:'直線 AB と直線 CD は点 O で交わる。AO = BO、CO = DO が仮定として与えられた。△AOC と △BOD に注目しよう。',question:'さらに等しいといえる角と、その根拠はどれだ？',hint:'2本の直線が交わるとき、向かい合う角の関係に注目。',options:[
+  ['AC = BD（見た目が等しいから）','見た目は証拠にならない。しかも問われているのは角だ。'],
+  ['∠ACO = ∠BDO（錯角だから）','AC と BD が平行という仮定はない。錯角を使う根拠が不足している。'],
+  ['∠AOC = ∠BOD（対頂角だから）','正解！2直線が交わる点で向かい合う角は等しい。これで間の角の証拠がそろう。',1],
+  ['∠AOC = ∠BOD（二等辺三角形だから）','角の等しさ自体は正しいが、根拠が違う。二等辺三角形とは示されていない。']]},
+ {rank:2,title:'誰もが見落とす共通の辺',diagram:'shared',scenario:'△ABD と △ACD は辺 AD を共有している。それ以外の等しさは、まだ証明されていない。',question:'確実に使える証拠と根拠はどれだ？',hint:'2つの三角形にまったく同じ線分が含まれていないかな？',options:[
+  ['AB = AC（図が左右対称に見えるから）','左右対称という条件は与えられていない。見た目だけでは判断できない。'],
+  ['AD = AD（共通な辺だから）','正解！同じ辺 AD は当然同じ長さだ。',1],
+  ['∠BAD = ∠CAD（AD が共通だから）','辺が共通でも、両側の角まで必ず等しくなるわけではない。'],
+  ['BD = CD（どちらも D につながるから）','同じ頂点につながる線分でも長さは異なりうる。']]},
+ {rank:2,title:'平行線が残した暗号',diagram:'parallel',scenario:'AB ∥ CD で、A・B と C・D を結ぶ線分 AD が引かれている。',question:'平行線の錯角から、正しく示せる等式と根拠はどれだ？',hint:'平行な2本の線を AD が横切る。「Z」の形に位置する内側の角を探そう。',options:[
+  ['∠BAD = ∠CDA（錯角だから）','正解！AB ∥ CD を AD が横切ると、∠BAD と ∠CDA は錯角になる。',1],
+  ['∠BAD = ∠CDA（対頂角だから）','角の等式は正しいが、頂点は A と D で異なる。対頂角ではない。'],
+  ['AB = CD（平行だから）','平行な2つの線分の長さが等しいとは限らない。'],
+  ['∠BAD = ∠BCD（同位角だから）','この2角は線分 AD を横切る同位角の組ではない。']]},
+ {rank:3,title:'調書の空欄を埋めろ',diagram:'x',scenario:'直線 AB と直線 CD が O で交わる。AO = BO、CO = DO（仮定）、∠AOC = ∠BOD（対頂角）がわかった。\nしたがって △AOC と △BOD は……？',question:'調書の空欄に入る合同条件はどれだ？',hint:'AO と CO の間にある角は ∠AOC。もう一方も対応しているかな？',options:[
+  ['3組の辺がそれぞれ等しい。','AC = BD はまだ得られていない。3組の辺はそろっていない。'],
+  ['2組の辺とその間の角がそれぞれ等しい。','正解！AO↔BO、CO↔DO、間の角 AOC↔BOD がそろっている。',1],
+  ['1組の辺とその両端の角がそれぞれ等しい。','等しい角は1組しか使っていない。'],
+  ['2組の辺と間でない角がそれぞれ等しい。','そのような合同条件は存在しない。']]},
+ {rank:3,title:'証拠と根拠を照合せよ',diagram:'textbook:case57',scenario:'2本の線分 AB、CD は O で交わり、AO=BO、CO=DO（仮定）。△AOC と △BOD の合同を示したい。',question:'合同を示すため、最初に使える「等しい式とその根拠」を正確にそろえたものはどれだ？',hint:'A↔B、O↔O、C↔D。2組の辺は仮定、O の間の角は対頂角だ。',options:[
+  ['AO=BO（仮定）、CO=DO（仮定）、∠AOC=∠BOD（対頂角）','正解。2組の辺と、その間にある対頂角が対応順どおりにそろっている。',1],
+  ['AO=BO（仮定）、CO=DO（仮定）、∠AOC=∠BOD（平行線の錯角）','角の等式は正しいが、理由が違う。これらは O を頂点とする対頂角。平行の仮定はない。'],
+  ['AO=BO（仮定）、CO=DO（仮定）、∠AOC=∠BOC（対頂角）','∠AOC と ∠BOC は隣り合う角。対頂角ではない。'],
+  ['AO=BO（仮定）、CO=DO（仮定）、∠ACO=∠BDO（錯角）','∠ACO と ∠BDO の等しさは、合同を示した後には導けるが、平行という仮定がないので錯角を根拠に先に使うことはできない。']]} ,
+ {rank:3,title:'3つ目の証拠をつなげ',diagram:'kite',scenario:'△ABD と △CBD で、AB = CB、AD = CD が仮定として与えられている。',question:'「3組の辺がそれぞれ等しい」を使うため、あとどの証拠を入れる？',hint:'どちらの三角形にも登場する辺が1本ある。',options:[
+  ['BD = BD（共通な辺だから）','正解！3組目の対応する辺 BD は共通。これで3組の辺がそれぞれ等しい。',1],
+  ['AB = CD（似た長さに見えるから）','AB と CD が等しいとは示されていない。'],
+  ['∠ABD = ∠CBD（合同だから）','証明したい合同を先に使うのは循環論法だ。'],
+  ['AD = BD（同じ三角形の辺だから）','同じ三角形の異なる辺が等しいとは限らない。']]},
+ {rank:4,title:'合同の後に続く一言',diagram:'kite',scenario:'捜査の結果、△ABD ≡ △CBD と証明できた。頂点の対応は A↔C、B↔B、D↔D だ。',question:'「合同な図形の対応する角はそれぞれ等しい」から導けるのはどれだ？',hint:'∠BAD の頂点は A。C を頂点にした対応する角を探そう。',options:[
+  ['∠BAD = ∠BDC','左の頂点 A に対して、右は D になっている。対応が違う。'],
+  ['∠ABD = ∠BCD','左の頂点 B に対し、右の頂点は C だ。'],
+  ['∠BAD = ∠BCD','正解！∠BAD の B-A-D に対応するのは B-C-D だ。',1],
+  ['∠BAD = ∠CBD','左の頂点 A と右の頂点 B は対応しない。']]},
+ {rank:4,title:'対応の最後の一歩',diagram:'kite',scenario:'△ABD ≡ △CBD が成立している。',question:'∠ABD と対応して大きさが等しい角はどれだ？',hint:'A↔C、B↔B、D↔D。3文字すべてをその対応で置き換えると？',options:[
+  ['∠BCD','∠BCD の頂点は C。∠ABD の頂点 B と対応しない。'],
+  ['∠CBD','正解！A-B-D の順に対応させると C-B-D となる。',1],
+  ['∠CDB','∠CDB の頂点は D。B に対応する角ではない。'],
+  ['∠BDC','頂点 D の角なので、∠ABD とは対応しない。']]},
+ {rank:4,title:'最終結論の根拠を言え',diagram:'pair',scenario:'△ABC ≡ △DEF がすでに証明された。ここから ∠BAC = ∠EDF を結論づけたい。',question:'最終行に添えるべき根拠はどれだ？',hint:'合同がわかった後、対応する何が等しいといえるかな？',options:[
+  ['対頂角は等しいから。','∠BAC と ∠EDF は異なる頂点の角で、対頂角ではない。'],
+  ['AB ∥ DE だから。','AB と DE が平行とは示されていない。'],
+  ['合同な図形の対応する角はそれぞれ等しいから。','正解！合同が証明できれば、対応する角の大きさが等しいといえる。',1],
+  ['見た目が同じ角度だから。','図の見た目は証明の根拠にはならない。']]},
+ {rank:5,title:'十字路の完全捜査',diagram:'x',scenario:'直線 AB と CD が O で交わり、AO = BO、CO = DO が与えられた。目標は AC = BD を示すことだ。',question:'△AOC と △BOD を使う完璧な調書はどれだ？',hint:'2組の辺に加えて O の角を調べよう。合同のあと、対応する辺を使って結論を導く。',options:[
+  ['AO = BO、CO = DO（仮定）、∠AOC = ∠BOD（対頂角）→ 2組の辺とその間の角がそれぞれ等しい → △AOC ≡ △BOD → AC = BD','完璧！3つの証拠から合同を示し、対応する辺 AC と BD の等しさを結論づけている。',1],
+  ['AO = BO、CO = DO（仮定）→ 2組の辺だけで合同 → AC = BD','2組の辺だけでは合同条件を満たさない。間の角が必要だ。'],
+  ['AC = BD と仮定 → △AOC ≡ △BOD → AC = BD','示したい結論を仮定にしてしまう循環論法だ。'],
+  ['∠AOC = ∠BOD（対頂角）→ 1組の辺とその両端の角がそれぞれ等しい → 合同','等しい角は1組だけ。1組の辺とその両端の角はそろっていない。']]},
+ {rank:5,title:'平行線の密室',diagram:'crossparallel',scenario:'AB ∥ CD、AB = CD。A・B は上の直線、C・D は下の直線にあり、AD と BC が O で交わる。△ABO と △DCO の合同を証明したい。',question:'平行線から得られる、正しい2組の角の証拠はどれだ？',hint:'AD と BC は、それぞれ平行な AB・CD を横切っている。',options:[
+  ['∠BAO = ∠CDO、∠ABO = ∠DCO（錯角だから）','正解！AD と BC をそれぞれ横切る直線と見ると、どちらも平行線の錯角になる。',1],
+  ['∠BAO = ∠CDO、∠ABO = ∠DCO（対頂角だから）','角の等式は正しいが、頂点 A と D、B と C が異なるため対頂角ではない。'],
+  ['∠BAO = ∠DCO、∠ABO = ∠CDO（錯角だから）','錯角の対応を取り違えている。AD に沿って A↔D、BC に沿って B↔C の角を調べよう。'],
+  ['AB = CD だから、∠BAO = ∠CDO','辺の長さの等しさだけでは、この角の等しさは導けない。平行という条件が必要だ。']]},
+ {rank:5,title:'最後の事件：対角線の罠',diagram:'parallelogram',scenario:'四角形 ABCD で、AB ∥ CD、AD ∥ BC。対角線 BD が引かれている。△ABD と △CDB の合同を証明しよう。',question:'証拠と合同条件を正しく組み合わせた調書はどれだ？',hint:'共通な辺 BD の「両端の角」を、平行線の錯角でそろえられないかな？',options:[
+  ['∠ABD = ∠CDB、∠ADB = ∠CBD（いずれも錯角）、BD = DB（共通）→ 1組の辺とその両端の角がそれぞれ等しい','大正解！B と D にある2組の錯角と共通な辺 BD から合同を示せる。',1],
+  ['∠ABD = ∠CBD、∠ADB = ∠CDB（錯角）、BD = DB → 1組の辺とその両端の角がそれぞれ等しい','錯角の組み合わせが違う。AB∥CD と AD∥BC をそれぞれ確かめよう。'],
+  ['BD = DB、∠ABD = ∠CDB（錯角）→ 2組の辺とその間の角がそれぞれ等しい','等しい辺は1組、角も1組だけ。選んだ合同条件を満たさない。'],
+  ['∠BAD = ∠BCD（対頂角）、BD = DB → 1組の辺とその両端の角がそれぞれ等しい','A と C は異なる頂点で対頂角ではない。そもそも2組の端の角も示していない。']]}
+];
+// 教科書106–108ページ：証明のしくみ＋52～60の到達課題
+// 各事件には誤答3個と正答1個。正答の説明に根拠と対応順を記載。
+function makeCase(rank,title,diagram,scenario,question,hint,opts,why,correct,source='',proof=''){
+ return {rank,title,diagram,scenario,question,hint,source,proof,
+ options:opts.map((s,i)=>[s,why[i],i===correct?1:0])};
+}
+const extraCases = [
+ // RANK 1：仮定・結論・対応を読み取る
+ makeCase(0,'証明という調書','textbook:logic',
+ '証明では、最初から正しいとわかっている「仮定」と、これから示したい「結論」を区別する。',
+ '仮定と結論について、正しい説明はどれだ？','証明は「わかっていること」から「示したいこと」へ進む。',
+ ['仮定は証明したいこと、結論は最初からわかっていること。','仮定は最初からわかっていること、結論は証明したいこと。','仮定も結論も図の見た目から決めてよい。','結論を先に使って仮定を確かめる。'],
+ ['役割が逆だ。最初に与えられるのが仮定だ。','正解。仮定 → 根拠のある推論 → 結論の順に積み上げる。','見た目は証拠ではない。問題文に書かれた条件が仮定だ。','結論を根拠に使うと循環論法になる。'],1,'証明のしくみ'),
+ makeCase(0,'仮定と結論・その1','pair',
+ '「△ABC ≡ △DEF ならば、∠A = ∠D である。」という主張がある。',
+ 'この主張の仮定と結論の組み合わせは？','「ならば」の前後を分けよう。',
+ ['仮定：∠A=∠D ／ 結論：△ABC≡△DEF','仮定：△ABC≡△DEF ／ 結論：∠A=∠D','仮定：AB=DE ／ 結論：△ABC≡△DEF','仮定：∠A=∠D ／ 結論：AB=DE'],
+ ['条件と結論を入れ替えている。','正解。合同が仮定で、対応する角の等しさが結論だ。','AB=DE はこの文には書かれていない。','その仮定は与えられていない。'],1,'52(1)'),
+ makeCase(0,'仮定と結論・数字の事件','textbook:logic',
+ '「a = b ならば 5a = 5b である。」という主張がある。',
+ 'この主張の結論は？','文字式でも仮定と結論の区別は同じだ。',
+ ['a=b','5a=5b','a=5b','aとbは正の数'],
+ ['a=b は仮定だ。','正解。等しい2つの数をそれぞれ5倍しても等しい。','5a=5b と書くべきだ。','正の数であることは条件にない。'],1,'52(3)'),
+ makeCase(0,'並べ替えても同じ容疑者？','pair',
+ '△ABC ≡ △DEF である。対応関係を保っている別の書き方を探そう。',
+ '数学的に同じ合同を正しく表すものは？','A↔D、B↔E、C↔F を最後まで保つ。',
+ ['△BCA ≡ △EFD','△BCA ≡ △FED','△CAB ≡ △EDF','△ACB ≡ △FDE'],
+ ['正解。B↔E、C↔F、A↔D を保っている。','B は E と対応するので、Fから始めてはいけない。','C の相手は F。Eから始めるのは誤り。','A の相手は D。Fではない。'],0,'対応順'),
+ // RANK 2：合同条件の正確な意味と含意
+ makeCase(1,'記号で表す逮捕状','sss',
+ '△ABC ≡ △DEF を、A↔D、B↔E、C↔F の対応順で証明したい。',
+ 'この対応順で3組の辺の等しさを正確に表したものはどれ？','A↔D、B↔E、C↔F に合わせて3組そろえる。',
+ ['AB=DE、BC=EF、CA=FD','AB=DE、BC=DF、CA=EF','AB=DE、BC=EF だけ','∠A=∠D、∠B=∠E、∠C=∠F'],
+ ['正解。対応する3組の辺がすべてそろっている。','2組目と3組目の対応が違う。','2組の辺だけでは合同は決められない。','3組の角だけでは大きさが決まらない。'],0,'53(1)'),
+ makeCase(1,'合同なら角も同じ','pair',
+ '△ABC ≡ △DEF が成立している。',
+ 'この仮定から必ず言えることはどれだ？','対応する3つの角を1組ずつ並べてみよう。',
+ ['∠A=∠E、∠B=∠D、∠C=∠F','∠A=∠D、∠B=∠E、∠C=∠F','∠A=∠D だが、他の角は不明','∠A=∠B=∠C'],
+ ['A↔D、B↔E、C↔F が正しい対応だ。','正解。合同な図形の対応する角はそれぞれ等しい。','合同なら対応する3組の角がいずれも等しい。','三角形内部の3角がすべて等しいとは限らない。'],1,'53(2)'),
+ makeCase(1,'角だけの手掛かり','textbook:similar',
+ '2つの三角形について、対応する3組の角がそれぞれ等しいとわかった。辺の長さは調べていない。',
+ 'この情報から合同を結論づけられるか？','同じ形でも大きさが違う三角形を思い浮かべよう。',
+ ['3組の角が等しいから必ず合同。','2組の角が等しければ必ず合同。','合同とは限らない。大きさが違う可能性がある。','角がすべて等しいなら辺もすべて等しい。'],
+ ['角が等しくても拡大・縮小された三角形の場合がある。','2組の角も同様に、大きさは定まらない。','正解。3組の角の等しさだけは合同条件ではない。','対応する辺の比は等しくても、各辺の長さが等しいとは限らない。'],2,'53(2) 応用'),
+ makeCase(1,'錯角の証言','parallel',
+ 'AB ∥ CD で、直線 AD が2直線に交わる。',
+ '平行線を使った説明として、必ず正しいものは？','平行であることが、角の等しさの根拠になる。',
+ ['∠BAD=∠CDA（錯角は等しい）','AB=CD（平行な線分の長さは等しい）','∠BAD=∠CDA（対頂角は等しい）','∠BAD=∠CDA（仮定で角が等しい）'],
+ ['正解。AD を横切る直線とみると、この2角は平行線の錯角になる。','平行だからといって長さは等しいとは限らない。','角の頂点が異なり、対頂角ではない。','角の等しさは仮定ではなく、平行線の性質から導く。'],0,'53(3)'),
+ // RANK 3：各問題の仮定と証拠を取り出す
+ makeCase(2,'頂点Pの三角形','textbook:case54',
+ 'M は線分 AB 上、P は AB 上にない。AM=BM、PA=PB ならば △PAM≡△PBM を証明する。',
+ '「仮定」と「結論」を正しく分けたのは？','証明したい三角形の合同が結論だ。',
+ ['仮定：△PAM≡△PBM ／ 結論：PA=PB','仮定：AM=BM、PA=PB ／ 結論：△PAM≡△PBM','仮定：PM=PM ／ 結論：AM=BM','仮定：∠PAM=∠PBM ／ 結論：PA=PB'],
+ ['合同はこれから示したい結論だ。','正解。AM=BM と PA=PB が最初に与えられている。','PM=PM は共通な辺からわかるが、仮定として与えられたわけではない。','角の等しさは仮定ではない。'],1,'54(1)'),
+ makeCase(2,'ひし形風の現場','textbook:case55',
+ 'AB=CB、AD=CD ならば △ABD≡△CBD と証明したい。',
+ '与えられている仮定はどれ？','図の印と、問題文に書かれた等しさを分けて考えよう。',
+ ['AB=CB、AD=CD','AB=AD、CB=CD','△ABD≡△CBD','∠ABD=∠CBD、BD=BD'],
+ ['正解。問題文の2つの等式が仮定だ。','等しさの組が違う。','これは結論だ。','角の等しさはまだ与えられていない。'],0,'55(1)'),
+ makeCase(2,'平行線事件の仮定','textbook:case56',
+ 'ℓ 上に A、B、m 上に C、D があり、AD と BC の交点は O。「AB=CD、ℓ ∥ m ならば AO=DO」を証明する。',
+ '仮定と結論の組み合わせはどれ？','最後に示したい等式を証拠として使ってはならない。',
+ ['仮定：AO=DO ／ 結論：AB=CD、ℓ∥m','仮定：AB=CD、ℓ∥m ／ 結論：AO=DO','仮定：AB∥CD、AO=DO ／ 結論：AB=CD','仮定：∠AOB=∠DOC ／ 結論：AB=CD'],
+ ['証明したい AO=DO を仮定にしている。','正解。長さの等しさと平行が仮定、AO=DO が結論だ。','AO=DO は結論であり、先に使えない。','対頂角の等しさは導けるが、AB=CD は仮定だ。'],1,'56(1)'),
+ makeCase(2,'差を調べる足跡','textbook:case58',
+ 'AB と CD は点 E で交わり、AB=CD、AE=CE である。E は両方の線分の内部にある。',
+ '新たに必ず導ける辺の等しさは？','長さが等しいものから、等しい部分を引く。',
+ ['EB=ED','AD=CB','AE=EB','AB=AE'],
+ ['正解。EB=AB−AE、ED=CD−CE だから EB=ED となる。','AD と CB はまだ示されていない。','AE=EB とは限らない。','E が AB の端点とは限らない。'],0,'58 証拠収集'),
+ makeCase(2,'二等分線の暗号','textbook:case59',
+ '半直線 OC は ∠AOB の二等分線。P は OC 上。P から OA、OB に下ろした垂線の足を Q、R とする。△OPQ と △OPR を比べよう。',
+ '左の ∠QOP と等しい角を、対応する3文字を同じ位置にそろえた等式で表すとどれ？','Q に対応するのは R、O には O、P には P。左側の Q-O-P の位置をそのまま置き換えよう。',
+ ['∠QOP=∠ROP','∠QOP=∠POR','∠QOP=∠OPR','∠QOP=∠ORP'],
+ ['正解。Q-O-P に対応する頂点を同じ位置に置くと R-O-P。OC は二等分線なので、この角の大きさも等しい。','∠POR は ∠ROP と同じ角なので大きさは等しい。しかし P-O-R では Q-O-P との文字の対応位置がそろわない。この事件では ∠ROP と書こう。','∠OPR の頂点は P。左の ∠QOP の頂点 O と対応しない。','∠ORP の頂点は R。左の角の頂点 O と対応しない。'],0,'59 証拠収集'),
+ makeCase(2,'中点の現場記録','textbook:case60',
+ '四角形 ABCD で、E は辺 CD の中点。直線 AE と辺 BC の延長の交点を F とする。さらに AE=FE とわかっている。',
+ '中点という情報から使える等式は？','中点は、もとの線分を長さの等しい2つに分ける点だ。',
+ ['AE=ED','CE=ED','AD=BF','AB=CD'],
+ ['AE と ED は異なる線分。与えられた条件から同じ長さとはいえない。','正解。E は CD の中点なので CE=ED だ。','これから証明すべき平行関係であり、等式でもない。','AB=CD は仮定ではない。'],1,'60 証拠収集'),
+ // RANK 4：穴埋め・不足証拠・論理整備
+ makeCase(3,'共通な辺の穴埋め','textbook:case54',
+ '△PAM と △PBM で、PA=PB、AM=BM が仮定としてわかっている。',
+ '合同を証明する調書の空欄「＿＿であるから PM=PM」に入るのは？','PM は左右両方の三角形で同じ線分だ。',
+ ['仮定','共通な辺','対頂角','同位角'],
+ ['PM=PM は問題文の仮定として与えられていない。','正解。共通な辺であるから PM=PM と書く。','PM は辺であり、角ではない。','平行線は使っていない。'],1,'54(2)'),
+ makeCase(3,'3組目を確保せよ','textbook:case55',
+ '△ABD と △CBD について AB=CB、AD=CD である。',
+ '「3組の辺がそれぞれ等しい」に届く3番目の証拠は？','BD は両方の三角形の一部分だ。',
+ ['BD=BD（共通な辺）','∠ABD=∠CBD（対頂角）','AB=AD（仮定）','∠BAD=∠BCD（合同だから）'],
+ ['正解。対応する辺 BD と BD は共通だ。','これらは同じ頂点の別の角であり、対頂角ではない。','AB=AD は与えられていない。','合同を示す前に、合同を理由にはできない。'],0,'55(2)'),
+ makeCase(3,'交点Oの調書','textbook:case57',
+ '2つの線分 AB、CD は O で交わる。AO=BO、CO=DO のとき、△AOC≡△BOD を示す。',
+ '合同を導く決め手となる角は？','交点 O に注目し、2組の辺に挟まれた角を探す。',
+ ['∠AOC=∠BOD（対頂角）','∠ACO=∠BDO（平行線の錯角）','∠CAO=∠DBO（底角）','∠AOC=∠COD（対頂角）'],
+ ['正解。交わる2本の直線の対頂角が等しい。','AC∥BD という条件はない。','二等辺三角形とわかっていない。','この2角は隣り合う角であり、対頂角ではない。'],0,'57'),
+ makeCase(3,'引き算の裏取り','textbook:case58',
+ 'AB=CD、AE=CE。E は AB と CD の内部にあるので、EB=AB−AE、ED=CD−CE と表せる。',
+ 'EB=ED を導く説明として適切なのは？','2つの等式を使い、等しいものから等しいものを引く。',
+ ['AB=CD と AE=CE から、AB−AE=CD−CE','AB=CD だから、AB−AE=CD−AE=CD','AE=CE だから、AB=AE+CE','AB=CD だから、AE=EB'],
+ ['正解。与えられた2組の等しさから差が等しいといえる。','AB−AE は EB、CD−CE は ED を表す。右側を CD とした式は成り立たない。','AB が AE と CE の和になるとは限らない。','線分全体とその一部の長さは、通常等しくない。'],0,'58'),
+ makeCase(3,'垂線と残りの角','textbook:case59',
+ '△OPQ と △OPR で、∠OQP=∠ORP=90°、∠QOP=∠ROP とわかっている。',
+ '三角形の内角の和を使うと、さらに導けるのは？','三角形の残り1角は 180° から他の2角を引けば求まる。',
+ ['∠OPQ=∠OPR','∠OQP=∠OPR','∠QOP=∠PRQ','∠POQ=∠QPR'],
+ ['正解。ともに直角の1組と O の角の1組が等しいので、残りの P の角も ∠OPQ=∠OPR と対応順をそろえて書ける。','左は直角だが、右の P の角まで直角とは限らない。','角の頂点と位置が対応していない。','この等しさを導く根拠はない。'],0,'59'),
+ makeCase(3,'中点と対頂角をつなぐ','textbook:case60',
+ 'E は CD の中点、AE=FE。AE と EF、DE と EC はそれぞれ一直線上にある。',
+ '△AED と △FEC の合同条件はどれ？','AE と FE、ED と EC。その2組の辺がはさむ角に注目。',
+ ['3組の辺がそれぞれ等しい','2組の辺とその間の角がそれぞれ等しい','1組の辺とその両端の角がそれぞれ等しい','3組の角がそれぞれ等しい'],
+ ['AD=FC はまだ示されていない。','正解。AE=FE、ED=EC、∠AED=∠FEC（対頂角）である。','両端の角2組は使っていない。','3角が等しいだけでは合同にならない。'],1,'60'),
+ makeCase(3,'合同条件を正しく適用せよ','pair',
+ '△ABC と △DEF において、AB=DE、BC=EF、∠ABC=∠DEF が与えられている。△ABC≡△DEF を示したい。',
+ 'どの2辺とどの角が対応し、合同条件が成り立つのか？','等しい2組の辺は AB↔DE、BC↔EF。その間にある頂点 B・E の角を調べよう。',
+ ['AB↔DE、BC↔EF、その間の ∠ABC↔∠DEF。2組の辺とその間の角がそれぞれ等しい。','AB↔DE、BC↔EF、∠BAC↔∠EDF。2組の辺とその間の角がそれぞれ等しい。','AB↔DE、BC↔EF、∠ABC↔∠DEF。1組の辺とその両端の角がそれぞれ等しい。','AB↔DE、BC↔DF、∠ABC↔∠DEF。2組の辺とその間の角がそれぞれ等しい。'],
+ ['正解。等しい2組の辺の間の角も対応しているため、合同条件が成り立つ。','∠BAC は AB と AC の間の角。与えられた辺 AB・BC の間の角ではない。','等しい角は1組だけなので、辺の両端の角が2組そろったとはいえない。','BC に対応するのは EF であって DF ではない。'],0,'52(2)'),
+ // RANK 5：合同を使って何を結論づけるか
+ makeCase(4,'合同から辺を導く','pair',
+ 'AB=DE、BC=EF、∠ABC=∠DEF から △ABC≡△DEF が証明できた。',
+ 'このあと導ける結論は？','合同がわかったので、残りの対応する辺も等しい。',
+ ['CA=FD','CA=EF','AB=DF','∠A=∠E'],
+ ['正解。A↔D、C↔F だから CA と FD が対応する。','C↔F、A↔D。CA は FD に対応する。','A↔D、B↔E。AB は DE に対応する。','A に対応する頂点は D だ。'],0,'52(2)'),
+ makeCase(4,'平行線の対角を照合','textbook:case56',
+ 'AB ∥ CD、AD と BC は O で交わる。△ABO と △DCO で使う錯角の組を調べる。',
+ '2組の角の対応として正しいのは？','AD を横切る直線、BC を横切る直線の順に考えよう。',
+ ['∠BAO=∠CDO、∠ABO=∠DCO','∠BAO=∠DCO、∠ABO=∠CDO','∠AOB=∠DCO、∠ABO=∠DOC','∠BAO=∠ABO、∠CDO=∠DCO'],
+ ['正解。両方とも平行線の錯角が等しいことから導ける。','AD に沿う A と D の角、BC に沿う B と C の角を対応させる。','対頂角と錯角の対応が混在し、示したい角の組ではない。','三角形の底角がそれぞれ等しいとは限らない。'],0,'56'),
+ makeCase(4,'最後の角を確定せよ','textbook:case58',
+ '△EAD ≡ △ECB が証明できた。',
+ '合同な図形の対応する角から導ける結論は？','E↔E、A↔C、D↔B の順番だ。',
+ ['∠EAD=∠ECB','∠EAD=∠EBC','∠EDA=∠ECB','∠EAD=∠EBC'],
+ ['正解。E-A-D ↔ E-C-B なので ∠EAD と ∠ECB が対応する。','右の頂点は B。A に対応するのは C だ。','左の頂点は D。右の頂点 C とは対応しない。','左は A、右は B を頂点とする角で、対応が違う。'],0,'58 結論'),
+ makeCase(4,'距離が等しいことを示す','textbook:case59',
+ '△OPQ ≡ △OPR が証明できた。Q と R はそれぞれ垂線の足である。',
+ '証明の最後に書くべき結論は？','O↔O、P↔P、Q↔R。垂線の長さはどれかな？',
+ ['PQ=PR','OQ=PR','OP=PQ','∠OPQ=90°'],
+ ['正解。PQ と PR は合同な三角形の対応する辺だ。','OQ と OR が対応するのであり、PR ではない。','OP は共通な辺で、PQ と等しいとは限らない。','直角は Q と R にある。'],0,'59 結論'),
+ makeCase(4,'平行の決定的証拠','textbook:case60',
+ '△AED≡△FEC から ∠ADE=∠FCE がわかった。D、E、C は一直線上にあり、B、C、F も一直線上にある。',
+ '最後に AD ∥ BF と結論づける適切な理由は？','直線 DC を横切る2直線 AD・CF の錯角が等しい。',
+ ['錯角が等しいので AD∥CF。B・C・F は一直線上だから AD∥BF。','AD と BF が同じ長さなので平行。','△AED と △FEC が合同だから、すべての辺は平行。','AE=FE だから AD∥BF。'],
+ ['正解。錯角が等しいことの逆を使って平行を示す。','長さと平行であることは別の性質だ。','合同でも対応する辺がすべて平行とは限らない。','等しい2線分だけでは、直接平行を示せない。'],0,'60 結論'),
+ makeCase(4,'3角すべての結末','pair',
+ '△ABC≡△DEF が証明できた。',
+ '「対応する3つの角が、それぞれ等しい」を正確に書いたものはどれ？','1つだけでなく、頂点の対応に従って3組とも調べよう。',
+ ['∠A=∠D、∠B=∠E、∠C=∠F','∠A=∠D、∠B=∠F、∠C=∠E','∠A=∠B、∠B=∠C、∠C=∠A','∠A=∠E、∠B=∠D、∠C=∠F'],
+ ['正解。合同なら対応する3組の角はそれぞれ等しい。','B↔E、C↔F の順を取り違えた。','同じ三角形の角がすべて等しいとは限らない。','A↔D、B↔E が正しい。'],0,'53(2)'),
+ // RANK 6：教科書問題を自力で仕上げる総合事件
+ makeCase(5,'【54】PAMとPBM','textbook:case54',
+ 'M は AB 上。AM=BM、PA=PB が仮定。△PAM≡△PBM を証明せよ。',
+ '最初から最後まで正しい調書はどれだ？','2組の仮定の辺に加えて、どちらにも使う辺を1組探す。',
+ ['PA=PB、AM=BM（仮定）、PM=PM（共通）→3組の辺がそれぞれ等しい→△PAM≡△PBM','PA=PB、AM=BM（仮定）、PM=PM（共通）→3組の辺がそれぞれ等しい→△PAM≡△PMB','PA=PB、AM=BM（仮定）、PM=PM（共通）→2組の辺とその間の角がそれぞれ等しい→△PAM≡△PBM','PA=PB、AM=BM（仮定）、∠PAM=∠PBM（仮定）→2組の辺とその間の角がそれぞれ等しい→△PAM≡△PBM'],
+ ['完全な証明だ。仮定2組と共通な辺で3組の辺がそろう。','3組の辺がそろっていても、△PAM≡△PMB は対応する頂点の順が違う。正しくは △PAM≡△PBM。','等しいと示したのは3組の辺であって、間の角の等しさは示していない。合同条件の指定が違う。','∠PAM=∠PBM は仮定として与えられていない。もし角の等しさを使うなら、問題文の仮定ではないので、別の性質から先に等しいと示す必要がある。'],0,'54(2)',
+ '【証明】△PAM と △PBM において\n仮定より PA=PB ……①\n仮定より AM=BM ……②\n共通な辺より PM=PM ……③\n①、②、③から、3組の辺がそれぞれ等しいから\n△PAM≡△PBM。'),
+ makeCase(5,'【55】ABDとCBD','textbook:case55',
+ 'AB=CB、AD=CD。△ABD≡△CBD を証明せよ。',
+ '合同を導く調書として正しいものは？','図形の中央にある BD が大きな証拠だ。',
+ ['AB=CB、AD=CD（仮定）、BD=BD（共通）→3組の辺がそれぞれ等しい→△ABD≡△CBD','AB=CB、AD=CD（仮定）、BD=BD（共通）→3組の辺がそれぞれ等しい→△ABD≡△BCD','AB=CB、AD=CD（仮定）、BD=BD（共通）→2組の辺とその間の角がそれぞれ等しい→△ABD≡△CBD','AB=CB、AD=CD（仮定）、BD=BD（対頂角だから）→3組の辺がそれぞれ等しい→△ABD≡△CBD'],
+ ['正解。対応順 A↔C、B↔B、D↔D も正しい。','3組の辺がそろっても、△ABD≡△BCD は対応順が違う。A↔C、B↔B、D↔D を保とう。','使える証拠は3組の辺。間の角を示していないのに別の合同条件を使うことはできない。','BD=BD は共通な辺だからであり、対頂角は角の等しさに関する性質だ。'],0,'55(2)',
+ '【証明】△ABD と △CBD において\n仮定より AB=CB ……①\n仮定より AD=CD ……②\n共通な辺より BD=BD ……③\n①、②、③から、3組の辺がそれぞれ等しいから\n△ABD≡△CBD。'),
+ makeCase(5,'【56】平行線を使う最終弁論','textbook:case56',
+ 'AB=CD、AB∥CD。AD と BC の交点は O。AO=DO を証明せよ。',
+ '論理的に正しい一連の証明はどれだ？','まず合同になる三角形を見つけ、最後に AO と DO を対応させよう。',
+ ['AB=CD（仮定）、∠BAO=∠CDO・∠ABO=∠DCO（錯角）→1組の辺とその両端の角がそれぞれ等しい→△ABO≡△DCO→AO=DO','AB=CD、AO=DO、BO=CO とおけば3組の辺がそろう','AB=CD（仮定）、∠BAO=∠DCO、∠ABO=∠CDO（錯角）→1組の辺とその両端の角がそれぞれ等しい→△ABO≡△DCO','AB=CD（仮定）、∠BAO=∠CDO、∠ABO=∠DCO（錯角）→1組の辺とその両端の角がそれぞれ等しい→△ABO≡△DOC'],
+ ['正解。合同条件と対応する辺から、目標 AO=DO にたどりつく。','AO=DO は結論。最初から使ってはいけない。','錯角の組み合わせがずれている。A に対応するのは D、B に対応するのは C だ。','辺と角の証拠はそろっているが、△ABO≡△DOC では A と D が対応せず、頂点の順番が違う。'],0,'56(2)',
+ '【証明】△ABO と △DCO において\n仮定より AB=DC ……①\nAB∥DC より、錯角は等しいから\n∠BAO=∠CDO ……②\n∠ABO=∠DCO ……③\n①、②、③から、1組の辺とその両端の角がそれぞれ等しいから\n△ABO≡△DCO。\n合同な図形の対応する辺はそれぞれ等しいので AO=DO。'),
+ makeCase(5,'【57】交差する2本の線分','textbook:case57',
+ '線分 AB、CD は O で交わる。AO=BO、CO=DO のとき、△AOC≡△BOD を証明せよ。',
+ '正しい証明はどれだ？','2組の辺の間にある交点 O の角を調べよう。',
+ ['AO=BO、CO=DO（仮定）、∠AOC=∠BOD（対頂角）→2組の辺とその間の角がそれぞれ等しい→△AOC≡△BOD','AO=BO、CO=DO（仮定）、∠AOC=∠BOD（対頂角）→2組の辺とその間の角がそれぞれ等しい→△AOC≡△BDO','AO=BO、CO=DO（仮定）、∠AOC=∠BOD（平行線の錯角）→2組の辺とその間の角がそれぞれ等しい→△AOC≡△BOD','AO=BO、CO=DO（仮定）、∠AOC=∠BOD（対頂角）→1組の辺とその両端の角がそれぞれ等しい→△AOC≡△BOD'],
+ ['完璧。2辺にはさまれる角 O が対頂角で等しい。','△AOC≡△BDO は対応順が異なる。A↔B、O↔O、C↔D なので、△AOC≡△BOD だ。','角の大きさは等しいが、∠AOC と ∠BOD は対頂角。平行線の錯角とした根拠が誤りだ。','示した証拠は2組の辺とその間の角であり、1組の辺の両端の角ではない。'],0,'57',
+ '【証明】△AOC と △BOD において\n仮定より AO=BO ……①\n仮定より CO=DO ……②\n対頂角は等しいから ∠AOC=∠BOD ……③\n①、②、③から、2組の辺とその間の角がそれぞれ等しいから\n△AOC≡△BOD。'),
+ makeCase(5,'【58】等しい全体から等しい一部を引く','textbook:case58',
+ 'AB=CD、AE=CE。AB と CD が E で交わる。∠EAD=∠ECB を証明せよ。',
+ '正しい合同の証明方法はどれだ？','まず EB=ED を引き算で示す。その後、対頂角を探す。',
+ ['EB=AB−AE=CD−CE=ED。さらに AE=CE、∠AED=∠CEB（対頂角）→△EAD≡△ECB→∠EAD=∠ECB','EB=ED、AE=CE、∠AED=∠CEB（対頂角）→△EAD≡△EBC→∠EAD=∠ECB','EB=ED、AE=CE、∠AED=∠CEB（同位角）→△EAD≡△ECB→∠EAD=∠ECB','EB=ED、AE=CE、∠AED=∠CEB（対頂角）→3組の辺がそれぞれ等しい→△EAD≡△ECB→∠EAD=∠ECB'],
+ ['正解。引き算→2組の辺と間の角→合同→対応する角、という流れだ。','EB=ED、AE=CE、対頂角は正しいが、△EAD≡△EBC では A↔B となり、対応順が違う。','∠AED=∠CEB は対頂角の等しさであって、同位角ではない。平行線も与えられていない。','辺は2組、角はその間の1組。3組目の辺 AD=CB はまだ証明していない。'],0,'58',
+ '【証明】AB=CD、AE=CE より\nEB=AB−AE=CD−CE=ED。\n△EAD と △ECB において\n仮定より EA=EC ……①\n上で示したことから ED=EB ……②\n対頂角は等しいから ∠AED=∠CEB ……③\n①、②、③から、2組の辺とその間の角がそれぞれ等しいから\n△EAD≡△ECB。\n合同な図形の対応する角はそれぞれ等しいので ∠EAD=∠ECB。'),
+ makeCase(5,'【59】二等分線上の点からの距離','textbook:case59',
+ 'OC は ∠AOB の二等分線。P は OC 上。PQ⊥OA、PR⊥OB のとき、PQ=PR を証明せよ。',
+ '一般の三角形の合同条件だけを使った正しい道筋は？','垂線の直角、Oの二等分角、内角の和、共通な OP を順番に用いる。',
+ ['∠OQP=∠ORP=90°、∠QOP=∠ROP、内角の和より∠OPQ=∠OPR、OP=OP → 1組の辺とその両端の角がそれぞれ等しい→△OPQ≡△OPR→PQ=PR','∠QOP=∠ROP、∠OQP=∠ORP、OP=OP → 1組の辺とその両端の角がそれぞれ等しい→△OPQ≡△OPR','∠QOP=∠ROP、∠OPQ=∠OPR、OP=OP → 2組の辺とその間の角がそれぞれ等しい→△OPQ≡△OPR','∠QOP=∠ROP、∠OPQ=∠OPR、OP=OP → 1組の辺とその両端の角がそれぞれ等しい→△OPQ≡△ORP'],
+ ['正解。P の角まで求めると、共通な辺 OP の両端の角2組がそろう。','∠OQP と ∠ORP は直角で等しいが、共通な OP の両端の角ではない。もう一方の P の角を求めてから指定の合同条件を使おう。','等しいと示した辺は OP の1組。辺2組の等しさはないので、選んだ合同条件が違う。','頂点の対応順が違う。△OPQ に対応するのは △OPR であって △ORP ではない。'],0,'59',
+ '【証明】△OPQ と △OPR において\nPQ⊥OA、PR⊥OB より ∠OQP=∠ORP=90° ……①\nOC は ∠AOB の二等分線で P は OC 上だから ∠QOP=∠ROP ……②\n①、②と三角形の内角の和より ∠OPQ=∠OPR ……③\n共通な辺より OP=OP ……④\n②、③、④から、1組の辺とその両端の角がそれぞれ等しいから\n△OPQ≡△OPR。\n合同な図形の対応する辺はそれぞれ等しいので PQ=PR。'),
+ makeCase(5,'【60】合同から平行を導く','textbook:case60',
+ 'E は CD の中点、F は AE と BC の延長の交点、AE=FE。AD∥BF を証明せよ。',
+ '正しい証明の道筋はどれだ？','合同はゴールではない。対応する角を取り出して平行へ結びつける。',
+ ['AE=FE、DE=CE、∠AED=∠FEC（対頂角）→△AED≡△FEC→∠ADE=∠FCE→錯角が等しいのでAD∥CF、したがってAD∥BF','AE=FE、DE=CE、∠AED=∠FEC（対頂角）→2組の辺とその間の角がそれぞれ等しい→△AED≡△FCE','AE=FE、DE=CE、∠AED=∠FEC（錯角）→2組の辺とその間の角がそれぞれ等しい→△AED≡△FEC','△AED≡△FEC だから ∠ADE=∠FCE。これらは同位角なので AD∥BF'],
+ ['正解。2組の辺と間の角→合同→対応角→錯角が等しいことの逆だ。','等しい辺・角がそろっていても、△AED≡△FCE は対応順が違う。A↔F、E↔E、D↔C が正しい。','∠AED と ∠FEC は E を頂点とする対頂角であり、錯角ではない。','∠ADE と ∠FCE は錯角であり、同位角ではない。等しい錯角の逆を用いて平行と示す。'],0,'60',
+ '【証明】△AED と △FEC において\n仮定より AE=FE ……①\nE は CD の中点だから DE=CE ……②\n対頂角は等しいので ∠AED=∠FEC ……③\n①、②、③から、2組の辺とその間の角がそれぞれ等しいから\n△AED≡△FEC。\n合同な図形の対応する角はそれぞれ等しいので ∠ADE=∠FCE。\n錯角が等しいから AD∥CF。B、C、F は一直線上にあるので AD∥BF。'),
+ makeCase(5,'【56】最後の錯角を見つけよ','textbook:case56',
+ 'AB=CD、AB∥CD で AD と BC は O で交わる。△ABO と △DCO について、AB=DC（仮定）、∠BAO=∠CDO（錯角）がすでに示された。',
+ '「1組の辺とその両端の角がそれぞれ等しい」を使うには、あとどの角の等しさと理由が必要？','辺 AB と DC の端にある、B と C の角を探す。対頂角 O も等しいが、AB・DC の端の角ではない。',
+ ['∠ABO=∠DCO（平行線の錯角）','∠AOB=∠DOC（対頂角）','∠ABO=∠DCO（対頂角）','∠BAO=∠DCO（平行線の錯角）'],
+ ['正解。BC が平行な AB と DC を横切るため、B と C にできる錯角が等しい。AB と DC の両端の角がそろう。','対頂角の等式としては正しい。ただし O は辺 AB・DC の端点ではないので、このままでは指定した合同条件の2つ目の角にならない。','等式は正しいが、理由が違う。B と C は異なる頂点なので対頂角ではなく平行線の錯角だ。','A にある角と C にある角は、この図で AB・DC を対応する2辺の両端の角としてそろえた組ではない。'],0,'56 確認'),
+ makeCase(5,'最終試験：自力で証明を組み立てよう','textbook:case60',
+ 'E は CD の中点、AE=FE。△AED≡△FEC を証明した後、AD∥BF まで示したい。',
+ '試験の答案として、最後の2行に最も適切なのはどれ？','「合同だから平行」ではない。角の等しさから平行を導く。',
+ ['合同な図形の対応する角はそれぞれ等しいので ∠ADE=∠FCE。錯角が等しいから AD∥CF、したがって AD∥BF。','合同な図形の対応する辺がそれぞれ等しいので AD=FC。したがって AD∥BF。','△AED≡△FEC だから AD∥BF。','∠ADE=∠FCE は同位角なので AB∥CD。'],
+ ['正解。根拠のある2段階の推論で最終結論に到達している。','等しい長さから平行は導けない。','合同だけで異なる位置にある辺の平行は決定できない。','錯角の組を見ているうえに、最終的な平行の組も違う。'],0,'総合卒業試験')
+];
+cases.push(...extraCases);
+cases.sort((a,b)=>a.rank-b.rank);
+// 数学的・教材的な基本検査：4択・正解が1つ、必要なランクは0～5
+cases.forEach((q,i)=>{
+ if(q.options.length!==4 || q.options.filter(o=>o[2]===1).length!==1 || q.rank<0 || q.rank>5)
+  throw new Error('事件データの整合性に問題あり: '+(i+1)+' '+q.title);
+});
+
+const $=id=>document.getElementById(id);
+const storageKey='shomei_detective_club_2026_v1';
+const blank=()=>({index:0,score:0,miss:0,hints:0,hintUsed:{},eliminated:{},solved:{},drafts:{},finished:false,name:'',awards:{}});
+let state=blank(),locked=false;
+try{const previous=JSON.parse(localStorage.getItem(storageKey));if(previous && Number.isInteger(previous.index)&&previous.index>=0&&previous.index<=cases.length && typeof previous.score==='number'){state={...blank(),...previous};}}catch(e){}
+function save(){try{localStorage.setItem(storageKey,JSON.stringify(state));}catch(e){}}
+function esc(s){return String(s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+// SVG: lines and labels are calculated from fixed, mathematically consistent coordinates.
+const line=(x1,y1,x2,y2,cl='main')=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="${cl}"/>`;
+const txt=(x,y,t,cl='lab')=>`<text x="${x}" y="${y}" class="${cl}">${esc(t)}</text>`;
+function ticks(x1,y1,x2,y2,count=1){const mx=(x1+x2)/2,my=(y1+y2)/2,dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy),ux=-dy/len,uy=dx/len,vx=dx/len,vy=dy/len;return Array.from({length:count},(_,i)=>{let d=(i-(count-1)/2)*8;let x=mx+vx*d,y=my+vy*d;return line(x-ux*5,y-uy*5,x+ux*5,y+uy*5,'tick');}).join('');}
+function marks(pt,n1,n2,count){return ticks(...pt[n1],...pt[n2],count);}
+function mathHtml(s){
+ return esc(s).replace(/(△[A-Z]{3}|∠[A-Z]{3})/g,'<span class="math-unit">$1</span>');
+}
+function diagramSvg(type){
+ let s='',p={};let triangle=(a,b,c)=>line(...p[a],...p[b])+line(...p[b],...p[c])+line(...p[c],...p[a]);
+ let pair=()=>{p={A:[126,35],B:[59,193],C:[236,182],D:[388,35],E:[321,193],F:[498,182]};s+=triangle('A','B','C')+triangle('D','E','F');};
+ if(['pair','sss','sas','ssa'].includes(type)){
+  pair();if(type==='ssa'){p.F=[525,196];s=triangle('A','B','C')+triangle('D','E','F');}
+  if(type==='sss'){s+=marks(p,'A','B',1)+marks(p,'D','E',1)+marks(p,'A','C',2)+marks(p,'D','F',2)+marks(p,'B','C',3)+marks(p,'E','F',3);}
+  if(type==='sas'){s+=marks(p,'A','B',1)+marks(p,'D','E',1)+marks(p,'A','C',2)+marks(p,'D','F',2)+`<path d="M117 57 Q126 66 143 53 M379 57 Q388 66 405 53" class="arc"/>`;}
+  if(type==='ssa'){s+=marks(p,'A','B',1)+marks(p,'D','E',1)+marks(p,'B','C',2)+marks(p,'E','F',2)+`<path d="M117 57 Q126 66 143 53 M379 57 Q388 66 405 53" class="arc"/>`;}
+  s+=txt(118,21,'A')+txt(42,212,'B')+txt(244,202,'C')+txt(380,21,'D')+txt(304,212,'E')+txt(type==='ssa'?530:506,205,'F');
+ }
+ if(type==='x'){
+  p={A:[112,41],B:[488,213],C:[488,41],D:[112,213],O:[300,127]};
+  s+=line(...p.A,...p.B)+line(...p.C,...p.D);
+  s+=marks(p,'A','O',1)+marks(p,'B','O',1)+marks(p,'C','O',2)+marks(p,'D','O',2);
+  s+=txt(95,36,'A')+txt(498,231,'B')+txt(499,37,'C')+txt(95,234,'D')+txt(310,122,'O');
+ }
+ if(type==='shared'){
+  p={A:[285,24],D:[285,222],B:[102,141],C:[480,149]};
+  s+=triangle('A','B','D')+line(...p.A,...p.C)+line(...p.C,...p.D);
+  s+=txt(278,15,'A')+txt(91,146,'B')+txt(486,153,'C')+txt(278,242,'D');
+ }
+ if(type==='kite'){
+  p={A:[100,129],B:[298,25],C:[496,129],D:[298,230]};
+  s+=triangle('A','B','D')+line(...p.C,...p.B)+line(...p.C,...p.D);
+  s+=marks(p,'A','B',1)+marks(p,'C','B',1)+marks(p,'A','D',2)+marks(p,'C','D',2);
+  s+=txt(85,135,'A')+txt(291,15,'B')+txt(502,134,'C')+txt(293,250,'D');
+ }
+ if(type==='parallel'){
+  p={A:[116,65],B:[450,65],C:[160,200],D:[494,200]};
+  s+=line(...p.A,...p.B)+line(...p.C,...p.D)+line(...p.A,...p.D);
+  s+=`<path class="arrow" d="M268 58 l12 7 -12 7 M312 193 l12 7 -12 7"/>`;
+  s+=txt(101,52,'A')+txt(455,52,'B')+txt(145,221,'C')+txt(501,221,'D');
+ }
+ if(type==='crossparallel'){
+  p={A:[94,45],B:[450,45],C:[172,221],D:[528,221],O:[0,0]};
+  // AD and BC intersect at t = 356 / (434+278) = 1/2, hence O=(311,133).
+  p.O=[311,133];
+  s+=line(...p.A,...p.B)+line(...p.C,...p.D)+line(...p.A,...p.D)+line(...p.B,...p.C);
+  s+=marks(p,'A','B',1)+marks(p,'C','D',1);
+  s+=`<path class="arrow" d="M260 38 l12 7 -12 7 M340 214 l12 7 -12 7"/>`;
+  s+=txt(83,34,'A')+txt(456,34,'B')+txt(161,243,'C')+txt(535,243,'D')+txt(316,128,'O');
+ }
+ if(type==='parallelogram'){
+  p={A:[100,62],B:[419,62],C:[510,208],D:[191,208]};
+  s+=line(...p.A,...p.B)+line(...p.B,...p.C)+line(...p.C,...p.D)+line(...p.D,...p.A)+line(...p.B,...p.D);
+  s+=`<path class="arrow" d="M252 55 l13 7 -13 7 M333 201 l13 7 -13 7"/><path class="arrow" d="M137 119 l-2 13 13 -3 M455 119 l-2 13 13 -3"/>`;
+  s+=txt(83,52,'A')+txt(425,53,'B')+txt(518,223,'C')+txt(175,229,'D');
+ }
+ return `<svg viewBox="0 0 610 260" role="img" aria-label="${esc({pair:'対応する2つの三角形 ABC と DEF',sss:'3組の辺に印がある2つの三角形',sas:'2組の辺と間の角に印がある三角形',ssa:'2組の辺と間でない角に印がある模式図',x:'2本の直線がOで交わる図',shared:'辺ADを共有する2つの三角形',kite:'辺BDを共有する左右2つの三角形',parallel:'平行なABとCDをADが横切る図',crossparallel:'平行なABとCD、交差するADとBC',parallelogram:'向かい合う辺がそれぞれ平行な四角形ABCDと対角線BD'}[type])}"><style>.main{stroke:#254563;stroke-width:3.5;stroke-linecap:round;fill:none}.tick{stroke:#cc8b2f;stroke-width:2.8;stroke-linecap:round}.arc{stroke:#c06646;stroke-width:2.5;fill:none}.arrow{stroke:#237f71;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;fill:none}.lab{font:700 20px system-ui, sans-serif;fill:#24354b}</style>${s}</svg>`;
+}
+// 教科書の位置関係と与件に沿って作った編集可能なベクトル図形。
+// 描画は画像を貼る方式ではなくSVG。線の交点・垂直・等長・中点を座標で整合させてある。
+function diagramSvgNew(name){
+ let s='', p={}, caption='';
+ const L=(a,b,cls='main')=>line(...p[a],...p[b],cls);
+ const T=(a,b,c=1)=>ticks(...p[a],...p[b],c);
+ const P=(a,b,c)=>L(a,b)+L(b,c)+L(c,a);
+ const A=(name,x,y)=>txt(x,y,name);
+ const make=(description)=>`<svg viewBox="0 0 620 260" role="img" aria-label="${esc(description)}"><style>.main{stroke:#2a5070;stroke-width:3.3;stroke-linecap:round;stroke-linejoin:round;fill:none}.helper{stroke:#71849d;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;fill:none}.tick{stroke:#c18228;stroke-width:2.9;stroke-linecap:round}.arc{stroke:#c5664e;stroke-width:3;stroke-linecap:round;fill:none}.arrow{stroke:#298274;stroke-width:3.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.lab{font:700 19px system-ui,sans-serif;fill:#21334b}.note{font:600 13px system-ui,sans-serif;fill:#557089}</style>${s}</svg>`;
+ switch(name){
+ case 'logic':
+  s+=`<rect x="45" y="72" width="146" height="101" rx="14" fill="#e2f1ff" stroke="#557a9b" stroke-width="2"/><rect x="235" y="72" width="146" height="101" rx="14" fill="#fff2d5" stroke="#bd923f" stroke-width="2"/><rect x="425" y="72" width="146" height="101" rx="14" fill="#e0f2e8" stroke="#588a70" stroke-width="2"/><path d="M192 122 H232 M223 114 L232 122 L223 130 M382 122 H422 M413 114 L422 122 L413 130" class="arrow"/>`;
+  s+=A('仮定',118,115)+A('根拠・推論',308,115)+A('結論',500,115);
+  s+=`<text x="118" y="143" class="note" text-anchor="middle">最初にわかること</text><text x="308" y="143" class="note" text-anchor="middle">等しい理由を示す</text><text x="500" y="143" class="note" text-anchor="middle">証明したいこと</text>`;
+  return make('仮定から根拠・推論を通して結論へ進む証明の流れ');
+ case 'similar':
+  p={A:[105,34],B:[58,192],C:[200,192],D:[410,20],E:[285,215],F:[565,215]};
+  s+=P('A','B','C')+P('D','E','F');
+  s+=A('A',101,23)+A('B',43,214)+A('C',208,211)+A('D',410,12)+A('E',269,237)+A('F',574,234);
+  s+=`<text x="125" y="247" class="note" text-anchor="middle">小さい三角形</text><text x="430" y="247" class="note" text-anchor="middle">大きい三角形</text>`;
+  return make('形が相似でも大きさの異なる2つの三角形');
+ case 'case54':
+  p={P:[290,29],A:[104,214],B:[476,214],M:[290,214]};
+  s+=P('P','A','B')+L('P','M');s+=T('P','A',1)+T('P','B',1)+T('A','M',2)+T('M','B',2);
+  s+=A('P',286,18)+A('A',87,233)+A('M',282,239)+A('B',486,235);
+  s+=`<text x="560" y="40" class="note" text-anchor="end">PA=PB</text><text x="560" y="60" class="note" text-anchor="end">AM=BM</text>`;
+  return make('問54：二等辺三角形PAB、AB上の中点M、共通なPM');
+ case 'case55':
+  p={A:[307,30],B:[118,125],C:[307,220],D:[496,125]};
+  s+=P('A','B','D')+P('C','B','D');s+=T('A','B',1)+T('C','B',1)+T('A','D',2)+T('C','D',2);
+  s+=A('A',305,18)+A('B',100,130)+A('C',304,244)+A('D',505,128);
+  return make('問55：ABとCB、ADとCDがそれぞれ等しく、BDを共有する三角形ABDとCBD');
+ case 'case56':
+  p={A:[170,66],B:[455,24],C:[153,232],D:[438,190],O:[304,128]};
+  s+=line(85,78,520,14)+line(65,246,510,180)+L('A','D')+L('B','C');
+  // AB と CD は同一ベクトルで等長。O は厳密には交点付近の表示位置。
+  s+=T('A','B',1)+T('C','D',1);
+  s+=`<path class="arrow" d="M275 48 l11 7 -9 10 M260 216 l11 7 -9 10"/>`;
+  s+=A('A',160,55)+A('B',460,20)+A('C',135,242)+A('D',439,207)+A('O',313,124)+A('ℓ',535,19)+A('m',522,180);
+  return make('問56：平行で等しいABとCD、ADとBCの交点O');
+ case 'case57':
+  p={A:[145,30],C:[474,30],D:[145,225],B:[474,225],O:[309.5,127.5]};
+  s+=L('A','C')+L('D','B')+L('A','B')+L('C','D');
+  s+=T('A','O',1)+T('O','B',1)+T('C','O',2)+T('O','D',2);
+  s+=A('A',134,23)+A('C',478,24)+A('D',136,245)+A('B',484,246)+A('O',316,119);
+  return make('問57：線分ABとCDはOで交わり、AO=BO、CO=DO');
+ case 'case58':
+  // E(310,116)、A=(-40,-76)だけ、C=(76,-40)だけ離れるので AE=CE。B,Dは各線分の延長で同じ倍率。
+  p={E:[310,116],A:[270,40],B:[366,222.4],C:[386,76],D:[203.6,172]};
+  s+=L('A','B')+L('C','D')+L('A','D')+L('B','C');
+  s+=T('A','E',1)+T('E','C',1);
+  s+=A('A',266,28)+A('B',369,242)+A('C',391,67)+A('D',185,178)+A('E',318,112);
+  s+=`<text x="480" y="174" class="note">AB=CD</text><text x="480" y="192" class="note">AE=CE</text>`;
+  return make('問58：長さの等しい線分AB、CDがEで交わり、AE=CE。ADとBCを結ぶ');
+ case 'case59':
+  p={O:[100,221],A:[545,221],B:[320,1],C:[460,71.88],P:[305,136.08],Q:[305,221],R:[244.96,76.04]};
+  s+=L('O','A')+L('O','B')+L('O','C')+L('P','Q')+L('P','R');
+  // 半直線OCとOPは同一直線上。OCは角AOBの二等分線の模式図。
+  s+=`<path class="arc" d="M149 221 A49 49 0 0 0 145.2 202.25 M145.2 202.25 A49 49 0 0 0 134.6 186.35"/>`;
+  s+=`<path d="M305 209 h-12 v12 M237.1 84.0 l8.5 8.5 l8.5 -8.5" class="arc"/>`;
+  s+=A('O',78,230)+A('A',551,229)+A('B',333,17)+A('C',473,69)+A('P',311,132)+A('Q',299,246)+A('R',229,72);
+  s+=`<text x="411" y="248" class="note" text-anchor="middle">PQ⊥OA</text><text x="173" y="53" class="note">PR⊥OB</text>`;
+  return make('問59：OCは角AOBの二等分線、PはOC上、PQとPRはそれぞれOAとOBに垂直');
+ case 'case60':
+  p={A:[120,30],D:[300,30],B:[80,211],C:[400,211],E:[350,120.5],F:[580,211]};
+  s+=L('A','D')+L('D','C')+L('C','B')+L('B','A')+L('A','F')+L('C','F');
+  s+=T('D','E',1)+T('E','C',1)+T('A','E',2)+T('E','F',2);
+  s+=A('A',112,20)+A('D',300,19)+A('B',64,233)+A('C',391,234)+A('E',358,124)+A('F',581,232);
+  return make('問60：EはCDの中点でAE=FE、直線AEはFを通り、B・C・Fは一直線上');
+ default: return diagramSvg('pair');
+ }
+}
+
+function awardCount(){return Object.keys(state.awards||{}).filter(k=>(state.awards||{})[k]).length;}
+function updateMemberUI(){
+ const member=$('member-chip');member.classList.toggle('hidden',!state.name);member.textContent=state.name?`🪪 ${state.name}`:'';
+ $('award-counter').textContent=String(awardCount());
+}
+function drawIntro(){
+ $('intro-case-count').textContent=cases.length;
+ $('intro-ranks').innerHTML=rankInfo.map((r,i)=>`<li><span class="chapter-icon">${chapterIcons[i]}</span><div><b>第${i+1}章 · ${esc(r[0])}</b><small>${esc(r[1])}</small></div>${state.awards?.[i]?'<em>認定済</em>':''}</li>`).join('');
+ $('join-name').value=state.name||'';
+ const resume=state.index>0&&!state.finished;
+ $('start-btn').textContent=state.finished?'🏆 調査結果をもう一度見る':resume?`🔎 続きから捜査（${state.index+1}/${cases.length}）`:'🔎 入団して捜査開始';
+ $('join-name').readOnly=resume||state.finished;
+ $('join-name').title=$('join-name').readOnly?'捜査をやり直すと名前を変更できます。':'';
+ $('restart-intro-btn').classList.toggle('hidden',state.index===0&&!state.finished);
+ $('join-error').classList.add('hidden');
+ updateMemberUI();
+}
+function view(name){['start','game','result'].forEach(v=>$(v+'-screen').classList.toggle('hidden',v!==name));$('home-btn').classList.toggle('hidden',name==='start');window.scrollTo({top:0,behavior:'instant'});updateMemberUI();}
+function drawRail(){
+ let rank=cases[Math.min(state.index,cases.length-1)].rank;
+ $('rank-nav').innerHTML=rankInfo.map((r,i)=>{const done=!!state.awards?.[i],active=i===rank&&!state.finished;
+ return `<div class="rank-item ${done?'done':''} ${active?'active':''}" title="第${i+1}章：${esc(r[0])}" aria-label="第${i+1}章：${esc(r[0])}" ${active?'aria-current="step"':''}><div class="rank-number">${done?'✓':i+1}</div><div class="rank-desc"><strong>${esc(r[0])}</strong>${esc(r[1])}${done?'<span class="tiny-earned">🎖 認定済</span>':''}</div></div>`;}).join('');
+}
+function render(){
+ if(state.finished||state.index>=cases.length){finish();return;}
+ locked=false;view('game');const q=cases[state.index];const inRank=cases.slice(0,state.index+1).filter(c=>c.rank===q.rank).length;const rankLen=cases.filter(c=>c.rank===q.rank).length;
+ $('rank-label').textContent=`${chapterIcons[q.rank]} 第${q.rank+1}章 · ${rankInfo[q.rank][0]}`;
+ $('mission-no').textContent=`${state.name} 団員 · 事件 ${state.index+1}/${cases.length} · この章 ${inRank}/${rankLen}`;
+ $('progress-fill').style.width=`${100*state.index/cases.length}%`;
+ $('progress-track').setAttribute('aria-valuenow',String(state.index));
+ $('case-id').textContent=`CASE ${String(state.index+1).padStart(3,'0')} · SECRET FILE`;
+ $('case-title').textContent=q.title;$('scenario').innerHTML=mathHtml(q.scenario);
+ $('diagram').innerHTML=q.diagram.startsWith('textbook:')?diagramSvgNew(q.diagram.slice(9)):diagramSvg(q.diagram);
+ $('question').innerHTML=mathHtml(q.question);
+ $('feedback').className='feedback hidden';$('proof-panel').classList.add('hidden');$('proof-panel').open=false;$('proof-content').textContent='';
+ $('draft-panel').classList.toggle('hidden',q.rank<3);$('draft-panel').open=false;$('draft-text').value=state.drafts?.[state.index]||'';
+ $('hint-btn').disabled=false;$('hint-note').classList.toggle('hidden',!state.hintUsed[state.index]);
+ $('hint-note').textContent=state.hintUsed[state.index]?`団長のヒント：${q.hint}`:'';
+ $('hint-btn').textContent=state.hintUsed[state.index]?'💡 ヒント確認済み':'💡 団長にヒントを聞く';
+ $('options').innerHTML='';$('options').classList.toggle('reading-mode',q.options.some(opt=>opt[0].length>76));
+ q.options.forEach((opt,i)=>{const b=document.createElement('button');b.className='option';b.setAttribute('aria-label',`${i+1}番 ${opt[0]}`);
+ b.innerHTML=`<span class="num">${i+1}</span><span class="opttext">${mathHtml(opt[0])}</span>`;
+ b.addEventListener('click',()=>answer(i));
+ if((state.eliminated[state.index]||[]).includes(i)){b.classList.add('eliminated');b.disabled=true;}
+ $('options').appendChild(b);});
+ updateStats();drawRail();save();if(state.solved[state.index]!==undefined){showSolved();}
+}
+function updateStats(){
+ $('mini-score').textContent=`📌 ${state.score} pt`;
+ $('mini-miss').textContent=`🔎 再捜査 ${state.miss} 回`;
+ $('mini-hints').textContent=`💡 ヒント ${state.hints} 回`;
+ updateMemberUI();
+}
+function revealProof(){const q=cases[state.index];if(!q.proof)return;$('proof-content').textContent=q.proof;$('proof-panel').classList.remove('hidden');}
+function isChapterLast(index){return index===cases.length-1 || (cases[index] && cases[index+1] && cases[index+1].rank!==cases[index].rank);}
+function ensureAward(rank){
+ state.awards=state.awards||{};
+ if(state.awards[rank])return;
+ const previous=rank>0?state.awards[rank-1]:null;
+ const prevMiss=previous?previous.totalMiss:0,prevHints=previous?previous.totalHints:0;
+ state.awards[rank]={name:state.name,date:new Date().toISOString(),totalMiss:state.miss,totalHints:state.hints,
+  miss:Math.max(0,state.miss-prevMiss),hints:Math.max(0,state.hints-prevHints),score:state.score};
+ save();updateMemberUI();
+}
+function advance(){state.index++;save();render();}
+function solvedAction(){
+ const q=cases[state.index];const last=isChapterLast(state.index);
+ if(last)ensureAward(q.rank);
+ const b=document.createElement('button');b.className='goldbtn';
+ b.textContent=last?`🎖 第${q.rank+1}章の認定証を受け取る`:'次の事件へ →';
+ b.onclick=last?()=>showAward(q.rank,true):advance;
+ $('feedback-actions').appendChild(b);
+}
+function showSolved(){
+ const i=state.solved[state.index],q=cases[state.index];locked=true;revealProof();$('hint-btn').disabled=true;
+ const fb=$('feedback');fb.className='feedback good';$('feedback-title').textContent='✓ 真実に到達！';
+ $('feedback-text').textContent=q.options[i][1];$('feedback-actions').innerHTML='';
+ Array.from($('options').children).forEach((b,k)=>{b.disabled=true;if(k===i)b.classList.add('correct-choice');});solvedAction();
+}
+function answer(i){
+ if(locked||state.solved[state.index]!==undefined)return;
+ const q=cases[state.index];const opt=q.options[i];const isGood=opt[2]===1;
+ const fb=$('feedback');fb.className='feedback '+(isGood?'good':'bad');
+ $('feedback-title').textContent=isGood?'✓ 真実に到達！':'⚠️ その証拠は、まだ裏取りが必要だ！';
+ $('feedback-text').textContent=opt[1];$('feedback-actions').innerHTML='';
+ const selected=$('options').children[i];
+ if(isGood){
+  locked=true;revealProof();$('hint-btn').disabled=true;selected.classList.add('correct-choice');
+  Array.from($('options').children).forEach(b=>b.disabled=true);
+  state.solved[state.index]=i;
+  const misses=(state.eliminated[state.index]||[]).length,usedHint=!!state.hintUsed[state.index];
+  state.score+=Math.max(40,100-misses*20-(usedHint?15:0));
+  solvedAction();
+ }else{
+  state.miss++;state.eliminated[state.index]=[...new Set([...(state.eliminated[state.index]||[]),i])];
+  selected.classList.add('eliminated');selected.disabled=true;
+  const p=document.createElement('span');p.className='retry-note';p.textContent='証拠をもう一度見直してみよう。';
+  $('feedback-actions').appendChild(p);
+ }
+ updateStats();save();fb.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function finish(){
+ if(!state.awards?.[5])ensureAward(5);
+ state.finished=true;state.index=cases.length;save();view('result');
+ const perfect=state.miss===0&&state.hints===0;
+ $('result-medal').textContent=perfect?'🥇':'🏆';
+ $('result-title').textContent=`${state.name}、全事件解決！`;
+ $('result-lead').textContent=perfect?'6つの章をノーミス・ノーヒントで突破。団長も認める、証明探偵団の名探偵だ！':'最後の謎まで解き明かした！ よくやった。次は選択肢を見ずに、自分の言葉で証明してみよう。';
+ $('end-score').textContent=state.score;$('end-miss').textContent=state.miss;$('end-hints').textContent=state.hints;
+}
+function reset(){
+ if(!confirm('捜査記録と6枚の認定証を消して、最初からやり直しますか？'))return;
+ state=blank();save();drawIntro();view('start');
+}
+function enterClub(){
+ if(state.finished){finish();return;}
+ if(state.index>0 && state.name){render();return;}
+ const raw=$('join-name').value.trim().replace(/[\u0000-\u001f\u007f]/g,'');
+ if(!raw){$('join-error').classList.remove('hidden');$('join-name').focus();return;}
+ state.name=raw.slice(0,20);save();$('join-error').classList.add('hidden');render();
+}
+let displayedAwardRank=null,awardFromCheckpoint=false;
+function showDialog(id){const d=$(id);if(typeof d.showModal==='function'&&!d.open)d.showModal();else d.setAttribute('open','');}
+function hideDialog(id){const d=$(id);if(typeof d.close==='function'&&d.open)d.close();else d.removeAttribute('open');}
+function showAward(rank,checkpoint=false){
+ if(!state.awards?.[rank])return;
+ hideDialog('archive-dialog');displayedAwardRank=rank;awardFromCheckpoint=checkpoint;
+ $('award-heading').textContent=`${chapterIcons[rank]} 第${rank+1}章クリア！`;
+ $('award-story').textContent=`${state.awards[rank].name}、${rankAwards[rank].story}`;
+ const c=$('award-canvas');paintAward(c,rank,state.awards[rank]);
+ $('award-next').textContent=checkpoint?(rank===5?'🏆 最終結果へ':'次の章へ進む →'):'証明書アルバムへ戻る';
+ showDialog('award-dialog');
+}
+function closeAward(){hideDialog('award-dialog');displayedAwardRank=null;awardFromCheckpoint=false;}
+function returnFromAward(){
+ const wasCheckpoint=awardFromCheckpoint;
+ closeAward();
+ if(wasCheckpoint)advance();else showArchive();
+}
+function niceDate(str){return new Date(str).toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric'});}
+function paintAward(canvas,rank,rec){
+ const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
+ const perfect=rec.miss===0&&rec.hints===0,accent=perfect?'#bb8834':'#477e8a';
+ ctx.fillStyle='#fff8e8';ctx.fillRect(0,0,W,H);
+ // Subtle dotted blueprint and a proper geometry figure, instead of a raster image.
+ ctx.strokeStyle='#d9e2df';ctx.lineWidth=1;
+ for(let x=90;x<W;x+=50){ctx.beginPath();ctx.moveTo(x,80);ctx.lineTo(x,H-80);ctx.stroke();}
+ for(let y=90;y<H;y+=50){ctx.beginPath();ctx.moveTo(80,y);ctx.lineTo(W-80,y);ctx.stroke();}
+ ctx.fillStyle='#fffbf2';ctx.fillRect(66,66,W-132,H-132);
+ ctx.strokeStyle=accent;ctx.lineWidth=14;ctx.strokeRect(50,50,W-100,H-100);
+ ctx.lineWidth=2;ctx.strokeRect(75,75,W-150,H-150);
+ // Watermark: triangle / magnifying-glass motif.
+ ctx.save();ctx.globalAlpha=.075;ctx.strokeStyle=accent;ctx.lineWidth=23;
+ ctx.beginPath();ctx.moveTo(1160,245);ctx.lineTo(1415,710);ctx.lineTo(880,715);ctx.closePath();ctx.stroke();
+ ctx.beginPath();ctx.arc(220,870,92,0,2*Math.PI);ctx.moveTo(280,936);ctx.lineTo(368,1005);ctx.stroke();ctx.restore();
+ ctx.textAlign='center';ctx.textBaseline='alphabetic';
+ ctx.fillStyle=accent;ctx.font='900 29px sans-serif';ctx.fillText('S H O M E I   D E T E C T I V E   C L U B',W/2,156);
+ ctx.fillStyle='#253b4f';ctx.font='bold 51px serif';ctx.fillText('証 明 探 偵 団',W/2,239);
+ ctx.strokeStyle=accent;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(465,278);ctx.lineTo(1135,278);ctx.stroke();
+ ctx.fillStyle=accent;ctx.font='900 34px sans-serif';ctx.fillText(`第 ${rank+1} 章　修 了 証 明 書`,W/2,351);
+ ctx.fillStyle='#203448';ctx.font='bold 62px serif';ctx.fillText(rankAwards[rank].title,W/2,447);
+ ctx.font='bold 78px sans-serif';let fontSize=78;
+ while(ctx.measureText(rec.name).width>1200&&fontSize>34){fontSize-=2;ctx.font=`bold ${fontSize}px sans-serif`;}
+ ctx.fillText(rec.name,W/2,583);
+ ctx.fillStyle=accent;ctx.font='bold 31px serif';ctx.fillText('団　員　殿',W/2,642);
+ ctx.fillStyle='#3f5261';ctx.font='29px sans-serif';ctx.fillText(`キミは証明探偵団の第${rank+1}章を突破し、`,W/2,726);
+ ctx.fillText(rankAwards[rank].subtitle+'。',W/2,782);
+ ctx.fillStyle=accent;ctx.font='bold 26px sans-serif';ctx.fillText(perfect?'★ ノーミス・ノーヒント ★':'★ 事件解決・認定 ★',W/2,850);
+ ctx.fillStyle='#435264';ctx.font='25px sans-serif';ctx.fillText(`発行日：${niceDate(rec.date)}`,W/2,919);
+ ctx.fillStyle=accent;ctx.font='bold 31px serif';ctx.fillText('証明探偵団　団長',W/2,976);
+}
+function downloadAward(){
+ if(displayedAwardRank===null)return;
+ const c=$('award-canvas'),rec=state.awards[displayedAwardRank];
+ const cleaned=rec.name.replace(/[\\/:*?"<>|\s]+/g,'_').slice(0,22)||'探偵';
+ const a=document.createElement('a');a.href=c.toDataURL('image/png');
+ a.download=`証明探偵団_第${displayedAwardRank+1}章_${cleaned}_認定証.png`;
+ document.body.appendChild(a);a.click();a.remove();
+}
+function showArchive(){
+ const grid=$('archive-grid');grid.innerHTML='';
+ rankInfo.forEach((r,i)=>{
+  const done=!!state.awards?.[i];const item=document.createElement('article');item.className='archive-card'+(done?' earned':'');
+  item.innerHTML=`<div class="archive-emblem">${done?chapterIcons[i]:'🔒'}</div><div class="archive-info"><small>CHAPTER ${i+1}</small><strong>${esc(rankAwards[i].title)}</strong><span>${done?esc(state.awards[i].name)+' · '+niceDate(state.awards[i].date):'未解決 · 事件を解いて手に入れよう'}</span></div>`;
+  if(done){const b=document.createElement('button');b.className='archive-view';b.textContent='見る・保存';b.onclick=()=>showAward(i,false);item.appendChild(b);}
+  grid.appendChild(item);
+ });
+ showDialog('archive-dialog');
+}
+$('draft-text').addEventListener('input',()=>{state.drafts=state.drafts||{};state.drafts[state.index]=$('draft-text').value;save();});
+$('start-btn').addEventListener('click',enterClub);
+$('join-name').addEventListener('keydown',e=>{if(e.key==='Enter')enterClub();});
+$('join-name').addEventListener('input',()=>{$('join-error').classList.add('hidden');});
+$('restart-intro-btn').addEventListener('click',reset);
+$('home-btn').addEventListener('click',reset);
+$('play-again').addEventListener('click',reset);
+$('save-certificate').addEventListener('click',()=>showAward(5,false));
+$('archive-btn').addEventListener('click',showArchive);
+$('archive-close').addEventListener('click',()=>hideDialog('archive-dialog'));
+$('award-close').addEventListener('click',closeAward);
+$('award-download').addEventListener('click',downloadAward);
+$('award-next').addEventListener('click',returnFromAward);
+$('archive-dialog').addEventListener('click',e=>{if(e.target===$('archive-dialog'))hideDialog('archive-dialog');});
+$('award-dialog').addEventListener('click',e=>{if(e.target===$('award-dialog'))closeAward();});
+$('hint-btn').addEventListener('click',()=>{if(!state.hintUsed[state.index]){state.hintUsed[state.index]=true;state.hints++;save();}
+ $('hint-note').textContent=`団長のヒント：${cases[state.index].hint}`;$('hint-note').classList.remove('hidden');$('hint-btn').textContent='💡 ヒント確認済み';updateStats();});
+$('diagram-zoom').addEventListener('click',()=>{
+  const zoom=$('zoom-dialog');
+  $('zoom-scroll').innerHTML=$('diagram').innerHTML;
+  $('zoom-scroll').scrollLeft=0;
+  if(typeof zoom.showModal==='function')zoom.showModal();else zoom.setAttribute('open','');
+});
+$('zoom-close').addEventListener('click',()=>{$('zoom-dialog').close();});
+$('zoom-dialog').addEventListener('click',e=>{if(e.target===$('zoom-dialog'))$('zoom-dialog').close();});
+$('notebook-btn').addEventListener('click',()=>{if(typeof $('notebook').showModal==='function')$('notebook').showModal();else $('notebook').setAttribute('open','');});$('close-notebook').addEventListener('click',()=>$('notebook').close());$('notebook').addEventListener('click',e=>{if(e.target===$('notebook'))$('notebook').close();});
+drawIntro();if(state.finished)finish();
+</script>
+<!-- 教育目的での学内利用を想定した単体HTML。外部ライブラリ・ネットワーク通信なし。 -->
+<script>
+/* UI enhancement only: all math questions, keys, reasoning and progress are preserved. */
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const node = document.createElement('section');
+  node.className='brief-bar';node.setAttribute('aria-label','現在の捜査');
+  node.innerHTML='<div class="brief-left"><span class="brief-symbol" aria-hidden="true">🧭</span><div><strong id="brief-title">現場捜査中</strong><small id="brief-subtitle">図を観察 → 証拠を照合 → 推理する</small></div></div><span class="brief-counter" id="brief-counter">捜査準備中</span>';
+  document.querySelector('.case-paper')?.before(node);
+  const originalRender=render;
+  render=function(...args){
+    const result=originalRender.apply(this,args);
+    const q=cases[state.index];if(!q)return result;
+    const preceding=cases.slice(0,state.index).filter(x=>x.rank===q.rank).length;
+    const total=cases.filter(x=>x.rank===q.rank).length;
+    $('brief-title').textContent=`第${q.rank+1}章・${rankInfo[q.rank][0]}`;
+    $('brief-subtitle').textContent=`${state.name}団員の捜査記録 ｜ 次の証拠を見つけよう`;
+    $('brief-counter').textContent=`この章 ${preceding+1} / ${total}`;
+    const long=q.options.some(x=>x[0].length>59||x[0].includes('\n'));
+    $('options').classList.toggle('reading-mode',long);
+    return result;
+  };
+  document.addEventListener('keydown',e=>{
+    if(e.altKey||e.ctrlKey||e.metaKey||e.isComposing)return;
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName||''))return;
+    if(document.querySelector('dialog[open]'))return;
+    if($('game-screen')?.classList.contains('hidden'))return;
+    if(['1','2','3','4'].includes(e.key)){
+      const buttons=Array.from($('options')?.querySelectorAll('.option')||[]);
+      const b=buttons[Number(e.key)-1];if(b&&!b.disabled){e.preventDefault();b.click();}
+    }
+  });
+})();
+
+</script>
+</body>
+</html>

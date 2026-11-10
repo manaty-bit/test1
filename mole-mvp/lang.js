@@ -8,6 +8,12 @@ const dictionary=[
 ['2組の辺とその間の角がそれぞれ等しい。','Two pairs of corresponding sides and their included angles are equal.'],
 ['1組の辺とその両端の角がそれぞれ等しい。','One pair of corresponding sides and their adjacent angles are equal.'],
 ['3組の辺がそれぞれ等しい。','Three pairs of corresponding sides are equal.'],
+['図から合同条件を見分けよう','Identify the congruence condition from the diagram'],
+['拡大した問題の図','Enlarged problem diagram'],
+['パーフェクト認定証','Perfect Certificate'],
+['この式','this equality'],
+['違う道！ ','Wrong path! '],
+['（－2秒）','(-2s)'],
 ['図の同じ印の辺・角はそれぞれ等しい','Matching marks indicate equal sides or equal angles'],
 ['合同な図形の対応する辺はそれぞれ等しいので、','Since corresponding sides of congruent triangles are equal,'],
 ['合同な図形の対応する角はそれぞれ等しいので、','Since corresponding angles of congruent triangles are equal,'],
@@ -203,13 +209,14 @@ function translateJapanese(source){
  if(!/[\u3040-\u30ff\u3400-\u9fff]/.test(s))return s;
  s=s.replace(/^(△[A-Z]{3})と(△[A-Z]{3})において、$/,(_m,a,b)=>'In '+a+' and '+b+',');
  s=s.replace(/^(.+?) を証明しよう$/,'Prove $1');
+ s=s.replace(/△([A-Z]{3})と△([A-Z]{3})/g,'△$1 and △$2');
  s=s.replace(/^なぜ (.+) といえる？$/,'Why is $1 true?');
  s=s.replace(/^等しい辺・角を選ぼう（([0-9]+)\/3）$/,'Select equal sides / angles ($1/3)');
- s=s.replace(/^①、②、③より、(.+)ので、$/,(_m,p)=>'From ①, ② and ③: '+translateJapanese(p)+', therefore');
+ s=s.replace(/^①、②、③より、(.+)ので、$/,(_m,p)=>'From ①, ② and ③: '+translateJapanese(p+'。').replace(/[.]$/,'')+'; therefore,');
  s=s.replace(/^合同条件：(.+)$/,(_m,p)=>'Congruence condition: '+translateJapanese(p));
  s=s.replace(/^(仮定より|共通な辺だから|対頂角は等しいから|平行線の錯角は等しいから)、(.+)$/,_m=>{const j=_m.indexOf('、');return translateJapanese(_m.slice(0,j))+': '+_m.slice(j+1)});
  s=s.replace(/^(.+) ……([①②③])$/,'$1 ……$2');
- s=s.replace(/^図形：(.+)。証明すること：(.+)。頂点は各三角形の対応順に記す。$/,'Diagram: $1. Goal: $2. Match corresponding vertices in order.');
+ s=s.replace(/^図形：(.+)。証明すること：(.+)。頂点は各三角形の対応順に記す。$/,(all,a,b)=>'Diagram: '+a+'. Goal: '+translateJapanese(b)+'. Match corresponding vertices in order.');
  s=s.replace(/^深さ ([0-9]+) ?m$/,'Depth $1 m');
  s=s.replace(/^🐍 残り猶予 ([0-9]+)%$/,'🐍 Time left $1%');
  s=s.replace(/^([0-9]+)問目の関門で失敗。$/,'Failed on question $1.');

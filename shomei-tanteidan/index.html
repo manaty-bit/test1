@@ -67,7 +67,7 @@ button,input,textarea{max-width:100%}
 .zoom-scroll{overflow:auto;max-height:calc(100dvh - 145px);padding:15px;overscroll-behavior:contain}
 .zoom-scroll svg{display:block;width:100%;max-width:740px;height:auto;margin:auto;border:1px solid #e2d5bd;border-radius:10px;background-color:#fff}
 .zoom-help{font-size:11px;color:#6c5a3e;margin:0;padding:0 17px 12px;text-align:center}
-@media(max-width:920px){.game-layout{grid-template-columns:1fr}.rail{position:static;overflow:visible;padding:8px 12px;border-radius:14px}.rail-heading,.rail-tip{display:none}.rail #rank-nav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));width:100%;gap:7px}.rank-item{justify-content:center;min-width:0;width:auto;max-width:none;min-height:37px;margin:0;padding:5px 3px;border-radius:9px;opacity:.8}.rank-number{width:27px;height:27px;border-radius:8px}.rank-desc{display:none}.game-layout{gap:15px}}
+@media(max-width:920px){.game-layout{grid-template-columns:1fr}.rail{position:static;overflow:visible;padding:8px 12px;border-radius:14px}.rail-heading,.rail-tip{display:none}.rail #rank-nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));width:100%;gap:7px}.rank-item{justify-content:center;min-width:0;width:auto;max-width:none;min-height:37px;margin:0;padding:5px 3px;border-radius:9px;opacity:.8}.rank-number{width:27px;height:27px;border-radius:8px}.rank-desc{display:none}.game-layout{gap:15px}}
 @media(max-width:600px){
  .shell{padding:10px 12px}
  .topbar{gap:7px;margin-bottom:14px;padding-bottom:9px}
@@ -312,7 +312,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;ba
 .progress-mini{font-size:12px;gap:17px;margin-top:18px}
 .award-dialog,.archive-dialog{border-radius:24px;border:2px solid #dec080;box-shadow:0 30px 110px #000b}.award-preview{background:#f3e7ca;box-shadow:inset 0 2px 10px #0001}.archive-card.earned{border-color:#cf9d4a;background:#fff4d5}.archive-view{min-height:38px}
 .footer{color:#94b0bb;font-size:11px}
-@media(max-width:920px){.intro{grid-template-columns:1fr}.intro-side{display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,.7fr);align-items:stretch}.stats-row{grid-column:2;grid-row:1}.club-rule{grid-column:2;grid-row:1;align-self:end;margin-top:125px}.chapter-card{grid-column:1;grid-row:1/3}.game-layout{grid-template-columns:1fr;gap:12px}.rail{position:static;padding:9px;border-radius:12px}.rail #rank-nav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}.rank-item{min-height:42px;padding:5px;margin:0}.rank-number{width:28px;height:28px}.rail-heading,.rail-tip,.rank-desc{display:none}}
+@media(max-width:920px){.intro{grid-template-columns:1fr}.intro-side{display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,.7fr);align-items:stretch}.stats-row{grid-column:2;grid-row:1}.club-rule{grid-column:2;grid-row:1;align-self:end;margin-top:125px}.chapter-card{grid-column:1;grid-row:1/3}.game-layout{grid-template-columns:1fr;gap:12px}.rail{position:static;padding:9px;border-radius:12px}.rail #rank-nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:5px}.rank-item{min-height:42px;padding:5px;margin:0}.rank-number{width:28px;height:28px}.rail-heading,.rail-tip,.rank-desc{display:none}}
 @media(max-width:700px){.intro-side{display:flex}.stats-row{order:-1}.club-rule{margin-top:0}.topbar{gap:7px;min-height:60px}.top-actions{gap:5px}.brand{gap:8px}.hero{padding:28px 20px;border-radius:18px}.hero::before{inset:9px;border-radius:12px}.hero h1{font-size:clamp(35px,9vw,49px)}.hero-seal{top:18px;right:15px}.hero .eyebrow{font-size:10px}.letter-note{padding:12px 14px}.join-row{gap:10px}.chapter-card h2{font-size:20px}.brief-bar{padding:10px 11px;gap:7px}.brief-left{gap:8px}.brief-left strong{font-size:12px}.brief-left small{font-size:10px}.brief-counter{font-size:11px;padding:5px 8px}.brief-symbol{width:33px;height:33px;font-size:18px}.paper-heading{padding:39px 15px 12px}.paper-heading h2{font-size:clamp(22px,5.6vw,28px)}.scenario{font-size:15px}.diagram-wrap{padding:5px 11px 8px}.diagram-frame{min-height:150px}.diagram-frame svg{max-height:none}.question-box{margin:12px 11px 17px;padding:14px;font-size:16px}.options{grid-template-columns:1fr;gap:9px}.option{min-height:58px;padding:11px 12px;gap:10px}.option .opttext{font-size:15px;line-height:1.65}.answer-heading{margin:17px 1px 8px}.answer-heading strong{font-size:14px}.member-chip{max-width:95px}.brand-icon{width:35px;height:35px;font-size:23px}}
 @media(max-width:400px){.shell{padding:9px}.topbar{flex-wrap:wrap;min-height:57px;padding-bottom:8px}.brand{flex:1 0 auto}.top-actions{margin-left:auto;gap:4px}.brand-text{font-size:15px}.brand-small{font-size:8px;letter-spacing:.11em}.smallbtn{font-size:10px;padding:6px 7px}.member-chip{max-width:105px}.hero{padding:23px 16px}.hero h1{font-size:35px}.hero-seal{width:42px;height:42px}.hero-seal span{font-size:19px}.brief-left strong{font-size:11px}.brief-counter{font-size:10px}.paper-heading h2{font-size:22px}.case-paper:before{font-size:8px;padding:4px 7px;right:10px}.rank-item{min-height:34px;padding:3px}.rank-number{width:25px;height:25px;font-size:11px}.option .opttext{font-size:14px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -429,8 +429,8 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;ba
     </div>
   </div>
   <div class="intro-side">
-    <div class="info-card chapter-card"><div class="eyebrow" style="font-size:10px">TOP SECRET · 6 CHAPTERS</div><h2>🗂️ 証明探偵団の任務</h2><p class="chapter-lead">事件を解決するたびに実力が上がる。<strong>各章を突破すれば、名前入りの認定証</strong>を手に入れられる！</p><ul class="mini-ranks" id="intro-ranks"></ul></div>
-    <div class="stats-row"><div class="stat"><strong>6</strong><span>秘密の章</span></div><div class="stat"><strong id="intro-case-count">54</strong><span>事件ファイル</span></div><div class="stat"><strong>6</strong><span>集める認定証</span></div></div>
+    <div class="info-card chapter-card"><div class="eyebrow" style="font-size:10px">TOP SECRET · 7 CHAPTERS</div><h2>🗂️ 証明探偵団の任務</h2><p class="chapter-lead">事件を解決するたびに実力が上がる。<strong>各章を突破すれば、名前入りの認定証</strong>を手に入れられる！</p><ul class="mini-ranks" id="intro-ranks"></ul></div>
+    <div class="stats-row"><div class="stat"><strong>7</strong><span>秘密の章</span></div><div class="stat"><strong id="intro-case-count">60</strong><span>事件ファイル</span></div><div class="stat"><strong>7</strong><span>集める認定証</span></div></div>
     <div class="info-card club-rule"><strong>🔐 団員の掟</strong><p>① 見た目で決めつけない<br>② 対応する順番をそろえる<br>③ 等しい理由を必ず確かめる</p></div>
   </div>
 </section>
@@ -449,10 +449,10 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;ba
     <div class="progress-mini"><span id="mini-score"></span><span id="mini-miss"></span><span id="mini-hints"></span></div></div></div>
   </div>
 </section>
-<section id="result-screen" class="result hidden"><div class="medal" id="result-medal">🏅</div><div class="eyebrow" style="margin-top:17px">THE FINAL MYSTERY — SOLVED</div><h1 id="result-title">全事件、解決。</h1><p id="result-lead"></p><div class="result-card"><h2 style="font-family:var(--serif);margin-top:0">📋 キミの最終捜査記録</h2><div class="result-grid"><div><strong id="end-score">0</strong><span>獲得ポイント</span></div><div><strong id="end-miss">0</strong><span>再捜査</span></div><div><strong id="end-hints">0</strong><span>ヒント</span></div></div><div class="result-congrats">🎖️ 各章の認定証は「証明書アルバム」でいつでも確認・画像保存できるぞ。</div><div class="result-actions"><button class="goldbtn" id="save-certificate">🏅 第6章の認定証を見る</button><button class="ghostbtn" style="color:#35465d" id="play-again">もう一度、最初から捜査する</button></div></div></section>
+<section id="result-screen" class="result hidden"><div class="medal" id="result-medal">🏅</div><div class="eyebrow" style="margin-top:17px">THE FINAL MYSTERY — SOLVED</div><h1 id="result-title">全事件、解決。</h1><p id="result-lead"></p><div class="result-card"><h2 style="font-family:var(--serif);margin-top:0">📋 キミの最終捜査記録</h2><div class="result-grid"><div><strong id="end-score">0</strong><span>獲得ポイント</span></div><div><strong id="end-miss">0</strong><span>再捜査</span></div><div><strong id="end-hints">0</strong><span>ヒント</span></div></div><div class="result-congrats">🎖️ 各章の認定証は「証明書アルバム」でいつでも確認・画像保存できるぞ。</div><div class="result-actions"><button class="goldbtn" id="save-certificate">🏅 最終章の認定証を見る</button><button class="ghostbtn" style="color:#35465d" id="play-again">もう一度、最初から捜査する</button></div></div></section>
 </main><footer class="footer">SHOMEI DETECTIVE CLUB · 証明探偵団 · 図形はウソをつかない</footer>
 </div>
-<dialog id="notebook" class="notebook-dialog"><div class="notebook-inner"><button class="notebook-close" id="close-notebook">閉じる ✕</button><div class="eyebrow" style="color:#a9823c">DETECTIVE'S NOTEBOOK</div><h2>📖 捜査手帳</h2><p>正確な証明をつくるための基本ルールだ。迷ったらいつでも確認しよう。</p><h3>合同条件はこの3つだけ</h3><div class="bookline"><ol><li><strong>3組の辺がそれぞれ等しい。</strong></li><li><strong>2組の辺とその間の角がそれぞれ等しい。</strong></li><li><strong>1組の辺とその両端の角がそれぞれ等しい。</strong></li></ol></div><h3>対応する順番（最重要）</h3><p>△ABC ≡ △DEF なら、頂点Aと頂点D、頂点Bと頂点E、頂点Cと頂点Fがそれぞれ対応する。たとえば AB = DE、∠ABC = ∠DEF だ。<strong>合同の証明では、角の3文字も左と右で同じ位置に対応する頂点が来るように書こう。</strong> ∠QOP の Q-O-P に対応する頂点が R-O-P なら、<strong>∠QOP = ∠ROP</strong> と記す。正しい対応を保った並べ替え（△BCA ≡ △EFD など）も数学的には正しい。</p><h3>記号と角のルール</h3><p>三角形の合同には <strong>≡</strong>、辺の長さ・角の大きさの等しさには <strong>=</strong> を使う。∠ABC の頂点は真ん中の B。∠ABC と ∠CBA は同じ角を表す。<strong>逆順だから角の大きさが違うわけではない。</strong>ただし、このゲームの「対応順をそろえる」問題では、同じ角でも文字の順が対応しない表記は採用しない。</p><h3>正しい式と、正しい理由は別々にチェック</h3><p>例えば ∠AOC=∠BOD は対頂角のため等しい。「錯角だから」と書くのは根拠が誤り。角の等式だけを見て、理由まで正しいと判断しないこと。<strong>与えられた条件 → 等式 → 等しい理由 → 合同条件 → 合同</strong>を一つずつ裏取りしよう。</p><h3>調書の基本手順</h3><p>① どの三角形か宣言 → ② 等しい辺・角とその根拠 → ③ 合同条件 → ④ 合同 → ⑤ 対応する辺・角が等しいことから最終結論。</p><h3>証拠の捏造は禁止</h3><p>「見た目が同じ」は根拠にならない。「2組の辺と1組の角」だけでは、その角が<strong>間の角</strong>か確認が必要。結論を証拠に用いる循環論法も禁止だ。</p><h3>この事件簿で身につく力</h3><p>仮定と結論、合同条件、共通な辺、対頂角、平行線の錯角、引き算で示す辺の等しさ、角の二等分線、垂線、合同から平行を導く証明まで、少しずつ挑戦できる。</p><h3>平行を示す逆向きの推理</h3><p>平行なら錯角は等しい。また、錯角が等しければ2直線は平行といえる。最後の問題では、合同によって対応する角が等しいことを示してから、この逆の性質を利用する。</p></div></dialog>
+<dialog id="notebook" class="notebook-dialog"><div class="notebook-inner"><button class="notebook-close" id="close-notebook">閉じる ✕</button><div class="eyebrow" style="color:#a9823c">DETECTIVE'S NOTEBOOK</div><h2>📖 捜査手帳</h2><p>正確な証明をつくるための基本ルールだ。迷ったらいつでも確認しよう。</p><h3>合同条件はこの3つだけ</h3><div class="bookline"><ol><li><strong>3組の辺がそれぞれ等しい。</strong></li><li><strong>2組の辺とその間の角がそれぞれ等しい。</strong></li><li><strong>1組の辺とその両端の角がそれぞれ等しい。</strong></li></ol></div><h3>対応する順番（最重要）</h3><p>△ABC ≡ △DEF なら 頂点Aと頂点D、頂点Bと頂点E、頂点Cと頂点Fがそれぞれ対応する。たとえば AB = DE、∠ABC = ∠DEF だ。<strong>合同の証明では、角の3文字も左と右で同じ位置に対応する頂点が来るように書こう。</strong> ∠QOP の Q-O-P に対応する頂点が R-O-P なら、<strong>∠QOP = ∠ROP</strong> と記す。正しい対応を保った並べ替え（△BCA ≡ △EFD など）も数学的には正しい。</p><h3>記号と角のルール</h3><p>三角形の合同には <strong>≡</strong>、辺の長さ・角の大きさの等しさには <strong>=</strong> を使う。∠ABC の頂点は真ん中の B。∠ABC と ∠CBA は同じ角を表す。<strong>逆順だから角の大きさが違うわけではない。</strong>ただし、このゲームの「対応順をそろえる」問題では、同じ角でも文字の順が対応しない表記は採用しない。</p><h3>正しい式と、正しい理由は別々にチェック</h3><p>例えば ∠AOC=∠BOD は対頂角のため等しい。「錯角だから」と書くのは根拠が誤り。角の等式だけを見て、理由まで正しいと判断しないこと。<strong>与えられた条件 → 等式 → 等しい理由 → 合同条件 → 合同</strong>を一つずつ裏取りしよう。</p><h3>調書の基本手順</h3><p>① どの三角形か宣言 → ② 等しい辺・角とその根拠 → ③ 合同条件 → ④ 合同 → ⑤ 対応する辺・角が等しいことから最終結論。</p><h3>証拠の捏造は禁止</h3><p>「見た目が同じ」は根拠にならない。「2組の辺と1組の角」だけでは、その角が<strong>間の角</strong>か確認が必要。結論を証拠に用いる循環論法も禁止だ。</p><h3>この事件簿で身につく力</h3><p>仮定と結論、合同条件、共通な辺、対頂角、平行線の錯角、引き算で示す辺の等しさ、角の二等分線、垂線、合同から平行を導く証明まで、少しずつ挑戦できる。</p><h3>平行を示す逆向きの推理</h3><p>平行なら錯角は等しい。また、錯角が等しければ2直線は平行といえる。最後の問題では、合同によって対応する角が等しいことを示してから、この逆の性質を利用する。</p></div></dialog>
 <dialog id="zoom-dialog" class="zoom-dialog" aria-label="図形の拡大表示"><div class="zoom-head"><strong>🔎 図形を詳しく見る</strong><button type="button" class="zoom-close" id="zoom-close">閉じる ✕</button></div><div class="zoom-scroll" id="zoom-scroll"></div><p class="zoom-help">スマホでは左右に動かして細部を確認できます。</p></dialog>
 <dialog id="archive-dialog" class="archive-dialog" aria-label="証明書アルバム">
   <div class="modal-head"><div><div class="eyebrow">DETECTIVE'S AWARD COLLECTION</div><h2>🏅 証明書アルバム</h2><p>クリアした章の証明書を何度でもダウンロードできるぞ。</p></div><button type="button" class="smallclose" id="archive-close">閉じる ✕</button></div>
@@ -473,16 +473,18 @@ const rankInfo=[
  ['現場の手がかり','仮定・共通・対頂角・錯角'],
  ['調書を完成せよ','証明の穴埋め・根拠の裏取り'],
  ['真実への最後の一手','合同から結論を導く'],
- ['最後の大事件','複雑な図形と実戦的な証明']
+ ['最後の大事件','複雑な図形と実戦的な証明'],
+ ['特別任務・上級事件簿','教科書レベルの総合証明']
 ];
-const chapterIcons=['🔎','🔐','🧩','📋','🧠','🏆'];
+const chapterIcons=['🔎','🔐','🧩','📋','🧠','🏆','🚨'];
 const rankAwards=[
  {title:'対応捜査員',subtitle:'頂点の対応を見破った証',story:'最初の暗号、見事に解読したな。これでキミも立派な証明探偵団の一員だ。'},
  {title:'合同条件鑑定士',subtitle:'3つの合同条件を使いこなした証',story:'3つの秘密の鍵がそろった。犯人ならぬ「合同」は、もう逃げられない！'},
  {title:'証拠分析官',subtitle:'仮定と図形の性質を見抜いた証',story:'現場に残る小さな手がかりを拾い集めた。見た目に惑わされない眼は、名探偵の才能だ。'},
  {title:'論理調書官',subtitle:'筋道の通った証明を構築した証',story:'バラバラの証拠が、一本の筋道につながった。法廷に提出できる調書に近づいてきたぞ。'},
  {title:'結論解明官',subtitle:'合同から結論を導く推理力の証',story:'合同を示して終わりではない。真実への最後の一手まで見通したな。'},
- {title:'証明名探偵',subtitle:'6つの章を突破し、全事件を解決した証',story:'事件簿の最後のページが開いた。答えを当てるだけでなく、「なぜ」を説明できる。それこそが証明探偵団のエースだ。'}
+ {title:'実戦証明官',subtitle:'複雑な図形を読み切った証',story:'入り組んだ図形の中から、使うべき証拠を見抜いた。答案らしい筋道もかなり板についてきたぞ。'},
+ {title:'証明名探偵',subtitle:'7つの章を突破し、全事件を解決した証',story:'特別任務まで見事に突破した。教科書レベルの総合問題にも立ち向かえる、本物の証明探偵だ。'}
 ];
 // 各事件は数学的に正解が1つとなるよう、条件・対応・根拠を明記している。
 const cases=[
@@ -496,11 +498,11 @@ const cases=[
   ['∠ABC = ∠DEF','正解！頂点Bと頂点Eが対応するので、∠ABC と ∠DEF は対応する角だ。',1],
   ['∠ABC = ∠FED','∠FED も ∠DEF と同じ角を表す。ただし今回は A-B-C の文字を D-E-F の順にそろえて書く問題だ。'],
   ['∠ABC ≡ ∠DEF','角の大きさが等しいことは「=」で表そう。三角形の合同には「≡」を使う。']]},
- {rank:0,title:'等号と合同記号の鑑識',diagram:'pair',scenario:'△ABC ≡ △DEF。したがって頂点Aと頂点D、頂点Bと頂点E、頂点Cと頂点Fがそれぞれ対応する。',question:'証拠品の書き方として正しいものはどれだ？',hint:'辺の「長さ」が等しいときと、三角形そのものが合同のときでは記号が違う。',options:[
+ {rank:0,title:'等号と合同記号の鑑識',diagram:'pair',scenario:'△ABC ≡ △DEF。したがって、頂点Aと頂点D、頂点Bと頂点E、頂点Cと頂点Fがそれぞれ対応する。',question:'証拠品の書き方として正しいものはどれだ？',hint:'辺の「長さ」が等しいときと、三角形そのものが合同のときでは記号が違う。',options:[
   ['AB ≡ DE','この教材では、辺の長さが等しいことを AB = DE と書く。'],
   ['∠BAC ≡ ∠EDF','角の大きさが等しいときは「=」を使う。'],
   ['△ABC = △DEF','三角形の合同は「≡」で表す。'],
-  ['BC = EF','正解！頂点Bと頂点E、頂点Cと頂点Fがそれぞれ対応するので BC と EF の長さは等しい。',1]]},
+  ['BC = EF','正解！頂点Bと頂点E、頂点Cと頂点Fが対応するので、BC と EF の長さは等しい。',1]]},
  {rank:1,title:'3辺の証言',diagram:'sss',scenario:'2つの三角形で、対応する3組の辺がすべて等しいことが確認できた。',question:'使用できる合同条件の正式な表現はどれだ？',hint:'条件文には「何組」「何が」「どう等しい」が必要だ。',options:[
   ['3組の角がそれぞれ等しい。','3組の角が等しいだけでは大きさは決まらず、合同とは限らない。'],
   ['3組の辺がそれぞれ等しい。','完璧！3組の対応する辺の長さがそれぞれ等しいことが合同条件になる。',1],
@@ -533,10 +535,10 @@ const cases=[
   ['∠BAD = ∠BCD（同位角だから）','この2角は線分 AD を横切る同位角の組ではない。']]},
  {rank:3,title:'調書の空欄を埋めろ',diagram:'x',scenario:'直線 AB と直線 CD が O で交わる。AO = BO、CO = DO（仮定）、∠AOC = ∠BOD（対頂角）がわかった。\nしたがって △AOC と △BOD は……？',question:'調書の空欄に入る合同条件はどれだ？',hint:'AO と CO の間にある角は ∠AOC。もう一方も対応しているかな？',options:[
   ['3組の辺がそれぞれ等しい。','AC = BD はまだ得られていない。3組の辺はそろっていない。'],
-  ['2組の辺とその間の角がそれぞれ等しい。','正解！AO = BO、CO = DO、∠AOC = ∠BOD がそろっている。',1],
+  ['2組の辺とその間の角がそれぞれ等しい。','正解！AO=BO、CO=DO、間の角∠AOC=∠BOD がそろっている。',1],
   ['1組の辺とその両端の角がそれぞれ等しい。','等しい角は1組しか使っていない。'],
   ['2組の辺と間でない角がそれぞれ等しい。','そのような合同条件は存在しない。']]},
- {rank:3,title:'証拠と根拠を照合せよ',diagram:'textbook:case57',scenario:'2本の線分 AB、CD は O で交わり、AO=BO、CO=DO（仮定）。△AOC と △BOD の合同を示したい。',question:'合同を示すため、最初に使える「等しい式とその根拠」を正確にそろえたものはどれだ？',hint:'頂点Aと頂点B、頂点Oと頂点O、頂点Cと頂点Dがそれぞれ対応する。2組の辺は仮定、O の間の角は対頂角だ。',options:[
+ {rank:3,title:'証拠と根拠を照合せよ',diagram:'textbook:case57',scenario:'2本の線分 AB、CD は O で交わり、AO=BO、CO=DO（仮定）。△AOC と △BOD の合同を示したい。',question:'合同を示すため、最初に使える「等しい式とその根拠」を正確にそろえたものはどれだ？',hint:'頂点Aと頂点B、頂点Oと頂点O、頂点Cと頂点Dが対応する。2組の辺は仮定、O の間の角は対頂角だ。',options:[
   ['AO=BO（仮定）、CO=DO（仮定）、∠AOC=∠BOD（対頂角）','正解。2組の辺と、その間にある対頂角が対応順どおりにそろっている。',1],
   ['AO=BO（仮定）、CO=DO（仮定）、∠AOC=∠BOD（平行線の錯角）','角の等式は正しいが、理由が違う。これらは O を頂点とする対頂角。平行の仮定はない。'],
   ['AO=BO（仮定）、CO=DO（仮定）、∠AOC=∠BOC（対頂角）','∠AOC と ∠BOC は隣り合う角。対頂角ではない。'],
@@ -569,7 +571,7 @@ const cases=[
  {rank:5,title:'平行線の密室',diagram:'crossparallel',scenario:'AB ∥ CD、AB = CD。A・B は上の直線、C・D は下の直線にあり、AD と BC が O で交わる。△ABO と △DCO の合同を証明したい。',question:'平行線から得られる、正しい2組の角の証拠はどれだ？',hint:'AD と BC は、それぞれ平行な AB・CD を横切っている。',options:[
   ['∠BAO = ∠CDO、∠ABO = ∠DCO（錯角だから）','正解！AD と BC をそれぞれ横切る直線と見ると、どちらも平行線の錯角になる。',1],
   ['∠BAO = ∠CDO、∠ABO = ∠DCO（対頂角だから）','角の等式は正しいが、頂点 A と D、B と C が異なるため対頂角ではない。'],
-  ['∠BAO = ∠DCO、∠ABO = ∠CDO（錯角だから）','錯角の対応を取り違えている。直線AD上のAとD、直線BC上のBとCを手がかりに、対応する角を調べよう。'],
+  ['∠BAO = ∠DCO、∠ABO = ∠CDO（錯角だから）','錯角の対応を取り違えている。直線AD上のAとD、直線BC上のBとC の角を調べよう。'],
   ['AB = CD だから、∠BAO = ∠CDO','辺の長さの等しさだけでは、この角の等しさは導けない。平行という条件が必要だ。']]},
  {rank:5,title:'最後の事件：対角線の罠',diagram:'parallelogram',scenario:'四角形 ABCD で、AB ∥ CD、AD ∥ BC。対角線 BD が引かれている。△ABD と △CDB の合同を証明しよう。',question:'証拠と合同条件を正しく組み合わせた調書はどれだ？',hint:'共通な辺 BD の「両端の角」を、平行線の錯角でそろえられないかな？',options:[
   ['∠ABD = ∠CDB、∠ADB = ∠CBD（いずれも錯角）、BD = DB（共通）→ 1組の辺とその両端の角がそれぞれ等しい','大正解！B と D にある2組の錯角と共通な辺 BD から合同を示せる。',1],
@@ -604,10 +606,10 @@ const extraCases = [
  '△ABC ≡ △DEF である。対応関係を保っている別の書き方を探そう。',
  '数学的に同じ合同を正しく表すものは？','頂点Aと頂点D、頂点Bと頂点E、頂点Cと頂点Fの対応を最後まで保つ。',
  ['△BCA ≡ △EFD','△BCA ≡ △FED','△CAB ≡ △EDF','△ACB ≡ △FDE'],
- ['正解。頂点Bと頂点E、頂点Cと頂点F、頂点Aと頂点Dの対応が保たれている。','B は E と対応するので、Fから始めてはいけない。','C の相手は F。Eから始めるのは誤り。','A の相手は D。Fではない。'],0,'対応順'),
+ ['正解。頂点Bと頂点E、頂点Cと頂点F、頂点Aと頂点Dの対応を保っている。','B は E と対応するので、Fから始めてはいけない。','C の相手は F。Eから始めるのは誤り。','A の相手は D。Fではない。'],0,'対応順'),
  // RANK 2：合同条件の正確な意味と含意
  makeCase(1,'記号で表す逮捕状','sss',
- '△ABC ≡ △DEF を、頂点Aと頂点D、頂点Bと頂点E、頂点Cと頂点Fがそれぞれ対応する順番で証明したい。',
+ '△ABC ≡ △DEF を、頂点Aと頂点D、頂点Bと頂点E、頂点Cと頂点Fの対応順で証明したい。',
  'この対応順で3組の辺の等しさを正確に表したものはどれ？','頂点Aと頂点D、頂点Bと頂点E、頂点Cと頂点Fの対応に合わせて3組そろえる。',
  ['AB=DE、BC=EF、CA=FD','AB=DE、BC=DF、CA=EF','AB=DE、BC=EF だけ','∠A=∠D、∠B=∠E、∠C=∠F'],
  ['正解。対応する3組の辺がすべてそろっている。','2組目と3組目の対応が違う。','2組の辺だけでは合同は決められない。','3組の角だけでは大きさが決まらない。'],0,'53(1)'),
@@ -615,7 +617,7 @@ const extraCases = [
  '△ABC ≡ △DEF が成立している。',
  'この仮定から必ず言えることはどれだ？','対応する3つの角を1組ずつ並べてみよう。',
  ['∠A=∠E、∠B=∠D、∠C=∠F','∠A=∠D、∠B=∠E、∠C=∠F','∠A=∠D だが、他の角は不明','∠A=∠B=∠C'],
- ['頂点Aと頂点D、頂点Bと頂点E、頂点Cと頂点Fがそれぞれ対応する。','正解。合同な図形の対応する角はそれぞれ等しい。','合同なら対応する3組の角がいずれも等しい。','三角形内部の3角がすべて等しいとは限らない。'],1,'53(2)'),
+ ['頂点Aと頂点D、頂点Bと頂点E、頂点Cと頂点Fの対応が正しい対応だ。','正解。合同な図形の対応する角はそれぞれ等しい。','合同なら対応する3組の角がいずれも等しい。','三角形内部の3角がすべて等しいとは限らない。'],1,'53(2)'),
  makeCase(1,'角だけの手掛かり','textbook:similar',
  '2つの三角形について、対応する3組の角がそれぞれ等しいとわかった。辺の長さは調べていない。',
  'この情報から合同を結論づけられるか？','同じ形でも大きさが違う三角形を思い浮かべよう。',
@@ -690,15 +692,15 @@ const extraCases = [
  ['AD=FC はまだ示されていない。','正解。AE=FE、ED=EC、∠AED=∠FEC（対頂角）である。','両端の角2組は使っていない。','3角が等しいだけでは合同にならない。'],1,'60'),
  makeCase(3,'合同条件を正しく適用せよ','pair',
  '△ABC と △DEF において、AB=DE、BC=EF、∠ABC=∠DEF が与えられている。△ABC≡△DEF を示したい。',
- 'どの2辺とどの角が対応し、合同条件が成り立つのか？','長さが等しい2組の辺は AB と DE、BC と EF。その間にある頂点 B・E の角を調べよう。',
- ['AB = DE、BC = EF、その間の角は ∠ABC = ∠DEF。2組の辺とその間の角がそれぞれ等しい。','AB = DE、BC = EF、∠BAC = ∠EDF。2組の辺とその間の角がそれぞれ等しい。','AB = DE、BC = EF、∠ABC = ∠DEF。1組の辺とその両端の角がそれぞれ等しい。','AB = DE、BC = DF、∠ABC = ∠DEF。2組の辺とその間の角がそれぞれ等しい。'],
+ 'どの2辺とどの角が対応し、合同条件が成り立つのか？','等しい2組の辺は 辺ABと辺DE、辺BCと辺EF。その間にある頂点 B・E の角を調べよう。',
+ ['AB=DE、BC=EF、その間の角は∠ABC=∠DEF。2組の辺とその間の角がそれぞれ等しい。','AB=DE、BC=EF、∠BAC=∠EDF。2組の辺とその間の角がそれぞれ等しい。','AB=DE、BC=EF、∠ABC=∠DEF。1組の辺とその両端の角がそれぞれ等しい。','AB=DE、BC=DF、∠ABC=∠DEF。2組の辺とその間の角がそれぞれ等しい。'],
  ['正解。等しい2組の辺の間の角も対応しているため、合同条件が成り立つ。','∠BAC は AB と AC の間の角。与えられた辺 AB・BC の間の角ではない。','等しい角は1組だけなので、辺の両端の角が2組そろったとはいえない。','BC に対応するのは EF であって DF ではない。'],0,'52(2)'),
  // RANK 5：合同を使って何を結論づけるか
  makeCase(4,'合同から辺を導く','pair',
  'AB=DE、BC=EF、∠ABC=∠DEF から △ABC≡△DEF が証明できた。',
  'このあと導ける結論は？','合同がわかったので、残りの対応する辺も等しい。',
  ['CA=FD','CA=EF','AB=DF','∠A=∠E'],
- ['正解。頂点Aと頂点D、頂点Cと頂点Fが対応するから CA と FD が対応する。','頂点Cと頂点F、頂点Aと頂点Dが対応する。CA は FD に対応する。','頂点Aと頂点D、頂点Bと頂点Eが対応する。AB は DE に対応する。','A に対応する頂点は D だ。'],0,'52(2)'),
+ ['正解。頂点Aと頂点D、頂点Cと頂点Fが対応するので、CA と FD が対応する。','頂点Cと頂点Fが対応する、頂点Aと頂点Dが対応する。CA は FD に対応する。','頂点Aと頂点Dが対応する、頂点Bと頂点Eが対応する。AB は DE に対応する。','A に対応する頂点は D だ。'],0,'52(2)'),
  makeCase(4,'平行線の対角を照合','textbook:case56',
  'AB ∥ CD、AD と BC は O で交わる。△ABO と △DCO で使う錯角の組を調べる。',
  '2組の角の対応として正しいのは？','AD を横切る直線、BC を横切る直線の順に考えよう。',
@@ -706,9 +708,9 @@ const extraCases = [
  ['正解。両方とも平行線の錯角が等しいことから導ける。','AD に沿う A と D の角、BC に沿う B と C の角を対応させる。','対頂角と錯角の対応が混在し、示したい角の組ではない。','三角形の底角がそれぞれ等しいとは限らない。'],0,'56'),
  makeCase(4,'最後の角を確定せよ','textbook:case58',
  '△EAD ≡ △ECB が証明できた。',
- '合同な図形の対応する角から導ける結論は？','頂点Eと頂点E、頂点Aと頂点C、頂点Dと頂点Bがこの順に対応する。',
+ '合同な図形の対応する角から導ける結論は？','頂点Eと頂点E、頂点Aと頂点C、頂点Dと頂点Bの対応の順番だ。',
  ['∠EAD=∠ECB','∠EAD=∠EBC','∠EDA=∠ECB','∠EAD=∠EBC'],
- ['正解。頂点Eと頂点E、頂点Aと頂点C、頂点Dと頂点Bが順に対応するので ∠EAD と ∠ECB が対応する。','右の頂点は B。A に対応するのは C だ。','左の頂点は D。右の頂点 C とは対応しない。','左は A、右は B を頂点とする角で、対応が違う。'],0,'58 結論'),
+ ['正解。頂点Eと頂点E、頂点Aと頂点C、頂点Dと頂点Bが対応する なので ∠EAD と ∠ECB が対応する。','右の頂点は B。A に対応するのは C だ。','左の頂点は D。右の頂点 C とは対応しない。','左は A、右は B を頂点とする角で、対応が違う。'],0,'58 結論'),
  makeCase(4,'距離が等しいことを示す','textbook:case59',
  '△OPQ ≡ △OPR が証明できた。Q と R はそれぞれ垂線の足である。',
  '証明の最後に書くべき結論は？','頂点Oと頂点O、頂点Pと頂点P、頂点Qと頂点Rがそれぞれ対応する。垂線の長さはどれかな？',
@@ -723,7 +725,7 @@ const extraCases = [
  '△ABC≡△DEF が証明できた。',
  '「対応する3つの角が、それぞれ等しい」を正確に書いたものはどれ？','1つだけでなく、頂点の対応に従って3組とも調べよう。',
  ['∠A=∠D、∠B=∠E、∠C=∠F','∠A=∠D、∠B=∠F、∠C=∠E','∠A=∠B、∠B=∠C、∠C=∠A','∠A=∠E、∠B=∠D、∠C=∠F'],
- ['正解。合同なら対応する3組の角はそれぞれ等しい。','頂点Bと頂点E、頂点Cと頂点Fの対応順を取り違えた。','同じ三角形の角がすべて等しいとは限らない。','頂点Aと頂点D、頂点Bと頂点Eの対応が正しい。'],0,'53(2)'),
+ ['正解。合同なら対応する3組の角はそれぞれ等しい。','頂点Bと頂点E、頂点Cと頂点Fの対応の順を取り違えた。','同じ三角形の角がすべて等しいとは限らない。','頂点Aと頂点Dが対応する、頂点Bと頂点Eが対応する が正しい。'],0,'53(2)'),
  // RANK 6：教科書問題を自力で仕上げる総合事件
  makeCase(5,'【54】PAMとPBM','textbook:case54',
  'M は AB 上。AM=BM、PA=PB が仮定。△PAM≡△PBM を証明せよ。',
@@ -735,7 +737,7 @@ const extraCases = [
  'AB=CB、AD=CD。△ABD≡△CBD を証明せよ。',
  '合同を導く調書として正しいものは？','図形の中央にある BD が大きな証拠だ。',
  ['AB=CB、AD=CD（仮定）、BD=BD（共通）→3組の辺がそれぞれ等しい→△ABD≡△CBD','AB=CB、AD=CD（仮定）、BD=BD（共通）→3組の辺がそれぞれ等しい→△ABD≡△BCD','AB=CB、AD=CD（仮定）、BD=BD（共通）→2組の辺とその間の角がそれぞれ等しい→△ABD≡△CBD','AB=CB、AD=CD（仮定）、BD=BD（対頂角だから）→3組の辺がそれぞれ等しい→△ABD≡△CBD'],
- ['正解。頂点Aと頂点C、頂点Bと頂点B、頂点Dと頂点Dという対応順も正しい。','3組の辺がそろっても、△ABD≡△BCD は対応順が違う。頂点Aと頂点C、頂点Bと頂点B、頂点Dと頂点Dの対応を保とう。','使える証拠は3組の辺。間の角を示していないのに別の合同条件を使うことはできない。','BD=BD は共通な辺だからであり、対頂角は角の等しさに関する性質だ。'],0,'55(2)',
+ ['正解。対応順 頂点Aと頂点C、頂点Bと頂点B、頂点Dと頂点Dがそれぞれ対応する も正しい。','3組の辺がそろっても、△ABD≡△BCD は対応順が違う。頂点Aと頂点C、頂点Bと頂点B、頂点Dと頂点Dの対応を保とう。','使える証拠は3組の辺。間の角を示していないのに別の合同条件を使うことはできない。','BD=BD は共通な辺だからであり、対頂角は角の等しさに関する性質だ。'],0,'55(2)',
  '【証明】△ABD と △CBD において\n仮定より AB=CB ……①\n仮定より AD=CD ……②\n共通な辺より BD=BD ……③\n①、②、③から、3組の辺がそれぞれ等しいから\n△ABD≡△CBD。'),
  makeCase(5,'【56】平行線を使う最終弁論','textbook:case56',
  'AB=CD、AB∥CD。AD と BC の交点は O。AO=DO を証明せよ。',
@@ -753,7 +755,7 @@ const extraCases = [
  'AB=CD、AE=CE。AB と CD が E で交わる。∠EAD=∠ECB を証明せよ。',
  '正しい合同の証明方法はどれだ？','まず EB=ED を引き算で示す。その後、対頂角を探す。',
  ['EB=AB−AE=CD−CE=ED。さらに AE=CE、∠AED=∠CEB（対頂角）→△EAD≡△ECB→∠EAD=∠ECB','EB=ED、AE=CE、∠AED=∠CEB（対頂角）→△EAD≡△EBC→∠EAD=∠ECB','EB=ED、AE=CE、∠AED=∠CEB（同位角）→△EAD≡△ECB→∠EAD=∠ECB','EB=ED、AE=CE、∠AED=∠CEB（対頂角）→3組の辺がそれぞれ等しい→△EAD≡△ECB→∠EAD=∠ECB'],
- ['正解。引き算→2組の辺と間の角→合同→対応する角、という流れだ。','EB=ED、AE=CE、対頂角は正しいが、△EAD≡△EBC では 頂点Aと頂点Bが対応することになり、対応順が違う。','∠AED=∠CEB は対頂角の等しさであって、同位角ではない。平行線も与えられていない。','辺は2組、角はその間の1組。3組目の辺 AD=CB はまだ証明していない。'],0,'58',
+ ['正解。引き算→2組の辺と間の角→合同→対応する角、という流れだ。','EB=ED、AE=CE、対頂角は正しいが、△EAD≡△EBC では 頂点Aと頂点Bが対応する となり、対応順が違う。','∠AED=∠CEB は対頂角の等しさであって、同位角ではない。平行線も与えられていない。','辺は2組、角はその間の1組。3組目の辺 AD=CB はまだ証明していない。'],0,'58',
  '【証明】AB=CD、AE=CE より\nEB=AB−AE=CD−CE=ED。\n△EAD と △ECB において\n仮定より EA=EC ……①\n上で示したことから ED=EB ……②\n対頂角は等しいから ∠AED=∠CEB ……③\n①、②、③から、2組の辺とその間の角がそれぞれ等しいから\n△EAD≡△ECB。\n合同な図形の対応する角はそれぞれ等しいので ∠EAD=∠ECB。'),
  makeCase(5,'【59】二等分線上の点からの距離','textbook:case59',
  'OC は ∠AOB の二等分線。P は OC 上。PQ⊥OA、PR⊥OB のとき、PQ=PR を証明せよ。',
@@ -777,12 +779,85 @@ const extraCases = [
  '試験の答案として、最後の2行に最も適切なのはどれ？','「合同だから平行」ではない。角の等しさから平行を導く。',
  ['合同な図形の対応する角はそれぞれ等しいので ∠ADE=∠FCE。錯角が等しいから AD∥CF、したがって AD∥BF。','合同な図形の対応する辺がそれぞれ等しいので AD=FC。したがって AD∥BF。','△AED≡△FEC だから AD∥BF。','∠ADE=∠FCE は同位角なので AB∥CD。'],
  ['正解。根拠のある2段階の推論で最終結論に到達している。','等しい長さから平行は導けない。','合同だけで異なる位置にある辺の平行は決定できない。','錯角の組を見ているうえに、最終的な平行の組も違う。'],0,'総合卒業試験')
+,
+ makeCase(6,'【上級6】AOC と BOD','textbook:adv6',
+ '平行な2直線 ℓ、m があり、ℓ 上の A と m 上の B を結ぶ線分 AB の中点を O とする。点 O を通る直線が ℓ、m と交わる点をそれぞれ C、D とする。△AOC≡△BOD を示したい。',
+ '試験の答案として最も適切な調書はどれ？','O は AB の中点なので AO=BO。平行線と対頂角も使える。',
+ ['AO=BO（中点）、∠AOC=∠BOD（対頂角）、∠CAO=∠DBO（錯角）より、1組の辺とその両端の角がそれぞれ等しいから △AOC≡△BOD。','AO=BO（中点）、CO=DO（向かい合っているから）より、2組の辺が等しいので △AOC≡△BOD。','AO=BO（中点）、∠CAO=∠DBO（錯角）より、1組の辺と1組の角が等しいから △AOC≡△BOD。','AB∥CD だから、△AOC≡△BOD。'],
+ ['正解。AO=BO、∠AOC=∠BOD、∠CAO=∠DBO がそろい、辺AOとBOの両端の角がそれぞれ等しい。','CO=DO は与えられていない。2組の辺だけでも合同は示せない。','1組の辺と1組の角だけでは合同条件にならない。','平行なのは ℓ と m であり、三角形の合同は自動では決まらない。'],0,'122-6'),
+ makeCase(6,'【上級7】AE と FE','textbook:adv7',
+ '四角形ABCDは AD∥BC の台形。辺DCの中点をEとし、直線AEと辺BCの延長との交点をFとする。AE=FE を示したい。',
+ 'まず着目するべき合同な三角形と、その合同条件として正しいものはどれ？','E は CD の中点。さらに AD∥BC、A・E・F は一直線上にある。',
+ ['△ADE と △FEC において、DE=EC、∠ADE=∠FCE、∠AED=∠FEC より、1組の辺とその両端の角がそれぞれ等しい。','△ABE と △CFE において、AE=FE、∠ABE=∠CFE より合同。','△ADE と △CEF において、AD=CF、DE=EC、∠AED=∠FEC より合同。','△ADC と △FCB において、AD∥BC だから合同。'],
+ ['正解。DE=EC は中点、∠ADE=∠FCE は平行線、∠AED=∠FEC は対頂角として使える。','示したい AE=FE を最初から使ってはいけない。','AD=CF は与えられていない。','平行だけでは三角形の合同は決まらない。'],0,'122-7'),
+ makeCase(6,'【上級8】DAB と EBC','textbook:adv8',
+ '点A、B、Cは一直線上にあり、AB=BC、DA=EB、DA∥EB である。△DAB≡△EBC を示したい。',
+ '合同を示すための3つの証拠として正しいものはどれ？','A・B・C が一直線上にあることと、DA∥EB に注目。',
+ ['AB=BC、DA=EB、∠DAB=∠EBC より、2組の辺とその間の角がそれぞれ等しい。','AB=BC、DA=EB、∠DBA=∠ECB より、2組の辺とその間の角がそれぞれ等しい。','AB=BC、∠DAB=∠EBC より、1組の辺とその両端の角がそれぞれ等しい。','DA∥EB だから △DAB≡△EBC。'],
+ ['正解。AB と BC、DA と EB が対応し、その間の角も平行線から等しい。','その角の等しさは、この条件からは直接いえない。','等しい辺は2組必要で、角も両端に2組必要ではない。','平行だけで合同とはいえない。'],0,'122-8'),
+ makeCase(6,'【上級10】ACB と DBC','textbook:adv10',
+ 'AB=DC、AC=DB である。∠ACB=∠DBC を示したい。',
+ '最も適切な証明の流れはどれ？','結論の角を含む2つの三角形に注目。',
+ ['△ACB と △DBC において、AC=DB、CB=BC、AB=DC より、3組の辺がそれぞれ等しいから △ACB≡△DBC。したがって ∠ACB=∠DBC。','△ABC と △DCB において、AB=DC、AC=DB より合同。したがって ∠ACB=∠DBC。','AB=DC、AC=DB だから、すぐに ∠ACB=∠DBC。','△ACB と △DBC において、AC=DB、∠ABC=∠BCD、AB=DC より合同。'],
+ ['正解。BC は共通な辺なので、3組の辺がそろって合同を示せる。','BC=CB を書かずに合同とはいえない。','2組の辺だけでは結論の角は決まらない。','∠ABC=∠BCD は与えられていない。'],0,'123-10'),
+ makeCase(6,'【上級11】AE と BD','textbook:adv11',
+ '四角形ABCDで、AD<BC、∠ABC=∠BAD である。辺BC上に点Eを、∠BAE=∠ABD となるようにとる。AE=BD を示したい。',
+ '△BAE と △ABD の合同を示すための証拠として正しい組はどれ？','E は BC 上にあるので、B を頂点とする角の向きに注目。',
+ ['BA=BA、∠BAE=∠ABD、∠ABE=∠BAD より、1組の辺とその両端の角がそれぞれ等しい。','AB=BD、AE=BA、∠BAE=∠ABD より、2組の辺とその間の角がそれぞれ等しい。','∠ABC=∠BAD、∠BAE=∠ABD より、2組の角が等しいから合同。','BA=BA、AE=BD より合同。'],
+ ['正解。E は BC 上だから ∠ABE は ∠ABC と同じ向きの角になり、与えられた ∠ABC=∠BAD とつながる。','AB=BD や AE=BA は与えられていない。','2組の角だけでは合同とはいえない。','示したい結論 AE=BD を先に使ってはいけない。'],0,'123-11'),
+ makeCase(6,'【上級12】BCE と BAF','textbook:adv12a',
+ '四角形ABCDで BA=BC。辺BAの延長と辺CDの延長の交点をE、辺ADの延長と辺BCの延長の交点をF とし、さらに AE=CF である。まず △BCE≡△BAF を示したい。',
+ '合同を示すために最も適切な証拠の組はどれ？','BE と BF は、等しいものに等しいものを足して作れる。',
+ ['BC=BA、BE=BF、∠CBE=∠ABF より、2組の辺とその間の角がそれぞれ等しい。','BC=BA、CE=AF、∠BCE=∠BAF より、2組の辺とその間の角がそれぞれ等しい。','BE=BF だけがわかるので、△BCE≡△BAF。','BA=BC、AE=CF より、すぐに △BCE≡△BAF。'],
+ ['正解。BE=BA+AE、BF=BC+CF であり、BA=BC と AE=CF から BE=BF。さらに B の角も対応する。','CE=AF やその角の等しさは、合同を示した後に導く内容だ。','1組の辺だけでは合同は示せない。','与えられた等式だけでは、どの三角形のどの辺・角が対応するかをまだ示せていない。'],0,'123-12(1)')
+
+,
+ makeCase(6,'【上級9】折り返しの証拠','textbook:adv9',
+ '長方形ABCDを折り、頂点Aを頂点Cに、頂点Bを点Eに重ねた。折り目はFGで、Fは辺AD上、Gは辺BC上にある。△CDF と △CEG の合同を証明したい。',
+ '折り返しと長方形の性質だけで、必ず等しいとわかる辺の組は？',
+ '折り返しでAはC、BはEへ移る。長方形では向かい合う辺が等しい。',
+ ['CD=CE（長方形よりAB=CD、折り返しよりAB=CE）',
+  'CD=EG（長方形の向かい合う辺だから）',
+  'DF=EG（折り返しによりFとGが重なるから）',
+  'CF=CE（折り返しでAがEに移るから）'],
+ ['正解。長方形よりCD=AB、折り返しでABはCEに重なるので、CD=CEとなる。',
+  'EGは折り返しでBGと等しい。CDと等しいとはいえない。',
+  'FとGはどちらも折り目上に残り、互いに重なるわけではない。DF=EGは別途証明する必要がある。',
+  'AはC、BはEに移る。CF=AF、CE=ABであり、CF=CEとは限らない。'],0,'122-9',
+ '【証明の手がかり】折り返しによって、頂点AはC、BはEに移り、折り目上のF、Gは動かない。よってAF=CF、BG=EG、AB=CE、∠AFG=∠GFC。長方形だからAB=CD。したがってCD=CE。'),
+ makeCase(6,'【上級9】折り返しの最終調書','textbook:adv9',
+ '上の折り返しで、CD=CE、DF=EG がすでに確かめられた。また、もとの長方形の頂点Dは直角で、折り返し後の頂点Eも直角になる。',
+ '△CDF≡△CEG を導く合同条件と根拠の組はどれ？',
+ 'CDとCE、DFとEG。等しい2辺がはさむ角は、DとEの角だ。',
+ ['CD=CE、DF=EG、∠CDF=∠CEG=90° なので、2組の辺とその間の角がそれぞれ等しい。',
+  'CD=CE、DF=EG、∠CDF=∠CEG=90° なので、1組の辺とその両端の角がそれぞれ等しい。',
+  'CD=CE、DF=EG の2組の辺がそれぞれ等しいので、それだけで合同。',
+  'CD=CE、DF=EG、∠DCF=∠CEG=90° なので、2組の辺とその間の角がそれぞれ等しい。'],
+ ['正解。CDとDFの間の角はD、CEとEGの間の角はE。よって△CDF≡△CEG。',
+  '等しいと示した角は1組だけ。辺の両端の角が2組そろったわけではない。',
+  '2組の辺だけでは合同とはいえない。間の角の等しさを使おう。',
+  '∠DCFはCを頂点とする角で、ここで示した直角はDとEにある。'],0,'122-9',
+ '【模範証明】折り返しでAがC、BがEに移るため、AF=CF、BG=EG、AB=CE、∠AFG=∠GFC。長方形よりAD∥BC、AD=BC、AB=CD。AF∥CGから∠AFG=∠CGF（錯角）。よって∠GFC=∠CGFなので△CFGは二等辺三角形でCF=CG。したがってAF=CG。よってDF=AD−AF=BC−CG=BG=EG。また、CD=AB=CE。長方形より∠CDF=90°、折り返しで直角が保たれるので∠CEG=90°。△CDFと△CEGにおいて、CD=CE、DF=EG、∠CDF=∠CEGだから、2組の辺とその間の角がそれぞれ等しいので△CDF≡△CEG。'),
+ makeCase(6,'【上級12(2)】合同から次の合同へ','textbook:adv12b',
+ '前の(1)で、△BCE≡△BAF が証明できている。A・D・Fは一直線上、C・D・Eも一直線上で、B・A・EとB・C・Fも一直線上にある。さらにAE=CFが仮定。△ADE≡△CDF を示したい。',
+ 'すでにわかっている合同を利用して、正しく書ける2組の角の等しさはどれ？',
+ '頂点の対応はBとB、CとA、EとF。(1)でわかった角と、その隣にある角を使う。',
+ ['∠AED=∠CFD、∠EAD=∠FCD',
+  '∠AED=∠FCD、∠EAD=∠CFD',
+  '∠ADE=∠CDF、∠EAD=∠CFD',
+  '∠AED=∠CFD、∠EAD=∠CDF'],
+ ['正解。(1)の対応角から∠AED=∠CFD。さらに∠BAF=∠BCEの補角を考えると∠EAD=∠FCD。AE=CFと合わせれば1組の辺とその両端の角がそれぞれ等しい。',
+  'Eにある角の相手はFにある角。Aの角の相手はCの角で、対応する頂点が違う。',
+  '∠ADE=∠CDFは対頂角として正しいが、∠EADはAを頂点とする角で、∠CFDはFを頂点とする角。対応しない。',
+  '∠CDFの頂点はD。Aの角に対応するのはCの角でなければならない。'],0,'123-12(2)',
+ '【証明】(1)で△BCE≡△BAF。合同な図形の対応する角はそれぞれ等しいので、∠BEC=∠BFA、∠BCE=∠BAF。E・D・Cは一直線上、F・D・Aも一直線上にあるから∠AED=∠CFD。また、A・B・Eは一直線上、B・C・Fは一直線上にあるので、∠EADと∠BAF、∠FCDと∠BCEはそれぞれ和が180°。したがって∠EAD=∠FCD。△ADEと△CDFにおいて、仮定よりAE=CF、上で示した∠EAD=∠FCD、∠AED=∠CFDより、1組の辺とその両端の角がそれぞれ等しいから△ADE≡△CDF。')
+
 ];
 cases.push(...extraCases);
 cases.sort((a,b)=>a.rank-b.rank);
-// 数学的・教材的な基本検査：4択・正解が1つ、必要なランクは0～5
+// 数学的・教材的な基本検査：4択・正解が1つ、必要なランクは0～6
 cases.forEach((q,i)=>{
- if(q.options.length!==4 || q.options.filter(o=>o[2]===1).length!==1 || q.rank<0 || q.rank>5)
+ if(q.options.length!==4 || q.options.filter(o=>o[2]===1).length!==1 || q.rank<0 || q.rank>6)
   throw new Error('事件データの整合性に問題あり: '+(i+1)+' '+q.title);
 });
 
@@ -920,6 +995,59 @@ function diagramSvgNew(name){
   s+=T('D','E',1)+T('E','C',1)+T('A','E',2)+T('E','F',2);
   s+=A('A',112,20)+A('D',300,19)+A('B',64,233)+A('C',391,234)+A('E',358,124)+A('F',581,232);
   return make('問60：EはCDの中点でAE=FE、直線AEはFを通り、B・C・Fは一直線上');
+
+ case 'adv6':
+  p={A:[150,50],C:[350,50],O:[290,130],D:[230,210],B:[430,210]};
+  s+=line(70,50,560,50)+line(60,210,560,210)+L('A','B')+L('C','D');
+  s+=T('A','O',1)+T('O','B',1);
+  s+=A('A',142,42)+A('C',358,42)+A('O',298,124)+A('D',219,231)+A('B',437,232)+A('ℓ',575,54)+A('m',575,214);
+  return make('上級6：平行な2直線と、その間を結ぶ線分ABの中点Oを通る直線');
+ case 'adv7':
+  p={A:[160,50],D:[300,50],B:[100,210],C:[380,210],E:[340,130],F:[520,210]};
+  s+=L('A','D')+L('D','C')+L('C','B')+L('B','A')+L('A','F')+L('C','F');
+  s+=T('D','E',1)+T('E','C',1);
+  s+=`<path class="arrow" d="M206 43 l12 7 -12 7 M243 203 l12 7 -12 7"/>`;
+  s+=A('A',151,39)+A('D',300,39)+A('B',84,231)+A('C',380,231)+A('E',347,126)+A('F',529,231);
+  return make('上級7：台形ABCD、EはDCの中点、直線AEとBCの延長の交点がF');
+ case 'adv8':
+  p={A:[100,210],B:[300,210],C:[500,210],D:[240,60],E:[440,60]};
+  s+=line(70,210,540,210)+L('D','A')+L('D','B')+L('E','B')+L('E','C');
+  s+=T('A','B',1)+T('B','C',1)+T('D','A',2)+T('E','B',2);
+  s+=`<path class="arrow" d="M156 145 l9 10 4-13 M356 145 l9 10 4-13"/>`;
+  s+=A('A',91,231)+A('B',296,231)+A('C',507,231)+A('D',233,52)+A('E',444,52);
+  return make('上級8：A,B,Cは一直線上にあり、AB=BC、DA=EB、DAはEBに平行');
+ case 'adv10':
+  p={A:[215,55],B:[115,210],C:[505,210],D:[405,55]};
+  s+=L('A','B')+L('B','C')+L('C','D')+L('A','C')+L('D','B');
+  s+=T('A','B',1)+T('D','C',1)+T('A','C',2)+T('D','B',2);
+  s+=A('A',210,45)+A('B',99,231)+A('C',510,231)+A('D',408,45);
+  return make('上級10：AB=DC、AC=DB の四角形で、対角線 AC と DB を引いた図');
+ case 'adv11':
+  p={A:[250,40],B:[120,195],C:[435,215],D:[415,120],E:[310,207]};
+  s+=L('A','B')+L('B','C')+L('C','D')+L('D','A')+L('B','D')+L('A','E');
+  s+=A('A',247,30)+A('B',104,198)+A('C',441,236)+A('D',422,116)+A('E',313,227);
+  return make('上級11：EはBC上にあり、角BAEが角ABDに等しくなるようにとった図');
+ case 'adv12b':
+ case 'adv12a':
+  p={B:[100.00000,230.00000],A:[253.20889,101.44248],E:[322.15289,43.59159],C:[300.00000,230.00000],F:[390.00000,230.00000],D:[309.04200,153.91494]};
+  s+=L('B','E')+L('E','C')+L('A','F')+line(76,230,455,230);
+  s+=T('B','A',1)+T('B','C',1)+T('A','E',2)+T('C','F',2);
+  s+=A('A',230,96)+A('B',81,252)+A('C',282,252)+A('D',321,154)+A('E',331,35)+A('F',405,252);
+  return make('上級12：BA=BC、AE=CF、B-A-E と B-C-F が一直線上、C-D-E と A-D-F が一直線上');
+
+ case 'adv9': {
+  // Model fold: rectangle A(135,50),B(135,140),C(475,140),D(475,50).
+  // FG is the perpendicular bisector of AC. E is the reflection of B in FG.
+  p={A:[135,50],B:[135,140],C:[475,140],D:[475,50],F:[316.91176,50],G:[293.08824,140],E:[430.47292,218.21342]};
+  s+=line(...p.A,...p.F,'helper')+line(...p.A,...p.B,'helper')+line(...p.B,...p.G,'helper');
+  s+=L('F','D')+L('D','C')+L('C','F')+L('C','G')+L('C','E')+L('G','E');
+  s+=line(...p.F,...p.G,'helper');
+  s+=T('C','D',1)+T('C','E',1);
+  s+=`<path class="arc" d="M460 50 v15 h15 M420.9 200.6 l10.7 -6.2 l6.2 10.7"/>`;
+  s+=A('A',121,45)+A('B',122,156)+A('C',486,149)+A('D',477,40)+A('F',314,35)+A('G',283,157)+A('E',443,235);
+  s+=`<text x="545" y="26" class="note" text-anchor="end">折り目 FG</text>`;
+  return make('上級9：長方形ABCDをFGで折り、AがCにBがEに移る図。CDとCEは等しい');
+ }
  default: return diagramSvg('pair');
  }
 }
@@ -1026,16 +1154,17 @@ function answer(i){
  updateStats();save();if(!window.matchMedia('(min-width:900px)').matches)fb.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 function finish(){
- if(!state.awards?.[5])ensureAward(5);
+ const finalRank=rankInfo.length-1;
+ if(!state.awards?.[finalRank])ensureAward(finalRank);
  state.finished=true;state.index=cases.length;save();view('result');
  const perfect=state.miss===0&&state.hints===0;
  $('result-medal').textContent=perfect?'🥇':'🏆';
  $('result-title').textContent=`${state.name}、全事件解決！`;
- $('result-lead').textContent=perfect?'6つの章をノーミス・ノーヒントで突破。団長も認める、証明探偵団の名探偵だ！':'最後の謎まで解き明かした！ よくやった。次は選択肢を見ずに、自分の言葉で証明してみよう。';
+ $('result-lead').textContent=perfect?'7つの章をノーミス・ノーヒントで突破。団長も認める、証明探偵団の名探偵だ！':'最後の謎まで解き明かした！ よくやった。次は選択肢を見ずに、自分の言葉で証明してみよう。';
  $('end-score').textContent=state.score;$('end-miss').textContent=state.miss;$('end-hints').textContent=state.hints;
 }
 function reset(){
- if(!confirm('捜査記録と6枚の認定証を消して、最初からやり直しますか？'))return;
+ if(!confirm('捜査記録と7枚の認定証を消して、最初からやり直しますか？'))return;
  state=blank();save();drawIntro();view('start');
 }
 function enterClub(){
@@ -1054,7 +1183,7 @@ function showAward(rank,checkpoint=false){
  $('award-heading').textContent=`${chapterIcons[rank]} 第${rank+1}章クリア！`;
  $('award-story').textContent=`${state.awards[rank].name}、${rankAwards[rank].story}`;
  const c=$('award-canvas');paintAward(c,rank,state.awards[rank]);
- $('award-next').textContent=checkpoint?(rank===5?'🏆 最終結果へ':'次の章へ進む →'):'証明書アルバムへ戻る';
+ $('award-next').textContent=checkpoint?(rank===rankInfo.length-1?'🏆 最終結果へ':'次の章へ進む →'):'証明書アルバムへ戻る';
  showDialog('award-dialog');
 }
 function closeAward(){hideDialog('award-dialog');displayedAwardRank=null;awardFromCheckpoint=false;}
@@ -1120,7 +1249,7 @@ $('join-name').addEventListener('input',()=>{$('join-error').classList.add('hidd
 $('restart-intro-btn').addEventListener('click',reset);
 $('home-btn').addEventListener('click',reset);
 $('play-again').addEventListener('click',reset);
-$('save-certificate').addEventListener('click',()=>showAward(5,false));
+$('save-certificate').addEventListener('click',()=>showAward(rankInfo.length-1,false));
 $('archive-btn').addEventListener('click',showArchive);
 $('archive-close').addEventListener('click',()=>hideDialog('archive-dialog'));
 $('award-close').addEventListener('click',closeAward);
@@ -1139,6 +1268,12 @@ $('diagram-zoom').addEventListener('click',()=>{
 $('zoom-close').addEventListener('click',()=>{$('zoom-dialog').close();});
 $('zoom-dialog').addEventListener('click',e=>{if(e.target===$('zoom-dialog'))$('zoom-dialog').close();});
 $('notebook-btn').addEventListener('click',()=>{if(typeof $('notebook').showModal==='function')$('notebook').showModal();else $('notebook').setAttribute('open','');});$('close-notebook').addEventListener('click',()=>$('notebook').close());$('notebook').addEventListener('click',e=>{if(e.target===$('notebook'))$('notebook').close();});
+// Migration: previously completed six-chapter saves must still solve the new seventh chapter.
+if(state.finished && Object.keys(state.solved||{}).length < cases.length){
+ state.finished=false;
+ state.index=cases.findIndex((q,i)=>state.solved[i]===undefined);
+ save();
+}
 drawIntro();if(state.finished)finish();
 </script>
 <!-- 教育目的での学内利用を想定した単体HTML。外部ライブラリ・ネットワーク通信なし。 -->
@@ -1195,7 +1330,15 @@ drawIntro();if(state.finished)finish();
    'textbook:case55': {A:[318,25]},
    'textbook:case58': {E:[318,90]},
    'textbook:case59': {B:[335,35],P:[312,108],R:[211,66]},
-   'textbook:case60': {D:[315,26],E:[362,101],F:[590,236]}
+   'textbook:case60': {D:[315,26],E:[362,101],F:[590,236]},
+   'textbook:adv6': {O:[299,116],D:[219,236],B:[438,236]},
+   'textbook:adv7': {E:[347,116],F:[529,236]},
+   'textbook:adv8': {D:[233,47],E:[444,47]},
+   'textbook:adv10': {B:[100,236],C:[512,236]},
+   'textbook:adv11': {E:[313,233]},
+   'textbook:adv12b': {A:[230,95],C:[279,250],D:[323,155],E:[335,39],F:[408,251]},
+   'textbook:adv9': {C:[487,147],E:[440,233],F:[322,35],G:[284,164]},
+   'textbook:adv12a': {A:[230,95],C:[279,250],D:[323,155],E:[335,39],F:[408,251]}
  };
  function polishDiagram(diagram){
    const root=document.querySelector('#diagram svg'); if(!root)return;
@@ -1227,6 +1370,165 @@ drawIntro();if(state.finished)finish();
 })();
 
 </script>
-<script src="stage-picker.js?v=20261112"></script>
+<script>
+/* Stage selection — all chapters always open. Preserves stored cases, answers and certificates. */
+(() => {
+ 'use strict';
+ const byId=id=>document.getElementById(id);
+ const totalSolved=()=>cases.reduce((n,_,i)=>n+Number(state.solved[i]!==undefined),0);
+ const allSolved=()=>totalSolved()===cases.length;
+ const stageIndices=rank=>cases.map((c,i)=>c.rank===rank?i:-1).filter(i=>i>=0);
+ const completed=rank=>stageIndices(rank).every(i=>state.solved[i]!==undefined);
+ const stageCount=rank=>stageIndices(rank).filter(i=>state.solved[i]!==undefined).length;
+ const uncompletedRankAfter=rank=>{
+  for(let x=1;x<=rankInfo.length;x++){
+   const r=(rank+x)%rankInfo.length;
+   if(!completed(r))return r;
+  }
+  return null;
+ };
+ const style=document.createElement('style');
+ style.textContent=`
+ .rank-item.stage-link{display:flex;width:100%;font:inherit;text-align:left;color:inherit;cursor:pointer}
+ .rank-item.stage-link:hover,.rank-item.stage-link:focus-visible{opacity:1;background:#e8be6524;border-color:#e8be6588;outline-offset:2px}
+ .rank-item.stage-link:focus-visible{outline:2px solid #f5d68a}
+ .stage-dialog{border:1px solid #e6c68d;border-radius:22px;background:linear-gradient(155deg,#1a3048,#0e1b2d);color:#f4f0e6;box-shadow:0 25px 85px #000b;width:min(780px,calc(100vw - 20px));max-height:min(91dvh,830px);padding:0;overflow:auto}
+ .stage-dialog::backdrop{background:#07101bcc;backdrop-filter:blur(3px)}
+ .stage-dialog-head{position:sticky;top:0;z-index:1;background:#12243a;border-bottom:1px solid #f5d68a55;padding:15px 18px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+ .stage-dialog-head small{color:#e8be65;font-size:10px;letter-spacing:.15em;font-weight:900}
+ .stage-dialog-head h2{font-family:var(--serif,serif);font-size:clamp(20px,3.5vw,28px);margin:3px 0 0;color:#fff0cc}
+ .stage-dialog-close{flex:none;border:1px solid #8ea3b5;background:#20374d;border-radius:9px;color:#fff;padding:8px 12px;font-size:12px;font-weight:800}
+ .stage-dialog-inner{padding:14px 18px 18px}
+ .stage-dialog-hint{font-size:12px;color:#bbccda;margin:0 0 12px;line-height:1.65}
+ .stage-dialog-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .stage-tile{display:flex;width:100%;align-items:center;text-align:left;gap:11px;min-width:0;background:#233a52;border:1px solid #6b8496;border-radius:13px;color:#f8f5e9;padding:12px;min-height:105px}
+ .stage-tile:hover,.stage-tile:focus-visible{background:#304d61;border-color:#f4d68a}
+ .stage-tile.is-active{background:#4b4435;border-color:#f4cc79}
+ .stage-tile.is-complete{border-color:#6cbaa4}
+ .stage-tile-mark{flex:0 0 42px;height:42px;border-radius:12px;display:grid;place-items:center;background:#e8be6520;border:1px solid #e8be6599;font-size:23px}
+ .stage-tile-body{min-width:0;flex:1;display:flex;flex-direction:column;gap:2px}
+ .stage-tile-body strong{font-size:14px;color:#fff2ce;line-height:1.3}
+ .stage-tile-body small{color:#c5d9e3;font-size:11px;line-height:1.4}
+ .stage-tile-foot{color:#f3da97;font-size:11px;font-weight:900;margin-top:3px}
+ .stage-dialog-bottom{margin:14px 0 0;padding:10px 12px;background:#0b2033;border:1px solid #4c7782;border-radius:10px;font-size:12px;color:#dce3d6;line-height:1.6}
+ .stage-dialog-result{width:100%;margin-top:12px;background:#e8be65;color:#202639;border:0;border-radius:9px;padding:10px;font-weight:900}
+ .stage-nav-btn{border-color:#e8be6580!important;color:#ffdda1!important}
+ @media(max-width:700px){.stage-dialog-grid{grid-template-columns:1fr}.stage-dialog-head{padding:12px}.stage-dialog-inner{padding:11px}.stage-tile{min-height:79px;padding:10px}.topbar{flex-wrap:wrap}.top-actions{flex-wrap:wrap;justify-content:flex-end;gap:5px}.stage-nav-btn{font-size:11px}}
+ @media(max-width:920px){.rail #rank-nav .rank-item.stage-link{min-width:0;justify-content:center;display:flex}.rail #rank-nav .rank-item.stage-link .rank-number{flex:none}.rail-heading{display:block;text-align:center;margin:0 0 5px!important;font-size:10px!important;letter-spacing:.07em!important}}
+ `;
+ document.head.appendChild(style);
+ const stageButton=document.createElement('button');
+ stageButton.id='stage-menu-btn';stageButton.className='smallbtn stage-nav-btn';stageButton.type='button';
+ stageButton.textContent='🗂 ステージ選択';stageButton.title='どのステージからでも挑戦できます';
+ byId('archive-btn').before(stageButton);
+ const dialog=document.createElement('dialog');dialog.id='stage-dialog';dialog.className='stage-dialog';
+ dialog.setAttribute('aria-label','挑戦するステージを選ぶ');
+ dialog.innerHTML='<div class="stage-dialog-head"><div><small>SECRET MISSION MAP · 全7ステージ開放</small><h2>🗂 どの事件から捜査する？</h2></div><button type="button" id="stage-dialog-close" class="stage-dialog-close">閉じる ✕</button></div><div class="stage-dialog-inner"><p class="stage-dialog-hint">どの章からでも挑戦OK。途中まで解いた章は、未解決の事件から再開するぞ。</p><div class="stage-dialog-grid" id="stage-dialog-grid"></div><div class="stage-dialog-bottom">🎖 各章の事件をすべて解決すると、探偵名入りの認定証を発行。全事件を解決すると最終称号を獲得！</div><button type="button" id="stage-dialog-result" class="stage-dialog-result hidden">🏆 全事件クリアの記録を見る</button></div>';
+ document.body.appendChild(dialog);
+ const hide=()=>{if(dialog.open)dialog.close();else dialog.removeAttribute('open');};
+ function renderStageMenu(){
+  const current=state.index<cases.length?cases[state.index]?.rank:null;
+  byId('stage-dialog-grid').innerHTML=rankInfo.map((r,rank)=>{
+   const all=stageIndices(rank).length,done=stageCount(rank),award=!!state.awards?.[rank];
+   const active=current===rank&&!state.finished;
+   const status=award?'🏅 認定証 獲得済み':`${done} / ${all} 事件 解決`;
+   return `<button type="button" class="stage-tile ${active?'is-active':''} ${award?'is-complete':''}" data-stage="${rank}" aria-label="第${rank+1}章 ${esc(r[0])}、${done}問解決、選択して開始"><span class="stage-tile-mark">${chapterIcons[rank]}</span><span class="stage-tile-body"><strong>第${rank+1}章 · ${esc(r[0])}</strong><small>${esc(r[1])}</small><span class="stage-tile-foot">${status} · ${done===all?'最初から見直す':'続きから捜査'}</span></span></button>`;
+  }).join('');
+  byId('stage-dialog-result').classList.toggle('hidden',!allSolved());
+  dialog.querySelectorAll('[data-stage]').forEach(b=>b.addEventListener('click',()=>chooseStage(Number(b.dataset.stage))));
+ }
+ function openStageMenu(){
+  if(!state.name){view('start');byId('join-name').focus();return;}
+  renderStageMenu();
+  if(typeof dialog.showModal==='function'&&!dialog.open)dialog.showModal();else dialog.setAttribute('open','');
+ }
+ function chooseStage(rank){
+  if(!Number.isInteger(rank)||rank<0||rank>=rankInfo.length)return;
+  if(!state.name){hide();view('start');byId('join-name').focus();return;}
+  const indices=stageIndices(rank),next=indices.find(i=>state.solved[i]===undefined);
+  state.index=next??indices[0];state.finished=false;save();hide();render();
+  if(window.matchMedia('(max-width:899px)').matches)window.scrollTo({top:0,behavior:'instant'});
+ }
+ const priorDrawRail=drawRail;
+ drawRail=function(){
+  const rank=state.index<cases.length?cases[state.index].rank:-1;
+  byId('rank-nav').innerHTML=rankInfo.map((r,i)=>{
+   const done=!!state.awards?.[i],active=i===rank&&!state.finished,progress=stageCount(i);
+   return `<button type="button" class="rank-item stage-link ${done?'done':''} ${active?'active':''}" data-stage="${i}" title="第${i+1}章：${esc(r[0])}（${progress}/${stageIndices(i).length}事件解決）" aria-label="第${i+1}章 ${esc(r[0])}に移動" ${active?'aria-current="step"':''}><span class="rank-number">${done?'✓':i+1}</span><span class="rank-desc"><strong>${esc(r[0])}</strong>${esc(r[1])}${done?'<span class="tiny-earned">🎖 認定済</span>':''}</span></button>`;
+  }).join('');
+  byId('rank-nav').querySelectorAll('[data-stage]').forEach(b=>b.addEventListener('click',()=>chooseStage(Number(b.dataset.stage))));
+ };
+ const oldRender=render;
+ render=function(...args){
+  if(state.index>=cases.length){
+   if(allSolved()){finish();return;}
+   state.index=cases.findIndex((c,i)=>state.solved[i]===undefined);
+  }
+  const r=oldRender.apply(this,args);
+  const num=totalSolved();
+  byId('progress-fill').style.width=`${100*num/cases.length}%`;
+  byId('progress-track').setAttribute('aria-valuenow',String(num));
+  return r;
+ };
+ ensureAward=function(rank){
+  state.awards=state.awards||{};
+  if(state.awards[rank]||!completed(rank))return;
+  const indices=stageIndices(rank),miss=indices.reduce((n,i)=>n+(state.eliminated[i]||[]).length,0);
+  const hints=indices.reduce((n,i)=>n+Number(!!state.hintUsed[i]),0);
+  const score=indices.reduce((n,i)=>n+(state.solved[i]===undefined?0:Math.max(40,100-((state.eliminated[i]||[]).length*20)-(state.hintUsed[i]?15:0))),0);
+  state.awards[rank]={name:state.name,date:new Date().toISOString(),totalMiss:state.miss,totalHints:state.hints,miss,hints,score};
+  save();updateMemberUI();
+ };
+ advance=function(){
+  const q=cases[state.index];
+  if(!q)return openStageMenu();
+  if(!isChapterLast(state.index)){state.index++;save();render();return;}
+  if(allSolved()){finish();return;}
+  const next=uncompletedRankAfter(q.rank);
+  if(next===null){openStageMenu();return;}
+  chooseStage(next);
+ };
+ solvedAction=function(){
+  const q=cases[state.index],last=isChapterLast(state.index);
+  if(last&&completed(q.rank))ensureAward(q.rank);
+  const b=document.createElement('button');b.className='goldbtn';
+  b.textContent=last?(completed(q.rank)?`🎖 第${q.rank+1}章の認定証を受け取る`:'次の未解決事件へ →'):'次の事件へ →';
+  b.onclick=last&&completed(q.rank)?()=>showAward(q.rank,true):advance;
+  byId('feedback-actions').appendChild(b);
+ };
+ finish=function(){
+  if(!allSolved()){state.finished=false;openStageMenu();return;}
+  for(let rank=0;rank<rankInfo.length;rank++)ensureAward(rank);
+  state.finished=true;state.index=cases.length;save();view('result');
+  const perfect=state.miss===0&&state.hints===0;
+  byId('result-medal').textContent=perfect?'🥇':'🏆';
+  byId('result-title').textContent=`${state.name}、全事件解決！`;
+  byId('result-lead').textContent=perfect?'7つの章をノーミス・ノーヒントで突破。団長も認める、証明探偵団の名探偵だ！':'最後の謎まで解き明かした！ よくやった。次は選択肢を見ずに、自分の言葉で証明してみよう。';
+  byId('end-score').textContent=state.score;byId('end-miss').textContent=state.miss;byId('end-hints').textContent=state.hints;
+ };
+ returnFromAward=function(){
+  const was=awardFromCheckpoint;
+  closeAward();
+  if(was)advance();else showArchive();
+ };
+ const oldDrawIntro=drawIntro;
+ drawIntro=function(...args){const v=oldDrawIntro.apply(this,args);if(state.name&&state.index<cases.length&&!state.finished){byId('start-btn').textContent=`🔎 捜査を再開（${totalSolved()}/${cases.length}事件解決）`;}return v;};
+ stageButton.addEventListener('click',openStageMenu);
+ byId('stage-dialog-close').addEventListener('click',hide);
+ byId('stage-dialog-result').addEventListener('click',()=>{hide();finish();});
+ dialog.addEventListener('click',e=>{if(e.target===dialog)hide();});
+ // Make switching stages discoverable immediately on the first visit.
+ const heading=document.querySelector('.rail-heading');
+ if(heading)heading.textContent='🗺 章を選ぶ（全ステージ開放）';
+ const note=document.querySelector('.rail-tip');
+ if(note)note.textContent='章番号をタップして自由に切り替えられる。認定証は各章の全事件を解決すると発行！';
+ if(!state.name)stageButton.classList.add('hidden');
+ const oldUpdateMember=updateMemberUI;
+ updateMemberUI=function(...args){const v=oldUpdateMember.apply(this,args);stageButton.classList.toggle('hidden',!state.name);return v;};
+ if(state.name&&state.finished&&allSolved())finish();
+ if(state.name&&!state.finished&&!byId('game-screen').classList.contains('hidden'))render();
+})();
+
+</script>
 </body>
 </html>

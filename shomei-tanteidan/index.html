@@ -404,6 +404,35 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;ba
 }
 
 </style>
+<style id="layout-2026-11-fix">
+/* PC: main must flex with its wrapper; otherwise the entire game stops above the viewport bottom. */
+@media (min-width:900px){
+  .shell:has(#game-screen:not(.hidden)) > main{
+    display:flex;flex:1 1 0%;min-height:0;min-width:0;flex-direction:column;overflow:hidden;
+  }
+  #game-screen.game-layout{flex:1 1 0%;height:100%;min-height:0;max-height:100%;width:100%;}
+  #game-screen .work{height:100%;}
+  #game-screen .work-grid{height:100%;min-height:0;}
+  #game-screen .rail{height:100%;}
+  #game-screen .rank-item{opacity:1;background:rgba(18,43,62,.85);border-color:rgba(120,160,181,.26)}
+  #game-screen .rank-item:not(.active):not(.done){opacity:.90}
+  #game-screen .rank-item.active{background:rgba(214,166,79,.15);border-color:rgba(244,207,138,.8)}
+  #game-screen .rank-desc strong{color:#f5f0df;}
+  #game-screen .option .opttext{font-size:clamp(13px,1.03vw,17px);line-height:1.44}
+  #game-screen .scenario{font-size:clamp(12px,.94vw,15px);line-height:1.55}
+  #game-screen .paper-heading h2{font-size:clamp(20px,1.65vw,25px)}
+  #game-screen .diagram-frame svg text.lab{font-size:21px;stroke:#fffdfa;stroke-width:3px;stroke-linejoin:round;paint-order:stroke fill}
+  #game-screen .diagram-frame svg text.note{font-size:14px}
+}
+@media (min-width:900px) and (max-height:700px){
+  #game-screen .option .opttext{font-size:clamp(12px,1vw,15px);line-height:1.32}
+  #game-screen .diagram-frame svg text.lab{font-size:19px}
+}
+/* Clearer point labels on phones, too. */
+@media (max-width:899px){
+  #game-screen .diagram-frame svg text.lab{stroke:#fffdfa;stroke-width:3px;stroke-linejoin:round;paint-order:stroke fill}
+}
+</style>
 </head>
 <body>
 <div class="shell">
@@ -1529,6 +1558,48 @@ drawIntro();if(state.finished)finish();
  if(state.name&&!state.finished&&!byId('game-screen').classList.contains('hidden'))render();
 })();
 
+</script>
+<script id="geometry-letter-alignment-2026-11">
+(()=>{
+  'use strict';
+  const container=document.getElementById('diagram');
+  if(!container)return;
+  const svgNS='http://www.w3.org/2000/svg';
+  // Labels must stay close to the exact endpoints/intersections drawn in the diagram.
+  const special={
+    'textbook:case59':{
+      positions:{O:[77,231],A:[555,229],B:[330,22],C:[472,68],P:[318,126],Q:[300,241],R:[224,70]},
+      points:[[100,221],[545,221],[320,1],[460,71.88],[305,136.08],[305,221],[244.96,76.04]]
+    },
+    'textbook:case57':{positions:{O:[316,114]},points:[[309.5,127.5]]},
+    'textbook:case58':{positions:{E:[323,112]},points:[[310,116]]},
+    'textbook:case60':{positions:{E:[366,115]},points:[[350,120.5]]},
+    'textbook:case56':{positions:{O:[313,120]},points:[[304,128]]}
+  };
+  function enhance(){
+    const fig=container.querySelector('svg');
+    if(!fig||typeof state==='undefined'||typeof cases==='undefined'||!cases[state.index])return;
+    const d=cases[state.index].diagram;
+    const fix=special[d];
+    if(!fix)return;
+    const labels=[...fig.querySelectorAll('text.lab')];
+    for(const t of labels){
+      const pos=fix.positions[t.textContent.trim()];
+      if(pos){t.setAttribute('x',pos[0]);t.setAttribute('y',pos[1]);}
+    }
+    if(fig.dataset.pointMarkers==='1')return;
+    const before=fig.querySelector('text.lab');
+    for(const [x,y] of fix.points){
+      const c=document.createElementNS(svgNS,'circle');
+      for(const [k,v] of Object.entries({cx:x,cy:y,r:3.6,fill:'#fffdf8',stroke:'#28516e','stroke-width':2}))c.setAttribute(k,String(v));
+      c.setAttribute('aria-hidden','true');
+      if(before)fig.insertBefore(c,before);else fig.appendChild(c);
+    }
+    fig.dataset.pointMarkers='1';
+  }
+  new MutationObserver(enhance).observe(container,{childList:true});
+  enhance();
+})();
 </script>
 </body>
 </html>

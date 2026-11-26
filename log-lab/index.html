@@ -488,6 +488,32 @@ sub:has(.frac){vertical-align:-.8em}
  #f2g .workleft>.quizformula{min-height:0;padding:14px 8px;font-size:clamp(24px,4.2vw,36px)}
 }
 
+
+/* Readable graphs and fraction delimiters in every math mode. */
+.fraction-parens{display:inline-flex;align-items:center;vertical-align:middle;white-space:nowrap;line-height:1}
+.fraction-parens>.frac{font-size:.88em}
+.fraction-delimiter{font-size:1.85em;font-weight:400;line-height:1;display:inline-block}
+.powbase .fraction-parens{vertical-align:middle}
+.point-caption{display:flex;align-items:center;justify-content:center;gap:5px;color:#344f79;font-size:13px;line-height:1.4;min-width:0}
+.point-caption .inline-equation{font-family:"KaTeX_Main","Latin Modern Math","Cambria Math",serif;font-weight:700}
+.point-caption .loglab-tex{padding-block:.02em}
+.point-dot{width:7px;height:7px;background:#416fe4;border-radius:50%;flex:none}
+.graphchoice:disabled{opacity:1}
+.graphchoice:disabled:not(.good):not(.bad){background:#f6f8fc}
+.graphchoice.good .point-caption{color:#16745b}
+@media(min-width:900px) and (min-height:640px){
+ #f2g .workspace{grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr)}
+ #f2g .workright .graphchoice{grid-template-rows:auto minmax(0,1fr) auto;gap:2px;padding:3px 5px}
+ #f2g .workright .graphchoice .point-caption{font-size:clamp(11px,1.65vh,15px);line-height:1.2;white-space:nowrap}
+ #f2g .workleft>.quizformula{font-size:clamp(24px,min(4.5vh,3vw),44px)}
+ #g2f .workleft>.point-caption{flex:none;margin:0}
+ #g2f .workleft>.quizgraph{flex:1 1 0;min-height:0}
+}
+@media(max-width:899px),(max-height:639px){
+ #f2g .graphchoice .point-caption{font-size:12px}
+ #f2g .graphchoice svg{max-width:200px}
+}
+
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
@@ -513,7 +539,7 @@ sub:has(.frac){vertical-align:-.8em}
 <div class="theory"><h3 data-en="⑧ Chain rule via change of base" data-ja="⑧ 底の変換をつなげる">⑧ 底の変換をつなげる</h3><div class="fml">log<sub>a</sub>b × log<sub>b</sub>c = log<sub>a</sub>c</div><p data-en="The middle bases cancel. Useful for multi-step questions." data-ja="間にある底がつながる。複合問題で便利。">間にある底がつながる。複合問題で便利。</p><div class="example">log<sub>2</sub>3 × log<sub>3</sub>8 = log<sub>2</sub>8 = 3</div></div>
 </div><div class="warn"><strong data-en="Conditions:" data-ja="条件：">条件：</strong><span data-en="A logarithmic base must be positive and different from 1; its argument must be positive. The same conditions apply to bases a and c and arguments M and N above. In particular, log" data-ja="対数の底は 0 より大きく 1 ではない数、真数は正の数。上の公式では a,c などの底は同様の条件を満たし、M,N などの真数は正です。特に、log">対数の底は 0 より大きく 1 ではない数、真数は正の数。上の公式では a,c などの底は同様の条件を満たし、M,N などの真数は正です。特に、log</span><sub>a</sub><span data-en="(M+N) cannot be rewritten as log" data-ja="(M+N) は log">(M+N) は log</span><sub>a</sub>M + log<sub>a</sub><span data-en="N." data-ja="N に変形できません。">N に変形できません。</span></div></div></div></section>
 <section class="page" id="graph"><div class="panel"><div class="ptop"><div><h2 data-en="GRAPH EXPLORER" data-ja="グラフ実験室">グラフ実験室</h2><p data-en="Change base a and exponent t to explore paired points on exponential and logarithmic curves." data-ja="底 a と指数 t を動かして、指数関数・対数関数の対応点を観察しよう。">底 a と指数 t を動かして、指数関数・対数関数の対応点を観察しよう。</p></div><div class="pill">EXPLORER</div></div><div class="graphgrid"><div><div class="graphsurface"><svg aria-label="指数関数と対数関数のグラフ" id="explorerSvg" role="img" viewbox="0 0 520 520"></svg></div><div class="legend"><span><i style="background:#416fe4"></i><span data-en="Exponential" data-ja="指数関数">指数関数</span></span><span><i style="background:#ed765e"></i><span data-en="Logarithmic" data-ja="対数関数">対数関数</span></span><span><i style="background:#7e91b3"></i>y = x</span></div></div><div class="graphctrl"><div class="ctrlbox"><h3 data-en="Change the base" data-ja="底を変える">底を変える</h3><div class="ctrlrow"><span id="graphbase-label" data-en="Base a" data-ja="底 a">底 a</span><select id="graphbase" hidden aria-hidden="true" tabindex="-1"><option value="0.3333333333333333">3⁻¹</option><option value="0.5">2⁻¹</option><option selected value="2">2</option><option value="3">3</option><option value="4">4</option></select></div><div class="base-picks" role="group" aria-labelledby="graphbase-label"><button type="button" data-base="0.3333333333333333" aria-pressed="false"><span class="frac"><span>1</span><span>3</span></span></button><button type="button" data-base="0.5" aria-pressed="false"><span class="frac"><span>1</span><span>2</span></span></button><button type="button" data-base="2" aria-pressed="true">2</button><button type="button" data-base="3" aria-pressed="false">3</button><button type="button" data-base="4" aria-pressed="false">4</button></div><div data-en="The behavior changes when the base crosses 1." data-ja="1を境に、増加・減少が変わる" style="font-size:11px;color:#7b8dab;margin-top:7px">1を境に、増加・減少が変わる</div></div><div class="ctrlbox"><h3 data-en="Change the exponent" data-ja="指数を動かす">指数を動かす</h3><div class="ctrlrow"><label data-en="Value of t" data-ja="t の値" for="grapht">t の値</label><span id="tread" style="color:#315ccc">1</span></div><input id="grapht" max="1.5" min="-1.5" step="0.5" type="range" value="1"/></div><div class="ctrlbox wide"><h3 data-en="Show curves" data-ja="表示する曲線">表示する曲線</h3><div class="seg" id="graphviews"><button class="on" data-en="Both" data-ja="両方" data-view="both">両方</button><button data-en="Exponential only" data-ja="指数だけ" data-view="exp">指数だけ</button><button data-en="Logarithmic only" data-ja="対数だけ" data-view="log">対数だけ</button></div><div class="checkrow"><label><input id="mirror" type="checkbox"/> y = x</label><label><input checked="" id="pointson" type="checkbox"/><span data-en="Matching points P / Q" data-ja="対応点 P・Q">対応点 P・Q</span></label></div></div><div class="graphdesc wide" id="graphdesc"></div></div></div></div></section>
-<section class="page" id="g2f"><div class="panel"><div class="ptop"><div><h2 data-en="GUESS THE FORMULA FROM THE GRAPH" data-ja="グラフから式を推測">グラフから式を推測</h2><p data-en="Use increasing/decreasing behavior, asymptotes, and points to choose an equation." data-ja="増加・減少、漸近線、通る点から、式を選ぼう。">増加・減少、漸近線、通る点から、式を選ぼう。</p></div><div class="pill">GRAPH → EQ</div></div><div class="graphquiz"><div class="barline"><label class="selectlabel"><span data-en="Difficulty" data-ja="難易度">難易度</span><select id="g2fdiff"><option data-en="Basics (bases / functions)" data-ja="基本（底・関数）" value="basic">基本（底・関数）</option><option data-en="Advanced (translations)" data-ja="発展（平行移動あり）" value="shift">発展（平行移動あり）</option></select></label><strong id="g2fscore">正解 0</strong></div><div class="workspace"><div class="workleft"><div class="graphsurface quizgraph"><svg aria-label="式を当てるグラフ" id="g2fsvg" viewbox="0 0 520 380"></svg></div><div class="explain more" hidden="" id="g2fexp"></div></div><div class="workright"><p class="graphquestionlabel" data-en="Which equation matches the curve?" data-ja="この曲線を表す式はどれ？">この曲線を表す式はどれ？</p><div class="optionFormula" id="g2fopts"></div><div class="message" id="g2fmsg">グラフの特徴をよく見よう。</div><div class="actions"><button class="primary" data-en="Next graph →" data-ja="次のグラフ →" hidden="" id="g2fnext">次のグラフ →</button><button data-en="Start over" data-ja="最初から" id="g2freset">最初から</button></div></div></div></div></div></section>
+<section class="page" id="g2f"><div class="panel"><div class="ptop"><div><h2 data-en="GUESS THE FORMULA FROM THE GRAPH" data-ja="グラフから式を推測">グラフから式を推測</h2><p data-en="Use increasing/decreasing behavior, asymptotes, and points to choose an equation." data-ja="増加・減少、漸近線、通る点から、式を選ぼう。">増加・減少、漸近線、通る点から、式を選ぼう。</p></div><div class="pill">GRAPH → EQ</div></div><div class="graphquiz"><div class="barline"><label class="selectlabel"><span data-en="Difficulty" data-ja="難易度">難易度</span><select id="g2fdiff"><option data-en="Basics (bases / functions)" data-ja="基本（底・関数）" value="basic">基本（底・関数）</option><option data-en="Advanced (translations)" data-ja="発展（平行移動あり）" value="shift">発展（平行移動あり）</option></select></label><strong id="g2fscore">正解 0</strong></div><div class="workspace"><div class="workleft"><div class="graphsurface quizgraph"><svg aria-label="式を当てるグラフ" id="g2fsvg" viewbox="0 0 520 380"></svg></div><div class="point-caption" id="g2fpoint"></div><div class="explain more" hidden="" id="g2fexp"></div></div><div class="workright"><p class="graphquestionlabel" data-en="Which equation matches the curve?" data-ja="この曲線を表す式はどれ？">この曲線を表す式はどれ？</p><div class="optionFormula" id="g2fopts"></div><div class="message" id="g2fmsg">グラフの特徴をよく見よう。</div><div class="actions"><button class="primary" data-en="Next graph →" data-ja="次のグラフ →" hidden="" id="g2fnext">次のグラフ →</button><button data-en="Start over" data-ja="最初から" id="g2freset">最初から</button></div></div></div></div></div></section>
 <section class="page" id="f2g"><div class="panel"><div class="ptop"><div><h2 data-en="GUESS THE GRAPH FROM THE FORMULA" data-ja="式からグラフを推測">式からグラフを推測</h2><p data-en="Choose the matching graph from four options." data-ja="4枚のグラフから、式に合うものを選ぼう。">4枚のグラフから、式に合うものを選ぼう。</p></div><div class="pill">EQ → GRAPH</div></div><div class="graphquiz"><div class="barline"><label class="selectlabel"><span data-en="Difficulty" data-ja="難易度">難易度</span><select id="f2gdiff"><option data-en="Basics (bases / functions)" data-ja="基本（底・関数）" value="basic">基本（底・関数）</option><option data-en="Advanced (translations)" data-ja="発展（平行移動あり）" value="shift">発展（平行移動あり）</option></select></label><strong id="f2gscore">正解 0</strong></div><div class="workspace"><div class="workleft"><div class="quizformula" id="f2geq"></div><p class="graphquestionlabel" data-en="Which graph matches this equation? All graphs use the same axes." data-ja="この式のグラフはどれ？ すべて同じ座標範囲です。">この式のグラフはどれ？ すべて同じ座標範囲です。</p><div class="explain more" hidden="" id="f2gexp"></div></div><div class="workright"><div class="plotoptions" id="f2gopts"></div><div class="message" id="f2gmsg">4つから選ぼう。</div><div class="actions"><button class="primary" data-en="Next question →" data-ja="次の問題 →" hidden="" id="f2gnext">次の問題 →</button><button data-en="Start over" data-ja="最初から" id="f2greset">最初から</button></div></div></div></div></div></section>
 <footer class="appfooter" data-en="LOG LAB v6 · Standalone learning app · Works offline · Your 60-second record is stored on this device (when supported)." data-ja="LOG LAB v6 · 学習用HTML・ネット接続不要・60秒の自己ベストはこの端末のブラウザに保存されます（対応時）">LOG LAB v6 · 学習用HTML・ネット接続不要・60秒の自己ベストはこの端末のブラウザに保存されます（対応時）</footer>
 </main>
@@ -777,19 +803,72 @@ $('#start4').onclick=startSpeed;$('#reset4').onclick=resetSpeed;resetSpeed();
 const NS='http://www.w3.org/2000/svg';
 function shape(svg,n,attrs,content){let e=document.createElementNS(NS,n);for(let k in attrs)e.setAttribute(k,attrs[k]);if(content!==undefined)e.textContent=content;svg.appendChild(e);return e}
 function curveValue(spec,x){const z=x-spec.h;if(spec.kind==='exp')return spec.a**z+spec.k;if(z<=0)return NaN;return Math.log(z)/Math.log(spec.a)+spec.k}
-function curveLabel(spec){let z=spec.h===0?'x':`(x ${spec.h>0?'−':'+'} ${Math.abs(spec.h)})`,base=Math.abs(spec.a-1/3)<.001?frac([1,3]):spec.a===.5?frac([1,2]):String(spec.a);return spec.kind==='exp'?`y = ${spec.a<1?'('+base+')':base}<sup>${z}</sup>${spec.k>0?' + '+spec.k:spec.k<0?' − '+(-spec.k):''}`:`y = log<sub>${base}</sub>${z}${spec.k>0?' + '+spec.k:spec.k<0?' − '+(-spec.k):''}`}
+function curveLabel(spec){let z=spec.h===0?'x':`x ${spec.h>0?'−':'+'} ${Math.abs(spec.h)}`,base=Math.abs(spec.a-1/3)<.001?frac([1,3]):spec.a===.5?frac([1,2]):String(spec.a);return spec.kind==='exp'?`y = ${spec.a<1?'('+base+')':base}<sup>${z}</sup>${spec.k>0?' + '+spec.k:spec.k<0?' − '+(-spec.k):''}`:`y = log<sub>${base}</sub>${spec.h===0?z:'('+z+')'}${spec.k>0?' + '+spec.k:spec.k<0?' − '+(-spec.k):''}`}
+function visibleCurve(sp,low,high,steps=320){
+ // Sample exponential curves in x, logarithmic curves in y.
+ // The inverse formula determines the exact visible interval, including
+ // intersections with the plot boundary and the steep near-asymptote region.
+ const exponential=sp.kind==='exp', offset=exponential?sp.h:sp.k, other=exponential?sp.k:sp.h;
+ const top=high-other,bottom=low-other;
+ if(top<=0)return [];
+ const tTop=offset+Math.log(top)/Math.log(sp.a);
+ let t0=low,t1=high;
+ if(sp.a>1){t1=Math.min(t1,tTop);if(bottom>0)t0=Math.max(t0,offset+Math.log(bottom)/Math.log(sp.a))}
+ else{t0=Math.max(t0,tTop);if(bottom>0)t1=Math.min(t1,offset+Math.log(bottom)/Math.log(sp.a))}
+ if(t1<t0)return [];
+ const pts=[];
+ for(let i=0;i<=steps;i++){
+  const t=t0+(t1-t0)*i/steps, v=other+sp.a**(t-offset);
+  pts.push(exponential?[t,v]:[v,t]);
+ }
+ return pts;
+}
+function curvePoint(sp){
+ const a=sp.a===.5?R(1,2):Math.abs(sp.a-1/3)<.001?R(1,3):R(sp.a);
+ return sp.kind==='exp'?[R(sp.h+1),addR(a,R(sp.k))]:[addR(a,R(sp.h)),R(sp.k+1)];
+}
+function pointCaption(sp){const [x,y]=curvePoint(sp);return '<span class="point-dot" aria-hidden="true"></span><span class="inline-equation">P('+frac(x)+', '+frac(y)+')</span>'}
 function drawAxes(svg,specs,config={}){
 const W=config.width||520,H=config.height||520,low=config.low??-3,high=config.high??9,margin=config.margin??50;
 svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.innerHTML='';const P=Math.min(W,H)-margin*2,ox=(W-P)/2,oy=(H-P)/2;const X=x=>ox+(x-low)/(high-low)*P,Y=y=>H-oy-(y-low)/(high-low)*P;
 shape(svg,'rect',{x:0,y:0,width:W,height:H,fill:'#fbfcff'});
 const defs=shape(svg,'defs',{}),clip=shape(defs,'clipPath',{id:svg.id+'_clip'});shape(clip,'rect',{x:ox,y:oy,width:P,height:P});
-const unit=config.tiny?2:1;
-for(let n=Math.ceil(low/unit)*unit;n<=high;n+=unit){const c=n===0?'#91a5c4':'#e3eaf5',sw=n===0?1.9:.9;shape(svg,'line',{x1:X(n),y1:oy,x2:X(n),y2:oy+P,stroke:c,'stroke-width':sw});shape(svg,'line',{x1:ox,y1:Y(n),x2:ox+P,y2:Y(n),stroke:c,'stroke-width':sw});if(n!==0){shape(svg,'text',{x:X(n),y:Y(0)+(config.tiny?12:15),'font-size':config.tiny?10:10,fill:'#637997','text-anchor':'middle'},String(n));shape(svg,'text',{x:X(0)-(config.tiny?6:9),y:Y(n)+3,'font-size':10,fill:'#637997','text-anchor':'end'},String(n))}}
-{shape(svg,'text',{x:X(0)-9,y:Y(0)+12,'font-size':10,fill:'#637997'},'0');shape(svg,'text',{x:ox+P+6,y:Y(0)-5,'font-size':config.tiny?11:13,fill:'#637997'},'x');shape(svg,'text',{x:X(0)+6,y:oy-5,'font-size':config.tiny?11:13,fill:'#637997'},'y')}
+const tiny=!!config.tiny,tick=tiny?12:12,ink='#405675',grid='#dce5f2',axis='#526985';
+const labelAttrs={'font-size':tick,fill:ink,'font-family':'system-ui, sans-serif','font-weight':600};
+for(let n=Math.ceil(low);n<=high;n++){
+ if(n===0)continue;
+ shape(svg,'line',{x1:X(n),y1:oy,x2:X(n),y2:oy+P,stroke:grid,'stroke-width':.85});
+ shape(svg,'line',{x1:ox,y1:Y(n),x2:ox+P,y2:Y(n),stroke:grid,'stroke-width':.85});
+ if(!tiny||n===1||n===-1||n%2===0){
+  shape(svg,'text',{...labelAttrs,x:X(n),y:Y(0)+(tiny?15:17),'text-anchor':'middle'},String(n));
+  shape(svg,'text',{...labelAttrs,x:X(0)-(tiny?6:9),y:Y(n)+4,'text-anchor':'end'},String(n));
+ }
+}
+shape(svg,'line',{x1:ox,y1:Y(0),x2:ox+P,y2:Y(0),stroke:axis,'stroke-width':tiny?1.6:2});
+shape(svg,'line',{x1:X(0),y1:oy,x2:X(0),y2:oy+P,stroke:axis,'stroke-width':tiny?1.6:2});
+shape(svg,'path',{d:'M '+(ox+P-5)+' '+(Y(0)-3)+' L '+(ox+P)+' '+Y(0)+' L '+(ox+P-5)+' '+(Y(0)+3),stroke:axis,fill:'none','stroke-width':1.5});
+shape(svg,'path',{d:'M '+(X(0)-3)+' '+(oy+5)+' L '+X(0)+' '+oy+' L '+(X(0)+3)+' '+(oy+5),stroke:axis,fill:'none','stroke-width':1.5});
+for(let n=Math.ceil(low);n<=high;n++){
+ if(n===0)continue;
+ shape(svg,'line',{x1:X(n),y1:Y(0)-2.5,x2:X(n),y2:Y(0)+2.5,stroke:axis,'stroke-width':1});
+ shape(svg,'line',{x1:X(0)-2.5,y1:Y(n),x2:X(0)+2.5,y2:Y(n),stroke:axis,'stroke-width':1});
+}
+shape(svg,'text',{...labelAttrs,x:X(0)-7,y:Y(0)+14,'text-anchor':'end'},'0');
+shape(svg,'text',{...labelAttrs,x:ox+P+5,y:Y(0)-5,'font-style':'italic','font-size':tiny?13:15},'x');
+shape(svg,'text',{...labelAttrs,x:X(0)+6,y:oy-5,'font-style':'italic','font-size':tiny?13:15},'y');
 if(config.mirror){shape(svg,'line',{x1:X(low),y1:Y(low),x2:X(high),y2:Y(high),stroke:'#8392af','stroke-width':1.8,'stroke-dasharray':'7 6'});if(!config.tiny)shape(svg,'text',{x:X(high)-40,y:Y(high)+15,'font-size':11,fill:'#8a94a8'},'y=x')}
 const colors=['#416fe4','#ed765e','#239d83','#bc72d9'];
-for(let s=0;s<specs.length;s++){const sp=specs[s],color=sp.color||colors[s];let path='',pen=false;for(let i=0;i<=660;i++){let x=low+(high-low)*i/660,y=curveValue(sp,x);if(!Number.isFinite(y)||y<low-1||y>high+1){pen=false;continue}path+=(pen?'L':'M')+X(x).toFixed(2)+' '+Y(y).toFixed(2);pen=true}shape(svg,'path',{d:path,fill:'none',stroke:color,'stroke-width':config.tiny?3.1:3.5,'stroke-linejoin':'round','clip-path':`url(#${svg.id}_clip)`});
-if(config.mark){const x=sp.kind==='exp'?sp.h+1:sp.h+sp.a,y=curveValue(sp,x);if(x>=low&&x<=high&&y>=low&&y<=high){shape(svg,'circle',{cx:X(x),cy:Y(y),r:config.tiny?4:5.5,fill:'white',stroke:color,'stroke-width':2.6})}}
+for(let s=0;s<specs.length;s++){
+ const sp=specs[s],color=sp.color||colors[s];
+ const pts=visibleCurve(sp,low,high);
+ const path=pts.map(([x,y],i)=>(i?'L':'M')+X(x).toFixed(3)+' '+Y(y).toFixed(3)).join(' ');
+ if(path)shape(svg,'path',{d:path,fill:'none',stroke:color,'stroke-width':tiny?2.6:3,'stroke-linecap':'round','stroke-linejoin':'round','clip-path':'url(#'+svg.id+'_clip)'});
+ if(config.mark){
+  const [xr,yr]=curvePoint(sp),x=number(xr),y=number(yr);
+  if(x>=low&&x<=high&&y>=low&&y<=high){
+   shape(svg,'circle',{cx:X(x),cy:Y(y),r:tiny?3.1:4.2,fill:color,stroke:'#fff','stroke-width':tiny?1:1.4});
+  }
+ }
 }
 if(config.pair){const{a,t}=config.pair,v=a**t;const pos=[{x:t,y:v,c:'#416fe4',name:'P'},{x:v,y:t,c:'#ed765e',name:'Q'}];for(let i=0;i<2;i++){if(config.view==='log'&&i===0||config.view==='exp'&&i===1)continue;let p=pos[i];if(p.x<low||p.x>high||p.y<low||p.y>high)continue;shape(svg,'circle',{cx:X(p.x),cy:Y(p.y),r:10,fill:p.c,opacity:.18});shape(svg,'circle',{cx:X(p.x),cy:Y(p.y),r:6,fill:'white',stroke:p.c,'stroke-width':2.6});shape(svg,'text',{x:Math.min(ox+P-17,X(p.x)+10),y:Math.max(oy+14,Y(p.y)-10),'font-size':14,'font-weight':900,fill:p.c},p.name)}}
 return{X,Y}
@@ -814,10 +893,10 @@ function explainCurve(s){const base=s.a===.5?frac([1,2]):s.a===1/3?frac([1,3]):s
 function prepGraph(key){comboReset(key);let ob=qGraph[key];ob.score=0;ob.turn=0;ob.seen=[];makeGraphQuestion(key)}
 function makeGraphQuestion(key){comboStart(key);let ob=qGraph[key],bank=curveBank[$('#'+key+'diff').value];ob.locked=false;$('#'+key+'next').hidden=true;$('#'+key+'exp').hidden=true;ob.turn++;const remaining=bank.filter(x=>!ob.seen.includes(keySpec(x)));if(!remaining.length)ob.seen=[];const use=(remaining.length?remaining:bank);ob.answer=pop(use);ob.seen.push(keySpec(ob.answer));const similar=x=>(x.kind===ob.answer.kind?4:0)+(x.a===ob.answer.a?3:(x.a>1)===(ob.answer.a>1)?1:0)+(x.h===ob.answer.h?1:0)+(x.k===ob.answer.k?1:0);const candidates=shuffle(bank.filter(x=>keySpec(x)!==keySpec(ob.answer))).sort((a,b)=>similar(b)-similar(a));ob.opts=shuffle([ob.answer,...candidates.slice(0,3)]);$('#'+key+'score').textContent=scoreText(ob.score,ob.turn);
 if(key==='g2f'){
- drawAxes($('#g2fsvg'),[ob.answer],{width:520,height:380,low:-2,high:6,margin:38,mark:true});$('#g2fopts').innerHTML=ob.opts.map((s,i)=>`<button class="graphopt" data-i="${i}"><span class="optionMath">${curveLabel(s)}</span></button>`).join('');
+ drawAxes($('#g2fsvg'),[ob.answer],{width:420,height:420,low:-2,high:6,margin:28,mark:true});$('#g2fpoint').innerHTML=pointCaption(ob.answer);$('#g2fopts').innerHTML=ob.opts.map((s,i)=>`<button class="graphopt" data-i="${i}"><span class="optionMath">${curveLabel(s)}</span></button>`).join('');
  $$('#g2fopts button').forEach(b=>b.onclick=()=>chooseGraph('g2f',Number(b.dataset.i),b));
 }else{
- $('#f2geq').innerHTML=curveLabel(ob.answer);$('#f2gopts').innerHTML=ob.opts.map((s,i)=>`<button class="graphchoice" data-i="${i}"><span>${'ABCD'[i]}</span><svg id="f2gsvg${i}" viewBox="0 0 220 220" aria-label="候補${'ABCD'[i]}のグラフ"></svg></button>`).join('');ob.opts.forEach((s,i)=>drawAxes($('#f2gsvg'+i),[s],{width:220,height:220,low:-2,high:6,margin:22,tiny:true,mark:true}));$$('#f2gopts button').forEach(b=>b.onclick=()=>chooseGraph('f2g',Number(b.dataset.i),b));
+ $('#f2geq').innerHTML=curveLabel(ob.answer);$('#f2gopts').innerHTML=ob.opts.map((s,i)=>`<button class="graphchoice" data-i="${i}"><span>${'ABCD'[i]}</span><svg id="f2gsvg${i}" viewBox="0 0 240 240" aria-label="候補${'ABCD'[i]}のグラフ"></svg><span class="point-caption">${pointCaption(s)}</span></button>`).join('');ob.opts.forEach((s,i)=>drawAxes($('#f2gsvg'+i),[s],{width:240,height:240,low:-2,high:6,margin:22,tiny:true,mark:true}));$$('#f2gopts button').forEach(b=>b.onclick=()=>chooseGraph('f2g',Number(b.dataset.i),b));
 }
 message('#'+key+'msg',key==='g2f'?T('式を選ぼう。','Choose the formula.'):T('グラフを選ぼう。','Choose the graph.'))}
 function chooseGraph(key,i,b){let ob=qGraph[key];if(ob.locked||b.disabled)return;const correct=keySpec(ob.opts[i])===keySpec(ob.answer);if(correct){ob.locked=true;ob.score++;comboHit(key);$$('#'+key+'opts button').forEach((x,j)=>{x.disabled=true;if(keySpec(ob.opts[j])===keySpec(ob.answer))x.classList.add('good')});$('#'+key+'score').textContent=scoreText(ob.score,ob.turn);message('#'+key+'msg',T('✓ 正解！ なぜこのグラフになるか確認しよう。','✓ Correct! Check why this graph matches.'),'good');renderSteps('#'+key+'exp',[`${T("式：","Equation: ")}<span class="inline-equation">${curveLabel(ob.answer)}</span>`,explainCurve(ob.answer)]);$('#'+key+'next').hidden=false}else{comboMiss(key);b.classList.add('bad');b.disabled=true;message('#'+key+'msg',T('違います。増加・減少、漸近線、通る点を観察しよう。','Not quite. Check the slope direction, asymptote, and points.'),'bad')}}
@@ -916,7 +995,11 @@ function installLogLabMath(){
    for(let i=0;i<s.length;i++){if(s[i]==='(')depth++;if(s[i]===')')depth--;if(depth===0&&i<s.length-1)return s}
    return s.slice(1,-1);
  }
+ function normalizeLogArguments(html){
+   return html.replace(/(log<sub>(?:(?!<\/sub>)[\s\S])*<\/sub>)\(\s*(\d+|[a-zA-Z]|\d+\s*\/\s*\d+|<span class="frac"><span>\d+<\/span><span>\d+<\/span><\/span>)\s*\)(?!\s*<sup>)/g,'$1$2');
+ }
  function htmlToTex(html){
+   html=normalizeLogArguments(html);
    // In this question bank, a spaced slash between logarithms is division.
    // The formula guide's pair of special values is explicitly separated.
    const split=html.split(' / ');
@@ -962,6 +1045,18 @@ function installLogLabMath(){
    window.katex.render('\\displaystyle\\boldsymbol{'+tex+'}',span,{throwOnError:true,strict:'ignore',output:'htmlAndMathml',trust:false});
    return span;
  }
+ function wrapFallbackFractionParens(el){
+   for(const f of Array.from(el.querySelectorAll('.frac'))){
+     if(f.closest('.loglab-tex,.fraction-parens'))continue;
+     const before=f.previousSibling,after=f.nextSibling;
+     if(!before||!after||before.nodeType!==3||after.nodeType!==3||!/\(\s*$/.test(before.textContent)||!/^\s*\)/.test(after.textContent))continue;
+     before.textContent=before.textContent.replace(/\(\s*$/,'');
+     after.textContent=after.textContent.replace(/^\s*\)/,'');
+     const group=document.createElement('span');group.className='fraction-parens';
+     const l=document.createElement('span'),rr=document.createElement('span');l.className=rr.className='fraction-delimiter';l.textContent='(';rr.textContent=')';
+     f.before(group);group.append(l,f,rr);
+   }
+ }
  function fallbackScripts(el){
    // Even when KaTeX cannot load, never leave a/b or a spaced quotient
    // in mathematical questions, explanations or hints.
@@ -998,11 +1093,13 @@ function installLogLabMath(){
      for(const v of [m[1]+m[2],m[3]]){const p=document.createElement('span');p.textContent=v;f.append(p)}
      n.replaceChildren(f);
    }
+   wrapFallbackFractionParens(el);
  }
  function render(el){
    if(!el||el.querySelector('.loglab-tex'))return;
-   const source=el.innerHTML;
+   const source=normalizeLogArguments(el.innerHTML);
    if(!source.trim())return;
+   if(source!==el.innerHTML)el.innerHTML=source;
    if(!window.katex){fallbackScripts(el);return}
    let body=source, note='';
    if(el.id==='q2'){

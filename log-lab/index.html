@@ -940,7 +940,24 @@ function installLogLabMath(){
    if(el.classList.contains('step')&&/[a-zA-Z]{2,}/.test(plain.replace(/log|sqrt/g,'')))return false;
    return true;
  }
+ function sizeFractionDelimiters(tex){
+   // Pair literal and existing scalable parentheses without disturbing
+   // the exponent, subscript, nested groups, or ordinary small parentheses.
+   const stack=[], edits=[];
+   for(const m of tex.matchAll(/\\(?:left|right)\s*[()]|[()]/g)){
+     const token=m[0], ch=token.slice(-1);
+     if(ch==='('){stack.push({index:m.index,token});continue}
+     const open=stack.pop();
+     if(!open)continue;
+     if(open.token==='('&&token===')'&&/\\(?:dfrac|tfrac|frac)\b/.test(tex.slice(open.index+1,m.index))){
+       edits.push({index:open.index,replacement:'\\left('},{index:m.index,replacement:'\\right)'});
+     }
+   }
+   for(const e of edits.sort((a,b)=>b.index-a.index))tex=tex.slice(0,e.index)+e.replacement+tex.slice(e.index+1);
+   return tex;
+ }
  function makeMath(tex){
+   tex=sizeFractionDelimiters(tex);
    const span=document.createElement('span');span.className='loglab-tex';
    window.katex.render('\\displaystyle\\boldsymbol{'+tex+'}',span,{throwOnError:true,strict:'ignore',output:'htmlAndMathml',trust:false});
    return span;

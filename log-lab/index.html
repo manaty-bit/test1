@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="ja"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="#1d3468" name="theme-color"/><title>LOG LAB v5 | JPN / ENG</title>
+<html lang="ja"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="#1d3468" name="theme-color"/><title>LOG LAB v6 | JPN / ENG</title>
 <style>
 :root{--bg:#edf2fb;--paper:#fff;--navy:#1e356a;--blue:#3967df;--blue2:#eff4ff;--ink:#253859;--muted:#7182a2;--line:#dce5f4;--green:#167c5e;--red:#b73c4d;--orange:#e18a4b}
 *{box-sizing:border-box}body{margin:0;background:#e5ecf8;color:var(--ink);font-family:system-ui,-apple-system,'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif}button,input,select{font:inherit}button{cursor:pointer;touch-action:manipulation}button:disabled{cursor:default;opacity:.6}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #9abaff;outline-offset:2px}.app{max-width:1130px;margin:20px auto;background:var(--bg);padding:19px;border-radius:26px;box-shadow:0 14px 45px #2941651b}.head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:5px 6px 15px}.kicker{font-size:10px;font-weight:900;letter-spacing:.17em;color:#768bb4}.brand{font-size:32px;font-weight:1000;letter-spacing:-1.5px;color:#203b7a;line-height:1.1;margin:2px 0}.brand span{color:var(--blue)}.sub{font-size:12px;color:var(--muted)}.headchip{font-size:11px;font-weight:900;color:#627aaa;border:1px solid #cad7ed;border-radius:100px;padding:9px 12px;white-space:nowrap}.navtitle{font-size:10px;letter-spacing:.12em;color:#8a9bbc;font-weight:950;margin:5px 4px 6px}.tabs{display:grid;gap:7px;margin-bottom:12px}.tabs.levels{grid-template-columns:repeat(5,minmax(0,1fr))}.tabs.extras{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:18px}.tabs button{border:1px solid #d6e0f0;border-radius:12px;background:white;color:#687fa5;padding:11px 4px;font-size:12px;min-width:0;font-weight:900}.tabs button b{display:block;font-size:15px}.tabs button small{display:block;font-size:11px;font-weight:850}.tabs button.active{background:var(--navy);color:white;border-color:var(--navy)}.tabs.extras button.active{background:#23736c;border-color:#23736c}
@@ -340,12 +340,23 @@ sub:has(.frac){vertical-align:-.8em}
  .graphctrl{align-content:center}
 }
 
+
+.combo-meter{display:inline-flex;align-items:center;gap:8px;margin-left:auto;padding:5px 10px;border:1px solid #cbdaf3;background:#edf3ff;color:#294a91;border-radius:10px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.combo-main{font-size:clamp(13px,1.55vw,20px);font-weight:950;letter-spacing:.025em}
+.combo-best{font-size:10px;font-weight:800;color:#60769b}
+.combo-meter.hot{background:#fff1d7;border-color:#e3bb65;color:#915516}
+.combo-meter.hot .combo-best{color:#915516}
+.math,.backline,.optionMath,.fml,.quizformula,.options button,.optionFormula button{font-family:"KaTeX_Main","Latin Modern Math","Cambria Math",serif}
+.backline .loglab-tex{margin:0;line-height:1.2}
+.backline{line-height:1.16}
+@media(max-width:540px){.combo-meter{gap:4px;padding:4px 6px}.combo-main{font-size:12px}.combo-best{font-size:9px}}
+
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
 </head><body>
 <main class="app" id="loglab">
-<header class="head"><div><div class="kicker">EXPONENTS × LOGARITHMS · MATH Ⅱ</div><h1 class="brand">LOG <span>LAB</span><small style="font-size:.39em;vertical-align:middle;letter-spacing:0">v5</small></h1><div class="sub" data-en="From powers to logarithms, rules, quick answers, and graphs." data-ja="指数から対数へ、公式、瞬答、グラフまで。">指数から対数へ、公式、瞬答、グラフまで。</div></div><div aria-label="Language / 言語" class="language-switch" role="group"><button aria-pressed="true" class="active" data-lang="ja" type="button">JPN</button><button aria-pressed="false" class="" data-lang="en" type="button">ENG</button></div></header>
+<header class="head"><div><div class="kicker">EXPONENTS × LOGARITHMS · MATH Ⅱ</div><h1 class="brand">LOG <span>LAB</span><small style="font-size:.39em;vertical-align:middle;letter-spacing:0">v6</small></h1><div class="sub" data-en="From powers to logarithms, rules, quick answers, and graphs." data-ja="指数から対数へ、公式、瞬答、グラフまで。">指数から対数へ、公式、瞬答、グラフまで。</div></div><div aria-label="Language / 言語" class="language-switch" role="group"><button aria-pressed="true" class="active" data-lang="ja" type="button">JPN</button><button aria-pressed="false" class="" data-lang="en" type="button">ENG</button></div></header>
 <div class="navgroups"><div><div class="navtitle" data-en="01 | LEARN STEP BY STEP (LEVELS 0–4)" data-ja="01｜順番に学ぶ（LEVEL 0〜4）">01｜順番に学ぶ（LEVEL 0〜4）</div>
 <nav aria-label="学習レベル" class="tabs levels"><button class="active" data-page="p0"><b>0</b><small data-en="Powers" data-ja="累乗の値">累乗の値</small></button><button data-page="p1"><b>1</b><small data-en="Log values" data-ja="対数の値">対数の値</small></button><button data-page="p2"><b>2</b><small data-en="Rules" data-ja="公式確認">公式確認</small></button><button data-page="p3"><b>3</b><small data-en="Mixed practice" data-ja="総合計算">総合計算</small></button><button data-page="p4"><b>4</b><small data-en="60-sec sprint" data-ja="60秒勝負">60秒勝負</small></button></nav></div><div><div class="navtitle" data-en="02 | EXPLORE · DISCOVER · CHALLENGE" data-ja="02｜調べる・発見する・挑戦する">02｜調べる・発見する・挑戦する</div>
 <nav aria-label="探究メニュー" class="tabs extras"><button data-page="library">📖<small data-en="Formula guide" data-ja="公式・性質集">公式・性質集</small></button><button data-page="graph">📈<small data-en="Graph lab" data-ja="グラフ実験">グラフ実験</small></button><button data-page="g2f">🔍<small data-en="Graph → formula" data-ja="グラフ→式">グラフ→式</small></button><button data-page="f2g">🧩<small data-en="Formula → graph" data-ja="式→グラフ">式→グラフ</small></button></nav></div></div>
@@ -367,7 +378,7 @@ sub:has(.frac){vertical-align:-.8em}
 <section class="page" id="graph"><div class="panel"><div class="ptop"><div><h2 data-en="GRAPH EXPLORER" data-ja="グラフ実験室">グラフ実験室</h2><p data-en="Change base a and exponent t to explore paired points on exponential and logarithmic curves." data-ja="底 a と指数 t を動かして、指数関数・対数関数の対応点を観察しよう。">底 a と指数 t を動かして、指数関数・対数関数の対応点を観察しよう。</p></div><div class="pill">EXPLORER</div></div><div class="graphgrid"><div><div class="graphsurface"><svg aria-label="指数関数と対数関数のグラフ" id="explorerSvg" role="img" viewbox="0 0 520 520"></svg></div><div class="legend"><span><i style="background:#416fe4"></i><span data-en="Exponential" data-ja="指数関数">指数関数</span></span><span><i style="background:#ed765e"></i><span data-en="Logarithmic" data-ja="対数関数">対数関数</span></span><span><i style="background:#7e91b3"></i>y = x</span></div></div><div class="graphctrl"><div class="ctrlbox"><h3 data-en="Change the base" data-ja="底を変える">底を変える</h3><div class="ctrlrow"><span id="graphbase-label" data-en="Base a" data-ja="底 a">底 a</span><select id="graphbase" hidden aria-hidden="true" tabindex="-1"><option value="0.3333333333333333">3⁻¹</option><option value="0.5">2⁻¹</option><option selected value="2">2</option><option value="3">3</option><option value="4">4</option></select></div><div class="base-picks" role="group" aria-labelledby="graphbase-label"><button type="button" data-base="0.3333333333333333" aria-pressed="false"><span class="frac"><span>1</span><span>3</span></span></button><button type="button" data-base="0.5" aria-pressed="false"><span class="frac"><span>1</span><span>2</span></span></button><button type="button" data-base="2" aria-pressed="true">2</button><button type="button" data-base="3" aria-pressed="false">3</button><button type="button" data-base="4" aria-pressed="false">4</button></div><div data-en="The behavior changes when the base crosses 1." data-ja="1を境に、増加・減少が変わる" style="font-size:11px;color:#7b8dab;margin-top:7px">1を境に、増加・減少が変わる</div></div><div class="ctrlbox"><h3 data-en="Change the exponent" data-ja="指数を動かす">指数を動かす</h3><div class="ctrlrow"><label data-en="Value of t" data-ja="t の値" for="grapht">t の値</label><span id="tread" style="color:#315ccc">1</span></div><input id="grapht" max="1.5" min="-1.5" step="0.5" type="range" value="1"/></div><div class="ctrlbox wide"><h3 data-en="Show curves" data-ja="表示する曲線">表示する曲線</h3><div class="seg" id="graphviews"><button class="on" data-en="Both" data-ja="両方" data-view="both">両方</button><button data-en="Exponential only" data-ja="指数だけ" data-view="exp">指数だけ</button><button data-en="Logarithmic only" data-ja="対数だけ" data-view="log">対数だけ</button></div><div class="checkrow"><label><input id="mirror" type="checkbox"/> y = x</label><label><input checked="" id="pointson" type="checkbox"/><span data-en="Matching points P / Q" data-ja="対応点 P・Q">対応点 P・Q</span></label></div></div><div class="graphdesc wide" id="graphdesc"></div></div></div></div></section>
 <section class="page" id="g2f"><div class="panel"><div class="ptop"><div><h2 data-en="GUESS THE FORMULA FROM THE GRAPH" data-ja="グラフから式を推測">グラフから式を推測</h2><p data-en="Use increasing/decreasing behavior, asymptotes, and points to choose an equation." data-ja="増加・減少、漸近線、通る点から、式を選ぼう。">増加・減少、漸近線、通る点から、式を選ぼう。</p></div><div class="pill">GRAPH → EQ</div></div><div class="graphquiz"><div class="barline"><label class="selectlabel"><span data-en="Difficulty" data-ja="難易度">難易度</span><select id="g2fdiff"><option data-en="Basics (bases / functions)" data-ja="基本（底・関数）" value="basic">基本（底・関数）</option><option data-en="Advanced (translations)" data-ja="発展（平行移動あり）" value="shift">発展（平行移動あり）</option></select></label><strong id="g2fscore">正解 0</strong></div><div class="workspace"><div class="workleft"><div class="graphsurface quizgraph"><svg aria-label="式を当てるグラフ" id="g2fsvg" viewbox="0 0 520 380"></svg></div></div><div class="workright"><p class="graphquestionlabel" data-en="Which equation matches the curve?" data-ja="この曲線を表す式はどれ？">この曲線を表す式はどれ？</p><div class="optionFormula" id="g2fopts"></div><div class="message" id="g2fmsg">グラフの特徴をよく見よう。</div><div class="explain more" hidden="" id="g2fexp"></div><div class="actions"><button class="primary" data-en="Next graph →" data-ja="次のグラフ →" hidden="" id="g2fnext">次のグラフ →</button><button data-en="Start over" data-ja="最初から" id="g2freset">最初から</button></div></div></div></div></div></section>
 <section class="page" id="f2g"><div class="panel"><div class="ptop"><div><h2 data-en="GUESS THE GRAPH FROM THE FORMULA" data-ja="式からグラフを推測">式からグラフを推測</h2><p data-en="Choose the matching graph from four options." data-ja="4枚のグラフから、式に合うものを選ぼう。">4枚のグラフから、式に合うものを選ぼう。</p></div><div class="pill">EQ → GRAPH</div></div><div class="graphquiz"><div class="barline"><label class="selectlabel"><span data-en="Difficulty" data-ja="難易度">難易度</span><select id="f2gdiff"><option data-en="Basics (bases / functions)" data-ja="基本（底・関数）" value="basic">基本（底・関数）</option><option data-en="Advanced (translations)" data-ja="発展（平行移動あり）" value="shift">発展（平行移動あり）</option></select></label><strong id="f2gscore">正解 0</strong></div><div class="workspace"><div class="workleft"><div class="quizformula" id="f2geq"></div><p class="graphquestionlabel" data-en="Which graph matches this equation? All graphs use the same axes." data-ja="この式のグラフはどれ？ すべて同じ座標範囲です。">この式のグラフはどれ？ すべて同じ座標範囲です。</p><div class="plotoptions" id="f2gopts"></div></div><div class="workright"><div class="message" id="f2gmsg">4つから選ぼう。</div><div class="explain more" hidden="" id="f2gexp"></div><div class="actions"><button class="primary" data-en="Next question →" data-ja="次の問題 →" hidden="" id="f2gnext">次の問題 →</button><button data-en="Start over" data-ja="最初から" id="f2greset">最初から</button></div></div></div></div></div></section>
-<footer class="appfooter" data-en="LOG LAB v5 · Standalone learning app · Works offline · Your 60-second record is stored on this device (when supported)." data-ja="LOG LAB v5 · 学習用HTML・ネット接続不要・60秒の自己ベストはこの端末のブラウザに保存されます（対応時）">LOG LAB v5 · 学習用HTML・ネット接続不要・60秒の自己ベストはこの端末のブラウザに保存されます（対応時）</footer>
+<footer class="appfooter" data-en="LOG LAB v6 · Standalone learning app · Works offline · Your 60-second record is stored on this device (when supported)." data-ja="LOG LAB v6 · 学習用HTML・ネット接続不要・60秒の自己ベストはこの端末のブラウザに保存されます（対応時）">LOG LAB v6 · 学習用HTML・ネット接続不要・60秒の自己ベストはこの端末のブラウザに保存されます（対応時）</footer>
 </main>
 <script>
 (()=>{'use strict';
@@ -379,7 +390,7 @@ function updateStatic(){
   document.documentElement.lang=locale;
   $$("[data-ja][data-en]").forEach(e=>{e.textContent=e.getAttribute('data-'+locale)});
   $$('.language-switch button').forEach(b=>{const active=b.dataset.lang===locale;b.classList.toggle('active',active);b.setAttribute('aria-pressed',active?'true':'false')});
-  document.title=locale==='en'?'LOG LAB v5 | Exponents & Logarithms':'LOG LAB v5｜指数・対数の学習ゲーム';
+  document.title=locale==='en'?'LOG LAB v6 | Exponents & Logarithms':'LOG LAB v6｜指数・対数の学習ゲーム';
 }
 const scoreText=(good,seen)=>T(`正解 ${good} / ${seen}問目`,`Correct ${good} · Question ${seen}`);
 const correctText=good=>T(`正解 ${good}`,`Correct ${good}`);
@@ -396,21 +407,65 @@ function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Ma
 function message(id,str,cls=''){let e=$(id);e.innerHTML=str;e.className='message'+(cls?' '+cls:'')}
 function renderSteps(id,lines){let e=$(id);e.innerHTML='<h3>'+T('解き方・確認','Solution & explanation')+'</h3>'+lines.map(s=>'<div class="step">'+s+'</div>').join('');e.hidden=false}
 function numericChoices(right,candidates){let items=[right];for(let x of candidates){if(items.length===4)break;if(!items.some(y=>eq(y,x)))items.push(x)}for(let x of [R(0),R(1),R(-1),R(2),R(3),R(4),R(5),R(-2),R(1,2),R(3,2),R(2,3)]){if(items.length===4)break;if(!items.some(y=>eq(y,x)))items.push(x)}return shuffle(items)}
-function distractors(right,extras=[]){let n=right[0],d=right[1];return numericChoices(right,shuffle([R(n+d,d),R(n-d,d),R(n+2*d,d),R(n-2*d,d),R(-n,d),R(2*n,d),R(n,2*d),...extras]))}
+function distractors(right,extras=[]){let n=right[0],d=right[1];return numericChoices(right,[...shuffle(extras.filter(Boolean)),...shuffle([R(n+d,d),R(n-d,d),R(n+2*d,d),R(n-2*d,d),R(-n,d),R(2*n,d),R(n,2*d)])])}
 function putNumeric(id,right,extras,onPick){const opts=distractors(right,extras);$(id).innerHTML=opts.map((v,i)=>`<button data-idx="${i}">${frac(v)}</button>`).join('');$$(id+' button').forEach((btn,i)=>btn.onclick=()=>onPick(opts[i],btn,opts))}
 function markChoices(id,answer,chosen){$$(id+' button').forEach((b,i)=>{b.disabled=true;if(i===answer)b.classList.add('good');if(i===chosen&&i!==answer)b.classList.add('bad')})}
+
+const combos={};
+function comboPaint(key){
+ const o=combos[key], id=/^[0-3]$/.test(key)?'count'+key:key+'score', score=$('#'+id);
+ if(!o||!score)return;
+ let el=$('#combo-'+key);
+ if(!el){el=document.createElement('span');el.id='combo-'+key;el.className='combo-meter';el.setAttribute('aria-live','polite');score.before(el)}
+ el.innerHTML='<span class="combo-main">'+(o.current>=3?'✦ ':'')+o.current+' COMBO</span><span class="combo-best">BEST '+o.best+'</span>';
+ el.classList.toggle('hot',o.current>=3);
+}
+function comboReset(key){combos[key]={current:0,best:0,failed:false};comboPaint(key)}
+function comboStart(key){if(!combos[key])comboReset(key);combos[key].failed=false;comboPaint(key)}
+function comboHit(key){const o=combos[key];if(!o.failed){o.current++;o.best=Math.max(o.best,o.current)}comboPaint(key)}
+function comboMiss(key){const o=combos[key];o.current=0;o.failed=true;comboPaint(key)}
+function safeRat(n,d=1){if(!Number.isSafeInteger(n)||!Number.isSafeInteger(d)||d===0)return null;return R(n,d)}
+function powRat(b,e){if(!Number.isInteger(e))return null;return e>=0?safeRat(b[0]**e,b[1]**e):safeRat(b[1]**(-e),b[0]**(-e))}
+const mulR=(a,b)=>safeRat(a[0]*b[0],a[1]*b[1]);
+const invR=a=>a[0]?safeRat(a[1],a[0]):null;
+const negR=a=>R(-a[0],a[1]);
+const addR=(a,b)=>safeRat(a[0]*b[1]+b[0]*a[1],a[1]*b[1]);
+function plausibleCard(index,b,e,v){
+ if(index===1)return [negR(e),invR(e),R(e[1],e[0]||1),R(e[0]+e[1],e[1]),R(e[0]-e[1],e[1]),R(0),R(1),v,b].filter(Boolean);
+ const a=e[0],d=e[1],abs=Math.abs(a),out=[];
+ if(a===0)out.push(R(0),b,R(-1),R(2));
+ else if(d===1){out.push(mulR(b,e),powRat(b,a-1),powRat(b,a+1),powRat(b,-a),a<0?negR(powRat(b,abs)||v):null,addR(b,e),b)}
+ else{out.push(invR(v),negR(v),powRat(b,a),powRat(b,d),mulR(b,e),safeRat(b[0],b[1]*d),a<0?powRat(b,abs):null)}
+ return out.filter(x=>x&&Math.abs(x[0])<=100000&&x[1]<=100000);
+}
+
 // All base values positive and different from 1. Fractional powers are chosen for exact rational answers.
 const powers={
  basic:[[[2,1],[5,1],[32,1]],[[3,1],[3,1],[27,1]],[[2,1],[4,1],[16,1]],[[5,1],[2,1],[25,1]],[[2,1],[3,1],[8,1]],[[3,1],[4,1],[81,1]],[[4,1],[3,1],[64,1]],[[10,1],[2,1],[100,1]],[[5,1],[3,1],[125,1]],[[2,1],[6,1],[64,1]],[[10,1],[3,1],[1000,1]],[[4,1],[2,1],[16,1]],[[7,1],[2,1],[49,1]],[[3,1],[2,1],[9,1]]],
  negative:[[[2,1],[-3,1],[1,8]],[[3,1],[-2,1],[1,9]],[[1,2],[-3,1],[8,1]],[[1,3],[2,1],[1,9]],[[2,3],[-2,1],[9,4]],[[4,1],[-1,1],[1,4]],[[1,5],[-2,1],[25,1]],[[5,1],[-3,1],[1,125]],[[3,2],[-2,1],[4,9]],[[1,4],[-1,1],[4,1]],[[1,2],[3,1],[1,8]],[[10,1],[-2,1],[1,100]],[[1,9],[-1,1],[9,1]]],
  fraction:[[[16,1],[3,4],[8,1]],[[27,1],[2,3],[9,1]],[[9,1],[-1,2],[1,3]],[[4,9],[1,2],[2,3]],[[1,4],[-1,2],[2,1]],[[8,1],[-2,3],[1,4]],[[81,1],[1,4],[3,1]],[[32,1],[2,5],[4,1]],[[25,1],[-3,2],[1,125]],[[1,8],[2,3],[1,4]],[[64,1],[-1,3],[1,4]],[[16,81],[1,4],[2,3]],[[1,27],[-2,3],[9,1]],[[125,1],[1,3],[5,1]],[[16,1],[-3,4],[1,8]]]
 };
+
+function extendPowers(){
+ const seen=new Set(Object.values(powers).flat().map(q=>JSON.stringify(q)));
+ function add(type,b,e,v){if(!b||!v||Math.abs(v[0])>10000||v[1]>10000||b[0]>10000||b[1]>10000)return;const q=[b,e,v],k=JSON.stringify(q);if(!seen.has(k)){seen.add(k);powers[type].push(q)}}
+ for(const a of [2,3,4,5,6,7,8,9,10,11,12])for(const n of [0,1,2,3,4,5,6]){
+  const b=R(a),v=powRat(b,n);add('basic',b,R(n),v);
+ }
+ for(const b of [R(2),R(3),R(4),R(5),R(6),R(10),R(1,2),R(1,3),R(1,4),R(1,5),R(2,3),R(3,2),R(3,4),R(4,3)])for(const n of [-4,-3,-2,-1,1,2,3,4]){
+  if(n<0||b[1]>1)add('negative',b,R(n),powRat(b,n));
+ }
+ for(const root of [R(2),R(3),R(4),R(5),R(1,2),R(1,3),R(2,3),R(3,2)])for(const d of [2,3,4,5])for(const n of [-3,-2,-1,1,2,3,4]){
+  const e=R(n,d);if(e[1]===1)continue;add('fraction',powRat(root,d),e,powRat(root,n));
+ }
+}
+extendPowers();
 const card={};function initCard(index){let obj={index,count:0,correct:0,used:[],q:null,locked:false,job:null};card[index]=obj;
-function draw(){clearTimeout(obj.job);obj.locked=false;$('#flip'+index).classList.remove('turned');$('#next'+index).hidden=true;let diff=$('#diff'+index).value;if(!obj.used.length)obj.used=shuffle(powers[diff]);if(obj.count===0&&diff==='basic'){obj.q=powers.basic[0];obj.used=obj.used.filter(q=>q!==powers.basic[0])}else obj.q=obj.used.pop();obj.count++;const[b,e,v]=obj.q;$('#q'+index).innerHTML=(index===0?pow(b,e):log(b,v))+' = ?';$('#back'+index).innerHTML=`${pow(b,e)} = ${frac(v)}<br>⇅<br>${log(b,v)} = ${frac(e)}`;$('#count'+index).textContent=scoreText(obj.correct,obj.count);
-const right=index===0?v:e;const supplemental=index===0?[R(v[0]*2,v[1]),R(Math.floor(number(v)/2)),...powers[diff].map(x=>x[2])]:[R(e[0]+1,e[1]),R(e[0]-1,e[1]),...powers[diff].map(x=>x[1])];
-putNumeric('#opts'+index,right,supplemental,(choice,button)=>{if(obj.locked||button.disabled)return;if(eq(choice,right)){obj.locked=true;obj.correct++;button.classList.add('good');$$('#opts'+index+' button').forEach(b=>b.disabled=true);$('#count'+index).textContent=scoreText(obj.correct,obj.count);message('#msg'+index,T('✓ 正解！ 同じ関係を反対側から表してみよう。','✓ Correct! See the same relationship from the other side.'),'good');obj.job=setTimeout(()=>{if(obj.locked){$('#flip'+index).classList.add('turned');$('#next'+index).hidden=false}},300)}else{button.classList.add('bad');button.disabled=true;message('#msg'+index,T('もう一度。','Try again. ')+(index===0?T('指数を計算しよう。','Calculate the power.'):T('底を何乗するとその値になる？','What power of the base gives the value?')),'bad')}});
+function draw(){comboStart(String(index));clearTimeout(obj.job);obj.locked=false;$('#flip'+index).classList.remove('turned');$('#next'+index).hidden=true;let diff=$('#diff'+index).value;if(!obj.used.length)obj.used=shuffle(powers[diff]);if(obj.used.length>1&&obj.q===obj.used[obj.used.length-1])obj.used.unshift(obj.used.pop());obj.q=obj.used.pop();obj.count++;const[b,e,v]=obj.q;$('#q'+index).innerHTML=(index===0?pow(b,e):log(b,v))+' = ?';$('#back'+index).innerHTML=`${pow(b,e)} = ${frac(v)}<br>⇔<br>${log(b,v)} = ${frac(e)}`;$('#count'+index).textContent=scoreText(obj.correct,obj.count);
+const right=index===0?v:e;const supplemental=plausibleCard(index,b,e,v);
+putNumeric('#opts'+index,right,supplemental,(choice,button)=>{if(obj.locked||button.disabled)return;if(eq(choice,right)){obj.locked=true;obj.correct++;comboHit(String(index));button.classList.add('good');$$('#opts'+index+' button').forEach(b=>b.disabled=true);$('#count'+index).textContent=scoreText(obj.correct,obj.count);message('#msg'+index,T('✓ 正解！ 同じ関係を反対側から表してみよう。','✓ Correct! See the same relationship from the other side.'),'good');obj.job=setTimeout(()=>{if(obj.locked){$('#flip'+index).classList.add('turned');$('#next'+index).hidden=false}},300)}else{comboMiss(String(index));button.classList.add('bad');button.disabled=true;message('#msg'+index,T('もう一度。','Try again. ')+(index===0?T('指数を計算しよう。','Calculate the power.'):T('底を何乗するとその値になる？','What power of the base gives the value?')),'bad')}});
 message('#msg'+index,index===0?T('累乗の値を選ぼう。','Choose the value of the power.'):T('何乗すれば真数になる？','What exponent gives the argument?'))}
-function reset(){clearTimeout(obj.job);obj.count=0;obj.correct=0;obj.used=[];draw()}
+function reset(){comboReset(String(index));clearTimeout(obj.job);obj.count=0;obj.correct=0;obj.used=[];draw()}
 $('#next'+index).onclick=draw;$('#reset'+index).onclick=reset;$('#diff'+index).onchange=reset;reset()}
 initCard(0);initCard(1);
 // Level 2: identify correctly transformed formulas, including invalid distractors.
@@ -434,9 +489,42 @@ const formulaBank=[
 ];
 const formulaEnglish=[["If you multiply the arguments, which operation links the logs?","The logarithm of a product equals the sum of the logarithms."],["Combine the two logs: what is the new argument?","Same-base logs add by multiplying arguments: 4 × 8 = 32."],["Think of 2 × 9.","The product of the arguments is 18."],["When the arguments are divided, what happens to the logs?","The logarithm of a quotient is a difference."],["What is 75 ÷ 3?","Subtracting same-base logs divides the arguments: 75 ÷ 3 = 25."],["Divide 12 by 3.","12 ÷ 3 = 4."],["Where can the exponent of the argument go?","The exponent of the argument becomes a coefficient in front of the log."],["Move the exponent 3 in front of the logarithm.","Use the power rule to get 3 log₂8."],["A square root is what fractional power?","√9 = 9^(1/2), so bring 1/2 in front."],["Does the numerator contain the original argument or base?","The numerator is log of M; the denominator is log of the original base a."],["Put the original base 4 in the denominator.","Change of base gives log₂8 / log₂4."],["The middle base 3 links the two factors.","By change of base, log₂3 × log₃5 = log₂5."],["What exponent of any valid base gives 1?","a⁰ = 1."],["What is the base raised to the first power?","a¹ = a."],["Exponents and logarithms are inverse operations.","Raising a to logₐM returns M."],["A reciprocal base changes the sign.","Using change of base, the denominator is logₐ(1/a) = −1."]];
 formulaBank.forEach((f,i)=>{[f.hintEn,f.whyEn]=formulaEnglish[i]});
+
+function addFormula(cat,q,opts,hint,why,hintEn,whyEn){
+ if(new Set(opts).size!==4||formulaBank.some(f=>f.q===q))return;
+ formulaBank.push({cat,q,opts,hint,why,hintEn,whyEn})
+}
+for(const a of [2,3,4,5,7,10])for(const [m,n] of [[3,5],[4,7],[6,2],[8,3],[9,4],[12,5],[15,3],[21,7]]){
+ const l=x=>'log<sub>'+a+'</sub>'+x;
+ const args=[m*n,m+n,m-n>0?m-n:n-m,Math.max(m,n)/Math.min(m,n)];
+ const wrong=[...new Set(args.slice(1).filter(x=>x!==args[0]&&Number.isInteger(x)))];
+ if(wrong.length>=2)addFormula('sum',l(m)+' + '+l(n)+' = ?',[l(m*n),l(wrong[0]),l(wrong[1]),l('('+frac(R(m,n))+')')],'真数を掛ける。','真数の積は '+m+'×'+n+'='+m*n+'。','Multiply the arguments.','The product is '+m+' × '+n+' = '+m*n+'.');
+ if(m>n&&new Set([m/n,m-n,m+n,m*n]).size===4)addFormula('diff',l(m)+' − '+l(n)+' = ?',[l('('+frac(R(m,n))+')'),l(m-n),l(m+n),l(m*n)],'真数を割る。','真数の商は '+m+'÷'+n+'。','Divide the arguments.','Divide '+m+' by '+n+'.');
+}
+for(const a of [2,3,5,7])for(const [m,n] of [[5,2],[7,3],[11,2],[13,3]]){
+ if(a===m)continue;
+ const l=x=>'log<sub>'+a+'</sub>'+x;
+ // These options are logarithms of distinct positive arguments.
+ addFormula('power',n+l(m)+' = ?',[l('('+m+'<sup>'+n+'</sup>)'),l(m*n),l(m+n),l('('+frac(R(m,n))+')')],'係数を真数の指数に。','係数 '+n+' は真数の指数になる。','Move the coefficient to the argument as an exponent.','The coefficient '+n+' becomes the exponent of the argument.');
+}
+for(const a of [2,3,5,7])for(const m of [2,3,5,7]){
+ if(a===m)continue;
+ const l=(b,x)=>'log<sub>'+b+'</sub>'+x;
+ const f=(x,y)=>'<span class="frac"><span>'+x+'</span><span>'+y+'</span></span>';
+ // New base is 10: reciprocal, difference and product cannot equal the ratio for these pairs.
+ const x=Math.log10(m),y=Math.log10(a);
+ if(new Set([x/y,y/x,x-y,x*y].map(v=>v.toFixed(10))).size!==4)continue;
+ addFormula('change',l(a,m)+' = ? （底を10に）',[f(l(10,m),l(10,a)),f(l(10,a),l(10,m)),l(10,m)+' − '+l(10,a),l(10,m)+' × '+l(10,a)],'元の底は分母。','分子が真数、分母が元の底。','Put the original base in the denominator.','The numerator contains the argument; the denominator contains the original base.');
+}
+for(const a of [2,3,4,5,7,10]){
+ const l=x=>'log<sub>'+a+'</sub>'+x;
+ addFormula('other',l(1)+' = ?',['0','1',String(a),'−1'],'0乗すると1。','どの底でも0乗は1。','A zero power gives 1.','Any valid base raised to zero equals 1.');
+ addFormula('other',l(a)+' = ?',['1','0',String(a),'−1'],'底の1乗を考えよう。','底の1乗は底そのもの。','Think of the first power.','The first power is the base itself.');
+}
+
 let formula={seen:0,good:0,deck:[],q:null,locked:false};
-function nextFormula(){formula.locked=false;$('#next2').hidden=true;$('#exp2').hidden=true;const subset=formulaBank.filter(x=>$('#filter2').value==='all'||x.cat===$('#filter2').value);if(!formula.deck.length)formula.deck=shuffle(subset);formula.q=formula.deck.pop();formula.seen++;$('#q2').innerHTML=locale==='en'?formula.q.q.replace('（底をcにする）','(using base c)').replace('（底を2に）','(using base 2)'):formula.q.q;$('#count2').textContent=scoreText(formula.good,formula.seen);const order=shuffle([0,1,2,3]);$('#opts2').innerHTML=order.map((idx,i)=>`<button data-opt="${idx}">${formula.q.opts[idx]}</button>`).join('');$$('#opts2 button').forEach(b=>b.onclick=()=>{if(formula.locked||b.disabled)return;if(+b.dataset.opt===0){formula.locked=true;formula.good++;$$('#opts2 button').forEach(el=>{el.disabled=true;if(+el.dataset.opt===0)el.classList.add('good')});$('#count2').textContent=scoreText(formula.good,formula.seen);message('#msg2',T('✓ 正解！ 変形の意味を確認しよう。','✓ Correct! Review why the transformation works.'),'good');renderSteps('#exp2',[locale==='en'?formula.q.whyEn:formula.q.why]);$('#next2').hidden=false}else{b.classList.add('bad');b.disabled=true;message('#msg2',T('もう一度。公式の条件や向きを見直そう。','Try again. Check the conditions and direction of the rule.'),'bad')}});message('#msg2',T('正しい変形を選ぼう。','Choose the valid transformation.'))}
-function resetFormula(){formula={seen:0,good:0,deck:[],q:null,locked:false};nextFormula()}$('#next2').onclick=nextFormula;$('#reset2').onclick=resetFormula;$('#filter2').onchange=resetFormula;$('#hint2').onclick=()=>message('#msg2','💡 '+(locale==='en'?formula.q.hintEn:formula.q.hint));resetFormula();
+function nextFormula(){comboStart('2');formula.locked=false;$('#next2').hidden=true;$('#exp2').hidden=true;const subset=formulaBank.filter(x=>$('#filter2').value==='all'||x.cat===$('#filter2').value);if(!formula.deck.length)formula.deck=shuffle(subset);formula.q=formula.deck.pop();formula.seen++;$('#q2').innerHTML=locale==='en'?formula.q.q.replace('（底をcにする）','(using base c)').replace('（底を2に）','(using base 2)').replace('（底を10に）','(using base 10)'):formula.q.q;$('#count2').textContent=scoreText(formula.good,formula.seen);const order=shuffle([0,1,2,3]);$('#opts2').innerHTML=order.map((idx,i)=>`<button data-opt="${idx}">${formula.q.opts[idx]}</button>`).join('');$$('#opts2 button').forEach(b=>b.onclick=()=>{if(formula.locked||b.disabled)return;if(+b.dataset.opt===0){formula.locked=true;formula.good++;comboHit('2');$$('#opts2 button').forEach(el=>{el.disabled=true;if(+el.dataset.opt===0)el.classList.add('good')});$('#count2').textContent=scoreText(formula.good,formula.seen);message('#msg2',T('✓ 正解！ 変形の意味を確認しよう。','✓ Correct! Review why the transformation works.'),'good');renderSteps('#exp2',[locale==='en'?formula.q.whyEn:formula.q.why]);$('#next2').hidden=false}else{comboMiss('2');b.classList.add('bad');b.disabled=true;message('#msg2',T('もう一度。公式の条件や向きを見直そう。','Try again. Check the conditions and direction of the rule.'),'bad')}});message('#msg2',T('正しい変形を選ぼう。','Choose the valid transformation.'))}
+function resetFormula(){comboReset('2');formula={seen:0,good:0,deck:[],q:null,locked:false};nextFormula()}$('#next2').onclick=nextFormula;$('#reset2').onclick=resetFormula;$('#filter2').onchange=resetFormula;$('#hint2').onclick=()=>message('#msg2','💡 '+(locale==='en'?formula.q.hintEn:formula.q.hint));resetFormula();
 // Level 3 bank. Answers are exact rational numbers. Tier progression is based on correct answers.
 const L=(b,x)=>`log<sub>${b}</sub>${x}`;
 function Q(t,html,ans,hint,steps,tag){return{tier:t,html,ans:R(...ans),hint,steps,tag:tag||['VALUE','SUM / DIFFERENCE','POWER RULE','CHANGE OF BASE','MIXED'][t]}}
@@ -487,6 +575,40 @@ problems.forEach((p,i)=>{[p.hintEn,p.stepEnglish]=problemEnglish[i];p.stepsEn=[p
 /* Show the same exact exponent-to-log derivation in both languages. */
 const valueDerivations=[[[2,1],[3,1],[8,1]],[[3,1],[-2,1],[1,9]],[[1,2],[-3,1],[8,1]],[[4,1],[3,2],[8,1]],[[16,1],[3,4],[8,1]],[[9,1],[-1,2],[1,3]],[[2,1],[-3,1],[1,8]],[[25,1],[1,2],[5,1]]];
 valueDerivations.forEach(([b,e,v],i)=>{const rows=[pow(b,e)+' = '+frac(v),log(b,v)+' = '+frac(e)];problems[i].steps=rows;problems[i].stepsEn=rows;});
+
+const F=(a,b)=>'<span class="frac"><span>'+a+'</span><span>'+b+'</span></span>';
+const exSet=new Set(problems.map(p=>p.tier+'|'+p.html));
+function addPractice(t,html,ans,wrong,hint,steps,hintEn){
+ const key=t+'|'+html;if(exSet.has(key))return;exSet.add(key);
+ const p=Q(t,html,ans,hint,steps);p.wrong=wrong.filter(Boolean);p.hintEn=hintEn;p.stepsEn=steps;problems.push(p);
+}
+for(const q of Object.values(powers).flat()){
+ const [b,e,v]=q;
+ addPractice(0,log(b,v)+' = ?',e,plausibleCard(1,b,e,v),'指数の式に戻して考えよう。',[pow(b,e)+' = '+frac(v),log(b,v)+' = '+frac(e)],'Rewrite as an exponential equation.');
+}
+for(const a of [2,3,5,7])for(const [m,n] of [[1,2],[2,3],[3,2],[3,4],[-1,2],[2,-1],[-2,-1],[1,3]]){
+ const b=R(a),u=powRat(b,m),v=powRat(b,n),lu=log(b,u),lv=log(b,v);
+ for(const sign of [1,-1]){
+  const ans=R(m+sign*n),res=powRat(b,ans[0]);
+  addPractice(1,lu+(sign===1?' + ':' − ')+lv+' = ?',ans,[R(m-sign*n),R(m*n),R(n-m),R(m,n),R(m),R(n)],'同じ底の対数の和・差を考えよう。',[log(b,res)+' = '+frac(ans)],'Use the product or quotient rule.');
+ }
+ for(const k of [2,3,-2]){
+  const ans=R(k*m);
+  addPractice(2,frac(R(k))+' '+lu+' = ?',ans,[R(k+m),R(m,k),R(-k*m),R(m),R(k)],'係数と対数の値を掛ける。',[frac(R(k))+' × '+frac(R(m))+' = '+frac(ans)],'Multiply the coefficient by the logarithm.');
+ }
+ const base=powRat(b,Math.abs(m)||1);
+ const arg=powRat(b,n);
+ const ans=R(n,Math.abs(m)||1);
+ addPractice(3,log(base,arg)+' = ?',ans,[invR(ans),negR(ans),R(n+Math.abs(m)),R(n-Math.abs(m)),R(n)],'共通の底で表してから底の変換を使う。',[F(log(b,arg),log(b,base))+' = '+F(frac(R(n)),frac(R(Math.abs(m)||1)))+' = '+frac(ans)],'Express both numbers as powers of a common base.');
+ for(const k of [2,-2,3]){
+  const ans=R(k*m-n);
+  addPractice(4,frac(R(k))+' '+lu+' − '+lv+' = ?',ans,[R(k*m+n),R(k*(m-n)),R(m-n),R(m-k*n),R(k+m-n)],'先に対数の値を求め、係数を掛けよう。',[frac(R(k))+' × ('+frac(R(m))+') − ('+frac(R(n))+') = '+frac(ans)],'Evaluate the logarithms before multiplying and subtracting.');
+ }
+}
+function practiceWrong(p){
+ return p.wrong||[negR(p.ans),invR(p.ans),R(p.ans[0]+p.ans[1],p.ans[1]),R(p.ans[0]-p.ans[1],p.ans[1]),R(p.ans[0]*2,p.ans[1])].filter(Boolean)
+}
+
 const tierNames=['① 値を求める','② 和・差の公式','③ 累乗の公式','④ 底の変換','⑤ 複合問題'];
 const tierNamesEn=['① Evaluate','② Sum / difference','③ Power rule','④ Change of base','⑤ Combined rules'];
 const tierName=i=>(locale==='en'?tierNamesEn:tierNames)[i];
@@ -495,10 +617,10 @@ const autoTier=good=>Math.min(4,Math.floor(good/4));
 function drawTier(t,id){$(id).innerHTML=tierNames.map((s,i)=>`<span class="${i<t?'past':i===t?'now':''}">${i+1}</span>`).join('')}
 function getProblem(t,decks){if(!decks[t]||!decks[t].length)decks[t]=shuffle(problems.filter(q=>q.tier===t));return decks[t].pop()}
 function practiceTier(){return $('#phase3').value==='auto'?autoTier(practice.good):Number($('#phase3').value)}
-function nextPractice(){practice.locked=false;$('#next3').hidden=true;$('#exp3').hidden=true;const t=practiceTier();practice.q=getProblem(t,practice.decks);practice.seen++;$('#q3').innerHTML=practice.q.html;$('#qtype3').textContent=`STEP ${t+1} · ${practice.q.tag}`;$('#count3').textContent=scoreText(practice.good,practice.seen);$('#tiername3').textContent=tierName(t);drawTier(t,'#tierdots3');$('#tierhint3').textContent=$('#phase3').value==='auto'?(t===4?T('最終段階：複合問題に挑戦中','Final stage: combined rules') : T(`あと${4-practice.good%4}問正解で、次の段階へ進みます`,`${4-practice.good%4} more correct to unlock the next stage`)):T('指定した段階の問題を練習中','Practicing the selected stage');
-putNumeric('#opts3',practice.q.ans,[],(choice,button)=>{if(practice.locked||button.disabled)return;if(eq(choice,practice.q.ans)){practice.locked=true;practice.good++;button.classList.add('good');$$('#opts3 button').forEach(b=>b.disabled=true);message('#msg3',T('✓ 正解！ 途中式を確認しよう。','✓ Correct! Review the steps.'),'good');renderSteps('#exp3',locale==='en'?practice.q.stepsEn:practice.q.steps);$('#next3').hidden=false;$('#count3').textContent=scoreText(practice.good,practice.seen);}else{button.disabled=true;button.classList.add('bad');message('#msg3',T('違います。ヒントや公式集を使って、もう一度。','Not quite. Use the hint or formula guide and try again.'),'bad')}});
+function nextPractice(){comboStart('3');practice.locked=false;$('#next3').hidden=true;$('#exp3').hidden=true;const t=practiceTier();practice.q=getProblem(t,practice.decks);practice.seen++;$('#q3').innerHTML=practice.q.html;$('#qtype3').textContent=`STEP ${t+1} · ${practice.q.tag}`;$('#count3').textContent=scoreText(practice.good,practice.seen);$('#tiername3').textContent=tierName(t);drawTier(t,'#tierdots3');$('#tierhint3').textContent=$('#phase3').value==='auto'?(t===4?T('最終段階：複合問題に挑戦中','Final stage: combined rules') : T(`あと${4-practice.good%4}問正解で、次の段階へ進みます`,`${4-practice.good%4} more correct to unlock the next stage`)):T('指定した段階の問題を練習中','Practicing the selected stage');
+putNumeric('#opts3',practice.q.ans,practiceWrong(practice.q),(choice,button)=>{if(practice.locked||button.disabled)return;if(eq(choice,practice.q.ans)){practice.locked=true;practice.good++;comboHit('3');button.classList.add('good');$$('#opts3 button').forEach(b=>b.disabled=true);message('#msg3',T('✓ 正解！ 途中式を確認しよう。','✓ Correct! Review the steps.'),'good');renderSteps('#exp3',locale==='en'?practice.q.stepsEn:practice.q.steps);$('#next3').hidden=false;$('#count3').textContent=scoreText(practice.good,practice.seen);}else{comboMiss('3');button.disabled=true;button.classList.add('bad');message('#msg3',T('違います。ヒントや公式集を使って、もう一度。','Not quite. Use the hint or formula guide and try again.'),'bad')}});
 message('#msg3',T('答えを選ぼう。','Choose the correct value.'))}
-function resetPractice(){practice={good:0,seen:0,decks:{},q:null,locked:false};nextPractice()}$('#next3').onclick=nextPractice;$('#hint3').onclick=()=>message('#msg3','💡 '+(locale==='en'?practice.q.hintEn:practice.q.hint));$('#reset3').onclick=resetPractice;$('#phase3').onchange=resetPractice;resetPractice();
+function resetPractice(){comboReset('3');practice={good:0,seen:0,decks:{},q:null,locked:false};nextPractice()}$('#next3').onclick=nextPractice;$('#hint3').onclick=()=>message('#msg3','💡 '+(locale==='en'?practice.q.hintEn:practice.q.hint));$('#reset3').onclick=resetPractice;$('#phase3').onchange=resetPractice;resetPractice();
 // Level 4: on each correct answer from the THIRD consecutive hit onwards, add exactly 1 sec.
 let speed={playing:false,locked:false,timeEnd:0,timer:null,delay:null,good:0,total:0,streak:0,maxStreak:0,decks:{},q:null,best:0};
 try{speed.best=Number(localStorage.getItem('loglab_v3_best'))||0}catch(e){}
@@ -507,7 +629,7 @@ function clearSpeed(){if(speed.timer)clearInterval(speed.timer);if(speed.delay)c
 function updateSpeed(){let seconds=speed.playing?Math.max(0,(speed.timeEnd-performance.now())/1000):60;$('#time4').textContent=seconds.toFixed(1);$('#score4').textContent=speed.good;$('#combo4').textContent=speed.streak;$('#rate4').textContent=speed.total?Math.round(100*speed.good/speed.total)+'%':'—';$('#track4').style.width=Math.min(100,seconds/60*100)+'%';$('#best4').textContent='BEST '+(speed.best||'—');$('#phase4').textContent=tierName(speedTier(speed.good))}
 function resetSpeed(){clearSpeed();speed.playing=false;speed.locked=false;speed.good=0;speed.total=0;speed.streak=0;speed.maxStreak=0;speed.decks={};$('#qtag4').textContent='READY?';$('#q4').innerHTML='log<sub>2</sub>32 = ?';$('#caption4').textContent=T('準備ができたらスタート！','Press Start when you are ready!');$('#opts4').innerHTML='';$('#start4').hidden=false;$('#start4').textContent=T('⏱ 60秒スタート','⏱ Start 60 seconds');message('#msg4',T('3連続正解目から、正解のたびに＋1秒。誤答は−5秒。','From your 3rd consecutive correct answer: +1 second each. Wrong answer: −5 seconds.'));updateSpeed()}
 function finishSpeed(){if(!speed.playing)return;speed.playing=false;clearSpeed();speed.best=Math.max(speed.best,speed.good);try{localStorage.setItem('loglab_v3_best',String(speed.best))}catch(e){}$('#qtag4').textContent='TIME UP!';$('#q4').innerHTML=`${speed.good}<span style="font-size:.48em"> ${T('問正解！','correct!')}</span>`;$('#caption4').textContent=`${T('正答率','Accuracy')} ${speed.total?Math.round(100*speed.good/speed.total):0}% / ${T('最大連続','Best streak')} ${speed.maxStreak}`;$('#opts4').innerHTML='';$('#start4').hidden=false;$('#start4').textContent=T('もう一度チャレンジ','Try again');message('#msg4',T('記録を更新しよう！ 自分のペースと正確さも大切。','Aim for a new record! Accuracy matters too.'),'good');$('#time4').textContent='0.0';$('#track4').style.width='0%';$('#best4').textContent='BEST '+speed.best}
-function nextSpeed(){if(!speed.playing)return;speed.locked=false;const t=speedTier(speed.good);speed.q=getProblem(t,speed.decks);$('#qtag4').textContent=`STEP ${t+1} · QUICK ANSWER`;$('#q4').innerHTML=speed.q.html;$('#caption4').textContent=T('答えを素早く選ぼう！','Choose the answer quickly!');updateSpeed();putNumeric('#opts4',speed.q.ans,[],(v,b)=>{if(!speed.playing||speed.locked||b.disabled)return;if(performance.now()>=speed.timeEnd){finishSpeed();return}speed.locked=true;speed.total++;$$('#opts4 button').forEach(x=>x.disabled=true);if(eq(v,speed.q.ans)){speed.good++;speed.streak++;speed.maxStreak=Math.max(speed.maxStreak,speed.streak);b.classList.add('good');if(speed.streak>=3){speed.timeEnd+=1000;message('#msg4',`✓ ${speed.streak} ${T('連続正解！','in a row!')} +1 ${T('秒','sec')}`,'good')}else message('#msg4',T('✓ 正解！','✓ Correct!'),'good')}else{speed.streak=0;speed.timeEnd-=5000;b.classList.add('bad');message('#msg4',T('✕ 不正解。−5秒','✕ Incorrect. −5 seconds'),'bad')}updateSpeed();if(performance.now()>=speed.timeEnd){finishSpeed();return}speed.delay=setTimeout(()=>{speed.delay=null;nextSpeed()},eq(v,speed.q.ans)?170:350)})}
+function nextSpeed(){if(!speed.playing)return;speed.locked=false;const t=speedTier(speed.good);speed.q=getProblem(t,speed.decks);$('#qtag4').textContent=`STEP ${t+1} · QUICK ANSWER`;$('#q4').innerHTML=speed.q.html;$('#caption4').textContent=T('答えを素早く選ぼう！','Choose the answer quickly!');updateSpeed();putNumeric('#opts4',speed.q.ans,practiceWrong(speed.q),(v,b)=>{if(!speed.playing||speed.locked||b.disabled)return;if(performance.now()>=speed.timeEnd){finishSpeed();return}speed.locked=true;speed.total++;$$('#opts4 button').forEach(x=>x.disabled=true);if(eq(v,speed.q.ans)){speed.good++;speed.streak++;speed.maxStreak=Math.max(speed.maxStreak,speed.streak);b.classList.add('good');if(speed.streak>=3){speed.timeEnd+=1000;message('#msg4',`✓ ${speed.streak} ${T('連続正解！','in a row!')} +1 ${T('秒','sec')}`,'good')}else message('#msg4',T('✓ 正解！','✓ Correct!'),'good')}else{speed.streak=0;speed.timeEnd-=5000;b.classList.add('bad');message('#msg4',T('✕ 不正解。−5秒','✕ Incorrect. −5 seconds'),'bad')}updateSpeed();if(performance.now()>=speed.timeEnd){finishSpeed();return}speed.delay=setTimeout(()=>{speed.delay=null;nextSpeed()},eq(v,speed.q.ans)?170:350)})}
 function startSpeed(){resetSpeed();speed.playing=true;speed.timeEnd=performance.now()+60000;$('#start4').hidden=true;nextSpeed();speed.timer=setInterval(()=>{if(!speed.playing)return;if(performance.now()>=speed.timeEnd)finishSpeed();else updateSpeed()},80)}
 $('#start4').onclick=startSpeed;$('#reset4').onclick=resetSpeed;resetSpeed();
 // Graph renderer: geometric axes share same unit scale, ensuring y=x reflection is exact.
@@ -535,14 +657,21 @@ let graphView='both';function drawExplorer(){const a=Number($('#graphbase').valu
 $('#graphbase').onchange=drawExplorer;$$('.base-picks button').forEach(b=>b.onclick=()=>{$('#graphbase').value=b.dataset.base;$$('.base-picks button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));drawExplorer()});$('#grapht').oninput=drawExplorer;$('#mirror').onchange=drawExplorer;$('#pointson').onchange=drawExplorer;$$('#graphviews button').forEach(b=>b.onclick=()=>{graphView=b.dataset.view;$$('#graphviews button').forEach(x=>x.classList.toggle('on',x===b));drawExplorer()});drawExplorer();
 // Graph quizzes: curves are deterministic and distinct. Option plots use identical axes and range.
 const curveBank={basic:[{kind:'exp',a:2,h:0,k:0},{kind:'exp',a:3,h:0,k:0},{kind:'exp',a:.5,h:0,k:0},{kind:'exp',a:1/3,h:0,k:0},{kind:'log',a:2,h:0,k:0},{kind:'log',a:3,h:0,k:0},{kind:'log',a:.5,h:0,k:0},{kind:'log',a:1/3,h:0,k:0}],shift:[{kind:'exp',a:2,h:1,k:0},{kind:'exp',a:2,h:0,k:1},{kind:'exp',a:2,h:-1,k:0},{kind:'exp',a:.5,h:0,k:-1},{kind:'exp',a:.5,h:1,k:0},{kind:'log',a:2,h:1,k:0},{kind:'log',a:2,h:0,k:1},{kind:'log',a:2,h:-1,k:0},{kind:'log',a:.5,h:0,k:1},{kind:'log',a:.5,h:1,k:0}]};
+
+for(const kind of ['exp','log'])for(const a of [2,3,4,.5,1/3]){
+ if(a===4)curveBank.basic.push({kind,a,h:0,k:0});
+ for(const [h,k] of [[-1,0],[1,0],[2,0],[0,-1],[0,1],[0,2],[1,-1],[-1,1]]){
+  if(!curveBank.shift.some(s=>s.kind===kind&&s.a===a&&s.h===h&&s.k===k))curveBank.shift.push({kind,a,h,k});
+ }
+}
 const qGraph={g2f:{score:0,turn:0,seen:[],opts:null,answer:null,locked:false},f2g:{score:0,turn:0,seen:[],opts:null,answer:null,locked:false}};
 const keySpec=s=>[s.kind,s.a,s.h,s.k].join('/');
 function explainCurve(s){const base=s.a===.5?frac([1,2]):s.a===1/3?frac([1,3]):s.a;
  if(locale==='en')return `${s.kind==='exp'?'Exponential':'Logarithmic'} function; base ${base}; ${s.a>1?'increasing':'decreasing'}. ${s.kind==='exp'?`Horizontal asymptote: y = ${s.k}.`:`Vertical asymptote: x = ${s.h}.`}${s.h||s.k?` Translated ${s.h} units right and ${s.k} units up.`:''}`;
  return `${s.kind==='exp'?'指数関数':'対数関数'}。底は ${base}、${s.a>1?'右上がり':'右下がり'}。${s.kind==='exp'?`水平漸近線は y=${s.k}。`:`垂直漸近線は x=${s.h}。`}${s.h||s.k?`右に ${s.h}、上に ${s.k} だけ平行移動しています。`:''}`;
 }
-function prepGraph(key){let ob=qGraph[key];ob.score=0;ob.turn=0;ob.seen=[];makeGraphQuestion(key)}
-function makeGraphQuestion(key){let ob=qGraph[key],bank=curveBank[$('#'+key+'diff').value];ob.locked=false;$('#'+key+'next').hidden=true;$('#'+key+'exp').hidden=true;ob.turn++;const remaining=bank.filter(x=>!ob.seen.includes(keySpec(x)));if(!remaining.length)ob.seen=[];const use=(remaining.length?remaining:bank);ob.answer=pop(use);ob.seen.push(keySpec(ob.answer));const candidates=shuffle(bank.filter(x=>keySpec(x)!==keySpec(ob.answer)));ob.opts=shuffle([ob.answer,...candidates.slice(0,3)]);$('#'+key+'score').textContent=scoreText(ob.score,ob.turn);
+function prepGraph(key){comboReset(key);let ob=qGraph[key];ob.score=0;ob.turn=0;ob.seen=[];makeGraphQuestion(key)}
+function makeGraphQuestion(key){comboStart(key);let ob=qGraph[key],bank=curveBank[$('#'+key+'diff').value];ob.locked=false;$('#'+key+'next').hidden=true;$('#'+key+'exp').hidden=true;ob.turn++;const remaining=bank.filter(x=>!ob.seen.includes(keySpec(x)));if(!remaining.length)ob.seen=[];const use=(remaining.length?remaining:bank);ob.answer=pop(use);ob.seen.push(keySpec(ob.answer));const similar=x=>(x.kind===ob.answer.kind?4:0)+(x.a===ob.answer.a?3:(x.a>1)===(ob.answer.a>1)?1:0)+(x.h===ob.answer.h?1:0)+(x.k===ob.answer.k?1:0);const candidates=shuffle(bank.filter(x=>keySpec(x)!==keySpec(ob.answer))).sort((a,b)=>similar(b)-similar(a));ob.opts=shuffle([ob.answer,...candidates.slice(0,3)]);$('#'+key+'score').textContent=scoreText(ob.score,ob.turn);
 if(key==='g2f'){
  drawAxes($('#g2fsvg'),[ob.answer],{width:520,height:380,low:-2,high:6,margin:38,mark:true});$('#g2fopts').innerHTML=ob.opts.map((s,i)=>`<button class="graphopt" data-i="${i}"><span class="optionMath">${curveLabel(s)}</span></button>`).join('');
  $$('#g2fopts button').forEach(b=>b.onclick=()=>chooseGraph('g2f',Number(b.dataset.i),b));
@@ -550,10 +679,10 @@ if(key==='g2f'){
  $('#f2geq').innerHTML=curveLabel(ob.answer);$('#f2gopts').innerHTML=ob.opts.map((s,i)=>`<button class="graphchoice" data-i="${i}"><span>${'ABCD'[i]}</span><svg id="f2gsvg${i}" viewBox="0 0 220 220" aria-label="候補${'ABCD'[i]}のグラフ"></svg></button>`).join('');ob.opts.forEach((s,i)=>drawAxes($('#f2gsvg'+i),[s],{width:220,height:220,low:-2,high:6,margin:22,tiny:true,mark:true}));$$('#f2gopts button').forEach(b=>b.onclick=()=>chooseGraph('f2g',Number(b.dataset.i),b));
 }
 message('#'+key+'msg',key==='g2f'?T('式を選ぼう。','Choose the formula.'):T('グラフを選ぼう。','Choose the graph.'))}
-function chooseGraph(key,i,b){let ob=qGraph[key];if(ob.locked||b.disabled)return;const correct=keySpec(ob.opts[i])===keySpec(ob.answer);if(correct){ob.locked=true;ob.score++;$$('#'+key+'opts button').forEach((x,j)=>{x.disabled=true;if(keySpec(ob.opts[j])===keySpec(ob.answer))x.classList.add('good')});$('#'+key+'score').textContent=scoreText(ob.score,ob.turn);message('#'+key+'msg',T('✓ 正解！ なぜこのグラフになるか確認しよう。','✓ Correct! Check why this graph matches.'),'good');renderSteps('#'+key+'exp',[`${T("式：","Equation: ")}<span class="inline-equation">${curveLabel(ob.answer)}</span>`,explainCurve(ob.answer)]);$('#'+key+'next').hidden=false}else{b.classList.add('bad');b.disabled=true;message('#'+key+'msg',T('違います。増加・減少、漸近線、通る点を観察しよう。','Not quite. Check the slope direction, asymptote, and points.'),'bad')}}
+function chooseGraph(key,i,b){let ob=qGraph[key];if(ob.locked||b.disabled)return;const correct=keySpec(ob.opts[i])===keySpec(ob.answer);if(correct){ob.locked=true;ob.score++;comboHit(key);$$('#'+key+'opts button').forEach((x,j)=>{x.disabled=true;if(keySpec(ob.opts[j])===keySpec(ob.answer))x.classList.add('good')});$('#'+key+'score').textContent=scoreText(ob.score,ob.turn);message('#'+key+'msg',T('✓ 正解！ なぜこのグラフになるか確認しよう。','✓ Correct! Check why this graph matches.'),'good');renderSteps('#'+key+'exp',[`${T("式：","Equation: ")}<span class="inline-equation">${curveLabel(ob.answer)}</span>`,explainCurve(ob.answer)]);$('#'+key+'next').hidden=false}else{comboMiss(key);b.classList.add('bad');b.disabled=true;message('#'+key+'msg',T('違います。増加・減少、漸近線、通る点を観察しよう。','Not quite. Check the slope direction, asymptote, and points.'),'bad')}}
 ['g2f','f2g'].forEach(key=>{$('#'+key+'next').onclick=()=>makeGraphQuestion(key);$('#'+key+'reset').onclick=()=>prepGraph(key);$('#'+key+'diff').onchange=()=>prepGraph(key);prepGraph(key)});
 // Tabs: stop a running timed challenge when leaving it.
-$$('.tabs button').forEach(b=>b.onclick=()=>{let page=b.dataset.page;if(!page)return;if(page!=='p4'&&speed.playing)resetSpeed();$$('.tabs button').forEach(btn=>btn.classList.toggle('active',btn===b));$$('.page').forEach(p=>p.classList.toggle('active',p.id===page));if(page==='graph')drawExplorer();if(page==='g2f')makeGraphQuestion('g2f');if(page==='f2g')makeGraphQuestion('f2g');window.scrollTo?.({top:0,behavior:'auto'})});
+$$('.tabs button').forEach(b=>b.onclick=()=>{let page=b.dataset.page;if(!page)return;if(page!=='p4'&&speed.playing)resetSpeed();$$('.tabs button').forEach(btn=>btn.classList.toggle('active',btn===b));$$('.page').forEach(p=>p.classList.toggle('active',p.id===page));if(page==='graph')drawExplorer();window.scrollTo?.({top:0,behavior:'auto'})});
 
 function switchLanguage(to){
   if(to===locale)return;
@@ -566,7 +695,7 @@ function switchLanguage(to){
   });
   if(formula.q){
     $('#count2').textContent=scoreText(formula.good,formula.seen);
-    $('#q2').innerHTML=locale==='en'?formula.q.q.replace('（底をcにする）','(using base c)').replace('（底を2に）','(using base 2)'):formula.q.q;
+    $('#q2').innerHTML=locale==='en'?formula.q.q.replace('（底をcにする）','(using base c)').replace('（底を2に）','(using base 2)').replace('（底を10に）','(using base 10)'):formula.q.q;
     message('#msg2',formula.locked?T('✓ 正解！ 変形の意味を確認しよう。','✓ Correct! Review why the transformation works.'):T('正しい変形を選ぼう。','Choose the valid transformation.'),formula.locked?'good':'');
     if(formula.locked)renderSteps('#exp2',[locale==='en'?formula.q.whyEn:formula.q.why]);
   }
@@ -615,8 +744,8 @@ function installLogLabMath(){
     .replace(/√\s*([0-9]+|[a-zA-Z])/g,'\\sqrt{$1}')
     .replace(/\(\s*(-?[0-9]+|[a-zA-Z])\s*\/\s*([0-9]+|[a-zA-Z])\s*\)/g,(_,a,b)=>'\\left( '+fraction(a,b)+' \\right)')
     .replace(/(-?[0-9]+|[a-zA-Z])\/([0-9]+|[a-zA-Z])/g,(_,a,b)=>fraction(a,b))
-    .replace(/log(?=[\s_{(0-9A-Z]|$)/g,'\\log ')
-    .replace(/×/g,'\\times ').replace(/÷/g,'\\div ').replace(/⇔/g,'\\Longleftrightarrow ').replace(/⇅/g,'\\updownarrow ').replace(/[・·]/g,'\\quad ')
+    .replace(/log(?=[\s_{(0-9A-Za-z]|$)/g,'\\log ')
+    .replace(/×/g,'\\times ').replace(/÷/g,'\\div ').replace(/⇔/g,'\\Longleftrightarrow ').replace(/⇅/g,'\\Longleftrightarrow ').replace(/[・·]/g,'\\quad ')
     .replace(/≦|≤/g,'\\leq ').replace(/≧|≥/g,'\\geq ');
  }
  function fraction(a,b){return a.startsWith('-')?'-\\frac{'+a.slice(1)+'}{'+b+'}':'\\frac{'+a+'}{'+b+'}'}

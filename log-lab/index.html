@@ -464,7 +464,7 @@ function installLogLabMath(){
     .replace(/√\s*([0-9]+|[a-zA-Z])/g,'\\sqrt{$1}')
     .replace(/\(\s*(-?[0-9]+|[a-zA-Z])\s*\/\s*([0-9]+|[a-zA-Z])\s*\)/g,(_,a,b)=>'\\left( '+fraction(a,b)+' \\right)')
     .replace(/(-?[0-9]+|[a-zA-Z])\/([0-9]+|[a-zA-Z])/g,(_,a,b)=>fraction(a,b))
-    .replace(/\blog(?=[\s_{(0-9A-Z]|$)/g,'\\log ')
+    .replace(/log(?=[\s_{(0-9A-Z]|$)/g,'\\log ')
     .replace(/×/g,'\\times ').replace(/÷/g,'\\div ').replace(/⇔/g,'\\Longleftrightarrow ').replace(/⇅/g,'\\updownarrow ').replace(/[・·]/g,'\\quad ')
     .replace(/≦|≤/g,'\\leq ').replace(/≧|≥/g,'\\geq ');
  }
@@ -511,8 +511,12 @@ function installLogLabMath(){
  function isMathOnly(el,html){
    const t=document.createElement('template');t.innerHTML=html;
    const plain=t.content.textContent;
-   return plain.trim()!==''&&!/[\u3040-\u30ff\u3400-\u9fff]/.test(plain)&&
-     !/[a-zA-Z]{2,}/.test(plain.replace(/log|sqrt/g,''))&&!el.querySelector('[data-ja],[data-en]');
+   if(!plain.trim()||/[\u3040-\u30ff\u3400-\u9fff]/.test(plain)||el.querySelector('[data-ja],[data-en]'))return false;
+   if(el.id==='q4'&&/correct!/i.test(plain))return false;
+   // Formula-only elements are known to be equations. In explanations,
+   // avoid interpreting natural-language words as products of variables.
+   if(el.classList.contains('step')&&/[a-zA-Z]{2,}/.test(plain.replace(/log|sqrt/g,'')))return false;
+   return true;
  }
  function makeMath(tex){
    const span=document.createElement('span');span.className='loglab-tex';

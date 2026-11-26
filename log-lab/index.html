@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="ja"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="#1d3468" name="theme-color"/><title>LOG LAB v4 | JPN / ENG</title>
+<html lang="ja"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="#1d3468" name="theme-color"/><title>LOG LAB v5 | JPN / ENG</title>
 <style>
 :root{--bg:#edf2fb;--paper:#fff;--navy:#1e356a;--blue:#3967df;--blue2:#eff4ff;--ink:#253859;--muted:#7182a2;--line:#dce5f4;--green:#167c5e;--red:#b73c4d;--orange:#e18a4b}
 *{box-sizing:border-box}body{margin:0;background:#e5ecf8;color:var(--ink);font-family:system-ui,-apple-system,'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif}button,input,select{font:inherit}button{cursor:pointer;touch-action:manipulation}button:disabled{cursor:default;opacity:.6}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #9abaff;outline-offset:2px}.app{max-width:1130px;margin:20px auto;background:var(--bg);padding:19px;border-radius:26px;box-shadow:0 14px 45px #2941651b}.head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:5px 6px 15px}.kicker{font-size:10px;font-weight:900;letter-spacing:.17em;color:#768bb4}.brand{font-size:32px;font-weight:1000;letter-spacing:-1.5px;color:#203b7a;line-height:1.1;margin:2px 0}.brand span{color:var(--blue)}.sub{font-size:12px;color:var(--muted)}.headchip{font-size:11px;font-weight:900;color:#627aaa;border:1px solid #cad7ed;border-radius:100px;padding:9px 12px;white-space:nowrap}.navtitle{font-size:10px;letter-spacing:.12em;color:#8a9bbc;font-weight:950;margin:5px 4px 6px}.tabs{display:grid;gap:7px;margin-bottom:12px}.tabs.levels{grid-template-columns:repeat(5,minmax(0,1fr))}.tabs.extras{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:18px}.tabs button{border:1px solid #d6e0f0;border-radius:12px;background:white;color:#687fa5;padding:11px 4px;font-size:12px;min-width:0;font-weight:900}.tabs button b{display:block;font-size:15px}.tabs button small{display:block;font-size:11px;font-weight:850}.tabs button.active{background:var(--navy);color:white;border-color:var(--navy)}.tabs.extras button.active{background:#23736c;border-color:#23736c}
@@ -96,9 +96,104 @@ select{font-size:13px;line-height:1.4;min-height:38px}
  .questionbox .math{font-size:24px}
 }
 @media(prefers-reduced-motion:reduce){.flipside{transition:none}}
-</style></head><body>
+
+/* v5: consistent mathematical typography, compact classroom layout */
+:root{--ink:#1e3152;--muted:#52688b}
+body{background:#e7edf7}
+.app{max-width:1180px;margin:14px auto;padding:18px}
+.head{padding:4px 4px 10px}
+.brand{line-height:1.05}
+.navtitle{margin:2px 3px 4px;font-size:11px;color:#52688b}
+.tabs{gap:7px;margin-bottom:9px}
+.tabs.extras{margin-bottom:13px}
+.tabs button{min-height:52px;padding:6px 4px;color:#45618a}
+.tabs button.active{color:#fff}
+.tabs button b{font-size:17px}
+.tabs button small{font-size:12px}
+.ptop{padding:15px 18px 6px}
+.ptop h2{font-size:clamp(19px,2vw,24px)}
+.ptop p{font-size:13px}
+.content{padding:8px 18px 16px}
+.barline{margin-bottom:9px}
+.questionbox{min-height:136px;padding:10px 8px;margin-bottom:10px}
+.flip{height:220px;margin-bottom:10px}
+.math,.backline,.optionMath,.fml,.quizformula,.options button,.optionFormula button{font-family:"KaTeX_Main","Latin Modern Math","Cambria Math",Georgia,serif;font-weight:700}
+.math{font-size:clamp(32px,4.3vw,49px);line-height:1.4}
+.questionbox .math{font-size:clamp(26px,3.8vw,43px);line-height:1.35}
+.formulaquestion .math{font-size:clamp(24px,3.4vw,39px)}
+.backline,.back .math{font-size:clamp(23px,3.2vw,33px);line-height:1.35}
+.options,.optionFormula,.message,.explain,.tierline,.tierhint,.best{max-width:900px}
+.options button,.optionFormula button{min-height:62px;overflow-wrap:normal;word-break:normal;padding:10px 7px}
+.optionFormula button{font-size:clamp(20px,2.25vw,29px);line-height:1.4}
+.options button:disabled,.optionFormula button:disabled{opacity:1}
+.options button:disabled:not(.good):not(.bad),.optionFormula button:disabled:not(.good):not(.bad){opacity:.64}
+.message{margin-top:9px;min-height:37px;padding:8px 12px}
+.actions{margin-top:9px}
+.explain{margin-top:9px;padding:10px 13px}
+.actions button{min-height:42px}
+.stats{margin-bottom:7px}.stat{padding:7px 4px}.track{margin-bottom:8px}
+.tierline,.tierhint{margin-bottom:6px}
+.theory .fml{line-height:1.6}
+.theory .example{font-size:16px;line-height:1.6}
+.quizformula{padding:12px 8px;margin-bottom:10px}
+.quizgraph{max-width:440px}
+.plotoptions{max-width:630px}
+.graphchoice svg{max-width:170px}
+.loglab-tex{display:inline-block;max-width:100%;vertical-align:middle;white-space:nowrap}
+.loglab-tex .katex{font-size:1em;line-height:1.2}
+.math-note{display:block;font:600 13px/1.4 system-ui,sans-serif;color:var(--muted);margin-top:6px}
+.backline .loglab-tex{margin:2px 0}
+.step .loglab-tex{font-size:1.16em}
+.math,.backline,.fml,.example,.quizformula,.optionFormula button,.options button{min-width:0;max-width:100%}
+.math,.backline,.fml,.example,.quizformula,.optionFormula button,.options button{overflow-x:auto;overflow-y:visible}
+.face .math,.face .backline{padding:4px 5px}
+.options button,.optionFormula button{padding-block:11px}
+/* Offline fallback: the exponent is raised from the base's baseline, not
+   aligned to the top of a flex row. Fractions remain stacked. */
+.powexpr{display:inline-block;vertical-align:baseline;white-space:nowrap;line-height:1.25;margin:0 .04em;max-width:none}
+.powexpr .powbase{display:inline;line-height:1.25}
+.powexpr .powexp{display:inline-flex;vertical-align:1.02em;align-items:center;justify-content:center;font-size:.62em;line-height:1.03;margin:0 0 0 .08em;min-width:0;white-space:nowrap}
+.powexpr .powexp .frac{font-size:1em;line-height:1.02}
+.math sup,.math sub,.backline sup,.backline sub,.fml sup,.fml sub,.optionFormula sup,.optionFormula sub,.optionMath sup,.optionMath sub,.explain sup,.explain sub,.quizformula sup,.quizformula sub{font-size:.63em;line-height:0}
+sup:has(.frac){vertical-align:1em}
+sub:has(.frac){vertical-align:-.8em}
+@media(min-width:781px) and (max-height:850px){
+ .app{margin:8px auto;padding:13px 17px}
+ .head{padding-bottom:7px}.brand{font-size:29px}.head .sub{font-size:12px}
+ .tabs button{min-height:46px;padding:4px}.tabs{margin-bottom:6px}.tabs.extras{margin-bottom:9px}
+ .questionbox{min-height:119px}.flip{height:210px}
+ .ptop{padding-top:12px}.content{padding-top:6px}
+ .optionFormula button,.options button{min-height:55px}
+}
+@media(max-width:780px){
+ .app{margin:0 auto;padding:10px;border-radius:0}
+ .head{padding:6px 3px 10px}
+ .tabs button{min-height:55px;padding:6px 2px}
+ .tabs button small{font-size:11px}
+ .content{padding:9px 11px 15px}
+ .ptop{padding:13px 11px 6px}
+ .questionbox{min-height:132px}
+ .flip{height:240px}
+ .math{font-size:clamp(29px,7.5vw,44px)}
+ .questionbox .math{font-size:clamp(23px,5.7vw,35px)}
+ .formulaquestion .math{font-size:clamp(22px,5vw,33px)}
+ .optionFormula button{font-size:clamp(17px,4.1vw,25px)}
+ .options button{font-size:clamp(20px,5vw,28px)}
+}
+@media(max-width:540px){
+ .options{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .tabs button small{font-size:10px}
+ .backline{font-size:clamp(22px,5.8vw,29px)}
+ .questionbox{min-height:126px}
+ .math-note{font-size:11px}
+}
+
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
+</head><body>
 <main class="app" id="loglab">
-<header class="head"><div><div class="kicker">EXPONENTS × LOGARITHMS · MATH Ⅱ</div><h1 class="brand">LOG <span>LAB</span><small style="font-size:.39em;vertical-align:middle;letter-spacing:0">v4</small></h1><div class="sub" data-en="From powers to logarithms, rules, quick answers, and graphs." data-ja="指数から対数へ、公式、瞬答、グラフまで。">指数から対数へ、公式、瞬答、グラフまで。</div></div><div aria-label="Language / 言語" class="language-switch" role="group"><button aria-pressed="true" class="active" data-lang="ja" type="button">JPN</button><button aria-pressed="false" class="" data-lang="en" type="button">ENG</button></div></header>
+<header class="head"><div><div class="kicker">EXPONENTS × LOGARITHMS · MATH Ⅱ</div><h1 class="brand">LOG <span>LAB</span><small style="font-size:.39em;vertical-align:middle;letter-spacing:0">v5</small></h1><div class="sub" data-en="From powers to logarithms, rules, quick answers, and graphs." data-ja="指数から対数へ、公式、瞬答、グラフまで。">指数から対数へ、公式、瞬答、グラフまで。</div></div><div aria-label="Language / 言語" class="language-switch" role="group"><button aria-pressed="true" class="active" data-lang="ja" type="button">JPN</button><button aria-pressed="false" class="" data-lang="en" type="button">ENG</button></div></header>
 <div class="navtitle" data-en="01 | LEARN STEP BY STEP (LEVELS 0–4)" data-ja="01｜順番に学ぶ（LEVEL 0〜4）">01｜順番に学ぶ（LEVEL 0〜4）</div>
 <nav aria-label="学習レベル" class="tabs levels"><button class="active" data-page="p0"><b>0</b><small data-en="Powers" data-ja="累乗の値">累乗の値</small></button><button data-page="p1"><b>1</b><small data-en="Log values" data-ja="対数の値">対数の値</small></button><button data-page="p2"><b>2</b><small data-en="Rules" data-ja="公式確認">公式確認</small></button><button data-page="p3"><b>3</b><small data-en="Mixed practice" data-ja="総合計算">総合計算</small></button><button data-page="p4"><b>4</b><small data-en="60-sec sprint" data-ja="60秒勝負">60秒勝負</small></button></nav>
 <div class="navtitle" data-en="02 | EXPLORE · DISCOVER · CHALLENGE" data-ja="02｜調べる・発見する・挑戦する">02｜調べる・発見する・挑戦する</div>
@@ -114,7 +209,7 @@ select{font-size:13px;line-height:1.4;min-height:38px}
 <div class="theory"><h3 data-en="③ Quotient → difference" data-ja="③ 商 → 差">③ 商 → 差</h3><div class="fml">log<sub>a</sub><span class="frac"><span>M</span><span>N</span></span> = log<sub>a</sub>M − log<sub>a</sub>N</div><p data-en="Division of arguments becomes subtraction of logarithms." data-ja="真数のわり算は、対数の差に変わる。">真数のわり算は、対数の差に変わる。</p><div class="example">log<sub>3</sub>81 − log<sub>3</sub>9 = log<sub>3</sub>9 = 2</div></div>
 <div class="theory"><h3 data-en="④ Power rule" data-ja="④ 累乗の公式">④ 累乗の公式</h3><div class="fml">log<sub>a</sub>M<sup>r</sup> = r log<sub>a</sub>M</div><p data-en="Bring the exponent of the argument in front." data-ja="真数の指数を前に出せる。">真数の指数を前に出せる。</p><div class="example">log<sub>2</sub>√8 = <span class="frac"><span>1</span><span>2</span></span>log<sub>2</sub>8 = <span class="frac"><span>3</span><span>2</span></span></div></div>
 <div class="theory"><h3 data-en="⑤ Change-of-base formula" data-ja="⑤ 底の変換公式">⑤ 底の変換公式</h3><div class="fml">log<sub>a</sub>M = <span class="frac"><span>log<sub>c</sub>M</span><span>log<sub>c</sub>a</span></span></div><p data-en="The numerator uses the original argument; the denominator uses the original base. Choose any valid new base c." data-ja="分子が真数、分母が元の底。新しい底 c は任意に選べる。">分子が真数、分母が元の底。新しい底 c は任意に選べる。</p><div class="example">log<sub>4</sub>8 = <span class="frac"><span>log<sub>2</sub>8</span><span>log<sub>2</sub>4</span></span> = <span class="frac"><span>3</span><span>2</span></span></div></div>
-<div class="theory"><h3 data-en="⑥ Special values and inverse operations" data-ja="⑥ 特別な値・逆の関係">⑥ 特別な値・逆の関係</h3><div class="fml">log<sub>a</sub>1 = 0 / log<sub>a</sub>a = 1</div><div class="fml">a<sup>log<sub>a</sub>M</sup> = M</div><p data-en="A power of 0 gives 1; a power of 1 gives the base." data-ja="0乗すると1、1乗すると底そのもの。">0乗すると1、1乗すると底そのもの。</p><div class="example">log<sub>5</sub><span data-en="1 = 0 · log" data-ja="1 = 0　・　log">1 = 0　・　log</span><sub>5</sub>5 = 1</div></div>
+<div class="theory"><h3 data-en="⑥ Special values and inverse operations" data-ja="⑥ 特別な値・逆の関係">⑥ 特別な値・逆の関係</h3><div class="fml">log<sub>a</sub>1 = 0　・　log<sub>a</sub>a = 1</div><div class="fml">a<sup>log<sub>a</sub>M</sup> = M</div><p data-en="A power of 0 gives 1; a power of 1 gives the base." data-ja="0乗すると1、1乗すると底そのもの。">0乗すると1、1乗すると底そのもの。</p><div class="example">log<sub>5</sub><span data-en="1 = 0 · log" data-ja="1 = 0　・　log">1 = 0　・　log</span><sub>5</sub>5 = 1</div></div>
 <div class="theory"><h3 data-en="⑦ Reciprocal bases" data-ja="⑦ 底が逆数の場合">⑦ 底が逆数の場合</h3><div class="fml">log<sub>1/a</sub>M = −log<sub>a</sub>M</div><p data-en="Replacing the base by its reciprocal changes the sign." data-ja="底を逆数にすると、対数の符号が変わる。">底を逆数にすると、対数の符号が変わる。</p><div class="example">log<sub>1/2</sub>8 = −log<sub>2</sub>8 = −3</div></div>
 <div class="theory"><h3 data-en="⑧ Chain rule via change of base" data-ja="⑧ 底の変換をつなげる">⑧ 底の変換をつなげる</h3><div class="fml">log<sub>a</sub>b × log<sub>b</sub>c = log<sub>a</sub>c</div><p data-en="The middle bases cancel. Useful for multi-step questions." data-ja="間にある底がつながる。複合問題で便利。">間にある底がつながる。複合問題で便利。</p><div class="example">log<sub>2</sub>3 × log<sub>3</sub>8 = log<sub>2</sub>8 = 3</div></div>
 </div><div class="warn"><strong data-en="Conditions:" data-ja="条件：">条件：</strong><span data-en="A logarithmic base must be positive and different from 1; its argument must be positive. The same conditions apply to bases a and c and arguments M and N above. In particular, log" data-ja="対数の底は 0 より大きく 1 ではない数、真数は正の数。上の公式では a,c などの底は同様の条件を満たし、M,N などの真数は正です。特に、log">対数の底は 0 より大きく 1 ではない数、真数は正の数。上の公式では a,c などの底は同様の条件を満たし、M,N などの真数は正です。特に、log</span><sub>a</sub><span data-en="(M+N) cannot be rewritten as log" data-ja="(M+N) は log">(M+N) は log</span><sub>a</sub>M + log<sub>a</sub><span data-en="N." data-ja="N に変形できません。">N に変形できません。</span></div></div></div></section>
@@ -238,6 +333,9 @@ Q(4,L(4,8)+' + '+L(4,2)+' = ?',[2],'真数の積を求めよう。',[L(4,16)+' =
 ];
 const problemEnglish=[["To what power do you raise 2 to get 8?","2³ = 8, so the answer is 3."],["Think of a negative exponent.","3⁻² = 1/9, so the answer is −2."],["What negative power of 1/2 gives 8?","(1/2)⁻³ = 8, so the answer is −3."],["Write 4 = 2² and 8 = 2³.","4<sup>3/2</sup> = 8, so the answer is 3/2."],["Write 16 = 2⁴ and 8 = 2³.","16<sup>3/4</sup> = 8, so the answer is 3/4."],["Write 9 = 3² and 1/3 = 3⁻¹.","9<sup>−1/2</sup> = 1/3, so the answer is −1/2."],["Think of negative powers of 2.","2⁻³ = 1/8, so the answer is −3."],["Think of the square root.","25<sup>1/2</sup> = 5, so the answer is 1/2."],["A sum of same-base logs combines as a product.","log₂(4×8) = log₂32 = 5"],["A difference of same-base logs combines as a quotient.","log₃(81÷9) = log₃9 = 2"],["What is 24 ÷ 3?","log₂8 = 3"],["Multiply the arguments to get 25.","log₅25 = 2"],["(1/9) × 27 = 3.","log₃3 = 1"],["Use the quotient rule.","log₂(1/4) = −2"],["3 × (8/3) = 8.","log₂8 = 3"],["The product of arguments is 16.","log₄16 = 2"],["Bring the coefficient 2 into the exponent.","log₃(9²) = log₃81 = 4"],["Bring the exponent 2 to the front.","2 × log₂8 = 2 × 3 = 6"],["A square root is a power of 1/2.","(1/2) × log₂8 = (1/2) × 3 = 3/2"],["Move the coefficient into an exponent.","3 × 2 − 3 = 3"],["log₃81 = 4.","(1/2) × 4 = 2"],["125 = 5³.","2 × log₅125 = 2 × 3 = 6"],["1/4 = 2⁻².","3 × log₂(1/4) = 3 × (−2) = −6"],["log₄8 = 3/2.","2 × (3/2) = 3"],["Use base 2.","log₂8 / log₂4 = 3/2"],["Use base 3.","log₃27 / log₃9 = 3/2"],["Use base 2.","log₂4 / log₂8 = 2/3"],["Use base 5.","log₅125 / log₅25 = 3/2"],["The middle base 3 cancels.","log₂8 = 3"],["Chain the logarithms.","log₃9 = 2"],["4 = 2².","log₂2 / log₂4 = 1/2"],["Apply change of base in reverse.","1 / log₅25 = 1/2"],["Combine quotients and products.","log₂(12÷3×2) = log₂8 = 3"],["Combine the arguments into 6² ÷ 4.","log₃(36÷4) = log₃9 = 2"],["Chain the change-of-base identities.","log₂16 = 4"],["Combine everything into one argument.","log₅((1/25) × 125 ÷ 5) = log₅1 = 0"],["The product of arguments is 64.","log₄64 = 3"],["Bring the exponents to the front.","(1/2) × 5 − (1/2) × 3 = 1"],["First compute log₉3 = 1/2.","(1/2) × 3 = 3/2"],["Multiply the arguments.","log₄16 = 2"]];
 problems.forEach((p,i)=>{[p.hintEn,p.stepEnglish]=problemEnglish[i];p.stepsEn=[p.stepEnglish]});
+/* Show the same exact exponent-to-log derivation in both languages. */
+const valueDerivations=[[[2,1],[3,1],[8,1]],[[3,1],[-2,1],[1,9]],[[1,2],[-3,1],[8,1]],[[4,1],[3,2],[8,1]],[[16,1],[3,4],[8,1]],[[9,1],[-1,2],[1,3]],[[2,1],[-3,1],[1,8]],[[25,1],[1,2],[5,1]]];
+valueDerivations.forEach(([b,e,v],i)=>{const rows=[pow(b,e)+' = '+frac(v),log(b,v)+' = '+frac(e)];problems[i].steps=rows;problems[i].stepsEn=rows;});
 const tierNames=['① 値を求める','② 和・差の公式','③ 累乗の公式','④ 底の変換','⑤ 複合問題'];
 const tierNamesEn=['① Evaluate','② Sum / difference','③ Power rule','④ Change of base','⑤ Combined rules'];
 const tierName=i=>(locale==='en'?tierNamesEn:tierNames)[i];
@@ -351,4 +449,117 @@ $$('.language-switch button').forEach(b=>b.onclick=()=>switchLanguage(b.dataset.
 updateStatic();
 
 })();
+</script>
+<script>
+function installLogLabMath(){
+ const app=document.querySelector('#loglab');
+ if(!app)return;
+ const selector='#q0,#q1,#q2,#q3,#q4,#back0,#back1,#opts0 button,#opts1 button,#opts2 button,#opts3 button,#opts4 button,#g2fopts .optionMath,#f2geq,.theory .fml,.theory .example,.explain .step';
+ const supDigits={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'-','⁺':'+'};
+ const subDigits={'₀':'0','₁':'1','₂':'2','₃':'3','₄':'4','₅':'5','₆':'6','₇':'7','₈':'8','₉':'9','ₐ':'a'};
+ function mathText(str){
+   return str.replace(/\u3000/g,' ').replace(/−/g,'-')
+    .replace(/([⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺]+)/g,(_,x)=>'^{'+Array.from(x,c=>supDigits[c]).join('')+'}')
+    .replace(/([₀₁₂₃₄₅₆₇₈₉ₐ]+)/g,(_,x)=>'_{'+Array.from(x,c=>subDigits[c]).join('')+'}')
+    .replace(/√\s*([0-9]+|[a-zA-Z])/g,'\\sqrt{$1}')
+    .replace(/\(\s*(-?[0-9]+|[a-zA-Z])\s*\/\s*([0-9]+|[a-zA-Z])\s*\)/g,(_,a,b)=>'\\left( '+fraction(a,b)+' \\right)')
+    .replace(/(-?[0-9]+|[a-zA-Z])\/([0-9]+|[a-zA-Z])/g,(_,a,b)=>fraction(a,b))
+    .replace(/\blog(?=[\s_{(0-9A-Z]|$)/g,'\\log ')
+    .replace(/×/g,'\\times ').replace(/÷/g,'\\div ').replace(/⇔/g,'\\Longleftrightarrow ').replace(/⇅/g,'\\updownarrow ').replace(/[・·]/g,'\\quad ')
+    .replace(/≦|≤/g,'\\leq ').replace(/≧|≥/g,'\\geq ');
+ }
+ function fraction(a,b){return a.startsWith('-')?'-\\frac{'+a.slice(1)+'}{'+b+'}':'\\frac{'+a+'}{'+b+'}'}
+ function nodesToTex(nodes){return Array.from(nodes).map(nodeToTex).join('')}
+ function nodeToTex(n){
+   if(n.nodeType===3)return mathText(n.textContent);
+   if(n.nodeType!==1)return '';
+   if(n.classList.contains('frac')){
+     const a=nodesToTex(n.children[0].childNodes).trim(), b=nodesToTex(n.children[1].childNodes).trim();
+     return fraction(a,b);
+   }
+   if(n.classList.contains('powexpr')){
+     const b=n.querySelector('.powbase'),e=n.querySelector('.powexp');
+     let base=nodesToTex(b.childNodes);
+     if(b.querySelector('.frac'))base=base.replace(/^\(/,'\\left(').replace(/\)$/,'\\right)');
+     return '{'+base+'}^{'+nodesToTex(e.childNodes)+'}';
+   }
+   const v=nodesToTex(n.childNodes);
+   if(n.tagName==='SUP')return '^{'+v+'}';
+   if(n.tagName==='SUB')return '_{'+v+'}';
+   return v;
+ }
+ function trimOuter(s){
+   s=s.trim();
+   if(!s.startsWith('(')||!s.endsWith(')'))return s;
+   let depth=0;
+   for(let i=0;i<s.length;i++){if(s[i]==='(')depth++;if(s[i]===')')depth--;if(depth===0&&i<s.length-1)return s}
+   return s.slice(1,-1);
+ }
+ function htmlToTex(html){
+   // In this question bank, a spaced slash between logarithms is division.
+   // The formula guide's pair of special values is explicitly separated.
+   const split=html.split(' / ');
+   if(split.length===2&&/log/.test(html)&&!html.includes('= 0 / ')){
+     let left=split[0],right=split[1],suffix='';
+     const eq=right.indexOf(' = ');
+     if(eq>=0){suffix=right.slice(eq);right=right.slice(0,eq)}
+     return '\\frac{'+htmlToTex(trimOuter(left))+'}{'+htmlToTex(trimOuter(right))+'}'+htmlToTex(suffix);
+   }
+   const template=document.createElement('template');template.innerHTML=html;
+   return nodesToTex(template.content.childNodes);
+ }
+ function isMathOnly(el,html){
+   const t=document.createElement('template');t.innerHTML=html;
+   const plain=t.content.textContent;
+   return plain.trim()!==''&&!/[\u3040-\u30ff\u3400-\u9fff]/.test(plain)&&
+     !/[a-zA-Z]{2,}/.test(plain.replace(/log|sqrt/g,''))&&!el.querySelector('[data-ja],[data-en]');
+ }
+ function makeMath(tex){
+   const span=document.createElement('span');span.className='loglab-tex';
+   window.katex.render('\\displaystyle\\boldsymbol{'+tex+'}',span,{throwOnError:true,strict:'ignore',output:'htmlAndMathml',trust:false});
+   return span;
+ }
+ function fallbackScripts(el){
+   for(const n of el.querySelectorAll('sup,sub')){
+     if(n.children.length)continue;
+     const m=n.textContent.trim().match(/^([−-]?)([0-9]+|[a-zA-Z])\/([0-9]+|[a-zA-Z])$/);
+     if(!m)continue;
+     const f=document.createElement('span');f.className='frac';
+     for(const v of [m[1]+m[2],m[3]]){const p=document.createElement('span');p.textContent=v;f.append(p)}
+     n.replaceChildren(f);
+   }
+ }
+ function render(el){
+   if(!el||el.querySelector('.loglab-tex'))return;
+   const source=el.innerHTML;
+   if(!source.trim())return;
+   if(!window.katex){fallbackScripts(el);return}
+   let body=source, note='';
+   if(el.id==='q2'){
+     const m=body.match(/\s*(（底を[^）]+）|\(using base [^)]+\))$/);
+     if(m){note=m[1];body=body.slice(0,m.index)}
+   }
+   if(!isMathOnly(el,body)){fallbackScripts(el);return}
+   const rows=body.split(/<br\s*\/?>/i);
+   try{
+     const frag=document.createDocumentFragment();
+     rows.forEach((row,i)=>{if(i)frag.append(document.createElement('br'));frag.append(makeMath(htmlToTex(row)))});
+     if(note){const span=document.createElement('span');span.className='math-note';span.textContent=note;frag.append(span)}
+     el.replaceChildren(frag);
+   }catch(e){fallbackScripts(el)}
+ }
+ function scan(root){if(root.nodeType!==1)return;if(root.matches(selector))render(root);root.querySelectorAll(selector).forEach(render)}
+ scan(app);
+ const observer=new MutationObserver(records=>{
+   for(const rec of records){
+     const target=rec.target.nodeType===1?rec.target:rec.target.parentElement;
+     if(!target||target.closest('.loglab-tex'))continue;
+     const parent=target.closest(selector);
+     if(parent)render(parent);
+     else for(const n of rec.addedNodes)scan(n);
+   }
+ });
+ observer.observe(app,{subtree:true,childList:true});
+}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',installLogLabMath,{once:true})}else{installLogLabMath()}
 </script></body></html>

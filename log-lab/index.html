@@ -351,6 +351,12 @@ sub:has(.frac){vertical-align:-.8em}
 .backline{line-height:1.16}
 @media(max-width:540px){.combo-meter{gap:4px;padding:4px 6px}.combo-main{font-size:12px}.combo-best{font-size:9px}}
 
+
+/* Equivalent forms on a single baseline, fitted to the card width. */
+#p0 .face .backline,#p1 .face .backline{width:100%;max-width:100%;min-width:0;white-space:nowrap;text-align:center;overflow-x:auto;overflow-y:hidden;padding:8px 6px;line-height:1.35}
+.backline .loglab-tex{display:inline-block;max-width:none;white-space:nowrap;vertical-align:middle;font-size:var(--equivalence-scale,1em)}
+@media(max-width:540px){#p0 .face .backline,#p1 .face .backline{font-size:clamp(20px,5.7vw,29px)}}
+
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
@@ -461,7 +467,7 @@ function extendPowers(){
 }
 extendPowers();
 const card={};function initCard(index){let obj={index,count:0,correct:0,used:[],q:null,locked:false,job:null};card[index]=obj;
-function draw(){comboStart(String(index));clearTimeout(obj.job);obj.locked=false;$('#flip'+index).classList.remove('turned');$('#next'+index).hidden=true;let diff=$('#diff'+index).value;if(!obj.used.length)obj.used=shuffle(powers[diff]);if(obj.used.length>1&&obj.q===obj.used[obj.used.length-1])obj.used.unshift(obj.used.pop());obj.q=obj.used.pop();obj.count++;const[b,e,v]=obj.q;$('#q'+index).innerHTML=(index===0?pow(b,e):log(b,v))+' = ?';$('#back'+index).innerHTML=`${pow(b,e)} = ${frac(v)}<br>⇔<br>${log(b,v)} = ${frac(e)}`;$('#count'+index).textContent=scoreText(obj.correct,obj.count);
+function draw(){comboStart(String(index));clearTimeout(obj.job);obj.locked=false;$('#flip'+index).classList.remove('turned');$('#next'+index).hidden=true;let diff=$('#diff'+index).value;if(!obj.used.length)obj.used=shuffle(powers[diff]);if(obj.used.length>1&&obj.q===obj.used[obj.used.length-1])obj.used.unshift(obj.used.pop());obj.q=obj.used.pop();obj.count++;const[b,e,v]=obj.q;$('#q'+index).innerHTML=(index===0?pow(b,e):log(b,v))+' = ?';$('#back'+index).innerHTML=`${pow(b,e)} = ${frac(v)} ⇔ ${log(b,v)} = ${frac(e)}`;$('#count'+index).textContent=scoreText(obj.correct,obj.count);
 const right=index===0?v:e;const supplemental=plausibleCard(index,b,e,v);
 putNumeric('#opts'+index,right,supplemental,(choice,button)=>{if(obj.locked||button.disabled)return;if(eq(choice,right)){obj.locked=true;obj.correct++;comboHit(String(index));button.classList.add('good');$$('#opts'+index+' button').forEach(b=>b.disabled=true);$('#count'+index).textContent=scoreText(obj.correct,obj.count);message('#msg'+index,T('✓ 正解！ 同じ関係を反対側から表してみよう。','✓ Correct! See the same relationship from the other side.'),'good');obj.job=setTimeout(()=>{if(obj.locked){$('#flip'+index).classList.add('turned');$('#next'+index).hidden=false}},300)}else{comboMiss(String(index));button.classList.add('bad');button.disabled=true;message('#msg'+index,T('もう一度。','Try again. ')+(index===0?T('指数を計算しよう。','Calculate the power.'):T('底を何乗するとその値になる？','What power of the base gives the value?')),'bad')}});
 message('#msg'+index,index===0?T('累乗の値を選ぼう。','Choose the value of the power.'):T('何乗すれば真数になる？','What exponent gives the argument?'))}
@@ -858,8 +864,25 @@ function installLogLabMath(){
      rows.forEach((row,i)=>{if(i)frag.append(document.createElement('br'));frag.append(makeMath(htmlToTex(row)))});
      if(note){const span=document.createElement('span');span.className='math-note';span.textContent=note;frag.append(span)}
      el.replaceChildren(frag);
+     if(el.id==='back0'||el.id==='back1')fitEquivalence(el);
    }catch(e){fallbackScripts(el)}
  }
+ function fitEquivalence(el){
+   const span=el.querySelector('.loglab-tex');
+   if(!span||!el.clientWidth)return;
+   span.style.removeProperty('--equivalence-scale');
+   const width=span.getBoundingClientRect().width;
+   // offsetWidth is unaffected by the card's 3D rotation.
+   const natural=span.offsetWidth||width;
+   const available=el.clientWidth-16;
+   if(natural>available&&available>0)span.style.setProperty('--equivalence-scale',Math.max(.42,available/natural).toFixed(4)+'em');
+ }
+ const equivalences=Array.from(app.querySelectorAll('#back0,#back1'));
+ if(typeof ResizeObserver==='function'){
+   const fitObserver=new ResizeObserver(entries=>entries.forEach(entry=>fitEquivalence(entry.target)));
+   equivalences.forEach(el=>fitObserver.observe(el));
+ }
+ window.addEventListener('resize',()=>equivalences.forEach(fitEquivalence));
  function scan(root){if(root.nodeType!==1)return;if(root.matches(selector))render(root);root.querySelectorAll(selector).forEach(render)}
  scan(app);
  app.querySelectorAll('.message,.tierhint,.graphdesc').forEach(fallbackScripts);

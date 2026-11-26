@@ -287,6 +287,59 @@ sub:has(.frac){vertical-align:-.8em}
  .theory .example{padding:6px}
 }
 
+
+/* Viewport-filling classroom layout: spend spare height on learning,
+   not margins. A minimum height (rather than a fixed height) preserves
+   access to all content on smaller screens and with enlarged text. */
+@media(min-width:900px) and (min-height:650px){
+ .app{min-height:calc(100dvh - 16px);display:flex;flex-direction:column}
+ .head,.navgroups,.appfooter{flex:none}
+ .page.active{display:flex;flex:1 0 auto;flex-direction:column}
+ .page.active>.panel{display:flex;flex:1 0 auto;flex-direction:column}
+ .ptop{flex:none}
+ .content,.graphquiz{display:flex;flex:1 0 auto;flex-direction:column}
+ .content>.barline,.content>.stats,.content>.track,.content>.tierline,.content>.tierhint,.graphquiz>.barline{flex:none}
+ .workspace{flex:1 0 auto;align-items:stretch;gap:clamp(12px,1.2vw,22px)}
+ .workleft,.workright{gap:clamp(8px,1.2vh,14px)}
+ .workright{padding:clamp(12px,1.7vh,20px)}
+ .workright>.actions:not([hidden]){margin-top:auto;padding-top:6px}
+ .workright>.message{font-size:clamp(14px,1.8vh,18px);padding:clamp(9px,1.3vh,15px)}
+ .workright>.explain{font-size:clamp(15px,1.9vh,19px);line-height:1.65;padding:clamp(12px,1.8vh,20px)}
+ .explain h3{font-size:clamp(16px,2vh,20px)}
+ .explain .step{padding:clamp(4px,.8vh,9px) 0}
+ .actions button{min-height:clamp(42px,5.5vh,55px);font-size:clamp(13px,1.8vh,17px)}
+ .workright .actions button.primary:not([hidden]){min-height:clamp(46px,6.4vh,65px);font-size:clamp(16px,2vh,20px)}
+ #p0 .workleft>.flip,#p1 .workleft>.flip{flex:1 0 auto;height:auto;min-height:clamp(240px,36vh,380px)}
+ #p0 .face .math,#p1 .face .math{font-size:clamp(43px,min(8.4vh,5.7vw),88px)}
+ #p0 .face .backline,#p1 .face .backline{font-size:clamp(30px,min(5.5vh,3.6vw),56px)}
+ #p0 .face small,#p1 .face small{font-size:clamp(12px,1.9vh,18px)}
+ #p0 .face p,#p1 .face p{font-size:clamp(14px,2vh,19px)}
+ #p0 .workright>.options,#p1 .workright>.options{flex:1 0 auto;grid-auto-rows:minmax(76px,1fr)}
+ #p0 .options button,#p1 .options button{font-size:clamp(30px,min(5.4vh,4vw),58px);min-height:clamp(75px,12vh,135px)}
+ #p2 .questionbox,#p3 .questionbox,#p4 .questionbox{flex:1 0 auto;min-height:clamp(120px,21vh,230px)}
+ #p2 .questionbox .math,#p3 .questionbox .math,#p4 .questionbox .math{font-size:clamp(30px,min(5.8vh,3.5vw),57px)}
+ #p2 .optionFormula,#p3 .options,#p4 .options:not(:empty){flex:1 0 auto}
+ #p2 .optionFormula button{font-size:clamp(20px,min(3.3vh,2.05vw),33px);min-height:clamp(64px,9.5vh,110px)}
+ #p3 .options button,#p4 .options button{font-size:clamp(24px,min(4.7vh,2.8vw),43px);min-height:clamp(62px,9.5vh,110px)}
+ #p4 .options:empty{display:none}
+ #p4 .rulebox{margin-top:0;font-size:clamp(12px,1.7vh,16px)}
+ #g2f .workleft{justify-content:center}
+ #g2f .workright .optionFormula{flex:1 0 auto}
+ #g2f .workright .optionFormula button{min-height:clamp(55px,8vh,100px);font-size:clamp(18px,min(3vh,2vw),30px)}
+ #f2g .plotoptions{flex:1 0 auto}
+ #f2g .graphchoice{display:flex;flex-direction:column;align-items:center;justify-content:center}
+ #f2g .graphchoice svg{max-width:min(100%,clamp(130px,calc((100dvh - 350px)*.62),300px))}
+ #f2g .quizformula{font-size:clamp(28px,min(5vh,3.5vw),48px)}
+ .library{display:flex;flex:1 0 auto;flex-direction:column}
+ .librarygrid{flex:1 0 auto;grid-auto-rows:1fr}
+ .theory{display:flex;flex-direction:column;justify-content:center;gap:3px;padding:clamp(10px,1.5vh,18px)}
+ .theory h3{font-size:clamp(14px,1.9vh,19px)}
+ .theory p{font-size:clamp(12px,1.65vh,16px)}
+ .theory .example{margin-top:8px}
+ .graphgrid{flex:1 0 auto;align-items:center}
+ .graphctrl{align-content:center}
+}
+
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
@@ -314,7 +367,7 @@ sub:has(.frac){vertical-align:-.8em}
 <section class="page" id="graph"><div class="panel"><div class="ptop"><div><h2 data-en="GRAPH EXPLORER" data-ja="グラフ実験室">グラフ実験室</h2><p data-en="Change base a and exponent t to explore paired points on exponential and logarithmic curves." data-ja="底 a と指数 t を動かして、指数関数・対数関数の対応点を観察しよう。">底 a と指数 t を動かして、指数関数・対数関数の対応点を観察しよう。</p></div><div class="pill">EXPLORER</div></div><div class="graphgrid"><div><div class="graphsurface"><svg aria-label="指数関数と対数関数のグラフ" id="explorerSvg" role="img" viewbox="0 0 520 520"></svg></div><div class="legend"><span><i style="background:#416fe4"></i><span data-en="Exponential" data-ja="指数関数">指数関数</span></span><span><i style="background:#ed765e"></i><span data-en="Logarithmic" data-ja="対数関数">対数関数</span></span><span><i style="background:#7e91b3"></i>y = x</span></div></div><div class="graphctrl"><div class="ctrlbox"><h3 data-en="Change the base" data-ja="底を変える">底を変える</h3><div class="ctrlrow"><span id="graphbase-label" data-en="Base a" data-ja="底 a">底 a</span><select id="graphbase" hidden aria-hidden="true" tabindex="-1"><option value="0.3333333333333333">3⁻¹</option><option value="0.5">2⁻¹</option><option selected value="2">2</option><option value="3">3</option><option value="4">4</option></select></div><div class="base-picks" role="group" aria-labelledby="graphbase-label"><button type="button" data-base="0.3333333333333333" aria-pressed="false"><span class="frac"><span>1</span><span>3</span></span></button><button type="button" data-base="0.5" aria-pressed="false"><span class="frac"><span>1</span><span>2</span></span></button><button type="button" data-base="2" aria-pressed="true">2</button><button type="button" data-base="3" aria-pressed="false">3</button><button type="button" data-base="4" aria-pressed="false">4</button></div><div data-en="The behavior changes when the base crosses 1." data-ja="1を境に、増加・減少が変わる" style="font-size:11px;color:#7b8dab;margin-top:7px">1を境に、増加・減少が変わる</div></div><div class="ctrlbox"><h3 data-en="Change the exponent" data-ja="指数を動かす">指数を動かす</h3><div class="ctrlrow"><label data-en="Value of t" data-ja="t の値" for="grapht">t の値</label><span id="tread" style="color:#315ccc">1</span></div><input id="grapht" max="1.5" min="-1.5" step="0.5" type="range" value="1"/></div><div class="ctrlbox wide"><h3 data-en="Show curves" data-ja="表示する曲線">表示する曲線</h3><div class="seg" id="graphviews"><button class="on" data-en="Both" data-ja="両方" data-view="both">両方</button><button data-en="Exponential only" data-ja="指数だけ" data-view="exp">指数だけ</button><button data-en="Logarithmic only" data-ja="対数だけ" data-view="log">対数だけ</button></div><div class="checkrow"><label><input id="mirror" type="checkbox"/> y = x</label><label><input checked="" id="pointson" type="checkbox"/><span data-en="Matching points P / Q" data-ja="対応点 P・Q">対応点 P・Q</span></label></div></div><div class="graphdesc wide" id="graphdesc"></div></div></div></div></section>
 <section class="page" id="g2f"><div class="panel"><div class="ptop"><div><h2 data-en="GUESS THE FORMULA FROM THE GRAPH" data-ja="グラフから式を推測">グラフから式を推測</h2><p data-en="Use increasing/decreasing behavior, asymptotes, and points to choose an equation." data-ja="増加・減少、漸近線、通る点から、式を選ぼう。">増加・減少、漸近線、通る点から、式を選ぼう。</p></div><div class="pill">GRAPH → EQ</div></div><div class="graphquiz"><div class="barline"><label class="selectlabel"><span data-en="Difficulty" data-ja="難易度">難易度</span><select id="g2fdiff"><option data-en="Basics (bases / functions)" data-ja="基本（底・関数）" value="basic">基本（底・関数）</option><option data-en="Advanced (translations)" data-ja="発展（平行移動あり）" value="shift">発展（平行移動あり）</option></select></label><strong id="g2fscore">正解 0</strong></div><div class="workspace"><div class="workleft"><div class="graphsurface quizgraph"><svg aria-label="式を当てるグラフ" id="g2fsvg" viewbox="0 0 520 380"></svg></div></div><div class="workright"><p class="graphquestionlabel" data-en="Which equation matches the curve?" data-ja="この曲線を表す式はどれ？">この曲線を表す式はどれ？</p><div class="optionFormula" id="g2fopts"></div><div class="message" id="g2fmsg">グラフの特徴をよく見よう。</div><div class="explain more" hidden="" id="g2fexp"></div><div class="actions"><button class="primary" data-en="Next graph →" data-ja="次のグラフ →" hidden="" id="g2fnext">次のグラフ →</button><button data-en="Start over" data-ja="最初から" id="g2freset">最初から</button></div></div></div></div></div></section>
 <section class="page" id="f2g"><div class="panel"><div class="ptop"><div><h2 data-en="GUESS THE GRAPH FROM THE FORMULA" data-ja="式からグラフを推測">式からグラフを推測</h2><p data-en="Choose the matching graph from four options." data-ja="4枚のグラフから、式に合うものを選ぼう。">4枚のグラフから、式に合うものを選ぼう。</p></div><div class="pill">EQ → GRAPH</div></div><div class="graphquiz"><div class="barline"><label class="selectlabel"><span data-en="Difficulty" data-ja="難易度">難易度</span><select id="f2gdiff"><option data-en="Basics (bases / functions)" data-ja="基本（底・関数）" value="basic">基本（底・関数）</option><option data-en="Advanced (translations)" data-ja="発展（平行移動あり）" value="shift">発展（平行移動あり）</option></select></label><strong id="f2gscore">正解 0</strong></div><div class="workspace"><div class="workleft"><div class="quizformula" id="f2geq"></div><p class="graphquestionlabel" data-en="Which graph matches this equation? All graphs use the same axes." data-ja="この式のグラフはどれ？ すべて同じ座標範囲です。">この式のグラフはどれ？ すべて同じ座標範囲です。</p><div class="plotoptions" id="f2gopts"></div></div><div class="workright"><div class="message" id="f2gmsg">4つから選ぼう。</div><div class="explain more" hidden="" id="f2gexp"></div><div class="actions"><button class="primary" data-en="Next question →" data-ja="次の問題 →" hidden="" id="f2gnext">次の問題 →</button><button data-en="Start over" data-ja="最初から" id="f2greset">最初から</button></div></div></div></div></div></section>
-<footer class="appfooter" data-en="LOG LAB v5 · Standalone learning app · Works offline · Your 60-second record is stored on this device (when supported)." data-ja="LOG LAB v3 · 学習用HTML・ネット接続不要・60秒の自己ベストはこの端末のブラウザに保存されます（対応時）">LOG LAB v3 · 学習用HTML・ネット接続不要・60秒の自己ベストはこの端末のブラウザに保存されます（対応時）</footer>
+<footer class="appfooter" data-en="LOG LAB v5 · Standalone learning app · Works offline · Your 60-second record is stored on this device (when supported)." data-ja="LOG LAB v5 · 学習用HTML・ネット接続不要・60秒の自己ベストはこの端末のブラウザに保存されます（対応時）">LOG LAB v5 · 学習用HTML・ネット接続不要・60秒の自己ベストはこの端末のブラウザに保存されます（対応時）</footer>
 </main>
 <script>
 (()=>{'use strict';
